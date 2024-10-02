@@ -15,17 +15,11 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PWA NextJS",
-  description: "It's a simple progressive web application made with NextJS",
+  title: "Munch",
+  description: "The best app to find the best restaurant for you",
   generator: "Next.js",
   manifest: "/manifest.json",
-  keywords: ["nextjs", "next14", "pwa", "next-pwa"],
-  authors: [
-    {
-      name: "imvinojanv",
-      url: "https://www.linkedin.com/in/imvinojanv/",
-    },
-  ],
+  keywords: ["munch", "tunisia", "restaurant", "eat"],
   icons: [
     { rel: "apple-touch-icon", url: "/assets/favicon.ico" },
     { rel: "icon", url: "/assets/favicon.ico" },

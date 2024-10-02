@@ -5,6 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import Link from "next/link";
 import routes from "@/constants/routes";
 import RegisterForm from "../forms/auth/RegisterForm";
+import Logo from "../common/Logo";
 type AuthScreenProps = {
   title: string;
   description: string;
@@ -30,7 +31,7 @@ export default function AuthScreen({
             rowGap: { xs: 4, md: 6 },
           }}
         >
-          <Typography variant="h2">MUNCH</Typography>
+          <Logo size="5rem" />
           <Stack>
             <Typography variant="h6">{title}</Typography>
             <Typography variant="body1">{description}</Typography>

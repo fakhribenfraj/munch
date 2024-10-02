@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
             alignItems: "center",
           }}
         >
-          <Logo />
+          <Logo direction="horizontal"/>
           <Stack flexDirection="row" columnGap={1}>
             <LanguageSelect />
             <AccountMenu />
