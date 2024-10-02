@@ -14,13 +14,11 @@ import Typography from "@mui/material/Typography";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 export default function AccountMenu() {
   const t = useTranslations("accountMenu");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const router = useRouter();
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -113,7 +111,7 @@ export default function AccountMenu() {
         </ListItemButton>
         <ListItemButton
           onClick={() => {
-            signOut({ redirect: false }).then(() => router.push(routes.SIGNIN));
+            signOut({ callbackUrl: routes.SIGNIN });
           }}
         >
           <ListItemIcon>

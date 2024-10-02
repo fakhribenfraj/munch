@@ -1,15 +1,12 @@
 "use client";
 
-import { registerUser } from "@/actions/authorization/register";
 import ActionForm from "@/components/common/compound/ActionForm";
-import label from "@/components/common/label";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import routes from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Link, Stack, Typography } from "@mui/material";
+import { Button, Link, Stack } from "@mui/material";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -25,7 +22,6 @@ const FormSchema = z.object({
 type FormData = z.infer<typeof FormSchema>;
 
 export default function SignInForm() {
-  const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -39,8 +35,8 @@ export default function SignInForm() {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        redirect: false,
-      }).then(() => router.push(routes.OVERVIEW))
+        callbackUrl: routes.OVERVIEW,
+      })
   );
 
   return (
