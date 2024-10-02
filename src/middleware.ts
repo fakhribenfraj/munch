@@ -10,7 +10,6 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(req: NextRequest) {
-  console.log(req.url, process.env.NEXTAUTH_URL + "/");
   if (req.url == process.env.NEXTAUTH_URL + "/") {
     return NextResponse.redirect(new URL(routes.OVERVIEW, req.url));
   }
