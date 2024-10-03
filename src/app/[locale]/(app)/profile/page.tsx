@@ -1,4 +1,5 @@
 import { getUserProfile } from "@/actions/authorization/getUserProfile";
+import LogoutButton from "@/components/common/auth/LogoutButton";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
@@ -10,7 +11,9 @@ const Home: NextPage = async () => {
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>
         ))}
-        <ListItem></ListItem>
+        <ListItem>
+          <LogoutButton />
+        </ListItem>
       </List>
     </Box>
   );

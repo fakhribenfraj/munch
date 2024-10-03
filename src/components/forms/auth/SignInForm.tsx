@@ -35,7 +35,7 @@ export default function SignInForm() {
       signIn("credentials", {
         email: data.email,
         password: data.password,
-        callbackUrl: routes.OVERVIEW,
+        callbackUrl: routes.HOME,
       })
   );
 

@@ -49,11 +49,13 @@ function ResponsiveAppBar() {
     [session]
   );
   useEffect(() => {
-    setactiveTabIndex(
-      navigationItems.findIndex(
-        (item) => item.url && item.url != "/" && pathname.startsWith(item.url)
-      )
-    );
+    if (pathname && pathname != "/") {
+      setactiveTabIndex(
+        navigationItems.findIndex(
+          (item) => item.url && item.url != "/" && pathname.startsWith(item.url)
+        )
+      );
+    }
   }, [pathname, navigationItems]);
 
   return (
