@@ -121,7 +121,6 @@ function ResponsiveAppBar() {
             left: 0,
             right: 0,
             display: { xs: "block", md: "none" },
-
             borderRadius: "1rem 1rem 0 0",
             zIndex: 10,
             overflow: "hidden",
