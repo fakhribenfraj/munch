@@ -15,21 +15,17 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      <Container maxWidth="xl" disableGutters>
-        <ResponsiveAppBar />
-        <Container
-          maxWidth="lg"
-          component="main"
-          sx={{
-            height: "100vh",
-            width: "100vw",
-            pb: 7,
-          }}
-        >
-          {children}
-        </Container>
+    <Container maxWidth="xl" disableGutters>
+      <ResponsiveAppBar />
+      <Container
+        maxWidth="lg"
+        component="main"
+        sx={{
+          pb: 7,
+        }}
+      >
+        {children}
       </Container>
-    </>
+    </Container>
   );
 }

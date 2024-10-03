@@ -20,7 +20,7 @@ export default function AuthScreen({
     <Stack
       sx={{
         rowGap: { xs: 2, md: 3 },
-        my: 4,
+        mt: 4,
         mx: "auto",
         textAlign: "center",
       }}

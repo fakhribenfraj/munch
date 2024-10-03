@@ -101,6 +101,7 @@ function ResponsiveAppBar() {
             right: 0,
             display: { xs: "block", md: "none" },
             borderRadius: 2,
+            zIndex: 10,
           }}
           elevation={4}
         >
