@@ -10,8 +10,10 @@ import {
   BottomNavigationAction,
   Box,
   Container,
+  InputAdornment,
   Paper,
   Stack,
+  TextField,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import { useSession } from "next-auth/react";
@@ -21,6 +23,7 @@ import AccountMenu from "./AccountMenu";
 import Logo from "./Logo";
 import { useEffect, useMemo, useState } from "react";
 import HideOnScroll from "./navigation/HideOnScroll";
+import TuneIcon from "@mui/icons-material/Tune";
 function ResponsiveAppBar() {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -61,37 +64,55 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <Box sx={{ display: { xs: "none", md: "block" } }}>
-        <HideOnScroll direction="down">
-          <AppBar position="fixed">
-            <Toolbar
-              disableGutters
-              sx={{
-                justifyContent: "space-between",
-                backgroundColor: "common.white",
-                boxShadow: 3,
-                zIndex: 1,
+      <AppBar position="fixed">
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "space-between",
+            backgroundColor: "common.white",
+            boxShadow: { xs: 0, md: 3 },
+            zIndex: 1,
+          }}
+        >
+          <Container
+            maxWidth="xl"
+            sx={{
+              justifyContent: "space-between",
+              display: "flex",
+              alignItems: "center",
+              columnGap: 2,
+            }}
+          >
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
+              <Logo direction="horizontal" />
+            </Box>
+            <TextField
+              color="primary"
+              fullWidth
+              placeholder="search meal..."
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+                sx: {
+                  borderRadius: 2,
+                },
               }}
+            />
+            <Stack
+              flexDirection="row"
+              columnGap={1}
+              sx={{ display: { xs: "none", md: "block" } }}
             >
-              <Container
-                maxWidth="xl"
-                sx={{
-                  justifyContent: "space-between",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Logo direction="horizontal" />
-                <Stack flexDirection="row" columnGap={1}>
-                  <LanguageSelect />
-                  <AccountMenu />
-                </Stack>
-              </Container>
-            </Toolbar>
-          </AppBar>
-        </HideOnScroll>
-        <Toolbar />
-      </Box>
+              <LanguageSelect />
+              <AccountMenu />
+            </Stack>
+          </Container>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
       <HideOnScroll direction="up">
         <Paper
           sx={{
@@ -100,8 +121,10 @@ function ResponsiveAppBar() {
             left: 0,
             right: 0,
             display: { xs: "block", md: "none" },
-            borderRadius: 2,
+
+            borderRadius: "1rem 1rem 0 0",
             zIndex: 10,
+            overflow: "hidden",
           }}
           elevation={4}
         >
