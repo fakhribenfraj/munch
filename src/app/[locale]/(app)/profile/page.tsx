@@ -1,11 +1,10 @@
 import { getUserProfile } from "@/actions/authorization/getUserProfile";
-import Block from "@/components/common/surfaces/Block";
-import { List, ListItem, Typography } from "@mui/material";
+import { Box, List, ListItem, Typography } from "@mui/material";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
   const profile = await getUserProfile();
   return (
-    <Block>
+    <Box>
       <Typography variant="h4">this is the profile</Typography>
       <List>
         {Object.entries(profile.data).map(([key, value]) => (
@@ -13,7 +12,7 @@ const Home: NextPage = async () => {
         ))}
         <ListItem></ListItem>
       </List>
-    </Block>
+    </Box>
   );
 };
 export default Home;

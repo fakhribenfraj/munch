@@ -3,6 +3,6 @@ const routes = {
   SIGNIN: "/signin",
   REGISTER: "/register",
   PROFILE: "/profile",
-  OVERVIEW: "/overview",
+  OVERVIEW: "/dashboard/overview",
 };
 export default routes;
