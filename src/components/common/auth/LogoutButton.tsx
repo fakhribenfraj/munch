@@ -1,18 +1,19 @@
 "use client";
 import routes from "@/constants/routes";
-import { ButtonBase } from "@mui/material";
+import { Button } from "@mui/material";
 import { signOut } from "next-auth/react";
-import React from "react";
 
 const LogoutButton = () => {
   return (
-    <ButtonBase
+    <Button
+      variant="outlined"
+      fullWidth
       onClick={() => {
         signOut({ callbackUrl: routes.HOME });
       }}
     >
       Log out
-    </ButtonBase>
+    </Button>
   );
 };
 

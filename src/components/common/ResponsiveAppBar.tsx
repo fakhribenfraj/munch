@@ -20,6 +20,7 @@ import LanguageSelect from "../inputs/LanguageSelect";
 import AccountMenu from "./AccountMenu";
 import Logo from "./Logo";
 import { useEffect, useMemo, useState } from "react";
+import HideOnScroll from "./navigation/HideOnScroll";
 function ResponsiveAppBar() {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -61,57 +62,60 @@ function ResponsiveAppBar() {
   return (
     <>
       <Box sx={{ display: { xs: "none", md: "block" } }}>
-        <AppBar position="fixed">
-          <Toolbar
-            disableGutters
-            sx={{
-              justifyContent: "space-between",
-              backgroundColor: "common.white",
-              boxShadow: 3,
-              zIndex: 1,
-            }}
-          >
-            <Container
-              maxWidth="xl"
+        <HideOnScroll direction="down">
+          <AppBar position="fixed">
+            <Toolbar
+              disableGutters
               sx={{
                 justifyContent: "space-between",
-                display: "flex",
-                alignItems: "center",
+                backgroundColor: "common.white",
+                boxShadow: 3,
+                zIndex: 1,
               }}
             >
-              <Logo direction="horizontal" />
-              <Stack flexDirection="row" columnGap={1}>
-                <LanguageSelect />
-                <AccountMenu />
-              </Stack>
-            </Container>
-          </Toolbar>
-        </AppBar>
+              <Container
+                maxWidth="xl"
+                sx={{
+                  justifyContent: "space-between",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Logo direction="horizontal" />
+                <Stack flexDirection="row" columnGap={1}>
+                  <LanguageSelect />
+                  <AccountMenu />
+                </Stack>
+              </Container>
+            </Toolbar>
+          </AppBar>
+        </HideOnScroll>
         <Toolbar />
       </Box>
-
-      <Paper
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          display: { xs: "block", md: "none" },
-          borderRadius: 2,
-        }}
-        elevation={3}
-      >
-        <BottomNavigation showLabels value={activeTabIndex}>
-          {navigationItems.map((item) => (
-            <BottomNavigationAction
-              key={"nav-bottom-" + item.label}
-              href={item.url}
-              label={item.label}
-              icon={item.icon}
-            />
-          ))}
-        </BottomNavigation>
-      </Paper>
+      <HideOnScroll direction="up">
+        <Paper
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            display: { xs: "block", md: "none" },
+            borderRadius: 2,
+          }}
+          elevation={4}
+        >
+          <BottomNavigation showLabels value={activeTabIndex}>
+            {navigationItems.map((item) => (
+              <BottomNavigationAction
+                key={"nav-bottom-" + item.label}
+                href={item.url}
+                label={item.label}
+                icon={item.icon}
+              />
+            ))}
+          </BottomNavigation>
+        </Paper>
+      </HideOnScroll>
     </>
   );
 }

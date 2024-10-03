@@ -22,7 +22,6 @@ const SideBar = ({ menuLinks }: SideBarProps) => {
     >
       <Stack
         sx={{
-          overflow: "auto",
           color: "text.secondary",
           rowGap: { xs: 2, md: 5 },
         }}

@@ -24,7 +24,6 @@ export default async function RootLayout({
           sx={{
             height: "100vh",
             width: "100vw",
-            overflowY: "hidden",
             pb: 7,
           }}
         >

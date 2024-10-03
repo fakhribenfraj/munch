@@ -12,7 +12,7 @@ const Home: NextPage = async () => {
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>
         ))}
         <ListItem>
-          <LogoutButton />
+            <LogoutButton />
         </ListItem>
       </List>
     </Box>
