@@ -26,7 +26,7 @@ import HideOnScroll from "./navigation/HideOnScroll";
 function ResponsiveAppBar() {
   const pathname = usePathname();
   const { data: session } = useSession();
-  const [activeTabIndex, setactiveTabIndex] = useState(0);
+  const [activeTabIndex, setActiveTabIndex] = useState(-1);
 
   const navigationItems = useMemo(
     () => [
@@ -61,12 +61,14 @@ function ResponsiveAppBar() {
   );
   useEffect(() => {
     if (pathname && pathname != routes.HOME) {
-      setactiveTabIndex(
+      setActiveTabIndex(
         navigationItems.findIndex(
           (item) =>
             item.url && item.url != routes.HOME && pathname.startsWith(item.url)
         )
       );
+    } else {
+      setActiveTabIndex(0);
     }
   }, [pathname, navigationItems]);
 

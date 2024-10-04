@@ -1,6 +1,4 @@
 export async function POST(req: Request) {
-  console.log("signin", req.body);
-
   return Response.json({
     email: "benfrajfakhreddine15@gmail.com",
     id: "1eeffdaghK2",
