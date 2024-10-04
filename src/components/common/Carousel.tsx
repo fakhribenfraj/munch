@@ -14,7 +14,6 @@ const Carousel = ({ children, ...settings }: CarouselProps) => {
   };
   const props = { ...defaultSettings, ...settings };
   const slidesCount = React.Children.count(children);
-  console.log(React.Children.count(children));
   return (
     <Slider
       {...props}
