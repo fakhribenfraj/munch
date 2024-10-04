@@ -4,11 +4,21 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
+import LunchDiningIcon from "@mui/icons-material/LunchDining";
+import IcecreamIcon from "@mui/icons-material/Icecream";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import CakeIcon from "@mui/icons-material/Cake";
+import LocalCafeIcon from "@mui/icons-material/LocalCafe";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
 import {
   AppBar,
   BottomNavigation,
   BottomNavigationAction,
   Box,
+  Chip,
   Container,
   InputAdornment,
   Paper,
@@ -74,55 +84,89 @@ function ResponsiveAppBar() {
 
   return (
     <>
-      <AppBar position="fixed">
-        <Toolbar
-          disableGutters
-          sx={{
-            justifyContent: "space-between",
-            backgroundColor: "common.white",
-            boxShadow: { xs: 0, md: 3 },
-            zIndex: 1,
-          }}
-        >
-          <Container
-            maxWidth="xl"
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "common.white",
+          boxShadow: 3,
+          zIndex: 1,
+        }}
+      >
+        <Stack>
+          <Toolbar
+            disableGutters
             sx={{
               justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-              columnGap: 2,
             }}
           >
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
-              <Logo direction="horizontal" />
-            </Box>
-            <TextField
-              color="primary"
-              fullWidth
-              placeholder="search meal..."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                sx: {
-                  borderRadius: 2,
-                  boxShadow: 4,
-                },
+            <Container
+              maxWidth="xl"
+              sx={{
+                justifyContent: "space-between",
+                display: "flex",
+                alignItems: "center",
+                columnGap: 2,
               }}
-            />
-            <Stack
-              flexDirection="row"
-              columnGap={1}
-              sx={{ display: { xs: "none", md: "block" } }}
             >
-              <LanguageSelect />
-              <AccountMenu />
-            </Stack>
-          </Container>
-        </Toolbar>
+              <Box sx={{ display: { xs: "none", md: "block" } }}>
+                <Logo direction="horizontal" />
+              </Box>
+              <TextField
+                color="warning"
+                fullWidth
+                placeholder="search meal..."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  sx: {
+                    borderRadius: 2,
+                    boxShadow: 1,
+                  },
+                }}
+              />
+              <Stack
+                flexDirection="row"
+                columnGap={1}
+                sx={{ display: { xs: "none", md: "block" } }}
+              >
+                <LanguageSelect />
+                <AccountMenu />
+              </Stack>
+            </Container>
+          </Toolbar>
+          <Toolbar
+            sx={{
+              display: "flex",
+              flexWrap: "nowrap",
+              gap: { xs: 1, md: 2 },
+              overflowX: "auto",
+            }}
+          >
+            {[
+              { label: "sandwiches", icon: <LunchDiningIcon /> },
+              { label: "pizza", icon: <LocalPizzaIcon /> },
+              { label: "pasta", icon: <DinnerDiningIcon /> },
+              { label: "spicy", icon: <WhatshotIcon /> },
+              { label: "drinks", icon: <LocalBarIcon /> },
+              { label: "coffe", icon: <LocalCafeIcon /> },
+              { label: "ice cream", icon: <IcecreamIcon /> },
+              { label: "fast food", icon: <FastfoodIcon /> },
+              { label: "cake", icon: <CakeIcon /> },
+            ].map((category) => (
+              <Chip
+                variant="outlined"
+                key={category.label}
+                {...category}
+                clickable
+              />
+            ))}
+          </Toolbar>
+        </Stack>
       </AppBar>
+      <Toolbar />
       <Toolbar />
       <HideOnScroll direction="up">
         <Paper
