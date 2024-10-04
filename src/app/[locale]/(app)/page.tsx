@@ -1,111 +1,16 @@
-import { getUserProfile } from "@/actions/authorization/getUserProfile";
-import HideOnScroll from "@/components/common/navigation/HideOnScroll";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { getRestaurants } from "@/actions/restaurant/getRestaurants";
+import Carousel from "@/components/common/Carousel";
+
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
-  const restaurants = [
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "El Ali",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/03/11/ef/c3/el-ali.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful restaurant in the middle of Medina. Cheap and elegant. The place to be when visiting Tunis and medina",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-    {
-      name: "Dar el jeld",
-      image:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
-      description:
-        "Beautiful setting. We ordered Tunesian sparkling wine to start. Some other flat wine arrived, which took a long time to replace.",
-    },
-  ];
+  const { data: restaurants } = await getRestaurants();
   return (
     <Grid container justifyContent="center">
-      {restaurants.map((restaurant) => (
+      {restaurants?.map((restaurant, i) => (
         <Grid
           item
-          key={restaurant.name}
+          key={restaurant.name + i}
           sx={{ p: { xs: 1, md: 1.5 } }}
           xs={12}
           sm={6}
@@ -117,11 +22,19 @@ const Home: NextPage = async () => {
               boxShadow: 7,
             }}
           >
-            <CardMedia
-              sx={{ height: 190 }}
-              image={restaurant.image}
-              title="green iguana"
-            />
+            <Carousel>
+              {restaurant.images.map((image, j) => (
+                <CardMedia
+                  sx={{
+                    height: 190,
+                  }}
+                  key={`${restaurant.name}-${i}-${j}`}
+                  image={image}
+                  title={`${restaurant.name}-${i}-${j}`}
+                />
+              ))}
+            </Carousel>
+
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {restaurant.name}

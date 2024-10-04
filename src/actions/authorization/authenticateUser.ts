@@ -1,5 +1,6 @@
 "use server";
 import endpoints from "@/constants/endpoints";
+import secureFetch from "@/utils/fetch";
 
 export const authenticateUser = async ({
   email,
@@ -8,12 +9,9 @@ export const authenticateUser = async ({
   email?: string;
   password?: string;
 }) => {
-  const res = await fetch(endpoints.SIGNIN, {
+  const res = await secureFetch(endpoints.SIGNIN, {
     method: "POST",
     body: JSON.stringify({ email, password }),
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
-  return await res.json();
+  return res;
 };
