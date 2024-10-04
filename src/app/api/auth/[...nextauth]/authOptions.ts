@@ -1,5 +1,4 @@
 import { authenticateUser } from "@/actions/authorization/authenticateUser";
-import endpoints from "@/constants/endpoints";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions: AuthOptions = {
@@ -24,7 +23,7 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = await authenticateUser({
+        const { data: user } = await authenticateUser({
           email: credentials?.username,
           password: credentials?.password,
         });
