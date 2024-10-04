@@ -9,9 +9,14 @@ export const authenticateUser = async ({
   email?: string;
   password?: string;
 }) => {
-  const res = await secureFetch(endpoints.SIGNIN, {
+  console.log({
+    email,
+    password,
+  });
+
+  const res = await fetch(endpoints.SIGNIN, {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
-  return res;
+  return { data: await res.json() };
 };

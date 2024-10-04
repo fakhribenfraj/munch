@@ -1,7 +1,6 @@
 import createMiddleware from "next-intl/middleware";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import LOCALES from "./constants/locales";
-import routes from "./constants/routes";
 
 const intlMiddleware = createMiddleware({
   locales: LOCALES.map((locate) => locate.code),
