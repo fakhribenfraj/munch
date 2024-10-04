@@ -142,7 +142,16 @@ function ResponsiveAppBar() {
               display: "flex",
               flexWrap: "nowrap",
               gap: { xs: 1, md: 2 },
-              overflowX: "auto",
+              overflowX: "scroll",
+              "::-webkit-scrollbar": {
+                "-webkit-appearance": "none",
+                height: "7px",
+              },
+              "::-webkit-scrollbar-thumb": {
+                borderRadius: 0.5,
+                backgroundColor: "grey.400",
+                boxShadow: "0 0 2px grey.100",
+              },
             }}
           >
             {[
