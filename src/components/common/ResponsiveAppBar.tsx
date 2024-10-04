@@ -18,12 +18,11 @@ import {
 import Toolbar from "@mui/material/Toolbar";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import LanguageSelect from "../inputs/LanguageSelect";
 import AccountMenu from "./AccountMenu";
 import Logo from "./Logo";
-import { useEffect, useMemo, useState } from "react";
 import HideOnScroll from "./navigation/HideOnScroll";
-import TuneIcon from "@mui/icons-material/Tune";
 function ResponsiveAppBar() {
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -31,11 +30,19 @@ function ResponsiveAppBar() {
 
   const navigationItems = useMemo(
     () => [
-      { label: "Explore", icon: <SearchIcon />, url: "/" },
+      { label: "Explore", icon: <SearchIcon />, url: routes.HOME },
       ...(session
         ? [
-            { label: "Wishlist", icon: <FavoriteBorderIcon />, url: "" },
-            { label: "Notification", icon: <NotificationsNoneIcon />, url: "" },
+            {
+              label: "Wishlist",
+              icon: <FavoriteBorderIcon />,
+              url: routes.WISHLIST,
+            },
+            {
+              label: "Notification",
+              icon: <NotificationsNoneIcon />,
+              url: routes.NOTIFICATION,
+            },
             {
               label: "Profile",
               icon: <AccountCircleOutlinedIcon />,
@@ -53,10 +60,11 @@ function ResponsiveAppBar() {
     [session]
   );
   useEffect(() => {
-    if (pathname && pathname != "/") {
+    if (pathname && pathname != routes.HOME) {
       setactiveTabIndex(
         navigationItems.findIndex(
-          (item) => item.url && item.url != "/" && pathname.startsWith(item.url)
+          (item) =>
+            item.url && item.url != routes.HOME && pathname.startsWith(item.url)
         )
       );
     }
@@ -98,6 +106,7 @@ function ResponsiveAppBar() {
                 ),
                 sx: {
                   borderRadius: 2,
+                  boxShadow: 4,
                 },
               }}
             />
@@ -125,7 +134,7 @@ function ResponsiveAppBar() {
             zIndex: 10,
             overflow: "hidden",
           }}
-          elevation={4}
+          elevation={24}
         >
           <BottomNavigation showLabels value={activeTabIndex}>
             {navigationItems.map((item) => (
