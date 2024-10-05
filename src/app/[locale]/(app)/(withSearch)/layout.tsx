@@ -1,13 +1,7 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
-import SideBar from "@/components/common/SideBar";
 import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Container,
-  Grid,
-  Paper,
-  Toolbar,
+  Container
 } from "@mui/material";
 
 export default async function RootLayout({

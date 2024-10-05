@@ -11,8 +11,8 @@ const Home: NextPage = async () => {
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>
         ))}
-        <ListItem>
-            <LogoutButton />
+        <ListItem sx={{ display: { md: "none" } }}>
+          <LogoutButton />
         </ListItem>
       </List>
     </Box>

@@ -7,25 +7,23 @@ import LocalBarIcon from "@mui/icons-material/LocalBar";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
-import SearchIcon from "@mui/icons-material/Search";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import {
-  AppBar,
-  Box,
-  Chip,
-  Container,
-  InputAdornment,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { AppBar, Box, Chip, Container, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import LanguageSelect from "../inputs/LanguageSelect";
 import AccountMenu from "./AccountMenu";
+import SearchBar from "./filters/Searchbar";
 import Logo from "./Logo";
 import HorizontalScrollbarBox from "./surfaces/HorizontalScrollbarBox";
-function ResponsiveAppBar() {
+type ResponsiveAppBarProps = {
+  hideSearchField?: boolean;
+};
+function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
   return (
-    <>
+    <Box
+      sx={{
+        display: { xs: hideSearchField ? "none" : "block", md: "block" },
+      }}
+    >
       <AppBar
         position="fixed"
         sx={{
@@ -34,52 +32,42 @@ function ResponsiveAppBar() {
           zIndex: 1,
         }}
       >
-        <Stack>
-          <Toolbar
-            disableGutters
+        <Toolbar
+          disableGutters
+          sx={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Container
+            maxWidth="xl"
             sx={{
               justifyContent: "space-between",
+              display: "flex",
+              alignItems: "center",
+              columnGap: 2,
             }}
           >
-            <Container
-              maxWidth="xl"
-              sx={{
-                justifyContent: "space-between",
-                display: "flex",
-                alignItems: "center",
-                columnGap: 2,
-              }}
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
+              <Logo direction="horizontal" />
+            </Box>
+
+            {!hideSearchField && <SearchBar />}
+            <Stack
+              flexDirection="row"
+              columnGap={1}
+              sx={{ display: { xs: "none", md: "block" } }}
             >
-              <Box sx={{ display: { xs: "none", md: "block" } }}>
-                <Logo direction="horizontal" />
-              </Box>
-              <TextField
-                color="warning"
-                fullWidth
-                placeholder="search meal..."
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchIcon />
-                    </InputAdornment>
-                  ),
-                  sx: {
-                    borderRadius: 2,
-                    boxShadow: 1,
-                  },
-                }}
-              />
-              <Stack
-                flexDirection="row"
-                columnGap={1}
-                sx={{ display: { xs: "none", md: "block" } }}
-              >
-                <LanguageSelect />
-                <AccountMenu />
-              </Stack>
-            </Container>
-          </Toolbar>
-          <HorizontalScrollbarBox>
+              <AccountMenu />
+            </Stack>
+          </Container>
+        </Toolbar>
+        {!hideSearchField && (
+          <HorizontalScrollbarBox
+            sx={{
+              maxWidth: "100%",
+              margin: "auto",
+            }}
+          >
             <Toolbar>
               {[
                 { label: "sandwiches", icon: <LunchDiningIcon /> },
@@ -101,11 +89,11 @@ function ResponsiveAppBar() {
               ))}
             </Toolbar>
           </HorizontalScrollbarBox>
-        </Stack>
+        )}
       </AppBar>
       <Toolbar />
-      <Toolbar />
-    </>
+      {!hideSearchField && <Toolbar />}
+    </Box>
   );
 }
 export default ResponsiveAppBar;
