@@ -33,7 +33,7 @@ export default function SignInForm() {
     methods,
     (data: FormData) =>
       signIn("credentials", {
-        email: data.email,
+        username: data.email,
         password: data.password,
         callbackUrl: routes.HOME,
       })

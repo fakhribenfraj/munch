@@ -5,13 +5,14 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async jwt({ user, token }) {
       if (user) {
-        //@ts-ignore
         token.accessToken = user.token;
+        token.role = user.role;
       }
       return token;
     },
-    async session({ session, token }) {
-      session.accessToken = token.accessToken as string;
+    async session({ session, token, user }) {
+      session.user.token = token.accessToken as string;
+      session.user.role = token.role as string;
       return session;
     },
   },
@@ -24,7 +25,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials, req) {
         const { data: user } = await authenticateUser({
-          email: credentials?.username,
+          username: credentials?.username,
           password: credentials?.password,
         });
 

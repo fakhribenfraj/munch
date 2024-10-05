@@ -9,7 +9,7 @@ const HorizontalScrollbarBox = styled(Box)(({ theme }) => ({
   },
   overflowX: "scroll",
   "::-webkit-scrollbar": {
-    "-webkit-appearance": "none",
+    WebkitAppearance: "none",
     height: "6px",
   },
   "::-webkit-scrollbar-thumb": {

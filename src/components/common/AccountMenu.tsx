@@ -1,23 +1,48 @@
 import routes from "@/constants/routes";
-import CachedIcon from "@mui/icons-material/Cached";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Logout from "@mui/icons-material/Logout";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import { ButtonBase, ListItemButton } from "@mui/material";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import PersonIcon from "@mui/icons-material/Person";
+import PersonOffIcon from "@mui/icons-material/PersonOff";
+import { ListItemButton, ListItemText } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import LoginIcon from "@mui/icons-material/Login";
+import CachedIcon from "@mui/icons-material/Cached";
+
 export default function AccountMenu() {
   const t = useTranslations("accountMenu");
+  const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigationItems = useMemo(
+    () => [
+      {
+        label: "Profile",
+        icon: <AccountCircleOutlinedIcon />,
+        url: routes.PROFILE,
+      },
+      {
+        label: "Wishlist",
+        icon: <FavoriteBorderIcon />,
+        url: routes.WISHLIST,
+      },
+      {
+        label: "Notification",
+        icon: <NotificationsNoneIcon />,
+        url: routes.NOTIFICATION,
+      },
+    ],
+    []
+  );
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -29,21 +54,9 @@ export default function AccountMenu() {
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
-          <ButtonBase
-            onClick={handleClick}
-            sx={{ ml: 2 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar
-              sx={{ width: 24, height: 24, marginRight: 1 }}
-              src={`/assets/icons/avatar/male.png`}
-            >
-              M
-            </Avatar>
-            <Typography sx={{ fontSize: "0.875rem" }}></Typography>
-          </ButtonBase>
+          <Avatar onClick={handleClick}>
+            {session ? <PersonIcon /> : <PersonOffIcon />}
+          </Avatar>
         </Tooltip>
       </Box>
       <Menu
@@ -84,41 +97,46 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <ListItemButton>
-          <Link href={routes.PROFILE}>
-            <ListItemIcon>
-              <PersonOutlineIcon fontSize="small" />
-            </ListItemIcon>
-            {t("profile")}
-          </Link>
-        </ListItemButton>
-        <ListItemButton>
-          <Link href={routes.PROFILE}>
-            <ListItemIcon>
-              <CachedIcon fontSize="small" />
-            </ListItemIcon>
-            {t("switchAccount")}
-          </Link>
-        </ListItemButton>
-        <Divider />
-        <ListItemButton>
-          <Link href={routes.PROFILE}>
-            <ListItemIcon>
-              <SettingsOutlinedIcon fontSize="small" />
-            </ListItemIcon>
-            {t("settings")}
-          </Link>
-        </ListItemButton>
-        <ListItemButton
-          onClick={() => {
-            signOut({ callbackUrl: routes.SIGNIN });
-          }}
-        >
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          {t("logout")}
-        </ListItemButton>
+        {session && (
+          <Box>
+            {navigationItems.map((linkItem) => (
+              <ListItemButton key={linkItem.label} href={linkItem.url}>
+                <ListItemIcon>{linkItem.icon}</ListItemIcon>
+                <ListItemText>{linkItem.label}</ListItemText>
+              </ListItemButton>
+            ))}
+            <Divider />
+            {session.user.role == "admin" && (
+              <ListItemButton href={routes.OVERVIEW}>
+                <ListItemIcon>
+                  <CachedIcon />
+                </ListItemIcon>
+                <ListItemText>Dashboard</ListItemText>
+              </ListItemButton>
+            )}
+            <ListItemButton
+              onClick={() => {
+                signOut({ callbackUrl: routes.SIGNIN });
+              }}
+            >
+              <ListItemIcon>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText> {t("logout")}</ListItemText>
+            </ListItemButton>
+          </Box>
+        )}
+
+        {!session && (
+          <ListItemButton>
+            <Link href={routes.SIGNIN}>
+              <ListItemIcon>
+                <LoginIcon />
+              </ListItemIcon>
+              Sign In
+            </Link>
+          </ListItemButton>
+        )}
       </Menu>
     </>
   );

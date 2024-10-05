@@ -14,7 +14,7 @@ const secureFetch = async (url: string | URL, params?: RequestInit) => {
     const res = await fetch(urlObj, {
       ...params,
       headers: {
-        ...(session && { Authorization: `Bearer ${session?.accessToken}` }),
+        ...(session && { Authorization: `Bearer ${session?.user.token}` }),
         Accept: "application/json, text/plain",
         "Content-Type": "application/json;charset=UTF-8",
         ...params?.headers,
