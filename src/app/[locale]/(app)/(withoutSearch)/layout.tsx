@@ -1,8 +1,6 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
-import {
-  Container
-} from "@mui/material";
+import { Container } from "@mui/material";
 
 export default async function RootLayout({
   children,
@@ -11,11 +9,12 @@ export default async function RootLayout({
 }>) {
   return (
     <Container maxWidth="xl" disableGutters>
-      <ResponsiveAppBar hideSearchField/>
+      <ResponsiveAppBar hideSearchField />
       <Container
         maxWidth="lg"
         component="main"
         sx={{
+          pt: 2,
           pb: 7,
         }}
       >

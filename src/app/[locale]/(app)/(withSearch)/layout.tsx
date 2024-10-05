@@ -1,8 +1,6 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
-import {
-  Container
-} from "@mui/material";
+import { Container } from "@mui/material";
 
 export default async function RootLayout({
   children,
