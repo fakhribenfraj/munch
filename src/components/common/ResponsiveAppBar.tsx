@@ -16,15 +16,14 @@ import {
   Container,
   InputAdornment,
   Stack,
-  TextField
+  TextField,
 } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import LanguageSelect from "../inputs/LanguageSelect";
 import AccountMenu from "./AccountMenu";
 import Logo from "./Logo";
+import HorizontalScrollbarBox from "./surfaces/HorizontalScrollbarBox";
 function ResponsiveAppBar() {
-
-
   return (
     <>
       <AppBar
@@ -80,47 +79,32 @@ function ResponsiveAppBar() {
               </Stack>
             </Container>
           </Toolbar>
-          <Toolbar
-            sx={{
-              display: "flex",
-              flexWrap: "nowrap",
-              gap: { xs: 1, md: 2 },
-              overflowX: "scroll",
-              "::-webkit-scrollbar": {
-                "-webkit-appearance": "none",
-                height: "7px",
-              },
-              "::-webkit-scrollbar-thumb": {
-                borderRadius: 0.5,
-                backgroundColor: "grey.400",
-                boxShadow: "0 0 2px grey.100",
-              },
-            }}
-          >
-            {[
-              { label: "sandwiches", icon: <LunchDiningIcon /> },
-              { label: "pizza", icon: <LocalPizzaIcon /> },
-              { label: "pasta", icon: <DinnerDiningIcon /> },
-              { label: "spicy", icon: <WhatshotIcon /> },
-              { label: "drinks", icon: <LocalBarIcon /> },
-              { label: "coffe", icon: <LocalCafeIcon /> },
-              { label: "ice cream", icon: <IcecreamIcon /> },
-              { label: "fast food", icon: <FastfoodIcon /> },
-              { label: "cake", icon: <CakeIcon /> },
-            ].map((category) => (
-              <Chip
-                variant="outlined"
-                key={category.label}
-                {...category}
-                clickable
-              />
-            ))}
-          </Toolbar>
+          <HorizontalScrollbarBox>
+            <Toolbar>
+              {[
+                { label: "sandwiches", icon: <LunchDiningIcon /> },
+                { label: "pizza", icon: <LocalPizzaIcon /> },
+                { label: "pasta", icon: <DinnerDiningIcon /> },
+                { label: "spicy", icon: <WhatshotIcon /> },
+                { label: "drinks", icon: <LocalBarIcon /> },
+                { label: "coffe", icon: <LocalCafeIcon /> },
+                { label: "ice cream", icon: <IcecreamIcon /> },
+                { label: "fast food", icon: <FastfoodIcon /> },
+                { label: "cake", icon: <CakeIcon /> },
+              ].map((category) => (
+                <Chip
+                  variant="outlined"
+                  key={category.label}
+                  {...category}
+                  clickable
+                />
+              ))}
+            </Toolbar>
+          </HorizontalScrollbarBox>
         </Stack>
       </AppBar>
       <Toolbar />
       <Toolbar />
-      
     </>
   );
 }
