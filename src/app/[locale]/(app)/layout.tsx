@@ -1,3 +1,4 @@
+import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
 import SideBar from "@/components/common/SideBar";
 import {
@@ -26,6 +27,7 @@ export default async function RootLayout({
       >
         {children}
       </Container>
+      <FixedBottomNavigation />
     </Container>
   );
 }
