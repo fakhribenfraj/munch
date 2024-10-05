@@ -1,5 +1,5 @@
 import { getSidebarLinks } from "@/actions/authorization/userConfigs";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 

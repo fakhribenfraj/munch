@@ -2,7 +2,7 @@
 
 import ActionForm from "@/components/common/compound/ActionForm";
 import DigitInput from "@/components/inputs/DigitInput";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack } from "@mui/material";
@@ -20,7 +20,6 @@ const FormSchema = z.object({
 type FormData = z.infer<typeof FormSchema>;
 
 export default function VerifyResetCode() {
-
   const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(FormSchema),
@@ -33,7 +32,7 @@ export default function VerifyResetCode() {
   });
   const { onSubmit, response, isPending } = useRHFActionForm(
     methods,
-    (data: FormData) => new Promise((resolve) => router.push(routes.OVERVIEW))
+    (data: FormData) => new Promise((resolve) => router.push(routes.HOME))
   );
 
   return (

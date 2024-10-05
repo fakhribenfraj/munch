@@ -2,7 +2,7 @@
 
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack } from "@mui/material";

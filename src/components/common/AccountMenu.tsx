@@ -1,4 +1,4 @@
-import routes from "@/constants/routes";
+import { routes ,dashboardRoutes} from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Logout from "@mui/icons-material/Logout";
@@ -107,7 +107,7 @@ export default function AccountMenu() {
             ))}
             <Divider />
             {session.user.role == "admin" && (
-              <ListItemButton href={routes.OVERVIEW}>
+              <ListItemButton href={dashboardRoutes.OVERVIEW}>
                 <ListItemIcon>
                   <CachedIcon />
                 </ListItemIcon>

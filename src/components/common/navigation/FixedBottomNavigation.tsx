@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import HideOnScroll from "./HideOnScroll";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";

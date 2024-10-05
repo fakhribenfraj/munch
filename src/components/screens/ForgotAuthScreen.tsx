@@ -1,6 +1,6 @@
 import { Button, Stack, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import ForgotPasswordForm from "../forms/auth/ForgotPasswordForm";
 import { ReactNode } from "react";
 type AuthScreenProps = {

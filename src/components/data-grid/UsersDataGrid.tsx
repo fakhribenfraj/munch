@@ -1,5 +1,5 @@
 "use client";
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import { Chip, Link } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useTranslations } from "next-intl";

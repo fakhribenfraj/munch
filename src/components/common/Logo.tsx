@@ -1,5 +1,5 @@
 // React Imports
-import routes from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import { Link, Stack, SvgIcon, Typography } from "@mui/material";
 type LogoProps = {
   direction?: "vertical" | "horizontal";

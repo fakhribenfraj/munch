@@ -1,4 +1,4 @@
-const routes = {
+export const routes = {
   HOME: "/",
   FORGOT_PASSWORD: "/forgot-password",
   SIGNIN: "/signin",
@@ -6,6 +6,9 @@ const routes = {
   PROFILE: "/profile",
   WISHLIST: "/wishlist",
   NOTIFICATION: "/notification",
-  OVERVIEW: "/dashboard/overview",
+  RESTAURANT: "/restaurant",
 };
-export default routes;
+const dashboardRoot = "/dashboard";
+export const dashboardRoutes = {
+  OVERVIEW: `${dashboardRoot}/overview`,
+};

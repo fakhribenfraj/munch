@@ -1,4 +1,5 @@
 import { getRandomInt } from "@/utils/number";
+import { randomUUID } from "crypto";
 
 export async function GET(req: Request) {
   const names = [
@@ -19,6 +20,7 @@ export async function GET(req: Request) {
   const restArray = new Array(25).fill(1);
   return Response.json(
     restArray.map(() => ({
+      id: randomUUID(),
       name: names[getRandomInt(5)],
       images: images.slice(getRandomInt(5), 5),
       description:

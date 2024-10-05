@@ -1,5 +1,5 @@
 "use server";
-import routes from "@/constants/routes";
+import { routes, dashboardRoutes } from "@/constants/routes";
 import { getTranslations } from "next-intl/server";
 
 const getSidebarLinks = async () => {
@@ -11,7 +11,7 @@ const getSidebarLinks = async () => {
       links: [
         {
           label: "overview",
-          url: routes.OVERVIEW,
+          url: dashboardRoutes.OVERVIEW,
           icon: getIconUrl("organisation"),
         },
         {

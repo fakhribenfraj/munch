@@ -3,7 +3,7 @@ import { Button, Divider, Stack, Typography } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Link from "next/link";
-import routes from "@/constants/routes";
+import {routes} from "@/constants/routes";
 import RegisterForm from "../forms/auth/RegisterForm";
 import Logo from "../common/Logo";
 type AuthScreenProps = {
