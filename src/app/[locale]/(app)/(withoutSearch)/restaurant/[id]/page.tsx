@@ -70,8 +70,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           "email",
           "website",
         ].map((item) => (
-          <Stack alignItems="flex-start" gap={1}>
-            <Typography variant="h6" key={'data-'+item}>{item}:</Typography>
+          <Stack alignItems="flex-start" gap={1} key={"data-" + item}>
+            <Typography variant="h6">{item}:</Typography>
             {/* @ts-ignore */}
             <Typography variant="body1">{restaurant[item]}</Typography>
           </Stack>
