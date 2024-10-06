@@ -1,4 +1,4 @@
-import { getRestaurants } from "@/actions/restaurant/getRestaurants";
+import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import Carousel from "@/components/common/Carousel";
 import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";

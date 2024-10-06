@@ -1,22 +1,34 @@
-import { getRestaurants } from "@/actions/restaurant/getRestaurants";
+import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
+import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import Carousel from "@/components/common/Carousel";
 import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
+import Image from "next/image";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { data } = await getRestaurants();
-  const restaurant = data && data[0];
+  const { data: restaurant } = await getRestaurantById(params.id);
   return (
     <Stack gap={2}>
       <Stack alignItems="flex-start" gap={1}>
         <Box
           sx={{
-            width: 48,
-            height: 48,
-            borderRadius: 1,
-            border: "1px solid grey",
+            position: "relative",
+            width: "100vw",
+            height: { xs: "5rem", md: "8rem" },
+            transform: "translate(-1rem,-1rem)",
+            mb: 2,
           }}
         >
-          logo
+          <Image src={restaurant.cover} fill alt="cover" />
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              transform: "translate(1rem,50%)",
+            }}
+          >
+            <Image src={restaurant.logo} width={48} height={48} alt="logo" />
+          </Box>
         </Box>
         <Typography variant="h4">{restaurant?.name}</Typography>
         <Button variant="outlined">add to favorite</Button>
@@ -37,7 +49,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </Stack>
       <Stack alignItems="flex-start" gap={1}>
         <Typography variant="h6">media:</Typography>
-        <Carousel height={280}>
+        <Carousel height={280} width={400}>
           {restaurant?.images.map((image, j) => (
             <Box key={`${restaurant.id}-${j}`}>
               <img src={image} alt={`${restaurant.name}-${j}`} />

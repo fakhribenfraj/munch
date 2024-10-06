@@ -16,7 +16,7 @@ export type Pager = {
 
 export type ActionResponse<T = undefined> = {
   code: 400 | 200;
-  data?: T;
+  data: T;
   error?: string;
 };
 

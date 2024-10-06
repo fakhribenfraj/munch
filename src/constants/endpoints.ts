@@ -1,9 +1,9 @@
 const BASE_URL = process.env.PORTAL_API_URL;
-
+const MOCK_URL = "https://localhost:3000/api ";
 const endpoints = {
-  SIGNIN: `${BASE_URL}/mock/signin`,
-  REGISTER: `${BASE_URL}/mock/register`,
-  PROFILE: `${BASE_URL}/mock/profile`,
-  RESTAURANT: `${BASE_URL}/mock/restaurant`,
+  SIGNIN: `${MOCK_URL}/mock/signin`,
+  REGISTER: `${MOCK_URL}/mock/register`,
+  PROFILE: `${MOCK_URL}/mock/profile`,
+  RESTAURANTS: `${BASE_URL}/restaurants`,
 };
 export default endpoints;
