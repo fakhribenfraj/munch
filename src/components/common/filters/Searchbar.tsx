@@ -5,7 +5,7 @@ import { InputAdornment, TextField } from "@mui/material";
 const Searchbar = () => {
   return (
     <TextField
-      color="warning"
+      color="primary"
       placeholder="search meal..."
       fullWidth
       sx={{ maxWidth: { xs: "100%", md: "25rem" } }}
@@ -18,6 +18,9 @@ const Searchbar = () => {
         sx: {
           borderRadius: 2,
           height: "2.5rem",
+          backgroundColor: "common.white",
+          border: "1px solid",
+          borderColor: "grey.300",
         },
       }}
     />

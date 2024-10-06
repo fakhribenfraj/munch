@@ -27,7 +27,7 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "common.white",
+          backgroundColor: "grey.200",
           boxShadow: 3,
           zIndex: 1,
         }}
@@ -68,7 +68,11 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
               margin: "auto",
             }}
           >
-            <Toolbar>
+            <Toolbar
+              sx={{
+                columnGap: { xs: 1, md: 2 },
+              }}
+            >
               {[
                 { label: "sandwiches", icon: <LunchDiningIcon /> },
                 { label: "pizza", icon: <LocalPizzaIcon /> },
