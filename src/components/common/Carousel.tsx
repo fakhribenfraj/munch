@@ -18,7 +18,17 @@ const Carousel = ({ children, width, height, ...settings }: CarouselProps) => {
   const props = { ...defaultSettings, ...settings };
   const slidesCount = React.Children.count(children);
   return (
-    <Box sx={{ width: width ?? "100%", height: height ?? 200 }}>
+    <Box
+      sx={{
+        width: "100%",
+        minWidth: 280,
+        maxWidth: width,
+
+        minHeight: 200,
+        height: "100%",
+        maxHeight: height,
+      }}
+    >
       <Slider
         {...props}
         infinite={

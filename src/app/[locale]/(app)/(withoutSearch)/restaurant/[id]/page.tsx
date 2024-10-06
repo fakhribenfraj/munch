@@ -12,10 +12,14 @@ export default async function Page({ params }: { params: { id: string } }) {
         <Box
           sx={{
             position: "relative",
-            width: "100vw",
+            width: { xs: "100vw", md: "100%" },
             height: { xs: "5rem", md: "8rem" },
-            transform: "translate(-1rem,-1rem)",
             mb: 2,
+            transform: {
+              xs: `translate(-1rem,-1rem)`,
+              sm: `translate(-1.5rem,-1.5rem)`,
+              md: "none",
+            },
           }}
         >
           <Image src={restaurant.cover} fill alt="cover" />
@@ -24,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               position: "absolute",
               bottom: 0,
               left: 0,
-              transform: "translate(1rem,50%)",
+              transform: "translate(1.5rem,50%)",
             }}
           >
             <Image src={restaurant.logo} width={48} height={48} alt="logo" />
