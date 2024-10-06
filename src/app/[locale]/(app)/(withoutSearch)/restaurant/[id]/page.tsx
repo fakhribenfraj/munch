@@ -41,7 +41,6 @@ export default async function Page({ params }: { params: { id: string } }) {
       <Stack gap={2}>
         <Tabs
           value="Overview"
-          aria-label="basic tabs example"
           indicatorColor="primary"
           textColor="primary"
           sx={{
@@ -72,7 +71,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           "website",
         ].map((item) => (
           <Stack alignItems="flex-start" gap={1}>
-            <Typography variant="h6">{item}:</Typography>
+            <Typography variant="h6" key={'data-'+item}>{item}:</Typography>
             {/* @ts-ignore */}
             <Typography variant="body1">{restaurant[item]}</Typography>
           </Stack>
