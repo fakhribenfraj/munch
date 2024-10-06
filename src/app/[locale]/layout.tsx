@@ -10,6 +10,8 @@ import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "mapbox-gl/dist/mapbox-gl.css";
+
 import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";

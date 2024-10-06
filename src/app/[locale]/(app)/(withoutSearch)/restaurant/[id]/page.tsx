@@ -2,13 +2,45 @@ import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import Carousel from "@/components/common/Carousel";
 import HideOnScroll from "@/components/common/navigation/HideOnScroll";
-import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { routes } from "@/constants/routes";
+import {
+  Box,
+  Button,
+  Fab,
+  IconButton,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { data: restaurant } = await getRestaurantById(params.id);
   return (
     <Stack>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 2,
+          p: 1,
+        }}
+      >
+        <Fab
+          href={routes.HOME}
+          size="small"
+          color="default"
+          sx={{
+            backgroundColor: "common.white",
+            boxShadow: 4,
+          }}
+        >
+          <ArrowBackIosNewIcon />
+        </Fab>
+      </Box>
       <Stack alignItems="flex-start" gap={1}>
         <Box
           sx={{

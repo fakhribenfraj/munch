@@ -89,6 +89,9 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
                   key={category.label}
                   {...category}
                   clickable
+                  sx={{
+                    backgroundColor: "common.white",
+                  }}
                 />
               ))}
             </Toolbar>
