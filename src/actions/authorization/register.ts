@@ -11,5 +11,5 @@ export const registerUser = async ({
 }) => {
   const res = await secureFetch(endpoints.REGISTER);
 
-  return res;
+  return { data: await res.json() };
 };
