@@ -10,9 +10,11 @@ import Image from "next/image";
 import { useState } from "react";
 
 const MapScreen = ({
+  mapboxAccessToken,
   restaurants,
 }: {
   restaurants: GetRestaurantsResponse[];
+  mapboxAccessToken: string;
 }) => {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
@@ -25,6 +27,7 @@ const MapScreen = ({
       }}
     >
       <Map
+        mapboxAccessToken={mapboxAccessToken}
         initialViewState={{
           latitude: 37.306834,
           longitude: -3.917501,

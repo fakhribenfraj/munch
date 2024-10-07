@@ -4,7 +4,10 @@ import { NextPage } from "next";
 const Home: NextPage = async () => {
   const { data: restaurants } = await getRestaurants();
   return (
-    <MapScreen restaurants={restaurants}/>
+    <MapScreen
+      mapboxAccessToken={process.env.MAPBOX_ACCESS_TOKEN ?? ""}
+      restaurants={restaurants}
+    />
   );
 };
 export default Home;
