@@ -98,8 +98,8 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
           </HorizontalScrollbarBox>
         )}
       </AppBar>
-      <Toolbar />
-      {!hideSearchField && <Toolbar />}
+      {/* <Toolbar />
+      {!hideSearchField && <Toolbar />} */}
     </Box>
   );
 }

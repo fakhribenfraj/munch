@@ -8,7 +8,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Container maxWidth="xl" disableGutters>
+    <>
       <ResponsiveAppBar hideSearchField />
       <Container
         maxWidth="lg"
@@ -21,6 +21,6 @@ export default async function RootLayout({
         {children}
       </Container>
       <FixedBottomNavigation />
-    </Container>
+    </>
   );
 }

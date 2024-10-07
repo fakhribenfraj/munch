@@ -1647,7 +1647,7 @@
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.1.tgz"
   integrity sha512-X+2qazGS3jxLAIz5JDXDzglAF3KpijdhFxlf/V1+hEsOUc+HnWi81L/uv/EvGuV90WY+7mPGFCUDGfQC3Gj95Q==
 
-"@types/mapbox-gl@>=1.0.0", "@types/mapbox-gl@^3.4.0":
+"@types/mapbox-gl@*", "@types/mapbox-gl@>=1.0.0", "@types/mapbox-gl@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@types/mapbox-gl/-/mapbox-gl-3.4.0.tgz#99207b6b68122e20947f5b2bc51c5304b9fd8125"
   integrity sha512-tbn++Mm94H1kE7W6FF0oVC9rMXHVzDDNUbS7KfBMRF8NV/8csFi+67ytKcZJ4LsrpsJ+8MC6Os6ZinEDCsrunw==
@@ -1714,6 +1714,16 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-map-gl@^6.1.6":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-map-gl/-/react-map-gl-6.1.6.tgz#ff6232459763a4e4b5214b9e50ef2d84479e3658"
+  integrity sha512-nrczNIcLmyhj53sYdAGqqAzRJg0lnGUZKdp1YohJfAzM5ialyo2iQxVxo0zpPPXe6oRfxlUTzHMjWGL2wt+EFA==
+  dependencies:
+    "@types/geojson" "*"
+    "@types/mapbox-gl" "*"
+    "@types/react" "*"
+    "@types/viewport-mercator-project" "*"
+
 "@types/react-slick@^0.23.13":
   version "0.23.13"
   resolved "https://registry.npmjs.org/@types/react-slick/-/react-slick-0.23.13.tgz"
@@ -1760,6 +1770,13 @@
   version "2.0.7"
   resolved "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.7.tgz"
   integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
+
+"@types/viewport-mercator-project@*":
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/@types/viewport-mercator-project/-/viewport-mercator-project-6.1.6.tgz#74874286099e9506943c3f868c9cbeaf2a6d1559"
+  integrity sha512-uWrbqhRXFeiT6CAvRjf0BkQKRkKED+ofrPhglKpUktQML3463dEPiA4iwe7cZQs6m49Zo/g03rL7ChMLiE5Z8w==
+  dependencies:
+    gl-matrix "^3.2.0"
 
 "@typescript-eslint/parser@^5.4.2 || ^6.0.0":
   version "6.21.0"
@@ -3131,7 +3148,7 @@ getaddress-api@^1.4.3:
   resolved "https://registry.npmjs.org/getaddress-api/-/getaddress-api-1.4.4.tgz"
   integrity sha512-FSCU+opyTgd9WI7RoQq0ltl4tF6TLYs3RDvY8GsuoAeChlLRsVsyFrf9+E4UaCtq18ERDZ7WpvRRogJ6uuuZtQ==
 
-gl-matrix@^3.4.3:
+gl-matrix@^3.2.0, gl-matrix@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.4.3.tgz#fc1191e8320009fd4d20e9339595c6041ddc22c9"
   integrity sha512-wcCp8vu8FT22BnvKVPjXa/ICBWRq/zjFfdofZy1WSpQZpphblv12/bOQLBC1rMM7SGOFS9ltVmKOHil5+Ml7gA==

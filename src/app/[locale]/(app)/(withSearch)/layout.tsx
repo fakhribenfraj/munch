@@ -8,18 +8,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Container maxWidth="xl" disableGutters>
+    <>
       <ResponsiveAppBar />
       <Container
         maxWidth="lg"
         component="main"
         sx={{
+          height: "100%",
+          width: "100%",
+          pt: 14,
           pb: 7,
         }}
       >
         {children}
       </Container>
       <FixedBottomNavigation />
-    </Container>
+    </>
   );
 }
