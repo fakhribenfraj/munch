@@ -1,7 +1,7 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
-
+import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import { routes } from "@/constants/routes";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Box, Button, Fab, Stack, Tab, Tabs, Typography } from "@mui/material";
@@ -107,13 +107,14 @@ export default async function Page({ params }: { params: { id: string } }) {
             longitude: restaurant.lng,
             zoom: 7,
           }}
+          style={{
+            width: "80%",
+            height: "20rem",
+            margin: "auto",
+          }}
         >
-          <Marker
-            longitude={restaurant.lng}
-            latitude={restaurant.lat}
-            anchor="bottom"
-          >
-            <div>{restaurant.name}</div>
+          <Marker longitude={restaurant.lng} latitude={restaurant.lat}>
+            <LocalPizzaIcon />
           </Marker>
         </Map>
       </Stack>

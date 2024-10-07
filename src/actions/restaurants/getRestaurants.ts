@@ -3,7 +3,7 @@ import endpoints from "@/constants/endpoints";
 import { ActionResponse } from "@/types/api";
 import secureFetch from "@/utils/fetch";
 import { getRandomInt } from "@/utils/number";
-type GetRestaurantsResponse = {
+export type GetRestaurantsResponse = {
   id: string;
   name: string;
   slug: string;
@@ -28,7 +28,7 @@ type GetRestaurantsResponse = {
   created_at: string;
   updated_at: string;
   images: string[];
-}[];
+};
 export const getRestaurants = async () => {
   const images = [
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/24/4a/36/au-coeur-de-la-medina.jpg?w=600&h=-1&s=1",
@@ -45,5 +45,5 @@ export const getRestaurants = async () => {
       ...resto,
       images: images.slice(getRandomInt(5), 5),
     })),
-  } as ActionResponse<GetRestaurantsResponse>;
+  } as ActionResponse<GetRestaurantsResponse[]>;
 };

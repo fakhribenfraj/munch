@@ -22,7 +22,7 @@ export default async function RootLayout({
       >
         {children}
       </Container>
-      <FixedBottomNavigation />
+      <FixedBottomNavigation showMapLink />
     </>
   );
 }
