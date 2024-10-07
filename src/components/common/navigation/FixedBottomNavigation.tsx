@@ -19,7 +19,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
 import MapIcon from "@mui/icons-material/Map";
 
-const FixedBottomNavigation = ({ showMapLink }: { showMapLink: boolean }) => {
+const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
   const [activeTabIndex, setActiveTabIndex] = useState(-1);
   const pathname = usePathname();
   const { data: session } = useSession();
