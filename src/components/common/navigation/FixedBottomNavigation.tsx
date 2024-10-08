@@ -9,6 +9,7 @@ import {
   Fab,
   Paper,
   Stack,
+  useScrollTrigger,
 } from "@mui/material";
 import { routes } from "@/constants/routes";
 import { useSession } from "next-auth/react";
@@ -23,7 +24,8 @@ const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
   const [activeTabIndex, setActiveTabIndex] = useState(-1);
   const pathname = usePathname();
   const { data: session } = useSession();
-
+  const trigger = useScrollTrigger();
+  console.log({ trigger });
   const navigationItems = useMemo(
     () => [
       { label: "Explore", icon: <SearchIcon />, url: routes.HOME },
@@ -75,6 +77,8 @@ const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
         left: 0,
         right: 0,
         zIndex: 10,
+        transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1)",
+        transform: `translateY(${trigger ? 80 : 0}px)`,
       }}
     >
       {showMapLink && (
@@ -88,28 +92,26 @@ const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
           Map
         </Fab>
       )}
-      <HideOnScroll direction="up">
-        <Paper
-          sx={{
-            display: { xs: "block", md: "none" },
-            borderRadius: "1rem 1rem 0 0",
-            overflow: "hidden",
-            boxShadow: 24,
-            py: 1.5,
-          }}
-        >
-          <BottomNavigation showLabels value={activeTabIndex}>
-            {navigationItems.map((item) => (
-              <BottomNavigationAction
-                key={"nav-bottom-" + item.label}
-                href={item.url}
-                label={item.label}
-                icon={item.icon}
-              />
-            ))}
-          </BottomNavigation>
-        </Paper>
-      </HideOnScroll>
+      <Paper
+        sx={{
+          display: { xs: "block", md: "none" },
+          borderRadius: "1rem 1rem 0 0",
+          overflow: "hidden",
+          boxShadow: 24,
+          py: 1.5,
+        }}
+      >
+        <BottomNavigation showLabels value={activeTabIndex}>
+          {navigationItems.map((item) => (
+            <BottomNavigationAction
+              key={"nav-bottom-" + item.label}
+              href={item.url}
+              label={item.label}
+              icon={item.icon}
+            />
+          ))}
+        </BottomNavigation>
+      </Paper>
     </Stack>
   );
 };
