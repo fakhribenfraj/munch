@@ -11,7 +11,7 @@ export default async function RootLayout({
     <>
       <ResponsiveAppBar hideSearchField />
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         component="main"
         sx={{
           pt: 2,

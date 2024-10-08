@@ -26,6 +26,7 @@ const Home: NextPage = async () => {
           sm={6}
           md={4}
           lg={3}
+          xl={2}
         >
           <Card
             sx={{
@@ -60,11 +61,11 @@ const Home: NextPage = async () => {
               </Carousel>
 
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h6">
                   {restaurant.name}
                 </Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {restaurant.description}
+                  {restaurant.address}
                 </Typography>
               </CardContent>
             </Link>

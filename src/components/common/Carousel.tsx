@@ -21,10 +21,8 @@ const Carousel = ({ children, width, height, ...settings }: CarouselProps) => {
     <Box
       sx={{
         width: "100%",
-        minWidth: 280,
         maxWidth: width,
 
-        minHeight: 200,
         height: "100%",
         maxHeight: height,
       }}

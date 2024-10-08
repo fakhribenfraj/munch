@@ -11,12 +11,12 @@ export default async function RootLayout({
     <>
       <ResponsiveAppBar />
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         component="main"
         sx={{
           height: "100%",
           width: "100%",
-          pt: 14,
+          pt: { xs: 15, sm: 17, },
           pb: 7,
         }}
       >
