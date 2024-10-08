@@ -53,13 +53,13 @@ const HomeScreen = ({
           {!isMapView && (
             <>
               <MapIcon sx={{ mr: 1 }} />
-              Map
+              Show map
             </>
           )}
           {isMapView && (
             <>
               <ViewListIcon sx={{ mr: 1 }} />
-              List
+              Show list
             </>
           )}
         </Fab>

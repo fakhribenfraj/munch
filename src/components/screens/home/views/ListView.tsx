@@ -27,13 +27,13 @@ const ListView = ({
           sm={6}
           md={4}
           lg={3}
-          xl={2}
         >
           <Card
             sx={{
-              boxShadow: 7,
               position: "relative",
+            //   backgroundColor: "grey.200",
             }}
+            elevation={1}
           >
             <Box
               sx={{

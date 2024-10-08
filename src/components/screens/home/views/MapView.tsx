@@ -50,6 +50,7 @@ const MapView = ({
             }}
           >
             <LocalPizzaIcon
+              sx={{ fontSize: "3rem" }}
               color={
                 selectedRestaurant?.id == restaurant.id ? "primary" : "inherit"
               }
@@ -113,6 +114,9 @@ const MapView = ({
                 sx={{
                   justifySelf: "flex-end",
                   alignSelf: "self-start",
+                }}
+                onClick={(e) => {
+                  setSelectedRestaurant(null);
                 }}
               >
                 <CloseIcon />
