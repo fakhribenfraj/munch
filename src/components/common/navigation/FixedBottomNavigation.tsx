@@ -89,25 +89,26 @@ const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
         </Fab>
       )}
       <HideOnScroll direction="up">
-        <BottomNavigation
-          showLabels
-          value={activeTabIndex}
+        <Paper
           sx={{
-            display: { xs: "flex", md: "none" },
+            display: { xs: "block", md: "none" },
             borderRadius: "1rem 1rem 0 0",
             overflow: "hidden",
             boxShadow: 24,
+            py: 1.5,
           }}
         >
-          {navigationItems.map((item) => (
-            <BottomNavigationAction
-              key={"nav-bottom-" + item.label}
-              href={item.url}
-              label={item.label}
-              icon={item.icon}
-            />
-          ))}
-        </BottomNavigation>
+          <BottomNavigation showLabels value={activeTabIndex}>
+            {navigationItems.map((item) => (
+              <BottomNavigationAction
+                key={"nav-bottom-" + item.label}
+                href={item.url}
+                label={item.label}
+                icon={item.icon}
+              />
+            ))}
+          </BottomNavigation>
+        </Paper>
       </HideOnScroll>
     </Stack>
   );
