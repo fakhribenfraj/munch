@@ -9,8 +9,7 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
       sx={{
         height: "100%",
         width: "100%",
-        pt: { xs: 15, sm: 17 },
-        pb: 7,
+        pb: 9,
         ...sx,
       }}
       {...props}

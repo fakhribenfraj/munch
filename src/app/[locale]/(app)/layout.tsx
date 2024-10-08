@@ -1,7 +1,8 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
+import HideOnScroll from "@/components/common/navigation/HideOnScroll";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
 import MainContainer from "@/components/common/surfaces/MainContainer";
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default async function RootLayout({
   children,
@@ -12,7 +13,19 @@ export default async function RootLayout({
     <>
       <ResponsiveAppBar hideSearchField />
       <MainContainer>{children}</MainContainer>
-      <FixedBottomNavigation />
+      <HideOnScroll direction="up">
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 0,
+            right: 0,
+            left: 0,
+            width: "100%",
+          }}
+        >
+          <FixedBottomNavigation />
+        </Box>
+      </HideOnScroll>
     </>
   );
 }

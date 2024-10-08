@@ -38,11 +38,11 @@ export default async function Page({ params }: { params: { id: string } }) {
           sx={{
             position: "relative",
             width: { xs: "100vw", md: "100%" },
-            height: { xs: "6rem", md: "9rem" },
-            mb: 2,
+            height: { xs: "7rem", md: "17rem" },
+            mb: { xs: 3, md: 6 },
             transform: {
-              xs: `translate(-1rem,-1rem)`,
-              sm: `translate(-1.5rem,-1.5rem)`,
+              xs: `translate(-1rem,0)`,
+              sm: `translate(-1.5rem,0)`,
               md: "none",
             },
           }}
@@ -54,9 +54,12 @@ export default async function Page({ params }: { params: { id: string } }) {
               bottom: 0,
               left: 0,
               transform: "translate(1.5rem,50%)",
+              boxShadow: 2,
+              width: { xs: 48, md: 80 },
+              height: { xs: 48, md: 80 },
             }}
           >
-            <Image src={restaurant.logo} width={48} height={48} alt="logo" />
+            <Image src={restaurant.logo} fill alt="logo" />
           </Box>
         </Box>
         <Typography variant="h4">{restaurant?.name}</Typography>
