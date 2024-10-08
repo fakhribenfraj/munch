@@ -19,8 +19,15 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
 import MapIcon from "@mui/icons-material/Map";
+import ViewListIcon from "@mui/icons-material/ViewList";
 
-const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
+const FixedBottomNavigation = ({
+  showMapLink,
+  onChangeView,
+}: {
+  showMapLink?: boolean;
+  onChangeView?: VoidFunction;
+}) => {
   const [activeTabIndex, setActiveTabIndex] = useState(-1);
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -81,37 +88,47 @@ const FixedBottomNavigation = ({ showMapLink }: { showMapLink?: boolean }) => {
         transform: `translateY(${trigger ? 80 : 0}px)`,
       }}
     >
-      {showMapLink && (
-        <Fab
-          variant="extended"
-          href="/map"
-          sx={{ margin: "auto", alignSelf: "center", mb: 2 }}
-          color="inherit"
-        >
-          <MapIcon sx={{ mr: 1 }} />
-          Map
-        </Fab>
-      )}
-      <Paper
-        sx={{
-          display: { xs: "block", md: "none" },
-          borderRadius: "1rem 1rem 0 0",
-          overflow: "hidden",
-          boxShadow: 24,
-          py: 1.5,
-        }}
+      <Fab
+        variant="extended"
+        sx={{ margin: "auto", alignSelf: "center", mb: 2 }}
+        color="inherit"
+        onClick={onChangeView}
       >
-        <BottomNavigation showLabels value={activeTabIndex}>
-          {navigationItems.map((item) => (
-            <BottomNavigationAction
-              key={"nav-bottom-" + item.label}
-              href={item.url}
-              label={item.label}
-              icon={item.icon}
-            />
-          ))}
-        </BottomNavigation>
-      </Paper>
+        {showMapLink && (
+          <>
+            <MapIcon sx={{ mr: 1 }} />
+            Map
+          </>
+        )}
+        {!showMapLink && (
+          <>
+            <ViewListIcon sx={{ mr: 1 }} />
+            List
+          </>
+        )}
+      </Fab>
+      {showMapLink && (
+        <Paper
+          sx={{
+            display: { xs: "block", md: "none" },
+            borderRadius: "1rem 1rem 0 0",
+            overflow: "hidden",
+            boxShadow: 24,
+            py: 1.5,
+          }}
+        >
+          <BottomNavigation showLabels value={activeTabIndex}>
+            {navigationItems.map((item) => (
+              <BottomNavigationAction
+                key={"nav-bottom-" + item.label}
+                href={item.url}
+                label={item.label}
+                icon={item.icon}
+              />
+            ))}
+          </BottomNavigation>
+        </Paper>
+      )}
     </Stack>
   );
 };

@@ -1,9 +1,8 @@
-import { getRestaurants } from "@/actions/restaurants/getRestaurants";
+import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import Carousel from "@/components/common/Carousel";
 import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {
-  Badge,
   Box,
   Card,
   CardContent,
@@ -12,9 +11,11 @@ import {
   Link,
   Typography,
 } from "@mui/material";
-import { NextPage } from "next";
-const Home: NextPage = async () => {
-  const { data: restaurants } = await getRestaurants();
+const ListView = ({
+  restaurants,
+}: {
+  restaurants: GetRestaurantsResponse[];
+}) => {
   return (
     <Grid container justifyContent="center">
       {restaurants?.map((restaurant, i) => (
@@ -75,4 +76,5 @@ const Home: NextPage = async () => {
     </Grid>
   );
 };
-export default Home;
+
+export default ListView;

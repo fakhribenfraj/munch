@@ -1,13 +1,8 @@
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
-import MapScreen from "@/components/screens/MapScreen";
+import HomeScreen from "@/components/screens/home/HomeScreen";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
   const { data: restaurants } = await getRestaurants();
-  return (
-    <MapScreen
-      mapboxAccessToken={process.env.MAPBOX_ACCESS_TOKEN ?? ""}
-      restaurants={restaurants}
-    />
-  );
+  return <HomeScreen restaurants={restaurants} />;
 };
 export default Home;

@@ -1,5 +1,6 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
+import MainContainer from "@/components/common/surfaces/MainContainer";
 import { Container } from "@mui/material";
 
 export default async function RootLayout({
@@ -9,20 +10,9 @@ export default async function RootLayout({
 }>) {
   return (
     <>
-      <ResponsiveAppBar />
-      <Container
-        maxWidth="xl"
-        component="main"
-        sx={{
-          height: "100%",
-          width: "100%",
-          pt: { xs: 15, sm: 17, },
-          pb: 7,
-        }}
-      >
-        {children}
-      </Container>
-      <FixedBottomNavigation showMapLink />
+      <ResponsiveAppBar hideSearchField />
+      <MainContainer>{children}</MainContainer>
+      <FixedBottomNavigation />
     </>
   );
 }
