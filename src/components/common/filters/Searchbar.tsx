@@ -1,6 +1,8 @@
 "use client";
 import SearchIcon from "@mui/icons-material/Search";
-import { InputAdornment, TextField } from "@mui/material";
+import { Box, InputAdornment, TextField } from "@mui/material";
+import TuneIcon from "@mui/icons-material/Tune";
+import ButtonModal from "../compound/ButtonModal";
 
 const Searchbar = () => {
   return (
@@ -14,6 +16,16 @@ const Searchbar = () => {
           <InputAdornment position="start">
             <SearchIcon />
           </InputAdornment>
+        ),
+        endAdornment: (
+          <ButtonModal icon={<TuneIcon />}>
+            <Box>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, odio
+              quasi eos adipisci beatae voluptates repudiandae facere
+              consequuntur perferendis quia excepturi illum. Non cumque pariatur
+              illo quia amet modi fuga.
+            </Box>
+          </ButtonModal>
         ),
         sx: {
           borderRadius: 2,

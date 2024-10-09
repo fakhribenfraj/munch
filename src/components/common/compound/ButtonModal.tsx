@@ -1,6 +1,19 @@
 "use client";
-import { Button, ButtonProps, CardProps } from "@mui/material";
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  Button,
+  ButtonBaseProps,
+  ButtonProps,
+  CardProps,
+  IconButton,
+  IconButtonProps,
+} from "@mui/material";
+import {
+  MouseEvent,
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import CardModal from "../surfaces/CardModal";
 
 type ModalContextType = {
@@ -11,16 +24,18 @@ const ModalContext = createContext<ModalContextType>({
 });
 
 export type ButtonModalProps = {
-  label: string;
+  label?: string;
   children: ReactNode;
-  buttonProps?: ButtonProps;
+  buttonProps?: ButtonBaseProps;
   cardProps?: CardProps;
+  icon?: ReactNode;
 };
 const ButtonModal = ({
   children,
   label,
   buttonProps,
   cardProps,
+  icon,
 }: ButtonModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
@@ -32,18 +47,23 @@ const ButtonModal = ({
   const contextValue = {
     handleClose,
   };
+  const triggerProps: ButtonBaseProps = {
+    ...buttonProps,
+    onClick: (event) => {
+      handleOpen();
+      buttonProps?.onClick && buttonProps?.onClick(event);
+    },
+    sx: { textTransform: "capitalize", ...buttonProps?.sx },
+  };
+  const trigger = icon ? (
+    <IconButton {...(triggerProps as IconButtonProps)}>{icon}</IconButton>
+  ) : (
+    <Button {...(triggerProps as ButtonProps)}> {label}</Button>
+  );
   return (
     <ModalContext.Provider value={contextValue}>
-      <Button
-        {...buttonProps}
-        onClick={(event) => {
-          handleOpen();
-          buttonProps?.onClick && buttonProps?.onClick(event);
-        }}
-        sx={{ textTransform: "capitalize", ...buttonProps?.sx }}
-      >
-        {label}
-      </Button>
+      {trigger}
+
       <CardModal {...cardProps} open={isOpen} onClose={() => setIsOpen(false)}>
         <>{children}</>
       </CardModal>
