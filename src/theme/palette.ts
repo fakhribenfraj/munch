@@ -58,7 +58,7 @@ export const secondary = {
 };
 
 export const info = {
-  lighter: "#CAFDF5",
+  lighter: "#CAFDF4ff",
   light: "#61F3F3",
   main: "#00B8D9",
   dark: "#006C9C",
