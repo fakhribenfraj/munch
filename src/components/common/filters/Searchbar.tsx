@@ -19,7 +19,15 @@ const Searchbar = () => {
           </InputAdornment>
         ),
         endAdornment: (
-          <ButtonModal icon={<TuneIcon />}>
+          <ButtonModal
+            icon={<TuneIcon />}
+            cardProps={{
+              sx: {
+                alignSelf: { xs: "flex-end", sm: "center" },
+                borderRadius: { xs: '1rem 1rem 0 0', sm: 2 },
+              },
+            }}
+          >
             <FilterForm />
           </ButtonModal>
         ),
