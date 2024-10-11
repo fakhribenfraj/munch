@@ -26,7 +26,7 @@ const ModalContext = createContext<ModalContextType>({
 export type ButtonModalProps = {
   label?: string;
   children: ReactNode;
-  buttonProps?: ButtonBaseProps;
+  buttonProps?: ButtonProps | IconButtonProps;
   cardProps?: CardProps;
   icon?: ReactNode;
 };
