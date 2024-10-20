@@ -15,7 +15,7 @@ const HomeScreen = ({
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
-  const [isMapView, setisMapView] = useState<boolean>(false);
+  const [isMapView, setIsMapView] = useState<boolean>(false);
   const trigger = useScrollTrigger();
 
   return (
@@ -48,7 +48,7 @@ const HomeScreen = ({
           variant="extended"
           sx={{ margin: "auto", alignSelf: "center", mb: 2 }}
           color="inherit"
-          onClick={() => setisMapView((state) => !state)}
+          onClick={() => setIsMapView((state) => !state)}
         >
           {!isMapView && (
             <>

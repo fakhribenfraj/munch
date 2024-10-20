@@ -6,7 +6,7 @@ export const routes = {
   PROFILE: "/profile",
   WISHLIST: "/wishlist",
   NOTIFICATION: "/notification",
-  RESTAURANT: "/restaurant",
+  RESTAURANTS: "/restaurants",
 };
 const dashboardRoot = "/dashboard";
 export const dashboardRoutes = {

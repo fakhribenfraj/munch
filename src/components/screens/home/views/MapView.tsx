@@ -94,7 +94,7 @@ const MapView = ({
                 >
                   <Link
                     variant="h6"
-                    href={`${routes.RESTAURANT}/${selectedRestaurant.id}`}
+                    href={`${routes.RESTAURANTS}/${selectedRestaurant.id}`}
                   >
                     {selectedRestaurant.name}
                   </Link>

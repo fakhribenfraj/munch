@@ -47,7 +47,7 @@ const ListView = ({
             >
               <FavoriteBorderIcon />
             </Box>
-            <Link href={`${routes.RESTAURANT}/${restaurant.id}`}>
+            <Link href={`${routes.RESTAURANTS}/${restaurant.id}`}>
               <Carousel>
                 {restaurant.images.map((image, j) => (
                   <CardMedia
