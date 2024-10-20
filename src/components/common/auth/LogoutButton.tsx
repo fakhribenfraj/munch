@@ -1,4 +1,5 @@
 "use client";
+import { logoutUser } from "@/actions/authorization/logoutUser";
 import { routes } from "@/constants/routes";
 import { Button } from "@mui/material";
 import { signOut } from "next-auth/react";
@@ -8,7 +9,8 @@ const LogoutButton = () => {
     <Button
       variant="outlined"
       fullWidth
-      onClick={() => {
+      onClick={async () => {
+        logoutUser();
         signOut({ callbackUrl: routes.HOME });
       }}
     >

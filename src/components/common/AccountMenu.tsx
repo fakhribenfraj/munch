@@ -1,6 +1,7 @@
-import { routes ,dashboardRoutes} from "@/constants/routes";
+import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LoginIcon from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import PersonIcon from "@mui/icons-material/Person";
@@ -16,8 +17,6 @@ import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import LoginIcon from "@mui/icons-material/Login";
-import CachedIcon from "@mui/icons-material/Cached";
 
 export default function AccountMenu() {
   const t = useTranslations("accountMenu");
@@ -106,14 +105,7 @@ export default function AccountMenu() {
               </ListItemButton>
             ))}
             <Divider />
-            {session.user.role == "admin" && (
-              <ListItemButton href={dashboardRoutes.OVERVIEW}>
-                <ListItemIcon>
-                  <CachedIcon />
-                </ListItemIcon>
-                <ListItemText>Dashboard</ListItemText>
-              </ListItemButton>
-            )}
+
             <ListItemButton
               onClick={() => {
                 signOut({ callbackUrl: routes.SIGNIN });

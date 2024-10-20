@@ -35,8 +35,7 @@ export default function SignInForm() {
     methods,
     (data: FormData) =>
       signIn("credentials", {
-        username: data.email,
-        password: data.password,
+        ...data,
         redirect: false,
       })
   );
