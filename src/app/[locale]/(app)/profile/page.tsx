@@ -1,9 +1,9 @@
-import { getUserProfile } from "@/actions/authorization/getUserProfile";
+import getProfile from "@/actions/profile/getProfile";
 import LogoutButton from "@/components/common/auth/LogoutButton";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
-  const profile = await getUserProfile();
+  const profile = await getProfile();
   return (
     <Box>
       <Typography variant="h4">this is the profile</Typography>

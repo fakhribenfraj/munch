@@ -11,7 +11,7 @@ export default async function RootLayout({
 }>) {
   return (
     <>
-      <ResponsiveAppBar hideSearchField />
+      {/* <ResponsiveAppBar hideSearchField /> */}
       <MainContainer>{children}</MainContainer>
       <HideOnScroll direction="up">
         <Box
