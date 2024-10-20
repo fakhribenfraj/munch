@@ -1,18 +1,17 @@
 import { authenticateUser } from "@/actions/authorization/authenticateUser";
-import { AuthOptions } from "next-auth";
+import { AuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions: AuthOptions = {
   callbacks: {
-    async jwt({ user, token }) {
-      if (user) {
-        token.accessToken = user.token;
-        token.role = user.role;
-      }
-      return token;
+    async jwt({ token, user }) {
+      // console.log({ user });
+      return { ...token, ...user };
     },
-    async session({ session, token, user }) {
-      session.user.token = token.accessToken as string;
-      session.user.role = token.role as string;
+    async session({ session, token }) {
+      if (token.access_token) {
+        session.user = token.user as User;
+        session.access_token = token.access_token as string;
+      }
       return session;
     },
   },
@@ -24,17 +23,17 @@ export const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const { data: user } = await authenticateUser({
+        const res = await authenticateUser({
           username: credentials?.username,
           password: credentials?.password,
         });
-
-        // If no error and we have user data, return it
-        if (user) {
-          return user;
+        if (res.data) {
+          // Any object returned will be saved in `user` property of the JWT
+          return res.data;
+        } else {
+          // Return an object that will pass error information through to the client-side.
+          throw new Error(res.message);
         }
-        // Return null if user data could not be retrieved
-        return null;
       },
     }),
   ],

@@ -5,8 +5,9 @@ import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import { routes } from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Link, Stack } from "@mui/material";
+import { Button, Link, Stack, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -14,14 +15,15 @@ const FormSchema = z.object({
   email: z.string().email({
     message: "email not correct",
   }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+  password: z.string().min(8, {
+    message: "Password must be at least 8 characters.",
   }),
 });
 
 type FormData = z.infer<typeof FormSchema>;
 
 export default function SignInForm() {
+  const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -35,10 +37,12 @@ export default function SignInForm() {
       signIn("credentials", {
         username: data.email,
         password: data.password,
-        callbackUrl: routes.HOME,
+        redirect: false,
       })
   );
-
+  if (response?.ok) {
+    router.push(routes.HOME);
+  }
   return (
     <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
       <Stack gap={2}>
@@ -62,6 +66,7 @@ export default function SignInForm() {
           href={routes.FORGOT_PASSWORD}
           sx={{
             textAlign: "right",
+            alignSelf: "flex-end",
           }}
         >
           forgot password
@@ -79,6 +84,9 @@ export default function SignInForm() {
         >
           login
         </Button>
+        {response && !response?.ok && (
+          <Typography color="error">{response?.error}</Typography>
+        )}
       </Stack>
     </ActionForm>
   );
