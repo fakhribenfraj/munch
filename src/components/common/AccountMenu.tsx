@@ -27,7 +27,7 @@ export default function AccountMenu() {
       {
         label: "Profile",
         icon: <AccountCircleOutlinedIcon />,
-        url: routes.PROFILE,
+        url: routes.ACCOUNT,
       },
       {
         label: "Wishlist",

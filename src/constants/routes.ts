@@ -3,7 +3,7 @@ export const routes = {
   FORGOT_PASSWORD: "/forgot-password",
   SIGNIN: "/signin",
   REGISTER: "/register",
-  PROFILE: "/profile",
+  ACCOUNT: "/account",
   WISHLIST: "/wishlist",
   NOTIFICATION: "/notification",
   RESTAURANTS: "/restaurants",

@@ -17,7 +17,7 @@ const getSidebarLinks = async () => {
         {
           label: "profile",
           icon: getIconUrl("users"),
-          url: routes.PROFILE,
+          url: routes.ACCOUNT,
         },
       ],
     },

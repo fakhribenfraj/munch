@@ -31,7 +31,7 @@ const FixedBottomNavigation = () => {
             {
               label: "Profile",
               icon: <AccountCircleOutlinedIcon />,
-              url: routes.PROFILE,
+              url: routes.ACCOUNT,
             },
           ]
         : [
