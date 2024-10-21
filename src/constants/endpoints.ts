@@ -1,9 +1,8 @@
 const BASE_URL = process.env.PORTAL_API_URL;
-const MOCK_URL = process.env.MOCK_PORTAL_API_URL;
 const endpoints = {
   LOGIN: `${BASE_URL}/login`,
   LOGOUT: `${BASE_URL}/logout`,
-  REGISTER: `${MOCK_URL}/register`,
+  REGISTER: `${BASE_URL}/register`,
   PROFILE: `${BASE_URL}/profile`,
   RESTAURANTS: `${BASE_URL}/restaurants`,
 };

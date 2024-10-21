@@ -4,41 +4,74 @@ import { registerUser } from "@/actions/authorization/register";
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
+import { routes } from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-const FormSchema = z.object({
-  email: z.string().email({
-    message: "email not correct",
-  }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
-  }),
-});
+const FormSchema = z
+  .object({
+    name: z.string().min(1, {
+      message: "name is empty",
+    }),
+    email: z.string().email({
+      message: "email not correct",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters.",
+    }),
+    confirmPassword: z.string(),
+  })
+  .superRefine(({ confirmPassword, password }, ctx) => {
+    if (confirmPassword !== password) {
+      ctx.addIssue({
+        code: "custom",
+        message: "The passwords did not match",
+        path: ["confirmPassword"],
+      });
+    }
+  });
 
 type FormData = z.infer<typeof FormSchema>;
 
 export default function RegisterForm() {
+  const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
   const { onSubmit, response, isPending } = useRHFActionForm(
     methods,
-    registerUser
+    (data: FormData) =>
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
   );
+  if (response?.ok) {
+    router.push(routes.HOME);
+  }
 
   return (
     <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
       <Stack gap={2}>
         <RHFTelInput name="phoneNumber" label="phone number" />
         {[
+          {
+            label: "Name",
+            name: "name",
+            type: "text",
+            placeholder: "Enter your name",
+          },
           {
             label: "Email",
             name: "email",
@@ -73,6 +106,9 @@ export default function RegisterForm() {
         >
           Sign up
         </Button>
+        {response && !response?.ok && (
+          <Typography color="error">{response?.error}</Typography>
+        )}
       </Stack>
     </ActionForm>
   );
