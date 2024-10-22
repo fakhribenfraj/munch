@@ -1,23 +1,35 @@
 "use client";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { Fab, FabProps, IconButton } from "@mui/material";
+import {
+  Button,
+  ButtonBase,
+  ButtonProps,
+  Fab,
+  FabProps,
+  IconButton,
+} from "@mui/material";
 import { useRouter } from "next/navigation";
-
-const ReturnButton = (props: Omit<FabProps, "href">) => {
+type ReturnButtonProps = Omit<ButtonProps, "href"> & {
+  label?: string;
+};
+const ReturnButton = ({ label, sx, ...props }: ReturnButtonProps) => {
   const router = useRouter();
   return (
-    <IconButton
+    <Button
       {...props}
-      size="small"
       sx={{
+        justifyContent: "start",
+        columnGap: 2,
         bgcolor: "transparent",
         color: "black",
         p: 0,
+        ...sx,
       }}
       onClick={() => router.back()}
+      startIcon={<ArrowBackIosNewIcon />}
     >
-      <ArrowBackIosNewIcon />
-    </IconButton>
+      {label}
+    </Button>
   );
 };
 

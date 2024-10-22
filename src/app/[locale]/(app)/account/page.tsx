@@ -3,6 +3,7 @@ import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SecurityIcon from '@mui/icons-material/Security';
 import {
   Box,
   List,
@@ -24,6 +25,11 @@ const Home: NextPage = () => {
             label: "personal info",
             url: "/personal-info",
             icon: <AccountCircleOutlinedIcon />,
+          },
+          {
+            label: "Privacy & security",
+            url: "/privacy",
+            icon: <SecurityIcon />,
           },
           {
             label: "Settings",
