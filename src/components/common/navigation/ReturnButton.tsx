@@ -1,22 +1,23 @@
 "use client";
-import { Button, ButtonProps } from "@mui/material";
-import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { Fab, FabProps, IconButton } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
 
-const ReturnButton = (props: Omit<ButtonProps, "href">) => {
+const ReturnButton = (props: Omit<FabProps, "href">) => {
   const router = useRouter();
-  const t_actions = useTranslations("genericActions");
   return (
-    <Button
+    <IconButton
       {...props}
-      color="primary"
-      startIcon={<ArrowBackIosNewIcon />}
+      size="small"
+      sx={{
+        bgcolor: "transparent",
+        color: "black",
+        p: 0,
+      }}
       onClick={() => router.back()}
     >
-      {t_actions("return")}
-    </Button>
+      <ArrowBackIosNewIcon />
+    </IconButton>
   );
 };
 

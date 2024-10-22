@@ -1,21 +1,54 @@
-import getProfile from "@/actions/profile/getProfile";
 import LogoutButton from "@/components/common/auth/LogoutButton";
-import { Box, List, ListItem, Typography } from "@mui/material";
+import { routes } from "@/constants/routes";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { NextPage } from "next";
-const Home: NextPage = async () => {
-  const profile = await getProfile();
+const Home: NextPage = () => {
   return (
-    <Box>
-      <Typography variant="h4">this is the profile</Typography>
+    <Stack>
+      <Typography variant="h2">Profile</Typography>
       <List>
-        {Object.entries(profile.data).map(([key, value]) => (
-          <ListItem key={key}>{`${key}: ${value}`}</ListItem>
+        {[
+          {
+            label: "personal info",
+            url: "/personal-info",
+            icon: <AccountCircleOutlinedIcon />,
+          },
+          {
+            label: "Settings",
+            url: "/settings",
+            icon: <SettingsOutlinedIcon />,
+          },
+        ].map((item) => (
+          <ListItem key={`profile-${item.label}`}>
+            <ListItemButton
+              href={`${routes.ACCOUNT}/${item.url}`}
+              sx={{ justifyContent: "space-between" }}
+            >
+              <Box sx={{ display: "flex" }}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText>{item.label}</ListItemText>
+              </Box>
+              <ListItemIcon>
+                <NavigateNextOutlinedIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
         ))}
-        <ListItem sx={{ display: { md: "none" } }}>
-          <LogoutButton />
-        </ListItem>
       </List>
-    </Box>
+      <LogoutButton />
+    </Stack>
   );
 };
 export default Home;
