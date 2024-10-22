@@ -28,7 +28,7 @@ const ReturnButton = ({ label, sx, ...props }: ReturnButtonProps) => {
       onClick={() => router.back()}
       startIcon={<ArrowBackIosNewIcon />}
     >
-      {label}
+      {label && label}
     </Button>
   );
 };

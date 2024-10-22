@@ -79,9 +79,10 @@ export default function SignInForm() {
             alignSelf: "center",
             borderRadius: 4,
             mt: 4,
+            fontSize:'1rem'
           }}
         >
-          login
+          Login
         </Button>
         {response && !response?.ok && (
           <Typography color="error">{response?.error}</Typography>
