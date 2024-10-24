@@ -1,4 +1,6 @@
+import RangeInput from "@/components/common/inputs/RangeInput";
 import { Button, Slider, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 
 const FilterForm = () => {
   const CheckBoxInputs = [
@@ -38,13 +40,12 @@ const FilterForm = () => {
         </Stack>
       ))}
       {RangeInputs.map((input) => (
-        <Stack key={input.label} >
+        <Stack key={input.label}>
           <Typography>{input.label}</Typography>
-          <Slider
-          size="medium"
+          <RangeInput
+            size="medium"
             min={input.min}
             max={input.max}
-            valueLabelDisplay="auto"
             disableSwap
           />
         </Stack>
