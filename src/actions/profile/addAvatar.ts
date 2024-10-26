@@ -1,7 +1,7 @@
 import endpoints from "@/constants/endpoints";
 import secureFetch from "@/utils/fetch";
 
-const addAvatar = async (avatar: any) => {
+const addAvatar = async (avatar: File) => {
   console.log({ avatar });
   // const res = await secureFetch(`${endpoints.PROFILE}/avatar`, {
   //   method: "POST",

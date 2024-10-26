@@ -31,9 +31,7 @@ const Page: NextPage = async () => {
       </Stack>
       <List>
         <ListItem>
-          <FileInput
-            id="avatar"
-            accept="image/*"
+          <Box
             sx={{
               position: "relative",
               margin: "auto",
@@ -49,21 +47,23 @@ const Page: NextPage = async () => {
               alt={profile.data.name}
               src={profile.data.avatar}
             />
-            <Chip
-              icon={<PhotoCameraIcon />}
-              label="Edit"
-              variant="filled"
-              color="warning"
-              sx={{
-                bgcolor: "common.white",
-                boxShadow: 4,
-                position: "absolute",
-                bottom: 0,
-                left: "50%",
-                transform: "translate(-50%,50%)",
-              }}
-            />
-          </FileInput>
+            <FileInput id="avatar" accept="image/*">
+              <Chip
+                icon={<PhotoCameraIcon />}
+                label="Edit"
+                variant="filled"
+                color="warning"
+                sx={{
+                  bgcolor: "common.white",
+                  boxShadow: 4,
+                  position: "absolute",
+                  bottom: 0,
+                  left: "50%",
+                  transform: "translate(-50%,50%)",
+                }}
+              />
+            </FileInput>
+          </Box>
         </ListItem>
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>

@@ -1,20 +1,21 @@
 "use client";
-import { Box, BoxProps, Stack } from "@mui/material";
-import { ReactNode, useEffect, useState } from "react";
-type FileInputProps = BoxProps & {
+import { Box, SxProps } from "@mui/material";
+import { ReactNode, useState } from "react";
+type FileInputProps = {
   id: string; //used for linking label and input
+  sx?: SxProps;
   onChange?: (files: File[]) => void;
   accept?: string;
+  disabled?: boolean;
   children: ReactNode;
 };
-const FileInput = ({ children, accept, id, onChange, sx }: FileInputProps) => {
-  const [files, setFiles] = useState<File[]>([]);
-  useEffect(() => {
-    if (files) {
-      onChange && onChange(files);
-    }
-  }, [files, onChange]);
-
+const FileInput = ({
+  children,
+  id,
+  onChange,
+  sx,
+  ...props
+}: FileInputProps) => {
   return (
     <Box
       sx={{
@@ -26,14 +27,14 @@ const FileInput = ({ children, accept, id, onChange, sx }: FileInputProps) => {
     >
       {children}
       <input
+        {...props}
         id={id}
         type="file"
         hidden
-        accept={accept}
         onChange={(e) => {
           let files = e.target.files;
           if (files && files?.length > 0) {
-            setFiles(Array.from(files));
+            onChange && onChange(Array.from(files));
           }
         }}
       />
