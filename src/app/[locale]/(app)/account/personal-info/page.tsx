@@ -1,7 +1,7 @@
 import getProfile from "@/actions/profile/getProfile";
 import FileInput from "@/components/common/inputs/FileInput";
 import ReturnButton from "@/components/common/navigation/ReturnButton";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import AvatarSelect from "@/components/custom/AvatarSelect";
 import {
   Avatar,
   Box,
@@ -31,39 +31,7 @@ const Page: NextPage = async () => {
       </Stack>
       <List>
         <ListItem>
-          <Box
-            sx={{
-              position: "relative",
-              margin: "auto",
-              mb: 2,
-            }}
-          >
-            <Avatar
-              sx={{
-                width: 160,
-                height: 160,
-                bgcolor: "grey.400",
-              }}
-              alt={profile.data.name}
-              src={profile.data.avatar}
-            />
-            <FileInput id="avatar" accept="image/*">
-              <Chip
-                icon={<PhotoCameraIcon />}
-                label="Edit"
-                variant="filled"
-                color="warning"
-                sx={{
-                  bgcolor: "common.white",
-                  boxShadow: 4,
-                  position: "absolute",
-                  bottom: 0,
-                  left: "50%",
-                  transform: "translate(-50%,50%)",
-                }}
-              />
-            </FileInput>
-          </Box>
+          <AvatarSelect src={profile.data.avatar} alt={profile.data.name} />
         </ListItem>
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>

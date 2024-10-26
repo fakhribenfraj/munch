@@ -2,7 +2,7 @@
 import SearchIcon from "@mui/icons-material/Search";
 import { Box, InputAdornment, TextField } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
-import ButtonModal from "../compound/ButtonModal";
+import ButtonModal from "../common/compound/ButtonModal";
 import FilterForm from "@/components/forms/filter/FilterForm";
 
 const Searchbar = () => {

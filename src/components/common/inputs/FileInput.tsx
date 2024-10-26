@@ -1,12 +1,21 @@
 "use client";
-import { Box, SxProps } from "@mui/material";
-import { ReactNode, useState } from "react";
-type FileInputProps = {
+import {
+  Box,
+  InputBase,
+  InputBaseComponentProps,
+  InputBaseProps,
+  SxProps,
+  Theme,
+} from "@mui/material";
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from "react";
+
+type FileInputProps = Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  "onChange"
+> & {
   id: string; //used for linking label and input
   sx?: SxProps;
   onChange?: (files: File[]) => void;
-  accept?: string;
-  disabled?: boolean;
   children: ReactNode;
 };
 const FileInput = ({
@@ -32,7 +41,7 @@ const FileInput = ({
         type="file"
         hidden
         onChange={(e) => {
-          let files = e.target.files;
+          let files = (e.target as HTMLInputElement).files;
           if (files && files?.length > 0) {
             onChange && onChange(Array.from(files));
           }

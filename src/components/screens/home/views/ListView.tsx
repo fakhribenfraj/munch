@@ -1,5 +1,5 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
-import Carousel from "@/components/common/Carousel";
+import Carousel from "@/components/custom/Carousel";
 import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import {

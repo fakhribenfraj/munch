@@ -4563,6 +4563,11 @@ react-map-gl@^7.1.7:
     "@maplibre/maplibre-gl-style-spec" "^19.2.1"
     "@types/mapbox-gl" ">=1.0.0"
 
+react-photo-editor@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-photo-editor/-/react-photo-editor-2.1.4.tgz#6b30da1832aed7b53452e44e2bad0af0a173e12e"
+  integrity sha512-8BaiWjY/pg8PNV5C3s5R8sJuFnxwY1PrZWji+jeV8pTqiQ4k++kHzvPZexbObarRJJdqxTAXnFi+aDL9IY5rZQ==
+
 react-slick@^0.30.2:
   version "0.30.2"
   resolved "https://registry.npmjs.org/react-slick/-/react-slick-0.30.2.tgz"

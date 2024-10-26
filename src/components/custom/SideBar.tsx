@@ -1,7 +1,7 @@
 import { Box, List, ListItem, Paper, Stack, Typography } from "@mui/material";
 import UrlActiveListItem, {
   UrlActiveListItemProps,
-} from "./navigation/UrlActiveListItem";
+} from "../common/navigation/UrlActiveListItem";
 type SideBarProps = {
   menuLinks: {
     category: string;

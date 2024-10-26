@@ -1,7 +1,7 @@
 "use client";
 import { Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
-import Label, { LabelColor } from "../label";
+import Label, { LabelColor } from "../common/label";
 import { useTranslations } from "next-intl";
 export type TabsFilterOption = {
   value: number | string | null;

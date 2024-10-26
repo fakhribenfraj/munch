@@ -1,7 +1,7 @@
 "use client";
 import { ButtonBase, Menu, MenuItem, Typography } from "@mui/material";
 import React, { ReactNode } from "react";
-import ActionButton from "./inputs/ActionButton";
+import ActionButton from "../common/inputs/ActionButton";
 type ActionsMenuProps = {
   actions: { action: any; label: string; warning: string; icon?: ReactNode }[];
   children: ReactNode;

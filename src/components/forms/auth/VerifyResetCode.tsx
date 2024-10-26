@@ -1,7 +1,7 @@
 "use client";
 
 import ActionForm from "@/components/common/compound/ActionForm";
-import DigitInput from "@/components/inputs/DigitInput";
+import DigitInput from "@/components/common/inputs/DigitInput";
 import { routes } from "@/constants/routes";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";

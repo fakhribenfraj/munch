@@ -5,7 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import Link from "next/link";
 import {routes} from "@/constants/routes";
 import RegisterForm from "../forms/auth/RegisterForm";
-import Logo from "../common/Logo";
+import Logo from "../custom/Logo";
 type AuthScreenProps = {
   title: string;
   description: string;

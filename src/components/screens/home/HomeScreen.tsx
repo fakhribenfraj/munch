@@ -5,7 +5,7 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import { Fab, Stack, useScrollTrigger } from "@mui/material";
 import { useState } from "react";
 import FixedBottomNavigation from "../../common/navigation/FixedBottomNavigation";
-import ResponsiveAppBar from "../../common/ResponsiveAppBar";
+import ResponsiveAppBar from "../../custom/ResponsiveAppBar";
 import MainContainer from "../../common/surfaces/MainContainer";
 import ListView from "./views/ListView";
 import MapView from "./views/MapView";

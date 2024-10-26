@@ -11,9 +11,9 @@ import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { AppBar, Box, Chip, Container, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import AccountMenu from "./AccountMenu";
-import SearchBar from "./filters/Searchbar";
+import SearchBar from "../filters/Searchbar";
 import Logo from "./Logo";
-import HorizontalScrollbarBox from "./surfaces/HorizontalScrollbarBox";
+import HorizontalScrollbarBox from "../common/surfaces/HorizontalScrollbarBox";
 type ResponsiveAppBarProps = {
   hideSearchField?: boolean;
 };

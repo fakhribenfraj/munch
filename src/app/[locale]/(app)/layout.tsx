@@ -1,6 +1,6 @@
 import FixedBottomNavigation from "@/components/common/navigation/FixedBottomNavigation";
 import HideOnScroll from "@/components/common/navigation/HideOnScroll";
-import ResponsiveAppBar from "@/components/common/ResponsiveAppBar";
+import ResponsiveAppBar from "@/components/custom/ResponsiveAppBar";
 import MainContainer from "@/components/common/surfaces/MainContainer";
 import { Box } from "@mui/material";
 
