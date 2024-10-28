@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import FileInput from "../common/inputs/FileInput";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { ReactPhotoEditor } from "react-photo-editor";
+import MuiPhotoEditor from "../common/MuiPhotoEditor";
 
 type AvatarSelectProps = {
   alt?: string;
@@ -33,7 +34,7 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
         alt={alt}
         src={editedFile && URL.createObjectURL(editedFile)}
       />
-      <ReactPhotoEditor
+      {/* <ReactPhotoEditor
         open={showModal}
         onClose={() => setShowModal(false)}
         file={file ?? editedFile}
@@ -41,7 +42,14 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
           setEditedFile(editedFile);
         }}
         allowColorEditing={false}
-      />
+      /> */}
+      {(file || editedFile) && (
+        <MuiPhotoEditor
+          file={file ?? editedFile}
+          open={showModal}
+          onClose={() => setShowModal(false)}
+        />
+      )}
       <FileInput
         id="avatar"
         accept="image/*"
