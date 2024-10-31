@@ -12,6 +12,8 @@ import {
   IconButton,
   Slider,
   Stack,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
@@ -28,6 +30,8 @@ const MuiPhotoEditor = ({
   onClose,
   onSaveImage,
 }: MuiPhotoEditorProps) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const editor = useRef(null);
   const [scale, setScale] = useState<number>(1);
   const [rotate, setRotate] = useState<number>(0);
@@ -50,11 +54,11 @@ const MuiPhotoEditor = ({
       <IconButton
         aria-label="close"
         onClick={handleClose}
-        sx={(theme) => ({
+        sx={{
           position: "absolute",
           right: 8,
           top: 8,
-        })}
+        }}
       >
         <CloseIcon />
       </IconButton>
@@ -63,7 +67,8 @@ const MuiPhotoEditor = ({
           width={300}
           height={300}
           borderRadius={300}
-          border={0}
+          color={[0, 0, 0, 0.7]}
+          border={isMobile ? 0 : [120, 0, 120, 0]}
           image={file}
           ref={editor}
           scale={scale}
