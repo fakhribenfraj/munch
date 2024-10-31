@@ -1,38 +1,36 @@
+import CloseIcon from "@mui/icons-material/Close";
+import RotateLeftIcon from "@mui/icons-material/RotateLeft";
+import RotateRightIcon from "@mui/icons-material/RotateRight";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import ZoomOutIcon from "@mui/icons-material/ZoomOut";
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   IconButton,
-  Modal,
-  Paper,
   Slider,
   Stack,
-  Typography,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
-import ZoomInIcon from "@mui/icons-material/ZoomIn";
-import ZoomOutIcon from "@mui/icons-material/ZoomOut";
-import CloseIcon from "@mui/icons-material/Close";
-import RotateRightIcon from "@mui/icons-material/RotateRight";
-import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 type MuiPhotoEditorProps = {
   file: File;
   open?: boolean;
   onClose: VoidFunction;
+  onSaveImage: (editedFile: File) => void;
 };
+
 const MuiPhotoEditor = ({
   file,
   open = false,
   onClose,
+  onSaveImage,
 }: MuiPhotoEditorProps) => {
   const editor = useRef(null);
   const [scale, setScale] = useState<number>(1);
   const [rotate, setRotate] = useState<number>(0);
-
   const [position, setPosition] = useState({ x: 0.5, y: 0.5 });
 
   const resetFilters = () => {
@@ -56,7 +54,6 @@ const MuiPhotoEditor = ({
           position: "absolute",
           right: 8,
           top: 8,
-          color: theme.palette.grey[500],
         })}
       >
         <CloseIcon />
@@ -136,7 +133,21 @@ const MuiPhotoEditor = ({
         <Button variant="text" color="primary" onClick={resetFilters}>
           Reset
         </Button>
-        <Button variant="contained" color="primary">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={async () => {
+            if (editor.current) {
+              const dataUrl = (editor.current as AvatarEditor)
+                .getImage()
+                .toDataURL();
+              const res = await fetch(dataUrl);
+              const blob = await res.blob();
+              onSaveImage(blob as File);
+              handleClose();
+            }
+          }}
+        >
           Save
         </Button>
       </DialogActions>

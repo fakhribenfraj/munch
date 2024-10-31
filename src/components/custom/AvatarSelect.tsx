@@ -1,10 +1,10 @@
 "use client";
-import { Avatar, Box, Chip } from "@mui/material";
-import React, { useState } from "react";
-import FileInput from "../common/inputs/FileInput";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import { ReactPhotoEditor } from "react-photo-editor";
+import { Avatar, Box, Chip } from "@mui/material";
+import { useState } from "react";
+import FileInput from "../common/inputs/FileInput";
 import MuiPhotoEditor from "../common/MuiPhotoEditor";
+import addAvatar from "@/actions/profile/addAvatar";
 
 type AvatarSelectProps = {
   alt?: string;
@@ -16,7 +16,6 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  console.log({ file });
   return (
     <Box
       sx={{
@@ -32,32 +31,33 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
           bgcolor: "grey.400",
         }}
         alt={alt}
-        src={editedFile && URL.createObjectURL(editedFile)}
+        src={editedFile ? URL.createObjectURL(editedFile) : src}
       />
-      {/* <ReactPhotoEditor
-        open={showModal}
-        onClose={() => setShowModal(false)}
-        file={file ?? editedFile}
-        onSaveImage={(editedFile) => {
-          setEditedFile(editedFile);
-        }}
-        allowColorEditing={false}
-      /> */}
-      {(file || editedFile) && (
+      {file && (
         <MuiPhotoEditor
-          file={file ?? editedFile}
+          file={file}
           open={showModal}
           onClose={() => setShowModal(false)}
+          onSaveImage={(editedFile: File) => {
+            setEditedFile(editedFile);
+            addAvatar.bind(null, editedFile);
+          }}
         />
       )}
       <FileInput
         id="avatar"
         accept="image/*"
+        value={file}
         onClick={() => {
           setFile(undefined);
-          setShowModal(true);
         }}
-        onChange={(files: File[]) => setFile(files[0])}
+        onChange={(e) => {
+          let files = (e.target as HTMLInputElement).files;
+          if (files && files?.length > 0) {
+            setFile(files[0]);
+            setShowModal(true);
+          }
+        }}
       >
         <Chip
           icon={<PhotoCameraIcon />}

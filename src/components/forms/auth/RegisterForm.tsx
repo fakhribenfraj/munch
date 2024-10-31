@@ -1,6 +1,5 @@
 "use client";
 
-import { registerUser } from "@/actions/authorization/register";
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";

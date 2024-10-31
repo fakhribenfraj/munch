@@ -1,3 +1,4 @@
+"use server";
 import endpoints from "@/constants/endpoints";
 import secureFetch from "@/utils/fetch";
 
