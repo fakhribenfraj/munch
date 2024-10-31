@@ -8,7 +8,7 @@ const Page: NextPage = async () => {
   return (
     <Box>
       <ReturnButton
-        label="profile"
+        label="account"
         sx={{
           mb: 6,
         }}

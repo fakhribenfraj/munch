@@ -12,13 +12,7 @@ export default async function RootLayout({
   return (
     <>
       <ResponsiveAppBar hideSearchField />
-      <MainContainer
-        sx={{
-          pt: { xs: 2, md: 10 },
-        }}
-      >
-        {children}
-      </MainContainer>
+      <MainContainer>{children}</MainContainer>
       <HideOnScroll direction="up">
         <Box
           sx={{

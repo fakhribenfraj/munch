@@ -29,7 +29,7 @@ const FixedBottomNavigation = () => {
               url: routes.NOTIFICATION,
             },
             {
-              label: "Profile",
+              label: "Account",
               icon: <AccountCircleOutlinedIcon />,
               url: routes.ACCOUNT,
             },

@@ -8,6 +8,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Grid2,
   Link,
   Typography,
 } from "@mui/material";
@@ -17,21 +18,13 @@ const ListView = ({
   restaurants: GetRestaurantsResponse[];
 }) => {
   return (
-    <Grid container justifyContent="center">
+    <Grid2 container justifyContent="center" spacing={2}>
       {restaurants?.map((restaurant, i) => (
-        <Grid
-          item
-          key={restaurant.id}
-          sx={{ p: { xs: 1, md: 1.5 } }}
-          xs={12}
-          sm={6}
-          md={4}
-          lg={3}
-        >
+        <Grid2 key={restaurant.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <Card
             sx={{
               position: "relative",
-            //   backgroundColor: "grey.200",
+              //   backgroundColor: "grey.200",
             }}
             elevation={1}
           >
@@ -71,9 +64,9 @@ const ListView = ({
               </CardContent>
             </Link>
           </Card>
-        </Grid>
+        </Grid2>
       ))}
-    </Grid>
+    </Grid2>
   );
 };
 

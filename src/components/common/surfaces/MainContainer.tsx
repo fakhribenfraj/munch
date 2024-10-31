@@ -10,6 +10,7 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
         height: "100%",
         width: "100%",
         pb: 9,
+        pt: { xs: 0, md: 8 },
         ...sx,
       }}
       {...props}
