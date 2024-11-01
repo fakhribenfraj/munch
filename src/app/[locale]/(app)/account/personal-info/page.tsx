@@ -19,16 +19,11 @@ const Page: NextPage = async () => {
   const profile = await getProfile();
   return (
     <Box>
-      <Stack
+      <ReturnButton
         sx={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          mb: 2,
+          my: 2,
         }}
-      >
-        <ReturnButton />
-        <Button>Edit</Button>
-      </Stack>
+      />
       <List>
         <ListItem>
           <AvatarSelect src={profile.data.avatar} alt={profile.data.name} />

@@ -18,7 +18,7 @@ import {
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 type MuiPhotoEditorProps = {
-  file: File;
+  file: File | string;
   open?: boolean;
   onClose: VoidFunction;
   onSaveImage: (editedFile: File) => void;
