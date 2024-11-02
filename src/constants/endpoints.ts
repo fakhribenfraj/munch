@@ -5,5 +5,6 @@ const endpoints = {
   REGISTER: `${BASE_URL}/register`,
   PROFILE: `${BASE_URL}/profile`,
   RESTAURANTS: `${BASE_URL}/restaurants`,
+  INGREDIENTS: `${process.env.INGREDIENTS_URL}`,
 };
 export default endpoints;

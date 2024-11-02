@@ -44,7 +44,7 @@ const MapView = ({
               e.originalEvent.stopPropagation();
               e.target._map?.flyTo({
                 center: { lat: restaurant.lat, lng: restaurant.lng },
-                zoom: 4,
+                zoom: 14,
               });
               setSelectedRestaurant(restaurant);
             }}

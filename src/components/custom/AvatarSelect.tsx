@@ -35,8 +35,8 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
       >
         <Avatar
           sx={{
-            width: 160,
-            height: 160,
+            width: 144,
+            height: 144,
             bgcolor: "grey.400",
             fontSize: "3.5rem",
             textTransform: "uppercase",

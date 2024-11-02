@@ -4,17 +4,18 @@ import ClientProviders, {
 import LOCALES from "@/constants/locales";
 import ThemeProvider from "@/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import "mapbox-gl/dist/mapbox-gl.css";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "mapbox-gl/dist/mapbox-gl.css";
+import "slick-carousel/slick/slick.css";
 
-import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
+import "../globals.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -49,11 +50,11 @@ export default async function RootLayout({
       <NextIntlClientProvider locale={locale} messages={messages}>
         <AppRouterCacheProvider>
           <ThemeProvider>
-            <SessionProvider session={session}>
-              <body className={inter.className}>
-                <ClientProviders>{children}</ClientProviders>
-              </body>
-            </SessionProvider>
+              <SessionProvider session={session}>
+                <body className={inter.className}>
+                  <ClientProviders>{children}</ClientProviders>
+                </body>
+              </SessionProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </NextIntlClientProvider>

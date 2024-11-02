@@ -1,19 +1,8 @@
 import getProfile from "@/actions/profile/getProfile";
-import FileInput from "@/components/common/inputs/FileInput";
 import ReturnButton from "@/components/common/navigation/ReturnButton";
 import AvatarSelect from "@/components/custom/AvatarSelect";
-import {
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  List,
-  ListItem,
-  Paper,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import ProfileForm from "@/components/forms/account/ProfileForm";
+import { Box, Stack } from "@mui/material";
 import { NextPage } from "next";
 const Page: NextPage = async () => {
   const profile = await getProfile();
@@ -24,14 +13,10 @@ const Page: NextPage = async () => {
           my: 2,
         }}
       />
-      <List>
-        <ListItem>
-          <AvatarSelect src={profile.data.avatar} name={profile.data.name} />
-        </ListItem>
-        {Object.entries(profile.data).map(([key, value]) => (
-          <ListItem key={key}>{`${key}: ${value}`}</ListItem>
-        ))}
-      </List>
+      <Stack rowGap={4}>
+        <AvatarSelect src={profile.data.avatar} name={profile.data.name} />
+        <ProfileForm />
+      </Stack>
     </Box>
   );
 };
