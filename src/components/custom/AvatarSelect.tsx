@@ -12,7 +12,7 @@ type AvatarSelectProps = {
   src: string;
 };
 const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
-  const [fileUrl, setFileUrl] = useState<string>();
+  const [editedFile, setEditedFile] = useState<File>();
 
   const [showEditor, setShowEditor] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -28,7 +28,7 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
     >
       <ButtonBase
         onClick={() => setShowPreview(true)}
-        disabled={!fileUrl && !src}
+        disabled={!editedFile && !src}
       >
         <Avatar
           sx={{
@@ -37,33 +37,35 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
             bgcolor: "grey.400",
           }}
           alt={alt}
-          src={fileUrl ? fileUrl : src}
+          src={editedFile ? URL.createObjectURL(editedFile) : src}
         />
       </ButtonBase>
       <PreviewImage
-        src={fileUrl ? fileUrl : src}
+        src={file ? URL.createObjectURL(file) : src}
         open={showPreview}
         onClose={() => {
           setShowPreview(false);
           setShowEditor(false);
         }}
-        onSave={(editedFile: string) => {
-          setFileUrl(editedFile);
+        onSave={(editedFile: File) => {
+          setEditedFile(editedFile);
+          setFile(editedFile);
           // addAvatar.bind(null, editedFile);
         }}
       />
       {file && (
         <MuiPhotoEditor
+          name="avatar"
           file={file}
           open={showEditor}
           onClose={() => setShowEditor(false)}
           onSaveImage={(editedFile: File) => {
-            setShowPreview(true);
             setFile(editedFile);
+            setShowPreview(true);
           }}
         />
       )}
-      {!fileUrl && !src && (
+      {!editedFile && !src && (
         <FileInput
           id="avatar-add"
           accept="image/*"

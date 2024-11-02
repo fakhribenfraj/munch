@@ -21,7 +21,7 @@ type PreviewImageProps = {
   src: string;
   open?: boolean;
   onClose?: VoidFunction;
-  onSave?: (editedFile: string) => void;
+  onSave?: (editedFile: File) => void;
 };
 const PreviewImage = ({
   src,
@@ -57,6 +57,7 @@ const PreviewImage = ({
           height={300}
         />
         <MuiPhotoEditor
+          name="avatar"
           file={file ? URL.createObjectURL(file) : src}
           open={showEditor}
           onClose={() => setShowEditor(false)}
@@ -107,7 +108,7 @@ const PreviewImage = ({
               variant="contained"
               color="primary"
               onClick={() => {
-                onSave && onSave(file ? URL.createObjectURL(file) : src);
+                onSave && onSave(file);
                 handleClose();
                 //   resetFile();
               }}

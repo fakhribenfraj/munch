@@ -18,6 +18,7 @@ import {
 import { useRef, useState } from "react";
 import AvatarEditor from "react-avatar-editor";
 type MuiPhotoEditorProps = {
+  name: string;
   file: File | string;
   open?: boolean;
   onClose: VoidFunction;
@@ -28,6 +29,7 @@ const MuiPhotoEditor = ({
   file,
   open = false,
   onClose,
+  name,
   onSaveImage,
 }: MuiPhotoEditorProps) => {
   const theme = useTheme();
@@ -148,7 +150,8 @@ const MuiPhotoEditor = ({
                 .toDataURL();
               const res = await fetch(dataUrl);
               const blob = await res.blob();
-              onSaveImage(blob as File);
+              const file = new File([blob], name);
+              onSaveImage(file);
               handleClose();
             }
           }}
