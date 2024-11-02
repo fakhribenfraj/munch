@@ -1,12 +1,11 @@
 "use client";
 import { Box, SxProps } from "@mui/material";
 import {
-  ChangeEvent,
   DetailedHTMLProps,
   InputHTMLAttributes,
   ReactNode,
   useEffect,
-  useRef,
+  useRef
 } from "react";
 
 type FileInputProps = Omit<
