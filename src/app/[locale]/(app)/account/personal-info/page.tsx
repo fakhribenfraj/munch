@@ -26,7 +26,7 @@ const Page: NextPage = async () => {
       />
       <List>
         <ListItem>
-          <AvatarSelect src={profile.data.avatar} alt={profile.data.name} />
+          <AvatarSelect src={profile.data.avatar} name={profile.data.name} />
         </ListItem>
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>

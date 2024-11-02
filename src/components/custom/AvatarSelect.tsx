@@ -8,16 +8,16 @@ import PreviewImage from "../common/image/PreviewImage";
 import FileInput from "../common/inputs/FileInput";
 
 type AvatarSelectProps = {
-  alt?: string;
+  name: string;
   src: string;
 };
-const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
-  const [editedFile, setEditedFile] = useState<File>();
+const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(src);
 
   const [showEditor, setShowEditor] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const { file, handleFileSelect, resetFile, setFile } = useSelectFile();
-
+  // console.log({ avatarUrl, src });
   return (
     <Box
       sx={{
@@ -27,30 +27,45 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
       }}
     >
       <ButtonBase
-        onClick={() => setShowPreview(true)}
-        disabled={!editedFile && !src}
+        onClick={() => {
+          setShowPreview(true);
+          setFile(undefined);
+        }}
+        disabled={!avatarUrl && !src}
       >
         <Avatar
           sx={{
             width: 160,
             height: 160,
             bgcolor: "grey.400",
+            fontSize: "3.5rem",
+            textTransform: "uppercase",
           }}
-          alt={alt}
-          src={editedFile ? URL.createObjectURL(editedFile) : src}
-        />
+          alt={name}
+          src={avatarUrl ?? undefined}
+        >
+          {name.split(" ").length > 1
+            ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+            : `${name.split(" ")[0][0]}${name.split(" ")[0][1]}`}
+        </Avatar>
       </ButtonBase>
       <PreviewImage
         src={file ? URL.createObjectURL(file) : src}
         open={showPreview}
+        showSave={!!file}
         onClose={() => {
           setShowPreview(false);
           setShowEditor(false);
         }}
         onSave={(editedFile: File) => {
-          setEditedFile(editedFile);
+          editedFile && setAvatarUrl(URL.createObjectURL(editedFile));
           setFile(editedFile);
-          // addAvatar.bind(null, editedFile);
+          // addAvatar(editedFile);
+        }}
+        onDelete={() => {
+          setAvatarUrl(null);
+          // deleteAvatar();
+          // resetFile();
         }}
       />
       {file && (
@@ -65,7 +80,7 @@ const AvatarSelect = ({ alt, src }: AvatarSelectProps) => {
           }}
         />
       )}
-      {!editedFile && !src && (
+      {!avatarUrl && !src && (
         <FileInput
           id="avatar-add"
           accept="image/*"

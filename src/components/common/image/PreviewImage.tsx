@@ -14,20 +14,24 @@ import {
   Stack,
 } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FileInput from "../inputs/FileInput";
 import MuiPhotoEditor from "./MuiPhotoEditor";
 type PreviewImageProps = {
   src: string;
   open?: boolean;
+  showSave?: boolean;
   onClose?: VoidFunction;
   onSave?: (editedFile: File) => void;
+  onDelete?: VoidFunction;
 };
 const PreviewImage = ({
   src,
   open = false,
+  showSave = false,
   onClose,
   onSave,
+  onDelete,
 }: PreviewImageProps) => {
   const [showEditor, setShowEditor] = useState(false);
   const { file, handleFileSelect, resetFile, setFile } = useSelectFile();
@@ -35,6 +39,13 @@ const PreviewImage = ({
     resetFile();
     onClose && onClose();
   };
+  useEffect(() => {
+    if (src) {
+      fetch(src)
+        .then((r) => r.blob())
+        .then((blob) => setFile(new File([blob], "avatar")));
+    }
+  }, [src]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ m: 0, p: 2 }}>preview Photo</DialogTitle>
@@ -50,20 +61,21 @@ const PreviewImage = ({
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Image
-          src={file ? URL.createObjectURL(file) : src}
-          alt="preview"
-          width={300}
-          height={300}
-        />
+        {file && (
+          <Image
+            src={URL.createObjectURL(file)}
+            alt="preview"
+            width={300}
+            height={300}
+          />
+        )}
         <MuiPhotoEditor
           name="avatar"
-          file={file ? URL.createObjectURL(file) : src}
+          file={file ? file : src}
           open={showEditor}
           onClose={() => setShowEditor(false)}
           onSaveImage={(editedFile: File) => {
             setFile(editedFile);
-            // addAvatar.bind(null, editedFile);
           }}
         />
       </DialogContent>
@@ -100,17 +112,26 @@ const PreviewImage = ({
           </Button>
         </Stack>
         <Stack direction="row">
-          <Button variant="text" color="primary" onClick={resetFile}>
-            Delete
-          </Button>
           {file && (
+            <Button
+              variant="text"
+              color="primary"
+              onClick={() => {
+                resetFile();
+                onDelete && onDelete();
+                handleClose();
+              }}
+            >
+              Delete
+            </Button>
+          )}
+          {(showSave || file) && (
             <Button
               variant="contained"
               color="primary"
               onClick={() => {
-                onSave && onSave(file);
+                onSave && file && onSave(file);
                 handleClose();
-                //   resetFile();
               }}
             >
               save
