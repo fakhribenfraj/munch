@@ -23,7 +23,13 @@ const SubPageLayout = ({ children }: SubPageLayoutProps) => {
         </Toolbar>
       </AppBar>
       <Toolbar />
-      <Container maxWidth="xl" component="main">
+      <Container
+        maxWidth="xl"
+        component="main"
+        sx={{
+          pt: { xs: 0, md: 4 },
+        }}
+      >
         {children}
       </Container>
     </>

@@ -107,7 +107,7 @@ const Home: NextPage = async () => {
             ))}
           </Grid2>
         </List>
-        <LogoutButton sx={{ display: { md: "none" }, mt: 8 }} />
+        <LogoutButton sx={{ display: { md: "none" }, mt: 12 }} />
       </Stack>
     </MainLayout>
   );

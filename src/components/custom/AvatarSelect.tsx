@@ -22,6 +22,8 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
     <Box
       sx={{
         position: "relative",
+        display: "flex",
+        justifyContent: "center",
         margin: "auto",
         mb: 2,
       }}
@@ -40,6 +42,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
             bgcolor: "grey.400",
             fontSize: "3.5rem",
             textTransform: "uppercase",
+            mx: "auto",
           }}
           alt={name}
           src={avatarUrl ?? undefined}

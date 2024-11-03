@@ -17,6 +17,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 export default function AccountMenu() {
   const t = useTranslations("accountMenu");
@@ -27,7 +28,7 @@ export default function AccountMenu() {
       {
         label: "Profile",
         icon: <AccountCircleOutlinedIcon />,
-        url: routes.ACCOUNT,
+        url: `${routes.ACCOUNT}/profile`,
       },
       {
         label: "Wishlist",
@@ -105,7 +106,12 @@ export default function AccountMenu() {
               </ListItemButton>
             ))}
             <Divider />
-
+            <ListItemButton href={routes.ACCOUNT}>
+              <ListItemIcon>
+                <SettingsOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText>Account</ListItemText>
+            </ListItemButton>
             <ListItemButton
               onClick={() => {
                 signOut({ callbackUrl: routes.SIGNIN });
