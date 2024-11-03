@@ -1,18 +1,10 @@
 import getProfile from "@/actions/profile/getProfile";
-import LogoutButton from "@/components/common/auth/LogoutButton";
-import ReturnButton from "@/components/common/navigation/ReturnButton";
 import { Box, List, ListItem, Typography } from "@mui/material";
 import { NextPage } from "next";
 const Page: NextPage = async () => {
   const profile = await getProfile();
   return (
     <Box>
-      <ReturnButton
-        label="profile"
-        sx={{
-          mb: 6,
-        }}
-      />
       <Typography variant="h4">Privacy & security</Typography>
       <List>
         {Object.entries(profile.data).map(([key, value]) => (

@@ -5,7 +5,9 @@ import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SecurityIcon from "@mui/icons-material/Security";
 import {
+  Avatar,
   Box,
+  Divider,
   Grid2,
   List,
   ListItem,
@@ -17,16 +19,55 @@ import {
 } from "@mui/material";
 import { NextPage } from "next";
 import MainLayout from "@/components/layouts/MainLayout";
-const Home: NextPage = () => {
+import { getServerSession } from "next-auth";
+const Home: NextPage = async () => {
+  const session = await getServerSession();
+  const name = session?.user.name;
   return (
     <MainLayout>
-      <Stack>
+      <Stack sx={{ height: "100%", pb: 2 }}>
         <Typography variant="h2">Account</Typography>
         <List>
+          <ListItem
+            sx={{
+              display: { md: "none" },
+              mb: 8,
+            }}
+          >
+            <ListItemButton
+              href={`${routes.ACCOUNT}/profile`}
+              sx={{ justifyContent: "space-between" }}
+            >
+              <Box sx={{ display: "flex", columnGap: 2 }}>
+                <Avatar
+                  sx={{
+                    width: 56,
+                    height: 56,
+                  }}
+                >
+                  {name &&
+                    (name.split(" ").length > 1
+                      ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+                      : `${name.split(" ")[0][0]}${name.split(" ")[0][1]}`)}
+                </Avatar>
+                <Stack justifyContent="center">
+                  <Typography variant="subtitle1">
+                    {session?.user.name ?? "user"}
+                  </Typography>
+                  <Typography variant="caption" sx={{ color: "grey.500" }}>
+                    Show profile
+                  </Typography>
+                </Stack>
+              </Box>
+              <ListItemIcon>
+                <NavigateNextOutlinedIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
           <Grid2 container>
             {[
               {
-                label: "personal info",
+                label: "Personal info",
                 url: "/personal-info",
                 icon: <AccountCircleOutlinedIcon />,
               },
@@ -64,7 +105,7 @@ const Home: NextPage = () => {
             ))}
           </Grid2>
         </List>
-        <LogoutButton sx={{ display: { md: "none" } }} />
+        <LogoutButton sx={{ display: { md: "none" }, mt: "auto" }} />
       </Stack>
     </MainLayout>
   );
