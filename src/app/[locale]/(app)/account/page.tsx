@@ -16,7 +16,7 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import { NextPage } from "next";
 import { getServerSession } from "next-auth";
@@ -26,7 +26,7 @@ const Home: NextPage = async () => {
   const name = session?.user.name;
   return (
     <MainLayout>
-      <Stack sx={{ height: "100%", pb: 2 }}>
+      <Stack sx={{ pb: 2 }}>
         <Typography variant="h3">Account</Typography>
         <List>
           <ListItem
@@ -107,7 +107,7 @@ const Home: NextPage = async () => {
             ))}
           </Grid2>
         </List>
-        <LogoutButton sx={{ display: { md: "none" }, mt: "auto" }} />
+        <LogoutButton sx={{ display: { md: "none" }, mt: 8 }} />
       </Stack>
     </MainLayout>
   );
