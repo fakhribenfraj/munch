@@ -20,8 +20,10 @@ import {
 import { NextPage } from "next";
 import MainLayout from "@/components/layouts/MainLayout";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+
 const Home: NextPage = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
   const name = session?.user.name;
   return (
     <MainLayout>
@@ -43,6 +45,7 @@ const Home: NextPage = async () => {
                   sx={{
                     width: 56,
                     height: 56,
+                    textTransform: "uppercase",
                   }}
                 >
                   {name &&
