@@ -3,12 +3,13 @@ import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
+import FormSection from "../FormSection";
 
 const FormSchema = z
   .object({
@@ -56,37 +57,49 @@ const ProfileForm = () => {
 
   return (
     <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
-      <Stack gap={2}>
+      <Stack gap={4}>
         {[
           {
-            label: "First Name",
-            name: "firstname",
-            type: "text",
-            placeholder: "Enter your name",
+            title: "Basic Info",
+            children: (
+              <>
+                {[
+                  {
+                    label: "First Name",
+                    name: "firstname",
+                    type: "text",
+                    placeholder: "Enter your name",
+                  },
+                  {
+                    label: "Last Name",
+                    name: "lastname",
+                    type: "text",
+                    placeholder: "Enter your name",
+                  },
+                ].map((input) => (
+                  <RHFTextField {...input} key={input.name} />
+                ))}
+                <DatePicker label="Birth date" />
+              </>
+            ),
           },
           {
-            label: "Last Name",
-            name: "lastname",
-            type: "text",
-            placeholder: "Enter your name",
+            title: "Contact",
+            children: (
+              <>
+                <RHFTelInput name="phone" label="Phone" />
+                <RHFTextField name="address" label="Address" />
+              </>
+            ),
           },
-          {
-            label: "Email",
-            name: "email",
-            type: "email",
-            placeholder: "enter your email",
-          },
-        ].map((input) => (
-          <RHFTextField {...input} key={input.name} />
+        ].map((section) => (
+          <FormSection key={section.title} {...section} />
         ))}
-        <DatePicker label="Birth date" />
-        <RHFTextField name="address" label="Address" />
-        <RHFTelInput name="phone" label="Phone" />
+
         <Button
           type="submit"
           variant="contained"
           color="primary"
-          fullWidth
           sx={{
             alignSelf: "flex-end",
             mt: 2,
