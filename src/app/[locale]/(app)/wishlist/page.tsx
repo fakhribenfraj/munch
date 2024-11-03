@@ -5,7 +5,7 @@ const Home: NextPage = async () => {
   const profile = await getProfile();
   return (
     <Box>
-      <Typography variant="h4">this is the wishlist</Typography>
+      <Typography variant="h3">this is the wishlist</Typography>
       {[...new Array(25)].map((i) => (
         <List key={i}>
           <Paper elevation={i}>elevation {i}</Paper>

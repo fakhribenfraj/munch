@@ -5,7 +5,7 @@ const Page: NextPage = async () => {
   const profile = await getProfile();
   return (
     <Box>
-      <Typography variant="h4">settings</Typography>
+      <Typography variant="h3">settings</Typography>
       <List>
         {Object.entries(profile.data).map(([key, value]) => (
           <ListItem key={key}>{`${key}: ${value}`}</ListItem>

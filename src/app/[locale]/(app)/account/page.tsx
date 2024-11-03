@@ -1,13 +1,14 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import LogoutButton from "@/components/common/auth/LogoutButton";
+import MainLayout from "@/components/layouts/MainLayout";
 import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import NavigateNextOutlinedIcon from "@mui/icons-material/NavigateNextOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import SecurityIcon from "@mui/icons-material/Security";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import {
   Avatar,
   Box,
-  Divider,
   Grid2,
   List,
   ListItem,
@@ -15,12 +16,10 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import { NextPage } from "next";
-import MainLayout from "@/components/layouts/MainLayout";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 const Home: NextPage = async () => {
   const session = await getServerSession(authOptions);
@@ -28,7 +27,7 @@ const Home: NextPage = async () => {
   return (
     <MainLayout>
       <Stack sx={{ height: "100%", pb: 2 }}>
-        <Typography variant="h2">Account</Typography>
+        <Typography variant="h3">Account</Typography>
         <List>
           <ListItem
             sx={{
