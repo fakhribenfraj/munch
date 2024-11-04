@@ -1,13 +1,18 @@
 import { AppBar, Container, Toolbar } from "@mui/material";
-import React, { ReactNode } from "react";
-import MainContainer from "../common/surfaces/MainContainer";
+import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
 import ResponsiveAppBar from "../custom/ResponsiveAppBar";
 
 type SubPageLayoutProps = {
   children: ReactNode;
+  disableTopGutter?: boolean;
+  buttonVariant?: "contained" | "text";
 };
-const SubPageLayout = ({ children }: SubPageLayoutProps) => {
+const SubPageLayout = ({
+  children,
+  disableTopGutter,
+  buttonVariant,
+}: SubPageLayoutProps) => {
   return (
     <>
       <ResponsiveAppBar hideSearchField />
@@ -19,10 +24,16 @@ const SubPageLayout = ({ children }: SubPageLayoutProps) => {
         }}
       >
         <Toolbar>
-          <ReturnButton />
+          <ReturnButton
+            sx={{
+              ...(buttonVariant == "contained" && {
+                bgcolor: "grey.200",
+              }),
+            }}
+          />
         </Toolbar>
       </AppBar>
-      <Toolbar />
+      {!disableTopGutter && <Toolbar />}
       <Container
         maxWidth="xl"
         component="main"

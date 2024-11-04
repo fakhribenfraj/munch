@@ -1,44 +1,25 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
+import SubPageLayout from "@/components/layouts/SubPageLayout";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import { routes } from "@/constants/routes";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { Box, Button, Fab, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const { data: restaurant } = await getRestaurantById(params.id);
   return (
-    <Box>
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: 2,
-          p: 1,
-        }}
-      >
-        <Fab
-          href={routes.HOME}
-          size="small"
-          color="default"
-          sx={{
-            backgroundColor: "common.white",
-            boxShadow: 4,
-          }}
-        >
-          <ArrowBackIosNewIcon />
-        </Fab>
-      </Box>
+    <SubPageLayout disableTopGutter buttonVariant="contained">
       <Stack alignItems="flex-start" gap={1}>
         <Box
           sx={{
             position: "relative",
             width: { xs: "100vw", md: "100%" },
-            height: { xs: "7rem", md: "17rem" },
+            height: {
+              xs: "calc(100vw / 3)",
+              sm: "calc(100vw / 4)",
+              lg: "calc(100vw / 5)",
+            },
             mb: { xs: 3, md: 6 },
             transform: {
               xs: `translate(-1rem,0)`,
@@ -71,11 +52,8 @@ export default async function Page({ params }: { params: { id: string } }) {
           indicatorColor="primary"
           textColor="primary"
           sx={{
-            position: "sticky",
             pt: 2,
-            top: 0,
             backgroundColor: "grey.200",
-            zIndex: 1,
           }}
         >
           {["Overview", "Menu", "Reviews", "Contact"].map((tab) => (
@@ -121,6 +99,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Marker>
         </Map>
       </Stack>
-    </Box>
+    </SubPageLayout>
   );
 }

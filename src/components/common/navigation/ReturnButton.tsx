@@ -24,7 +24,6 @@ const ReturnButton = ({ label, fixed, sx, ...props }: ReturnButtonProps) => {
     columnGap: 2,
     bgcolor: "transparent",
     color: "black",
-    p: 0,
     ...(fixed && { position: "fixed", top: 0, left: 0, m: 2 }),
     ...sx,
   };
