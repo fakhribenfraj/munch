@@ -46,6 +46,7 @@ const Home: NextPage = async () => {
                     height: 56,
                     textTransform: "uppercase",
                   }}
+                  src={session?.user.avatar ?? undefined}
                 >
                   {name &&
                     (name.split(" ").length > 1

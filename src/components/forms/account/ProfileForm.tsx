@@ -101,7 +101,7 @@ const ProfileForm = () => {
           variant="contained"
           color="primary"
           sx={{
-            alignSelf: "flex-end",
+            alignSelf: "flex-start",
             mt: 2,
           }}
         >

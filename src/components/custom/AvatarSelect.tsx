@@ -17,7 +17,6 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
   const [showEditor, setShowEditor] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const { file, handleFileSelect, resetFile, setFile } = useSelectFile();
-  // console.log({ avatarUrl, src });
   return (
     <Box
       sx={{
@@ -33,7 +32,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
           setShowPreview(true);
           setFile(undefined);
         }}
-        disabled={!avatarUrl && !src}
+        disabled={!avatarUrl}
       >
         <Avatar
           sx={{
@@ -53,7 +52,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
         </Avatar>
       </ButtonBase>
       <PreviewImage
-        src={file ? URL.createObjectURL(file) : src}
+        src={file ? file : src}
         open={showPreview}
         showSave={!!file}
         onClose={() => {
@@ -67,8 +66,8 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
         }}
         onDelete={() => {
           setAvatarUrl(null);
+          resetFile();
           // deleteAvatar();
-          // resetFile();
         }}
       />
       {file && (
@@ -83,7 +82,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
           }}
         />
       )}
-      {!avatarUrl && !src && (
+      {!avatarUrl && (
         <FileInput
           id="avatar-add"
           accept="image/*"
