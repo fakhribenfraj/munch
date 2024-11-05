@@ -12,12 +12,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "munch.hek.tn",
-      },
-    ],
+    domains: ["munch.hek.tn"],
   },
 };
 const configWithPwa = withPWA({

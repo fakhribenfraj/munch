@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 import FileInput from "../inputs/FileInput";
 import MuiPhotoEditor from "./MuiPhotoEditor";
 type PreviewImageProps = {
-  src: string | File;
+  src: string;
   open?: boolean;
   showSave?: boolean;
   onClose?: VoidFunction;
@@ -33,19 +33,18 @@ const PreviewImage = ({
   onDelete,
 }: PreviewImageProps) => {
   const [showEditor, setShowEditor] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
   const { file, handleFileSelect, resetFile, setFile } = useSelectFile();
   const handleClose = () => {
-    setIsEditing(false);
     resetFile();
     onClose && onClose();
   };
   useEffect(() => {
-    console.log({ src });
-    if (src && typeof src != "string") {
-      setFile(src);
+    if (src) {
+      fetch(src, { mode: "no-cors" })
+        .then((r) => r.blob())
+        .then((blob) => setFile(new File([blob], "avatar")));
     }
-  }, [src, isEditing, setFile]);
+  }, [src, setFile]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ m: 0, p: 2 }}>preview Photo</DialogTitle>
@@ -61,20 +60,21 @@ const PreviewImage = ({
         <CloseIcon />
       </IconButton>
       <DialogContent dividers>
-        <Image
-          src={file ? URL.createObjectURL(file) : (src as string)}
-          alt="preview"
-          width={300}
-          height={300}
-          style={{ objectFit: "cover" }}
-        />
+        {file && (
+          <Image
+            src={URL.createObjectURL(file)}
+            alt="preview"
+            width={300}
+            height={300}
+            style={{ objectFit: "cover" }}
+          />
+        )}
         <MuiPhotoEditor
           name="avatar"
           file={file ? file : src}
           open={showEditor}
           onClose={() => setShowEditor(false)}
           onSaveImage={(editedFile: File) => {
-            setIsEditing(true);
             setFile(editedFile);
           }}
         />

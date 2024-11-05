@@ -52,7 +52,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
         </Avatar>
       </ButtonBase>
       <PreviewImage
-        src={file ? file : src}
+        src={file ? URL.createObjectURL(file) : (avatarUrl as string)}
         open={showPreview}
         showSave={!!file}
         onClose={() => {
