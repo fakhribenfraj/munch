@@ -38,13 +38,12 @@ const PreviewImage = ({
     resetFile();
     onClose && onClose();
   };
-  // useEffect(() => {
-  //   if (src) {
-  //     fetch(src, { mode: "no-cors" })
-  //       .then((r) => r.blob())
-  //       .then((blob) => setFile(new File([blob], "avatar")));
-  //   }
-  // }, [src, setFile]);
+
+  useEffect(() => {
+    if (src) {
+      setFile(src);
+    }
+  }, [src, setFile]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ m: 0, p: 2 }}>preview Photo</DialogTitle>

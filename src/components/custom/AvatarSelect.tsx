@@ -15,7 +15,6 @@ type AvatarSelectProps = {
 };
 const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(src);
-  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   const [showEditor, setShowEditor] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
