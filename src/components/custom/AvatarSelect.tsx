@@ -6,6 +6,8 @@ import { useState } from "react";
 import MuiPhotoEditor from "../common/image/MuiPhotoEditor";
 import PreviewImage from "../common/image/PreviewImage";
 import FileInput from "../common/inputs/FileInput";
+import addAvatar from "@/actions/profile/addAvatar";
+import deleteAvatar from "@/actions/profile/deleteAvatar";
 
 type AvatarSelectProps = {
   name: string;
@@ -13,6 +15,7 @@ type AvatarSelectProps = {
 };
 const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(src);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
 
   const [showEditor, setShowEditor] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
@@ -30,7 +33,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
       <ButtonBase
         onClick={() => {
           setShowPreview(true);
-          setFile(undefined);
+          setFile(null);
         }}
         disabled={!avatarUrl}
       >
@@ -52,22 +55,22 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
         </Avatar>
       </ButtonBase>
       <PreviewImage
-        src={file ? URL.createObjectURL(file) : (avatarUrl as string)}
+        src={file ? file : (avatarUrl as string)}
         open={showPreview}
         showSave={!!file}
         onClose={() => {
           setShowPreview(false);
           setShowEditor(false);
         }}
-        onSave={(editedFile: File) => {
-          editedFile && setAvatarUrl(URL.createObjectURL(editedFile));
+        onSave={(editedFile: string) => {
+          editedFile && setAvatarUrl(editedFile);
           setFile(editedFile);
-          // addAvatar(editedFile);
+          addAvatar(editedFile);
         }}
         onDelete={() => {
           setAvatarUrl(null);
           resetFile();
-          // deleteAvatar();
+          deleteAvatar();
         }}
       />
       {file && (
@@ -76,7 +79,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
           file={file}
           open={showEditor}
           onClose={() => setShowEditor(false)}
-          onSaveImage={(editedFile: File) => {
+          onSaveImage={(editedFile: string) => {
             setFile(editedFile);
             setShowPreview(true);
           }}
@@ -86,7 +89,7 @@ const AvatarSelect = ({ name, src }: AvatarSelectProps) => {
         <FileInput
           id="avatar-add"
           accept="image/*"
-          value={file}
+          value={file ?? undefined}
           onClick={resetFile}
           onChange={(e) => handleFileSelect(e, () => setShowEditor(true))}
         >

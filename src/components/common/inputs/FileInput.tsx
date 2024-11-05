@@ -14,7 +14,7 @@ type FileInputProps = Omit<
 > & {
   id: string; //used for linking label and input
   sx?: SxProps;
-  value?: File[] | File;
+  value?: string ;
   children: ReactNode;
 };
 const FileInput = ({ children, id, sx, value, ...props }: FileInputProps) => {

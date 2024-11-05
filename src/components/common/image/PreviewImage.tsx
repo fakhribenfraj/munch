@@ -21,7 +21,7 @@ type PreviewImageProps = {
   open?: boolean;
   showSave?: boolean;
   onClose?: VoidFunction;
-  onSave?: (editedFile: File) => void;
+  onSave?: (editedFile: string) => void;
   onDelete?: VoidFunction;
 };
 const PreviewImage = ({
@@ -33,18 +33,18 @@ const PreviewImage = ({
   onDelete,
 }: PreviewImageProps) => {
   const [showEditor, setShowEditor] = useState(false);
-  const { file, handleFileSelect, resetFile, setFile } = useSelectFile();
+  const { file, handleFileSelect, resetFile, setFile } = useSelectFile(src);
   const handleClose = () => {
     resetFile();
     onClose && onClose();
   };
-  useEffect(() => {
-    if (src) {
-      fetch(src, { mode: "no-cors" })
-        .then((r) => r.blob())
-        .then((blob) => setFile(new File([blob], "avatar")));
-    }
-  }, [src, setFile]);
+  // useEffect(() => {
+  //   if (src) {
+  //     fetch(src, { mode: "no-cors" })
+  //       .then((r) => r.blob())
+  //       .then((blob) => setFile(new File([blob], "avatar")));
+  //   }
+  // }, [src, setFile]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle sx={{ m: 0, p: 2 }}>preview Photo</DialogTitle>
@@ -62,7 +62,7 @@ const PreviewImage = ({
       <DialogContent dividers>
         {file && (
           <Image
-            src={URL.createObjectURL(file)}
+            src={file}
             alt="preview"
             width={300}
             height={300}
@@ -74,7 +74,7 @@ const PreviewImage = ({
           file={file ? file : src}
           open={showEditor}
           onClose={() => setShowEditor(false)}
-          onSaveImage={(editedFile: File) => {
+          onSaveImage={(editedFile: string) => {
             setFile(editedFile);
           }}
         />
@@ -104,7 +104,7 @@ const PreviewImage = ({
             <FileInput
               id="avatar"
               accept="image/*"
-              value={file}
+              value={file ?? undefined}
               onChange={(e) => handleFileSelect(e, () => setShowEditor(true))}
             >
               Upload

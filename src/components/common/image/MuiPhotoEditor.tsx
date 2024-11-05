@@ -22,7 +22,7 @@ type MuiPhotoEditorProps = {
   file: File | string;
   open?: boolean;
   onClose: VoidFunction;
-  onSaveImage: (editedFile: File) => void;
+  onSaveImage: (editedFile: string) => void;
 };
 
 const MuiPhotoEditor = ({
@@ -151,7 +151,7 @@ const MuiPhotoEditor = ({
               const res = await fetch(dataUrl);
               const blob = await res.blob();
               const file = new File([blob], name);
-              onSaveImage(file);
+              onSaveImage(dataUrl);
               handleClose();
             }
           }}
