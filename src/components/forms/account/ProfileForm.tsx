@@ -11,44 +11,37 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import FormSection from "../FormSection";
 
-const FormSchema = z
-  .object({
-    name: z.string().min(1, {
-      message: "name is empty",
-    }),
-    email: z.string().email({
-      message: "email not correct",
-    }),
-    password: z.string().min(8, {
-      message: "Password must be at least 8 characters.",
-    }),
-    confirmPassword: z.string(),
-  })
-  .superRefine(({ confirmPassword, password }, ctx) => {
-    if (confirmPassword !== password) {
-      ctx.addIssue({
-        code: "custom",
-        message: "The passwords did not match",
-        path: ["confirmPassword"],
-      });
-    }
-  });
+const FormSchema = z.object({
+  firstname: z.string().min(1, {
+    message: "firstname is empty",
+  }),
+  lastname: z.string().min(1, {
+    message: "lastname is empty",
+  }),
+  address: z.string().min(1, {
+    message: "address is empty",
+  }),
+  phone: z.string().min(1, {
+    message: "phone is empty",
+  }),
+});
 
 type FormData = z.infer<typeof FormSchema>;
 
-const ProfileForm = () => {
+type ProfileFormProps = {
+  defaultValues: FormData;
+};
+const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
   const methods = useForm({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      email: "",
-    },
+    defaultValues,
   });
   const { onSubmit, response, isPending } = useRHFActionForm(
     methods,
     (data: FormData) =>
       new Promise((resolve) => {
         const params = new URLSearchParams();
-        params.set("email", data.email);
+        // params.set("email", data.email);
         // router.push(
         //   `${routes.FORGOT_PASSWORD}/verify-code?${params.toString()}`
         // );

@@ -11,7 +11,14 @@ const Page: NextPage = async () => {
         <AvatarSelect src={profile.data.avatar} name={profile.data.name} />
       </Grid2>
       <Grid2 size={{ xs: 12, md: 9 }}>
-        <ProfileForm />
+        <ProfileForm
+          defaultValues={{
+            firstname: profile.data.name as string,
+            lastname: profile.data.name as string,
+            address: "avenue 13 mars, tunis",
+            phone: "+21650843572",
+          }}
+        />
       </Grid2>
     </Grid2>
   );
