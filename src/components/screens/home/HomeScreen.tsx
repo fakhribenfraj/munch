@@ -8,7 +8,8 @@ import FixedBottomNavigation from "../../common/navigation/FixedBottomNavigation
 import ResponsiveAppBar from "../../custom/ResponsiveAppBar";
 import MainContainer from "../../common/surfaces/MainContainer";
 import ListView from "./views/ListView";
-import MapView from "./views/MapView";
+import dynamic from "next/dynamic";
+const MapView = dynamic(() => import("./views/MapView"));
 
 const HomeScreen = ({
   restaurants,
