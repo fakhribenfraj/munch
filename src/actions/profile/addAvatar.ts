@@ -1,6 +1,8 @@
 "use server";
 import endpoints from "@/constants/endpoints";
+import { routes } from "@/constants/routes";
 import secureFetch from "@/utils/fetch";
+import { revalidatePath } from "next/cache";
 
 const addAvatar = async (avatarUrl: string) => {
   const fileRes = await fetch(avatarUrl);
@@ -14,6 +16,7 @@ const addAvatar = async (avatarUrl: string) => {
     isFileContent: true,
   });
 
+  revalidatePath(`${routes.ACCOUNT}/profile`)
   return await res.json();
 };
 
