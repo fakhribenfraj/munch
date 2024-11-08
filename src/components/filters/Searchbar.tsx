@@ -20,11 +20,12 @@ const Searchbar = () => {
         ),
         endAdornment: (
           <ButtonModal
+            buttonProps={{ "aria-label": "filters" }}
             icon={<TuneIcon />}
             cardProps={{
               sx: {
                 alignSelf: { xs: "flex-end", sm: "center" },
-                borderRadius: { xs: '1rem 1rem 0 0', sm: 2 },
+                borderRadius: { xs: "1rem 1rem 0 0", sm: 2 },
               },
             }}
           >

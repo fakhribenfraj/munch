@@ -2,15 +2,19 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import MapIcon from "@mui/icons-material/Map";
 import ViewListIcon from "@mui/icons-material/ViewList";
-import { Fab, Stack, useScrollTrigger } from "@mui/material";
+import { Stack, useScrollTrigger } from "@mui/material";
 import { useState } from "react";
-import FixedBottomNavigation from "../../common/navigation/FixedBottomNavigation";
-import ResponsiveAppBar from "../../custom/ResponsiveAppBar";
-import MainContainer from "../../common/surfaces/MainContainer";
-import ListView from "./views/ListView";
-import dynamic from "next/dynamic";
-const MapView = dynamic(() => import("./views/MapView"));
 
+import MainContainer from "../../common/surfaces/MainContainer";
+import dynamic from "next/dynamic";
+
+const MapView = dynamic(() => import("./views/MapView"));
+const ListView = dynamic(() => import("./views/ListView"));
+const Fab = dynamic(() => import("@mui/material/Fab"));
+const ResponsiveAppBar = dynamic(() => import("../../custom/ResponsiveAppBar"));
+const FixedBottomNavigation = dynamic(
+  () => import("../../common/navigation/FixedBottomNavigation")
+);
 const HomeScreen = ({
   restaurants,
 }: {

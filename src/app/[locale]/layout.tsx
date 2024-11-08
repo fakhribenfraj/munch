@@ -36,11 +36,12 @@ export const viewport = {
 };
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
   const session = await getServerSession(authOptions);
@@ -50,11 +51,11 @@ export default async function RootLayout({
       <NextIntlClientProvider locale={locale} messages={messages}>
         <AppRouterCacheProvider>
           <ThemeProvider>
-              <SessionProvider session={session}>
-                <body className={inter.className}>
-                  <ClientProviders>{children}</ClientProviders>
-                </body>
-              </SessionProvider>
+            <SessionProvider session={session}>
+              <body className={inter.className}>
+                <ClientProviders>{children}</ClientProviders>
+              </body>
+            </SessionProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </NextIntlClientProvider>

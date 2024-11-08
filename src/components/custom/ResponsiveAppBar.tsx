@@ -10,97 +10,94 @@ import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import { AppBar, Box, Chip, Container, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import AccountMenu from "./AccountMenu";
-import SearchBar from "../filters/Searchbar";
 import Logo from "./Logo";
-import HorizontalScrollbarBox from "../common/surfaces/HorizontalScrollbarBox";
+import dynamic from "next/dynamic";
+
+const SearchBar = dynamic(() => import("../filters/Searchbar"));
+const AccountMenu = dynamic(() => import("./AccountMenu"));
+const HorizontalScrollbarBox = dynamic(() => import("../common/surfaces/HorizontalScrollbarBox"));
+
 type ResponsiveAppBarProps = {
   hideSearchField?: boolean;
 };
+
 function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
   return (
-    <Box
+    <AppBar
+      position="fixed"
       sx={{
         display: { xs: hideSearchField ? "none" : "block", md: "block" },
+        backgroundColor: "grey.200",
+        boxShadow: 3,
+        zIndex: 1,
       }}
     >
-      <AppBar
-        position="fixed"
+      <Toolbar
+        disableGutters
         sx={{
-          backgroundColor: "grey.200",
-          boxShadow: 3,
-          zIndex: 1,
+          justifyContent: "space-between",
         }}
       >
-        <Toolbar
-          disableGutters
+        <Container
+          maxWidth="xl"
           sx={{
             justifyContent: "space-between",
+            display: "flex",
+            alignItems: "center",
+            columnGap: 2,
           }}
         >
-          <Container
-            maxWidth="xl"
-            sx={{
-              justifyContent: "space-between",
-              display: "flex",
-              alignItems: "center",
-              columnGap: 2,
-            }}
-          >
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
-              <Logo direction="horizontal" />
-            </Box>
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Logo direction="horizontal" />
+          </Box>
 
-            {!hideSearchField && <SearchBar />}
-            <Stack
-              flexDirection="row"
-              columnGap={1}
-              sx={{ display: { xs: "none", md: "block" } }}
-            >
-              <AccountMenu />
-            </Stack>
-          </Container>
-        </Toolbar>
-        {!hideSearchField && (
-          <HorizontalScrollbarBox
+          {!hideSearchField && <SearchBar />}
+          <Stack
+            flexDirection="row"
+            columnGap={1}
+            sx={{ display: { xs: "none", md: "block" } }}
+          >
+            <AccountMenu />
+          </Stack>
+        </Container>
+      </Toolbar>
+      {!hideSearchField && (
+        <HorizontalScrollbarBox
+          sx={{
+            maxWidth: "100%",
+            margin: "auto",
+          }}
+        >
+          <Toolbar
             sx={{
-              maxWidth: "100%",
-              margin: "auto",
+              columnGap: { xs: 1, md: 2 },
             }}
           >
-            <Toolbar
-              sx={{
-                columnGap: { xs: 1, md: 2 },
-              }}
-            >
-              {[
-                { label: "sandwiches", icon: <LunchDiningIcon /> },
-                { label: "pizza", icon: <LocalPizzaIcon /> },
-                { label: "pasta", icon: <DinnerDiningIcon /> },
-                { label: "spicy", icon: <WhatshotIcon /> },
-                { label: "drinks", icon: <LocalBarIcon /> },
-                { label: "coffe", icon: <LocalCafeIcon /> },
-                { label: "ice cream", icon: <IcecreamIcon /> },
-                { label: "fast food", icon: <FastfoodIcon /> },
-                { label: "cake", icon: <CakeIcon /> },
-              ].map((category) => (
-                <Chip
-                  variant="outlined"
-                  key={category.label}
-                  {...category}
-                  clickable
-                  sx={{
-                    backgroundColor: "common.white",
-                  }}
-                />
-              ))}
-            </Toolbar>
-          </HorizontalScrollbarBox>
-        )}
-      </AppBar>
-      {/* <Toolbar />
-      {!hideSearchField && <Toolbar />} */}
-    </Box>
+            {[
+              { label: "sandwiches", icon: <LunchDiningIcon /> },
+              { label: "pizza", icon: <LocalPizzaIcon /> },
+              { label: "pasta", icon: <DinnerDiningIcon /> },
+              { label: "spicy", icon: <WhatshotIcon /> },
+              { label: "drinks", icon: <LocalBarIcon /> },
+              { label: "coffe", icon: <LocalCafeIcon /> },
+              { label: "ice cream", icon: <IcecreamIcon /> },
+              { label: "fast food", icon: <FastfoodIcon /> },
+              { label: "cake", icon: <CakeIcon /> },
+            ].map((category) => (
+              <Chip
+                variant="outlined"
+                key={category.label}
+                {...category}
+                clickable
+                sx={{
+                  backgroundColor: "common.white",
+                }}
+              />
+            ))}
+          </Toolbar>
+        </HorizontalScrollbarBox>
+      )}
+    </AppBar>
   );
 }
 export default ResponsiveAppBar;

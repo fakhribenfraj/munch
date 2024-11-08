@@ -1,4 +1,4 @@
-const BASE_URL = `${process.env.PORTAL_API_URL}/api`;
+const BASE_URL = `https://${process.env.PORTAL_API_URL}/api`;
 const endpoints = {
   LOGIN: `${BASE_URL}/login`,
   LOGOUT: `${BASE_URL}/logout`,

@@ -1,9 +1,12 @@
-import { ReactNode } from "react";
-import FixedBottomNavigation from "../common/navigation/FixedBottomNavigation";
-import MainContainer from "../common/surfaces/MainContainer";
-import ResponsiveAppBar from "../custom/ResponsiveAppBar";
-import HideOnScroll from "../common/navigation/HideOnScroll";
 import { Box } from "@mui/material";
+import dynamic from "next/dynamic";
+import { ReactNode } from "react";
+import HideOnScroll from "../common/navigation/HideOnScroll";
+import MainContainer from "../common/surfaces/MainContainer";
+const ResponsiveAppBar = dynamic(() => import("../custom/ResponsiveAppBar"));
+const FixedBottomNavigation = dynamic(
+  () => import("../common/navigation/FixedBottomNavigation")
+);
 
 type MainLayoutProps = {
   children: ReactNode;
