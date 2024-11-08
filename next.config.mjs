@@ -7,12 +7,16 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   transpilePackages: ["mui-tel-input"],
   reactStrictMode: true, // Enable React strict mode for improved error handling
-  swcMinify: true, // Enable SWC minification for improved performance
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
   images: {
-    domains: ["munch.hek.tn"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: process.env.PORTAL_API_URL,
+      },
+    ],
   },
 };
 const configWithPwa = withPWA({
