@@ -1,7 +1,16 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { Box, Card, CardContent, Grid2, Link, Skeleton, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid2,
+  Link,
+  Paper,
+  Skeleton,
+  Typography,
+} from "@mui/material";
 import dynamic from "next/dynamic";
 const RestaurantMediaCarousel = dynamic(
   () => import("@/components/custom/restaurant/RestaurantMediaCarousel"),
@@ -30,9 +39,7 @@ const ListView = ({
         <Card
           sx={{
             position: "relative",
-            //   backgroundColor: "grey.200",
           }}
-          elevation={1}
         >
           <Box
             sx={{
@@ -64,9 +71,10 @@ const ListView = ({
           <Card
             sx={{
               position: "relative",
-              //   backgroundColor: "grey.200",
+              // border: "2px solid",
+              // boxShadow: "none",
+              // borderColor: "grey.300",
             }}
-            elevation={1}
           >
             <Box
               sx={{
