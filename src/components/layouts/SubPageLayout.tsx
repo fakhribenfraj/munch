@@ -1,17 +1,30 @@
-import { AppBar, Container, Toolbar } from "@mui/material";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import {
+  AppBar,
+  Box,
+  Breadcrumbs,
+  Container,
+  ContainerProps,
+  Link,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
 import ResponsiveAppBar from "../custom/ResponsiveAppBar";
 
-type SubPageLayoutProps = {
+type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
   disableTopGutter?: boolean;
   buttonVariant?: "contained" | "text";
+  breadcrumbs?: { label: string; href: string }[];
 };
 const SubPageLayout = ({
   children,
   disableTopGutter,
   buttonVariant,
+  breadcrumbs,
+  ...props
 }: SubPageLayoutProps) => {
   return (
     <>
@@ -34,13 +47,40 @@ const SubPageLayout = ({
         </Toolbar>
       </AppBar>
       {!disableTopGutter && <Toolbar />}
+
       <Container
         maxWidth="xl"
         component="main"
+        {...props}
         sx={{
           pt: { xs: 0, md: 4 },
+          ...props.sx,
         }}
       >
+        {breadcrumbs && (
+          <Box sx={{ mb: 4 }}>
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+              sx={{
+                display: { xs: "none", md: "initial" },
+                textTransform: "capitalize",
+              }}
+            >
+              {breadcrumbs?.map((item, index) =>
+                index == breadcrumbs.length - 1 ? (
+                  <Typography key="3" sx={{ color: "text.primary" }}>
+                    {item.label}
+                  </Typography>
+                ) : (
+                  <Link href={item.href} key={item.label}>
+                    {item.label}
+                  </Link>
+                )
+              )}
+            </Breadcrumbs>
+          </Box>
+        )}
         {children}
       </Container>
     </>

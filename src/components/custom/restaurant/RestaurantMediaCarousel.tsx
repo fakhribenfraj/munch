@@ -34,7 +34,7 @@ const RestaurantMediaCarousel = ({ id }: RestaurantMediaCarouselProps) => {
           variant="rectangular"
           height={190}
           sx={{
-            bgcolor: "grey.100",
+            bgcolor: "grey.300",
           }}
         />
       )}

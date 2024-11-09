@@ -94,7 +94,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
           variant="contained"
           color="primary"
           sx={{
-            alignSelf: "flex-start",
+            alignSelf: "flex-end",
             mt: 2,
           }}
         >

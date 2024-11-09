@@ -16,6 +16,10 @@ const nextConfig = {
         protocol: "https",
         hostname: process.env.PORTAL_API_URL,
       },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+      },
     ],
   },
 };

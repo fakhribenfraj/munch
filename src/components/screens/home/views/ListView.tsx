@@ -21,7 +21,7 @@ const RestaurantMediaCarousel = dynamic(
         variant="rectangular"
         height={190}
         sx={{
-          bgcolor: "common.white",
+          bgcolor: "grey.300",
         }}
       />
     ),
