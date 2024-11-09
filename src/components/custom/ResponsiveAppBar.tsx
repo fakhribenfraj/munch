@@ -66,6 +66,7 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
           sx={{
             maxWidth: "100%",
             margin: "auto",
+            justifyContent:'center'
           }}
         >
           <Toolbar

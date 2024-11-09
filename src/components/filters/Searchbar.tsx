@@ -11,7 +11,7 @@ const Searchbar = () => {
       color="primary"
       placeholder="search meal..."
       fullWidth
-      sx={{ maxWidth: { xs: "100%", md: "25rem" } }}
+      sx={{ maxWidth: { xs: "100%", md: "70%", lg: "50%" } }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -36,8 +36,6 @@ const Searchbar = () => {
           borderRadius: 2,
           height: "2.5rem",
           backgroundColor: "common.white",
-          border: "1px solid",
-          borderColor: "grey.300",
         },
       }}
     />
