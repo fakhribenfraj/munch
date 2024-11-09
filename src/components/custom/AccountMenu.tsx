@@ -54,8 +54,27 @@ export default function AccountMenu() {
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
-          <Avatar onClick={handleClick}>
-            {session ? <PersonIcon /> : <PersonOffIcon />}
+          <Avatar
+            onClick={handleClick}
+            sx={{
+              cursor: "pointer",
+              textTransform: "uppercase",
+            }}
+            src={session?.user.avatar ?? undefined}
+          >
+            {session ? (
+              session?.user.name.split(" ").length > 1 ? (
+                `${session?.user.name.split(" ")[0][0]}${
+                  session?.user.name.split(" ")[1][0]
+                }`
+              ) : (
+                `${session?.user.name.split(" ")[0][0]}${
+                  session?.user.name.split(" ")[0][1]
+                }`
+              )
+            ) : (
+              <PersonOffIcon />
+            )}
           </Avatar>
         </Tooltip>
       </Box>
