@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import LogoutButton from "@/components/common/auth/LogoutButton";
+import UserAvatar from "@/components/custom/user/UserAvatar";
 import MainLayout from "@/components/layouts/MainLayout";
 import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
@@ -23,7 +24,6 @@ import { getServerSession } from "next-auth";
 
 const Home: NextPage = async () => {
   const session = await getServerSession(authOptions);
-  const name = session?.user.name;
   return (
     <MainLayout>
       <Stack sx={{ pb: 2 }}>
@@ -40,19 +40,14 @@ const Home: NextPage = async () => {
               sx={{ justifyContent: "space-between" }}
             >
               <Box sx={{ display: "flex", columnGap: 2 }}>
-                <Avatar
+                <UserAvatar
                   sx={{
                     width: 56,
                     height: 56,
-                    textTransform: "uppercase",
                   }}
-                  src={session?.user.avatar ?? undefined}
-                >
-                  {name &&
-                    (name.split(" ").length > 1
-                      ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
-                      : `${name.split(" ")[0][0]}${name.split(" ")[0][1]}`)}
-                </Avatar>
+                  name={session?.user.name ?? null}
+                  image={session?.user.avatar ?? null}
+                />
                 <Stack justifyContent="center">
                   <Typography variant="subtitle1">
                     {session?.user.name ?? "user"}

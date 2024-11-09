@@ -1,5 +1,5 @@
 import getProfile from "@/actions/profile/getProfile";
-import AvatarSelect from "@/components/custom/AvatarSelect";
+import AvatarSelect from "@/components/custom/user/AvatarSelect";
 import ProfileForm from "@/components/forms/account/ProfileForm";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";

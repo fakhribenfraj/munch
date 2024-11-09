@@ -14,7 +14,7 @@ import Logo from "./Logo";
 import dynamic from "next/dynamic";
 
 const SearchBar = dynamic(() => import("../filters/Searchbar"));
-const AccountMenu = dynamic(() => import("./AccountMenu"));
+const AccountMenu = dynamic(() => import("./user/AccountMenu"));
 const HorizontalScrollbarBox = dynamic(() => import("../common/surfaces/HorizontalScrollbarBox"));
 
 type ResponsiveAppBarProps = {

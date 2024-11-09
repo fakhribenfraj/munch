@@ -18,6 +18,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import UserAvatar from "./UserAvatar";
 
 export default function AccountMenu() {
   const t = useTranslations("accountMenu");
@@ -54,28 +55,11 @@ export default function AccountMenu() {
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
         <Tooltip title="Account settings">
-          <Avatar
+          <UserAvatar
             onClick={handleClick}
-            sx={{
-              cursor: "pointer",
-              textTransform: "uppercase",
-            }}
-            src={session?.user.avatar ?? undefined}
-          >
-            {session ? (
-              session?.user.name.split(" ").length > 1 ? (
-                `${session?.user.name.split(" ")[0][0]}${
-                  session?.user.name.split(" ")[1][0]
-                }`
-              ) : (
-                `${session?.user.name.split(" ")[0][0]}${
-                  session?.user.name.split(" ")[0][1]
-                }`
-              )
-            ) : (
-              <PersonOffIcon />
-            )}
-          </Avatar>
+            name={session?.user.name ?? null}
+            image={session?.user.avatar ?? null}
+          />
         </Tooltip>
       </Box>
       <Menu

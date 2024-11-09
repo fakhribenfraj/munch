@@ -3,9 +3,9 @@ import useSelectFile from "@/hooks/useSelectFile";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { Avatar, Box, ButtonBase, Chip } from "@mui/material";
 import { useState } from "react";
-import MuiPhotoEditor from "../common/image/MuiPhotoEditor";
-import PreviewImage from "../common/image/PreviewImage";
-import FileInput from "../common/inputs/FileInput";
+import MuiPhotoEditor from "../../common/image/MuiPhotoEditor";
+import PreviewImage from "../../common/image/PreviewImage";
+import FileInput from "../../common/inputs/FileInput";
 import addAvatar from "@/actions/profile/addAvatar";
 import deleteAvatar from "@/actions/profile/deleteAvatar";
 
