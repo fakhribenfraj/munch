@@ -1,12 +1,9 @@
-import getProfile from "@/actions/profile/getProfile";
 import ChangePasswordForm from "@/components/forms/account/ChangePasswordForm";
-import ProfileForm from "@/components/forms/account/ProfileForm";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
-import { Box, Grid2, List, ListItem, Typography } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
 const Page: NextPage = async () => {
-  const profile = await getProfile();
   return (
     <SubPageLayout
       maxWidth="lg"

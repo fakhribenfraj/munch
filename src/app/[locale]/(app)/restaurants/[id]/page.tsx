@@ -6,8 +6,14 @@ import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { data: restaurant } = await getRestaurantById(params.id);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
+  const { data: restaurant } = await getRestaurantById(id);
   return (
     <SubPageLayout disableTopGutter buttonVariant="contained">
       <Stack alignItems="flex-start" gap={1}>

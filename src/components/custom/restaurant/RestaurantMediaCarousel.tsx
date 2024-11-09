@@ -25,7 +25,7 @@ const RestaurantMediaCarousel = ({ id }: RestaurantMediaCarouselProps) => {
       setIsPending(false);
     };
     startTransition();
-  }, []);
+  }, [id]);
   return (
     <Carousel>
       {isPending && (
