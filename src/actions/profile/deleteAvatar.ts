@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 const deleteAvatar = async () => {
   const res = await secureFetch(`${endpoints.PROFILE}/avatar`, {
-    method: "Delete",
+    method: "DELETE",
   });
   revalidatePath(`${routes.ACCOUNT}/profile`)
   return await res.json();
