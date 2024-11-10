@@ -22,10 +22,10 @@ const Page: NextPage = async () => {
       ]}
     >
       <Grid2 container rowGap={4}>
-        <Grid2 size={{ xs: 12, md: 3 }}>
+        <Grid2 size={{ xs: 12, md: 2 }}>
           <AvatarSelect src={profile.data.avatar} name={profile.data.name} />
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 9 }}>
+        <Grid2 size={{ xs: 12, md: 10 }}>
           <ProfileForm
             defaultValues={{
               firstname: profile.data.name as string,

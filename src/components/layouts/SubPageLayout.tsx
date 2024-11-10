@@ -64,12 +64,11 @@ const SubPageLayout = ({
               aria-label="breadcrumb"
               sx={{
                 display: { xs: "none", md: "initial" },
-                textTransform: "capitalize",
               }}
             >
               {breadcrumbs?.map((item, index) =>
                 index == breadcrumbs.length - 1 ? (
-                  <Typography key="3" sx={{ color: "text.primary" }}>
+                  <Typography key={item.label} sx={{ color: "text.primary" }}>
                     {item.label}
                   </Typography>
                 ) : (
