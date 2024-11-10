@@ -14,7 +14,7 @@ const Page: NextPage = async () => {
         },
         {
           href: routes.ACCOUNT,
-          label: "Privacy & security",
+          label: "security",
         },
       ]}
     >

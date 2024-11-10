@@ -1,20 +1,16 @@
 "use client";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   Button,
   ButtonBaseProps,
   ButtonProps,
-  CardProps,
+  Dialog,
+  DialogContent,
+  DialogProps,
   IconButton,
   IconButtonProps,
 } from "@mui/material";
-import {
-  MouseEvent,
-  ReactNode,
-  createContext,
-  useContext,
-  useState,
-} from "react";
-import CardModal from "../surfaces/CardModal";
+import { ReactNode, createContext, useContext, useState } from "react";
 
 type ModalContextType = {
   handleClose: VoidFunction;
@@ -27,8 +23,9 @@ export type ButtonModalProps = {
   label?: string;
   children: ReactNode;
   buttonProps?: ButtonProps | IconButtonProps;
-  cardProps?: CardProps;
+  cardProps?: DialogProps;
   icon?: ReactNode;
+  onClose?: VoidFunction;
 };
 const ButtonModal = ({
   children,
@@ -36,6 +33,7 @@ const ButtonModal = ({
   buttonProps,
   cardProps,
   icon,
+  onClose,
 }: ButtonModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
@@ -43,6 +41,7 @@ const ButtonModal = ({
   };
   const handleClose = () => {
     setIsOpen(false);
+    onClose && onClose();
   };
   const contextValue = {
     handleClose,
@@ -60,16 +59,60 @@ const ButtonModal = ({
   ) : (
     <Button {...(triggerProps as ButtonProps)}> {label}</Button>
   );
+
   return (
     <ModalContext.Provider value={contextValue}>
       {trigger}
 
-      <CardModal {...cardProps} open={isOpen} onClose={() => setIsOpen(false)}>
+      {/* <CardModal {...cardProps} open={isOpen} onClose={() => setIsOpen(false)}>
         <>{children}</>
-      </CardModal>
+      </CardModal> */}
+      <Dialog
+        {...cardProps}
+        open={isOpen}
+        onClose={handleClose}
+        sx={{
+          maxHeight: "90vh",
+          outline: "none",
+          ...cardProps?.sx,
+        }}
+      >
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        {children}
+      </Dialog>
     </ModalContext.Provider>
   );
 };
+
+export const CloseModalButton = ({
+  children,
+  onClick,
+  ...props
+}: ButtonProps) => {
+  const { handleClose } = useModal();
+  return (
+    <Button
+      {...props}
+      onClick={(e) => {
+        handleClose();
+        onClick && onClick(e);
+      }}
+    >
+      {children ?? "Cancel"}
+    </Button>
+  );
+};
+
 export function useModal() {
   const context = useContext(ModalContext);
   if (!context) {

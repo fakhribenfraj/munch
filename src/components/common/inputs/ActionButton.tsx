@@ -12,10 +12,10 @@ import { MouseEventHandler, useState, useTransition } from "react";
 import ButtonModal, {
   ButtonModalProps,
   useModal,
-} from "../compound/ButtonModal";
+} from "../buttons/ButtonModal";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useTranslations } from "next-intl";
-import { useMenu } from "../compound/ButtonMenu";
+import { useMenu } from "../buttons/ButtonMenu";
 import { useSnackbar } from "notistack";
 type ActionButtonProps = {
   serverAction: () => Promise<any>;
