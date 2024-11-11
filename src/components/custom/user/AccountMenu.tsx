@@ -117,7 +117,7 @@ export default function AccountMenu() {
             </ListItemButton>
             <ListItemButton
               onClick={() => {
-                signOut({ callbackUrl: routes.SIGNIN });
+                signOut({ callbackUrl: routes.HOME });
               }}
             >
               <ListItemIcon>

@@ -66,16 +66,22 @@ const Home: NextPage = async () => {
             {[
               {
                 label: "Personal info",
+                description:
+                  "find your info here find your info here find your info here",
                 url: "/personal-info",
                 icon: <AccountCircleOutlinedIcon />,
               },
               {
                 label: "Privacy & security",
+                description:
+                  "find your info here find your info here find your info here",
                 url: "/privacy",
                 icon: <SecurityIcon />,
               },
               {
                 label: "Settings",
+                description:
+                  "find your info here find your info here find your info here",
                 url: "/settings",
                 icon: <SettingsOutlinedIcon />,
               },
@@ -84,11 +90,27 @@ const Home: NextPage = async () => {
                 <ListItem>
                   <ListItemButton
                     href={`${routes.ACCOUNT}/${item.url}`}
-                    sx={{ justifyContent: "space-between" }}
+                    sx={{
+                      justifyContent: "space-between",
+                      bgcolor: { xs: "none", md: "common.white" },
+                      borderRadius: { xs: 0, md: 2 },
+                      boxShadow: { xs: 0, md: 3 },
+                    }}
                   >
                     <Box sx={{ display: "flex" }}>
                       <ListItemIcon>{item.icon}</ListItemIcon>
-                      <ListItemText>{item.label}</ListItemText>
+                      <Stack rowGap={2}>
+                        <ListItemText>{item.label}</ListItemText>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            color: "grey.600",
+                            display: { xs: "none", md: "initial" },
+                          }}
+                        >
+                          {item.description}
+                        </Typography>
+                      </Stack>
                     </Box>
                     <ListItemIcon
                       sx={{
