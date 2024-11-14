@@ -1,15 +1,19 @@
-import { ActionResponse } from "@/types/api";
 import { useState, useTransition } from "react";
 
-const useServerAction = (action: () => Promise<ActionResponse<any>>) => {
+const useServerAction = <T>() => {
   const [isPending, startTransition] = useTransition();
-  const [response, setResponse] = useState<ActionResponse<any>>();
-  const startAction = (onSuccess?: VoidFunction) => {
+  const [response, setResponse] = useState<T>();
+  const startAction = (
+    action: Promise<any | undefined>,
+    onSuccess?: VoidFunction
+  ) => {
     startTransition(async () => {
-      const res = await action();
-      setResponse(res);
-      if (res.ok && onSuccess) {
-        onSuccess();
+      const res = await action;
+      if (res) {
+        setResponse(res);
+        if (res.ok && onSuccess) {
+          onSuccess();
+        }
       }
     });
   };

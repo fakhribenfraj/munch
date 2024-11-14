@@ -8,7 +8,6 @@ export type GetRestaurantAttachementResponse = {
   url: string;
 };
 export const getRestaurantAttachementsById = async (id: string) => {
-  const res = await secureFetch(`${endpoints.RESTAURANTS}/${id}/attachments`);
-  const resData = await res.json();
+  const resData = await secureFetch(`${endpoints.RESTAURANTS}/${id}/attachments`);
   return (resData ?? []) as ActionResponse<GetRestaurantAttachementResponse[]>;
 };

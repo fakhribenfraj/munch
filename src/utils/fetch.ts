@@ -13,7 +13,7 @@ const secureFetch = async (
   // const urlObj = new URL(url);
   // urlObj.searchParams.append("lang", locale);
   const session = await getServerSession(authOptions);
-  return fetch(url, {
+  const res = await fetch(url, {
     ...params,
     headers: {
       ...(session && { Authorization: `Bearer ${session?.access_token}` }),
@@ -24,5 +24,8 @@ const secureFetch = async (
       ...params?.headers,
     },
   });
+  const resData = await res.json();
+
+  return { ...resData, ok: res.ok };
 };
 export default secureFetch;

@@ -7,7 +7,7 @@ const deleteProfile = async () => {
     method: "DELETE",
   });
 
-  return { ok: res.ok };
+  return res;
 };
 
 export default deleteProfile;

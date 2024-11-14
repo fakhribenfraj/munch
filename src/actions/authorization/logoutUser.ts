@@ -6,6 +6,5 @@ export const logoutUser = async () => {
   const res = await secureFetch(endpoints.LOGOUT, {
     method: "POST",
   });
-  const data = await res.json();
-  return JSON.stringify({ ok: res.ok, message: data.message });
+  return res;
 };

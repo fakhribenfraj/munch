@@ -15,7 +15,7 @@ const updatePassword = async (
       password_confirmation: confirmPassword,
     }),
   });
-  return await res.json();
+  return res;
 };
 
 export default updatePassword;

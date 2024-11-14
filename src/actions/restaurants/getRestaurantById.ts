@@ -37,8 +37,7 @@ export const getRestaurantById = async (id: string) => {
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-s/03/11/f1/22/el-ali.jpg?w=600&h=-1&s=1",
     "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/bb/97/af/la-salle-ouverte-de-restaurant.jpg?w=600&h=400&s=1",
   ];
-  const res = await secureFetch(`${endpoints.RESTAURANTS}/${id}`);
-  const resData = await res.json();
+  const resData = await secureFetch(`${endpoints.RESTAURANTS}/${id}`);
   return {
     ...resData,
     data: {

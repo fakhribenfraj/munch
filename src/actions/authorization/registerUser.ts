@@ -19,7 +19,6 @@ export const registerUser = async (
     }),
   });
 
-  const resData = await res.json();
 
-  return resData;
+  return res;
 };

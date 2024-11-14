@@ -1,11 +1,12 @@
 "use client";
 
+import { forgotPassword } from "@/actions/authorization/forgotPassword";
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import { routes } from "@/constants/routes";
-import useRHFActionForm from "@/hooks/useRHFActionForm";
+import useServerAction from "@/hooks/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -26,21 +27,21 @@ export default function ForgotPasswordForm() {
       email: "",
     },
   });
-  const { onSubmit, response, isPending } = useRHFActionForm(
-    methods,
-    (data: FormData) =>
-      new Promise((resolve) => {
-        const params = new URLSearchParams();
-        params.set("email", data.email);
-        router.push(
-          `${routes.FORGOT_PASSWORD}/verify-code?${params.toString()}`
-        );
-      })
-  );
+  const { handleSubmit, getValues } = methods;
+  const { startAction, response } = useServerAction<{
+    message: string;
+  }>();
 
+  const onSubmit = handleSubmit((data: FormData) =>
+    startAction(forgotPassword(data.email), () => {
+      const params = new URLSearchParams();
+      params.set("email", getValues("email"));
+      router.push(`${routes.FORGOT_PASSWORD}/verify-code?${params.toString()}`);
+    })
+  );
   return (
-    <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
-      <Stack gap={2}>
+    <ActionForm methods={methods} onSubmit={onSubmit}>
+      <Stack spacing={2}>
         {[
           {
             label: "Email",
@@ -65,6 +66,7 @@ export default function ForgotPasswordForm() {
         >
           reset password
         </Button>
+        <Typography>{response?.message}</Typography>
       </Stack>
     </ActionForm>
   );

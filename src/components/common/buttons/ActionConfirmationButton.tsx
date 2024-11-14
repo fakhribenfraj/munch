@@ -3,7 +3,10 @@ import useServerAction from "@/hooks/useServerAction";
 import ConfirmationButton, {
   ConfirmationButtonProps,
 } from "./ConfirmationButton";
-type ActionConfirmationButtonProps = ConfirmationButtonProps & {
+type ActionConfirmationButtonProps = Omit<
+  ConfirmationButtonProps,
+  "onConfirm"
+> & {
   onConfirm: () => Promise<any>;
   onSuccess?: VoidFunction;
 };
@@ -12,12 +15,12 @@ const ActionConfirmationButton = ({
   onSuccess,
   ...props
 }: ActionConfirmationButtonProps) => {
-  const { startAction, isPending } = useServerAction(onConfirm);
+  const { startAction, isPending } = useServerAction();
 
   return (
     <ConfirmationButton
       {...props}
-      onConfirm={() => startAction(onSuccess)}
+      onConfirm={() => startAction(onConfirm(), onSuccess)}
       loading={isPending}
     />
   );

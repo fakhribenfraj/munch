@@ -1,9 +1,10 @@
 "use client";
 
+import { forgotPassword } from "@/actions/authorization/forgotPassword";
 import ActionForm from "@/components/common/compound/ActionForm";
 import DigitInput from "@/components/common/inputs/DigitInput";
 import { routes } from "@/constants/routes";
-import useRHFActionForm from "@/hooks/useRHFActionForm";
+import useServerAction from "@/hooks/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -30,13 +31,16 @@ export default function VerifyResetCode() {
       4: null,
     },
   });
-  const { onSubmit, response, isPending } = useRHFActionForm(
-    methods,
-    (data: FormData) => new Promise((resolve) => router.push(routes.HOME))
-  );
+  const { handleSubmit, getValues } = methods;
+  const { startAction, response } = useServerAction<{
+    message: string;
+  }>();
 
+  const onSubmit = handleSubmit((data: FormData) =>
+    startAction(forgotPassword("test"), () => router.push(routes.HOME))
+  );
   return (
-    <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
+    <ActionForm methods={methods} onSubmit={onSubmit}>
       <Stack gap={2}>
         <DigitInput name="validate" length={5} />
         <Button

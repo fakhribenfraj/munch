@@ -4,12 +4,11 @@ import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import { routes } from "@/constants/routes";
-import useRHFActionForm from "@/hooks/useRHFActionForm";
+import useServerAction from "@/hooks/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -49,22 +48,23 @@ export default function RegisterForm() {
       confirmPassword: "",
     },
   });
-  const { onSubmit, response, isPending } = useRHFActionForm(
-    methods,
-    (data: FormData) =>
+  const { handleSubmit } = methods;
+  const { startAction, response } = useServerAction<{
+    ok: boolean;
+    error: string;
+  }>();
+  const onSubmit = handleSubmit((data: FormData) =>
+    startAction(
       signIn("credentials", {
         ...data,
         redirect: false,
-      })
+      }),
+      () => router.push(routes.HOME)
+    )
   );
-  useEffect(() => {
-    if (response?.ok) {
-      router.push(routes.HOME);
-    }
-  }, [response, router]);
 
   return (
-    <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
+    <ActionForm methods={methods} onSubmit={onSubmit}>
       <Stack gap={2}>
         <RHFTelInput name="phoneNumber" label="phone number" />
         {[

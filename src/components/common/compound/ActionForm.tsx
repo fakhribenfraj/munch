@@ -1,5 +1,4 @@
 "use client";
-import useActionSnackbar from "@/hooks/useActionSnackbar";
 import { BaseSyntheticEvent, ReactNode } from "react";
 import { FormProvider, UseFormReturn } from "react-hook-form";
 
@@ -9,16 +8,8 @@ type FormProps = {
   ) => Promise<void>;
   children: ReactNode;
   methods: UseFormReturn<any>;
-  state: any;
-  disableSnackbar?: boolean;
 };
-const ActionForm = ({
-  children,
-  state,
-  onSubmit,
-  methods,
-  disableSnackbar,
-}: FormProps) => {
+const ActionForm = ({ children, onSubmit, methods }: FormProps) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={onSubmit}>{children}</form>

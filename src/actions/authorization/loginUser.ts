@@ -8,7 +8,5 @@ export const loginUser = async (email: string, password: string) => {
     body: JSON.stringify({ email, password, device_name: "mobile" }),
   });
 
-  const resData = await res.json();
-
-  return resData;
+  return res;
 };

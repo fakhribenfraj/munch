@@ -17,7 +17,7 @@ const addAvatar = async (avatarUrl: string) => {
   });
 
   revalidatePath(`${routes.ACCOUNT}/profile`)
-  return await res.json();
+  return res;
 };
 
 export default addAvatar;

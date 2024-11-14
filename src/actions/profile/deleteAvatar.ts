@@ -9,7 +9,7 @@ const deleteAvatar = async () => {
     method: "DELETE",
   });
   revalidatePath(`${routes.ACCOUNT}/profile`)
-  return await res.json();
+  return res;
 };
 
 export default deleteAvatar;
