@@ -1,15 +1,12 @@
 "use client";
 import LOCALES from "@/constants/locales";
-import { Link, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { useLocale, useTranslations } from "next-intl";
+import { Link, MenuItem, TextField, Typography } from "@mui/material";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-type LanguageSelectProps = {
-  onChange?: (value: string) => void;
-};
-const LanguageSelect = ({ onChange }: LanguageSelectProps) => {
+type LanguageSelectProps = {};
+const LanguageSelect = ({}: LanguageSelectProps) => {
   const locale = useLocale();
-  const t_locales = useTranslations("locales");
   const pathname = usePathname();
   return (
     <TextField
@@ -32,6 +29,7 @@ const LanguageSelect = ({ onChange }: LanguageSelectProps) => {
               alignItems: "center",
               textDecoration: "none",
               verticalAlign: "middle",
+              textTransform: "capitalize",
               mr: 1,
             }}
           >
@@ -41,9 +39,7 @@ const LanguageSelect = ({ onChange }: LanguageSelectProps) => {
               width={24}
               height={24}
             />
-            <Typography sx={{ fontSize: "0.875rem" }}>
-              {t_locales(locale.name)}
-            </Typography>
+            <Typography sx={{ fontSize: "0.875rem" }}>{locale.name}</Typography>
           </Link>
         </MenuItem>
       ))}

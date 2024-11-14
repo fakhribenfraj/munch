@@ -3,9 +3,12 @@ import deleteProfile from "@/actions/profile/deleteProfile";
 import ActionConfirmationButton from "@/components/common/buttons/ActionConfirmationButton";
 import { routes } from "@/constants/routes";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 const DeleteProfileButton = () => {
+  const t = useTranslations();
+
   return (
     <ActionConfirmationButton
       onConfirm={deleteProfile}
@@ -17,7 +20,7 @@ const DeleteProfileButton = () => {
       variant="outlined"
       fullWidth
     >
-      delete profile
+      {t("DELETE_PROFILE")}
     </ActionConfirmationButton>
   );
 };

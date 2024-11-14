@@ -1,6 +1,7 @@
 import deleteProfile from "@/actions/profile/deleteProfile";
 import ActionConfirmationButton from "@/components/common/buttons/ActionConfirmationButton";
 import ConfirmationButton from "@/components/common/buttons/ConfirmationButton";
+import LanguageSelect from "@/components/common/inputs/LanguageSelect";
 import DeleteProfileButton from "@/components/custom/user/DeleteProfileButton";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
@@ -29,6 +30,9 @@ const Page: NextPage = async () => {
           justifyContent: "center",
         }}
       >
+        <Grid2 size={{ xs: 12, md: 6 }}>
+          <LanguageSelect />
+        </Grid2>
         <Grid2 size={{ xs: 12, md: 6 }}>
           <DeleteProfileButton />
         </Grid2>

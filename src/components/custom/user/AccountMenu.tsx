@@ -4,24 +4,19 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import PersonIcon from "@mui/icons-material/Person";
-import PersonOffIcon from "@mui/icons-material/PersonOff";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { ListItemButton, ListItemText } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import { signOut, useSession } from "next-auth/react";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import UserAvatar from "./UserAvatar";
 
 export default function AccountMenu() {
-  const t = useTranslations("accountMenu");
   const { data: session } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigationItems = useMemo(
@@ -123,7 +118,7 @@ export default function AccountMenu() {
               <ListItemIcon>
                 <Logout />
               </ListItemIcon>
-              <ListItemText> {t("logout")}</ListItemText>
+              <ListItemText>logout</ListItemText>
             </ListItemButton>
           </Box>
         )}
