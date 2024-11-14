@@ -7,10 +7,15 @@ import {
   CardContent,
   Grid2,
   Link,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Paper,
   Skeleton,
   Typography,
 } from "@mui/material";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import dynamic from "next/dynamic";
 const RestaurantMediaCarousel = dynamic(
   () => import("@/components/custom/restaurant/RestaurantMediaCarousel"),
@@ -91,12 +96,19 @@ const ListView = ({
             <Link href={`${routes.RESTAURANTS}/${restaurant.id}`}>
               <RestaurantMediaCarousel id={restaurant.id} />
               <CardContent>
-                <Typography gutterBottom variant="h6">
-                  {restaurant.name}
-                </Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {restaurant.address}
-                </Typography>
+                <List>
+                  <ListItem>
+                    <Typography gutterBottom variant="h6">
+                      {restaurant.name}
+                    </Typography>
+                  </ListItem>
+                  <ListItem sx={{ color: "text.secondary" }}>
+                    <ListItemIcon>
+                      <LocationOnIcon />
+                    </ListItemIcon>
+                    <ListItemText>{restaurant.delegation}</ListItemText>
+                  </ListItem>
+                </List>
               </CardContent>
             </Link>
           </Card>

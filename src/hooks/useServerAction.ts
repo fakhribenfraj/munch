@@ -8,7 +8,7 @@ const useServerAction = (action: () => Promise<ActionResponse<any>>) => {
     startTransition(async () => {
       const res = await action();
       setResponse(res);
-      if (res.code == 200 && onSuccess) {
+      if (res.ok && onSuccess) {
         onSuccess();
       }
     });

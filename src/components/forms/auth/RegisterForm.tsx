@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -56,9 +57,11 @@ export default function RegisterForm() {
         redirect: false,
       })
   );
-  if (response?.ok) {
-    router.push(routes.HOME);
-  }
+  useEffect(() => {
+    if (response?.ok) {
+      router.push(routes.HOME);
+    }
+  }, [response, router]);
 
   return (
     <ActionForm methods={methods} onSubmit={onSubmit} state={response}>

@@ -1,5 +1,7 @@
+"use client";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
-  Button,
   ButtonProps,
   ButtonPropsColorOverrides,
   DialogActions,
@@ -9,14 +11,14 @@ import {
   Stack,
 } from "@mui/material";
 import ButtonModal, { CloseModalButton } from "./ButtonModal";
-import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
-type ConfirmationButtonProps = Omit<ButtonProps, "onClick"> & {
+export type ConfirmationButtonProps = Omit<ButtonProps, "onClick"> & {
   onConfirm: VoidFunction;
   onCancel?: VoidFunction;
   color?: ButtonPropsColorOverrides;
   content: string;
   title?: string;
   confirmLabel?: string;
+  loading?: boolean;
 };
 const ConfirmationButton = ({
   children,
@@ -24,6 +26,8 @@ const ConfirmationButton = ({
   title,
   content,
   confirmLabel,
+  onConfirm,
+  loading,
   ...props
 }: ConfirmationButtonProps) => {
   return (
@@ -48,15 +52,17 @@ const ConfirmationButton = ({
       </DialogContent>
       <DialogActions>
         <CloseModalButton variant="soft" color="inherit" />
-        <Button
+        <LoadingButton
           variant="contained"
           color={color}
           sx={{
             textTransform: "capitalize",
           }}
+          loading={loading}
+          onClick={onConfirm}
         >
           {confirmLabel ?? "confirm"}
-        </Button>
+        </LoadingButton>
       </DialogActions>
     </ButtonModal>
   );

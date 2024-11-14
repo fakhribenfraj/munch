@@ -6,7 +6,8 @@ const deleteProfile = async () => {
   const res = await secureFetch(`${endpoints.PROFILE}`, {
     method: "DELETE",
   });
-  return await res.json();
+
+  return { ok: res.ok };
 };
 
 export default deleteProfile;
