@@ -4,6 +4,7 @@ import {
   Button,
   ButtonBaseProps,
   ButtonProps,
+  CardProps,
   Dialog,
   DialogContent,
   DialogProps,
@@ -23,7 +24,7 @@ export type ButtonModalProps = {
   label?: string;
   children: ReactNode;
   buttonProps?: ButtonProps | IconButtonProps;
-  cardProps?: DialogProps;
+  cardProps?: CardProps;
   icon?: ReactNode;
   onClose?: VoidFunction;
 };
