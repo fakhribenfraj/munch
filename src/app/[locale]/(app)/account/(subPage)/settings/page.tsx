@@ -1,13 +1,9 @@
-import deleteProfile from "@/actions/profile/deleteProfile";
-import ActionConfirmationButton from "@/components/common/buttons/ActionConfirmationButton";
-import ConfirmationButton from "@/components/common/buttons/ConfirmationButton";
 import LanguageSelect from "@/components/common/inputs/LanguageSelect";
 import DeleteProfileButton from "@/components/custom/user/DeleteProfileButton";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
-import { signOut } from "next-auth/react";
 import { getTranslations } from "next-intl/server";
 const Page: NextPage = async () => {
   const t = await getTranslations();

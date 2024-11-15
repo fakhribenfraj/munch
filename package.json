@@ -34,7 +34,7 @@
     "negotiator": "^0.6.3",
     "next": "^15.0.3",
     "next-auth": "^4.24.10",
-    "next-intl": "^3.9.1",
+    "next-intl": "^3.25.1",
     "next-logger": "^4.0.0",
     "next-pwa": "^5.6.0",
     "notistack": "^3.0.1",
