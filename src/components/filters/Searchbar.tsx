@@ -4,12 +4,14 @@ import { Box, InputAdornment, TextField } from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
 import ButtonModal from "../common/buttons/ButtonModal";
 import FilterForm from "@/components/forms/filter/FilterForm";
+import { useTranslations } from "next-intl";
 
 const Searchbar = () => {
+  const t = useTranslations();
   return (
     <TextField
       color="primary"
-      placeholder="search meal..."
+      placeholder={t("SEARCH_PLACEHOLDER")}
       fullWidth
       sx={{ maxWidth: { xs: "100%", md: "70%", lg: "50%" } }}
       InputProps={{

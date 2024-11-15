@@ -6,43 +6,45 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
 const FixedBottomNavigation = () => {
+  const t = useTranslations();
   const [activeTabIndex, setActiveTabIndex] = useState(-1);
   const pathname = usePathname();
   const { data: session } = useSession();
   const navigationItems = useMemo(
     () => [
-      { label: "Explore", icon: <SearchIcon />, url: routes.HOME },
+      { label: t("EXPLORE"), icon: <SearchIcon />, url: routes.HOME },
       ...(session
         ? [
             {
-              label: "Wishlist",
+              label: t("WISHLIST"),
               icon: <FavoriteBorderIcon />,
               url: routes.WISHLIST,
             },
             {
-              label: "Notification",
+              label: t("NOTIFICATIONS"),
               icon: <NotificationsNoneIcon />,
               url: routes.NOTIFICATION,
             },
             {
-              label: "Account",
+              label: t("ACCOUNT"),
               icon: <AccountCircleOutlinedIcon />,
               url: routes.ACCOUNT,
             },
           ]
         : [
             {
-              label: "Log in",
+              label: t("SIGNIN"),
               icon: <AccountCircleOutlinedIcon />,
               url: routes.SIGNIN,
             },
           ]),
     ],
-    [session]
+    [session, t]
   );
   useEffect(() => {
     if (pathname && pathname != routes.HOME) {
@@ -73,6 +75,7 @@ const FixedBottomNavigation = () => {
             href={item.url}
             label={item.label}
             icon={item.icon}
+            sx={{ textTransform: "capitalize" }}
           />
         ))}
       </BottomNavigation>

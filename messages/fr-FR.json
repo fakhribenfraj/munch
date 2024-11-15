@@ -13,6 +13,7 @@
   "SHOW_PROFILE": "Afficher le profil",
   "DELETE_PROFILE": "supprimer profile",
   "WISHLIST": "favoris",
-  "NOTIFICATIONS":"notifications"
-
+  "NOTIFICATIONS": "notifications",
+  "EXPLORE": "explorer",
+  "SEARCH_PLACEHOLDER": "rechercher un repas ou un restaurant..."
 }
