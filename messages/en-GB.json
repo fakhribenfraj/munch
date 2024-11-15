@@ -1,5 +1,6 @@
 {
-  "DELETE_PROFILE": "delete profile",
+  "LOGOUT": "log out",
+  "SIGNIN": "sign in",
   "ACCOUNT": "account",
   "SETTINGS": "settings",
   "SETTINGS_DETAILS": "You find here all your profile settings",
@@ -8,6 +9,9 @@
   "PRIVACY_DETAILS": "you find here all your profile security informations",
   "PERSONAL_INFO": "Personal information",
   "PERSONAL_INFO_DETAILS": "all of your food preferences and health information are here",
+  "PROFILE": "profile",
   "SHOW_PROFILE": "Show profile",
-  "LOGOUT": "log out"
+  "DELETE_PROFILE": "delete profile",
+  "WISHLIST": "whishlist",
+  "NOTIFICATIONS":"notifications"
 }

@@ -1,11 +1,12 @@
 "use client";
 import { logoutUser } from "@/actions/authorization/logoutUser";
 import { routes } from "@/constants/routes";
-import { Button, ButtonProps } from "@mui/material";
+import { Button, ButtonBase, ButtonProps } from "@mui/material";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 
-const LogoutButton = ({ sx, onClick, ...props }: ButtonProps) => {
+type LogoutButtonProps = ButtonProps & {};
+const LogoutButton = ({ sx, onClick, ...props }: LogoutButtonProps) => {
   const t = useTranslations();
   return (
     <Button

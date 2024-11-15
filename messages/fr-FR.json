@@ -1,5 +1,6 @@
 {
-  "DELETE_PROFILE": "supprimer profile",
+  "LOGOUT": "déconnexion",
+  "SIGNIN": "connexion",
   "ACCOUNT": "compte",
   "SETTINGS": "paramétres",
   "SETTINGS_DETAILS": "Vous trouvez ici tous les paramètres de votre profil",
@@ -8,6 +9,10 @@
   "PRIVACY_DETAILS": "vous trouvez ici toutes les informations de sécurité de votre profil",
   "PERSONAL_INFO": "Informations personnelles",
   "PERSONAL_INFO_DETAILS": "toutes vos préférences alimentaires et vos informations de santé sont ici",
+  "PROFILE": "profil",
   "SHOW_PROFILE": "Afficher le profil",
-  "LOGOUT": "déconnexion"
+  "DELETE_PROFILE": "supprimer profile",
+  "WISHLIST": "favoris",
+  "NOTIFICATIONS":"notifications"
+
 }

@@ -1,8 +1,9 @@
+"use client";
+import LogoutButton from "@/components/common/auth/LogoutButton";
 import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LoginIcon from "@mui/icons-material/Login";
-import Logout from "@mui/icons-material/Logout";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { ListItemButton, ListItemText } from "@mui/material";
@@ -11,33 +12,36 @@ import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import UserAvatar from "./UserAvatar";
+import Logout from "@mui/icons-material/Logout";
 
 export default function AccountMenu() {
   const { data: session } = useSession();
+  const t = useTranslations();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigationItems = useMemo(
     () => [
       {
-        label: "Profile",
+        label: t("PROFILE"),
         icon: <AccountCircleOutlinedIcon />,
         url: `${routes.ACCOUNT}/profile`,
       },
       {
-        label: "Wishlist",
+        label: t("WISHLIST"),
         icon: <FavoriteBorderIcon />,
         url: routes.WISHLIST,
       },
       {
-        label: "Notification",
+        label: t("NOTIFICATIONS"),
         icon: <NotificationsNoneIcon />,
         url: routes.NOTIFICATION,
       },
     ],
-    []
+    [t]
   );
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -67,6 +71,7 @@ export default function AccountMenu() {
           paper: {
             elevation: 0,
             sx: {
+              boxShadow: "none",
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
               mt: 1.5,
@@ -108,17 +113,24 @@ export default function AccountMenu() {
               <ListItemIcon>
                 <SettingsOutlinedIcon />
               </ListItemIcon>
-              <ListItemText>Account</ListItemText>
+              <ListItemText>{t("ACCOUNT")}</ListItemText>
             </ListItemButton>
-            <ListItemButton
-              onClick={() => {
-                signOut({ callbackUrl: routes.HOME });
-              }}
-            >
-              <ListItemIcon>
-                <Logout />
-              </ListItemIcon>
-              <ListItemText>logout</ListItemText>
+            <ListItemButton>
+              <LogoutButton
+                variant="text"
+                sx={{
+                  p: 0,
+                  fontWeight: 600,
+                  justifyContent: "flex-start",
+                  "& .MuiButton-startIcon": { m: 0 },
+                }}
+                startIcon={
+                  <ListItemIcon>
+                    <Logout />
+                  </ListItemIcon>
+                }
+                disableRipple
+              />
             </ListItemButton>
           </Box>
         )}
@@ -129,7 +141,7 @@ export default function AccountMenu() {
               <ListItemIcon>
                 <LoginIcon />
               </ListItemIcon>
-              Sign In
+              {t("SIGNIN")}
             </Link>
           </ListItemButton>
         )}

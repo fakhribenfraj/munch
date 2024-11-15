@@ -56,7 +56,7 @@ const Home: NextPage = async () => {
                     {session?.user.name ?? "user"}
                   </Typography>
                   <Typography variant="caption" sx={{ color: "grey.500" }}>
-                    {t('SHOW_PROFILE')}
+                    {t("SHOW_PROFILE")}
                   </Typography>
                 </Stack>
               </Box>
@@ -87,7 +87,11 @@ const Home: NextPage = async () => {
               },
             ].map((item) => (
               <Grid2 key={`profile-${item.label}`} size={{ xs: 12, md: 4 }}>
-                <ListItem>
+                <ListItem
+                  sx={{
+                    height: "100%",
+                  }}
+                >
                   <ListItemButton
                     href={`${routes.ACCOUNT}/${item.url}`}
                     sx={{
@@ -95,6 +99,7 @@ const Home: NextPage = async () => {
                       bgcolor: { xs: "none", md: "common.white" },
                       borderRadius: { xs: 0, md: 2 },
                       boxShadow: { xs: 0, md: 3 },
+                      height: "100%",
                     }}
                   >
                     <Box sx={{ display: "flex" }}>

@@ -13,6 +13,7 @@ import {
   ListItemText,
   Paper,
   Skeleton,
+  Stack,
   Typography,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -61,12 +62,19 @@ const ListView = ({
           <Link href={`${routes.RESTAURANTS}/101`}>
             <RestaurantMediaCarousel id="101" />
             <CardContent>
-              <Typography gutterBottom variant="h6">
-                test
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                test
-              </Typography>
+              <Stack spacing={1}>
+                <Typography component="span" variant="h6">
+                  hijon
+                </Typography>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ color: "text.secondary" }}
+                >
+                  <LocationOnIcon />
+                  <Typography variant="subtitle2">hay cheker</Typography>
+                </Stack>
+              </Stack>
             </CardContent>
           </Link>
         </Card>
@@ -76,9 +84,6 @@ const ListView = ({
           <Card
             sx={{
               position: "relative",
-              // border: "2px solid",
-              // boxShadow: "none",
-              // borderColor: "grey.300",
             }}
           >
             <Box
@@ -96,19 +101,21 @@ const ListView = ({
             <Link href={`${routes.RESTAURANTS}/${restaurant.id}`}>
               <RestaurantMediaCarousel id={restaurant.id} />
               <CardContent>
-                <List>
-                  <ListItem>
-                    <Typography gutterBottom variant="h6">
-                      {restaurant.name}
+                <Stack spacing={1}>
+                  <Typography component="span" variant="h6">
+                    {restaurant.name}
+                  </Typography>
+                  <Stack
+                    direction="row"
+                    spacing={1}
+                    sx={{ color: "text.secondary" }}
+                  >
+                    <LocationOnIcon />
+                    <Typography variant="subtitle2">
+                      {restaurant.delegation}
                     </Typography>
-                  </ListItem>
-                  <ListItem sx={{ color: "text.secondary" }}>
-                    <ListItemIcon>
-                      <LocationOnIcon />
-                    </ListItemIcon>
-                    <ListItemText>{restaurant.delegation}</ListItemText>
-                  </ListItem>
-                </List>
+                  </Stack>
+                </Stack>
               </CardContent>
             </Link>
           </Card>
