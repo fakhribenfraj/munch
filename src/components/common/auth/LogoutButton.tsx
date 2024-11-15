@@ -3,20 +3,26 @@ import { logoutUser } from "@/actions/authorization/logoutUser";
 import { routes } from "@/constants/routes";
 import { Button, ButtonProps } from "@mui/material";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
-const LogoutButton = (props: ButtonProps) => {
+const LogoutButton = ({ sx, onClick, ...props }: ButtonProps) => {
+  const t = useTranslations();
   return (
     <Button
-      {...props}
       variant="outlined"
       fullWidth
+      {...props}
+      sx={{
+        textTransform: "capitalize",
+        ...sx,
+      }}
       onClick={async (event) => {
         logoutUser();
         signOut({ callbackUrl: routes.HOME });
-        props.onClick && props.onClick(event);
+        onClick && onClick(event);
       }}
     >
-      Log out
+      {t("LOGOUT")}
     </Button>
   );
 };

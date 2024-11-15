@@ -7,5 +7,7 @@
   "PRIVACY&SECURITY": "privacy & security",
   "PRIVACY_DETAILS": "you find here all your profile security informations",
   "PERSONAL_INFO": "Personal information",
-  "PERSONAL_INFO_DETAILS": "all of your food preferences and health information are here"
+  "PERSONAL_INFO_DETAILS": "all of your food preferences and health information are here",
+  "SHOW_PROFILE": "Show profile",
+  "LOGOUT": "log out"
 }

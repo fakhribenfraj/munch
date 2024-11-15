@@ -56,7 +56,7 @@ const Home: NextPage = async () => {
                     {session?.user.name ?? "user"}
                   </Typography>
                   <Typography variant="caption" sx={{ color: "grey.500" }}>
-                    Show profile
+                    {t('SHOW_PROFILE')}
                   </Typography>
                 </Stack>
               </Box>
