@@ -1,3 +1,11 @@
 {
-  "DELETE_PROFILE": "fasa5 profile"
+  "DELETE_PROFILE": "fasa5 profile",
+  "ACCOUNT": "compte",
+  "SETTINGS": "paramétres",
+  "SETTINGS_DETAILS": "Houni tel9a les paramètres lkol mta3 profilek",
+  "SECURITY": "sécurité",
+  "PRIVACY&SECURITY": "confidentialité & sécurité",
+  "PRIVACY_DETAILS": "Houni tel9a ma3loumetek sereya kima mot de passe...",
+  "PERSONAL_INFO": "ma3loumet cha5seya",
+  "PERSONAL_INFO_DETAILS": "houni telka l ma3loumet 3ala mekeltek moufa4la w sa7tek en general"
 }

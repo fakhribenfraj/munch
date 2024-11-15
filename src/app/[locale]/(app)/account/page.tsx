@@ -21,13 +21,16 @@ import {
 } from "@mui/material";
 import { NextPage } from "next";
 import { getServerSession } from "next-auth";
+import { getTranslations } from "next-intl/server";
 
 const Home: NextPage = async () => {
   const session = await getServerSession(authOptions);
+  const t = await getTranslations();
+
   return (
     <MainLayout>
       <Stack sx={{ pb: 2 }}>
-        <Typography variant="h3">Account</Typography>
+        <Typography variant="h3">{t("ACCOUNT")}</Typography>
         <List>
           <ListItem
             sx={{
@@ -65,23 +68,20 @@ const Home: NextPage = async () => {
           <Grid2 container>
             {[
               {
-                label: "Personal info",
-                description:
-                  "find your info here find your info here find your info here",
+                label: t("PERSONAL_INFO"),
+                description: t("PERSONAL_INFO_DETAILS"),
                 url: "/personal-info",
                 icon: <AccountCircleOutlinedIcon />,
               },
               {
-                label: "Privacy & security",
-                description:
-                  "find your info here find your info here find your info here",
+                label: t("PRIVACY&SECURITY"),
+                description: t("PRIVACY_DETAILS"),
                 url: "/privacy",
                 icon: <SecurityIcon />,
               },
               {
-                label: "Settings",
-                description:
-                  "find your info here find your info here find your info here",
+                label: t("SETTINGS"),
+                description: t("SETTINGS_DETAILS"),
                 url: "/settings",
                 icon: <SettingsOutlinedIcon />,
               },
@@ -100,7 +100,9 @@ const Home: NextPage = async () => {
                     <Box sx={{ display: "flex" }}>
                       <ListItemIcon>{item.icon}</ListItemIcon>
                       <Stack rowGap={2}>
-                        <ListItemText>{item.label}</ListItemText>
+                        <ListItemText sx={{ textTransform: "capitalize" }}>
+                          {item.label}
+                        </ListItemText>
                         <Typography
                           variant="caption"
                           sx={{

@@ -1,7 +1,6 @@
 "use client";
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
-import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
@@ -10,6 +9,7 @@ import { z } from "zod";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import FormSection from "../FormSection";
+import useServerAction from "@/hooks/useServerAction";
 
 const FormSchema = z.object({
   firstname: z.string().min(1, {
@@ -36,20 +36,21 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
     resolver: zodResolver(FormSchema),
     defaultValues,
   });
-  const { onSubmit, response, isPending } = useRHFActionForm(
-    methods,
-    (data: FormData) =>
+  const { handleSubmit } = methods;
+  const { startAction, response } = useServerAction<{
+    message: string;
+  }>();
+
+  const onSubmit = handleSubmit((data: FormData) =>
+    startAction(
       new Promise((resolve) => {
         const params = new URLSearchParams();
-        // params.set("email", data.email);
-        // router.push(
-        //   `${routes.FORGOT_PASSWORD}/verify-code?${params.toString()}`
-        // );
       })
+    )
   );
 
   return (
-    <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
+    <ActionForm methods={methods} onSubmit={onSubmit}>
       <Stack gap={4}>
         {[
           {

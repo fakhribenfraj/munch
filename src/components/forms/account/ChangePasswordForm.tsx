@@ -1,16 +1,13 @@
 "use client";
+import updatePassword from "@/actions/profile/updatePassword";
 import ActionForm from "@/components/common/compound/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
-import useRHFActionForm from "@/hooks/useRHFActionForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import FormSection from "../FormSection";
-import updatePassword from "@/actions/profile/updatePassword";
+import useServerAction from "@/hooks/useServerAction";
 
 const FormSchema = z
   .object({
@@ -36,17 +33,23 @@ type FormData = z.infer<typeof FormSchema>;
 
 type ChangePasswordFormProps = {};
 const ChangePasswordForm = ({}: ChangePasswordFormProps) => {
-  const methods = useForm({
+  const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
-  const { onSubmit, response, isPending } = useRHFActionForm(
-    methods,
-    (data: FormData) =>
+  const { handleSubmit } = methods;
+  const { startAction, response, isPending } = useServerAction<{
+    message: string;
+    errors: string;
+  }>();
+
+  const onSubmit = handleSubmit((data: FormData) =>
+    startAction(
       updatePassword(data.oldPassword, data.password, data.confirmPassword)
+    )
   );
 
   return (
-    <ActionForm methods={methods} onSubmit={onSubmit} state={response}>
+    <ActionForm methods={methods} onSubmit={onSubmit}>
       <Stack gap={4}>
         {[
           {

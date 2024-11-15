@@ -3,18 +3,21 @@ import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
+import { getTranslations } from "next-intl/server";
 const Page: NextPage = async () => {
+  const t = await getTranslations();
+
   return (
     <SubPageLayout
       maxWidth="lg"
       breadcrumbs={[
         {
           href: routes.ACCOUNT,
-          label: "account",
+          label: t("ACCOUNT"),
         },
         {
           href: routes.ACCOUNT,
-          label: "security",
+          label: t("SECURITY"),
         },
       ]}
     >

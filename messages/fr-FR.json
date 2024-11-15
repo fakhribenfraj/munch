@@ -1,3 +1,11 @@
 {
-  "DELETE_PROFILE": "supprimer profile"
+  "DELETE_PROFILE": "supprimer profile",
+  "ACCOUNT": "compte",
+  "SETTINGS": "paramétres",
+  "SETTINGS_DETAILS": "Vous trouvez ici tous les paramètres de votre profil",
+  "SECURITY": "sécurité",
+  "PRIVACY&SECURITY": "confidentialité & sécurité",
+  "PRIVACY_DETAILS": "vous trouvez ici toutes les informations de sécurité de votre profil",
+  "PERSONAL_INFO": "Informations personnelles",
+  "PERSONAL_INFO_DETAILS": "toutes vos préférences alimentaires et vos informations de santé sont ici"
 }
