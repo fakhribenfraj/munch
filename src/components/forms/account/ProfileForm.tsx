@@ -1,15 +1,15 @@
 "use client";
 import ActionForm from "@/components/common/compound/ActionForm";
+import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
+import useServerAction from "@/hooks/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Button, Stack } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import FormSection from "../FormSection";
-import useServerAction from "@/hooks/useServerAction";
 
 const FormSchema = z.object({
   firstname: z.string().min(1, {
@@ -32,6 +32,8 @@ type ProfileFormProps = {
   defaultValues: FormData;
 };
 const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
+  const t = useTranslations();
+
   const methods = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues,
@@ -99,7 +101,7 @@ const ProfileForm = ({ defaultValues }: ProfileFormProps) => {
             mt: 2,
           }}
         >
-          Save
+          {t("SAVE")}
         </Button>
       </Stack>
     </ActionForm>

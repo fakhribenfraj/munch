@@ -24,5 +24,6 @@
   "CHANGE_PASSWORD": "Badal mot de passe",
   "OLD_PASSWORD": "mot de passe kdima",
   "PASSWORD": "mot de passe",
-  "CONFIRM_PASSWORD": "confirmi mot de passe"
+  "CONFIRM_PASSWORD": "confirmi mot de passe",
+  "SAVE": "sajal"
 }

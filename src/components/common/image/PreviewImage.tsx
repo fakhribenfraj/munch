@@ -12,6 +12,7 @@ import {
   IconButton,
   Stack,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import FileInput from "../inputs/FileInput";
@@ -32,6 +33,7 @@ const PreviewImage = ({
   onSave,
   onDelete,
 }: PreviewImageProps) => {
+  const t = useTranslations();
   const [showEditor, setShowEditor] = useState(false);
   const { file, handleFileSelect, resetFile, setFile } = useSelectFile(src);
   const handleClose = () => {
@@ -133,7 +135,7 @@ const PreviewImage = ({
                 handleClose();
               }}
             >
-              save
+              {t("SAVE")}
             </Button>
           )}
         </Stack>

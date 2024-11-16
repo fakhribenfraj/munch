@@ -24,5 +24,6 @@
   "CHANGE_PASSWORD": "Change password",
   "OLD_PASSWORD": "old password",
   "PASSWORD": "password",
-  "CONFIRM_PASSWORD": "confirm password"
+  "CONFIRM_PASSWORD": "confirm password",
+  "SAVE": "save"
 }

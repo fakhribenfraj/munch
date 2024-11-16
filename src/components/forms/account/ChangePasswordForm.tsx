@@ -93,11 +93,12 @@ const ChangePasswordForm = ({}: ChangePasswordFormProps) => {
           color="primary"
           disabled={isPending}
           sx={{
+            textTransform: "capitalize",
             alignSelf: "flex-end",
             mt: 2,
           }}
         >
-          Save
+          {t("SAVE")}
         </Button>
         {response && (
           <Typography color={response.errors ? "error" : "success"}>

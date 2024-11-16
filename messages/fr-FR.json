@@ -24,5 +24,6 @@
   "CHANGE_PASSWORD": "Changer mot de passe",
   "OLD_PASSWORD": "ancien mot de passe",
   "PASSWORD": "mot de passe",
-  "CONFIRM_PASSWORD": "confirmer mot de passe"
+  "CONFIRM_PASSWORD": "confirmer mot de passe",
+  "SAVE": "sauvegarder"
 }
