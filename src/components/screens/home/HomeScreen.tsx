@@ -2,7 +2,7 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import MapIcon from "@mui/icons-material/Map";
 import ViewListIcon from "@mui/icons-material/ViewList";
-import { Stack, useScrollTrigger } from "@mui/material";
+import { Box, Stack, useScrollTrigger } from "@mui/material";
 import { useState } from "react";
 
 import MainContainer from "../../common/surfaces/MainContainer";
@@ -31,7 +31,7 @@ const HomeScreen = ({
       <MainContainer
         sx={{
           pt: { xs: 15, sm: 17 },
-          ...(isMapView ? { pb: 0, px: 0 } : undefined),
+          ...(isMapView ? { pb: 0, px: { xs: 0 } } : undefined),
         }}
       >
         {isMapView ? (
@@ -48,33 +48,44 @@ const HomeScreen = ({
           right: 0,
           zIndex: 10,
           transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1)",
-          transform: `translateY(${trigger ? 80 : 0}px)`,
+          transform: `translateY(${trigger || isMapView ? "100%" : 0})`,
         }}
       >
-        <Fab
-          variant="extended"
+        <Box
           sx={{
-            margin: "auto",
-            alignSelf: "center",
-            mb: 2,
-            textTransform: "capitalize",
+            position: "relative",
+            transform: isMapView ? "none" : `translateY(100%)`,
           }}
-          color="inherit"
-          onClick={() => setIsMapView((state) => !state)}
         >
-          {!isMapView && (
-            <>
-              <MapIcon sx={{ mr: 1 }} />
-              {t("SHOW_MAP")}
-            </>
-          )}
-          {isMapView && (
-            <>
-              <ViewListIcon sx={{ mr: 1 }} />
-              {t("SHOW_LIST")}
-            </>
-          )}
-        </Fab>
+          <Fab
+            variant="extended"
+            sx={{
+              margin: "auto",
+              alignSelf: "center",
+              mb: 2,
+              textTransform: "capitalize",
+              position: "absolut",
+              top: "0",
+              left: "50%",
+              transform: `translate(-50% , calc(-100% - 1rem))`,
+            }}
+            color="inherit"
+            onClick={() => setIsMapView((state) => !state)}
+          >
+            {!isMapView && (
+              <>
+                <MapIcon sx={{ mr: 1 }} />
+                {t("SHOW_MAP")}
+              </>
+            )}
+            {isMapView && (
+              <>
+                <ViewListIcon sx={{ mr: 1 }} />
+                {t("SHOW_LIST")}
+              </>
+            )}
+          </Fab>
+        </Box>
         {!isMapView && <FixedBottomNavigation />}
       </Stack>
     </>
