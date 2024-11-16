@@ -20,5 +20,9 @@
   "DELETE": "fasa5",
   "CANCEL": "annuler",
   "SHOW_MAP": "warini map",
-  "SHOW_LIST": "warini lista"
+  "SHOW_LIST": "warini lista",
+  "CHANGE_PASSWORD": "Badal mot de passe",
+  "OLD_PASSWORD": "mot de passe kdima",
+  "PASSWORD": "mot de passe",
+  "CONFIRM_PASSWORD": "confirmi mot de passe"
 }

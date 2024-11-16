@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormSection from "../FormSection";
 import useServerAction from "@/hooks/useServerAction";
+import { useTranslations } from "next-intl";
 
 const FormSchema = z
   .object({
@@ -33,6 +34,7 @@ type FormData = z.infer<typeof FormSchema>;
 
 type ChangePasswordFormProps = {};
 const ChangePasswordForm = ({}: ChangePasswordFormProps) => {
+  const t = useTranslations();
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
@@ -53,24 +55,24 @@ const ChangePasswordForm = ({}: ChangePasswordFormProps) => {
       <Stack gap={4}>
         {[
           {
-            title: "Change password",
+            title: t("CHANGE_PASSWORD"),
             children: (
               <>
                 {[
                   {
-                    label: "old Password",
+                    label: t("OLD_PASSWORD"),
                     name: "oldPassword",
                     type: "password",
                     placeholder: "Enter your name",
                   },
                   {
-                    label: "password",
+                    label: t("PASSWORD"),
                     name: "password",
                     type: "password",
                     placeholder: "Enter your name",
                   },
                   {
-                    label: "confirm Password",
+                    label: t("CONFIRM_PASSWORD"),
                     name: "confirmPassword",
                     type: "password",
                     placeholder: "Enter your name",

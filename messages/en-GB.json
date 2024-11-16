@@ -20,5 +20,9 @@
   "DELETE": "delete",
   "CANCEL": "cancel",
   "SHOW_MAP": "show map",
-  "SHOW_LIST": "show list"
+  "SHOW_LIST": "show list",
+  "CHANGE_PASSWORD": "Change password",
+  "OLD_PASSWORD": "old password",
+  "PASSWORD": "password",
+  "CONFIRM_PASSWORD": "confirm password"
 }
