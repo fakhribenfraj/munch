@@ -7,15 +7,28 @@ import CloseIcon from "@mui/icons-material/Close";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import { Box, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { GeolocateControl, ViewState } from "react-map-gl";
 
 const MapView = ({
   restaurants,
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
+  const [viewPort, setViewPort] = useState<Partial<ViewState> | null>(null);
+
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      setViewPort({
+        zoom: 10,
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+      });
+    });
+  }, []);
 
   return (
     <Box
@@ -24,40 +37,47 @@ const MapView = ({
         height: "100%",
       }}
     >
-      <Map
-        initialViewState={{
-          latitude: 37.306834,
-          longitude: -3.917501,
-          zoom: 4,
-        }}
-        onClick={(e) => {
-          setSelectedRestaurant(null);
-        }}
-      >
-        {restaurants?.map((restaurant, i) => (
-          <Marker
-            key={restaurant.id}
-            longitude={restaurant.lng}
-            latitude={restaurant.lat}
-            anchor="bottom"
-            onClick={(e) => {
-              e.originalEvent.stopPropagation();
-              e.target._map?.flyTo({
-                center: { lat: restaurant.lat, lng: restaurant.lng },
-                zoom: 14,
-              });
-              setSelectedRestaurant(restaurant);
+      {viewPort && (
+        <Map
+          initialViewState={viewPort}
+          onClick={(e) => {
+            setSelectedRestaurant(null);
+          }}
+        >
+          <GeolocateControl
+            fitBoundsOptions={{ zoom: 13 }}
+            positionOptions={{
+              enableHighAccuracy: true,
             }}
-          >
-            <LocalPizzaIcon
-              sx={{ fontSize: "3rem" }}
-              color={
-                selectedRestaurant?.id == restaurant.id ? "primary" : "inherit"
-              }
-            />
-          </Marker>
-        ))}
-      </Map>
+          />
+          {restaurants?.map((restaurant, i) => (
+            <Marker
+              key={restaurant.id}
+              longitude={restaurant.lng}
+              latitude={restaurant.lat}
+              anchor="bottom"
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                e.target._map?.flyTo({
+                  center: { lat: restaurant.lat, lng: restaurant.lng },
+                  zoom: 14,
+                });
+                setSelectedRestaurant(restaurant);
+              }}
+            >
+              <LocalPizzaIcon
+                sx={{ fontSize: "3rem" }}
+                color={
+                  selectedRestaurant?.id == restaurant.id
+                    ? "primary"
+                    : "inherit"
+                }
+              />
+            </Marker>
+          ))}
+        </Map>
+      )}
+
       {selectedRestaurant && (
         <Box
           sx={{
