@@ -15,5 +15,10 @@
   "WISHLIST": "favoris",
   "NOTIFICATIONS": "notifications",
   "EXPLORE": "explorer",
-  "SEARCH_PLACEHOLDER": "rechercher un repas ou un restaurant..."
+  "SEARCH_PLACEHOLDER": "rechercher un repas ou un restaurant...",
+  "CONFIRM_DELETE_PROFILE_WARNING": "Cette action supprimera définitivement votre compte et elle n'est pas réversible",
+  "DELETE": "supprimer",
+  "CANCEL": "annuler",
+  "SHOW_MAP": "afficher carte",
+  "SHOW_LIST": "afficher liste"
 }

@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import MainContainer from "../../common/surfaces/MainContainer";
 import dynamic from "next/dynamic";
+import { useTranslations } from "next-intl";
 
 const MapView = dynamic(() => import("./views/MapView"));
 const ListView = dynamic(() => import("./views/ListView"));
@@ -20,6 +21,7 @@ const HomeScreen = ({
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
+  const t = useTranslations();
   const [isMapView, setIsMapView] = useState<boolean>(false);
   const trigger = useScrollTrigger();
 
@@ -51,20 +53,25 @@ const HomeScreen = ({
       >
         <Fab
           variant="extended"
-          sx={{ margin: "auto", alignSelf: "center", mb: 2 }}
+          sx={{
+            margin: "auto",
+            alignSelf: "center",
+            mb: 2,
+            textTransform: "capitalize",
+          }}
           color="inherit"
           onClick={() => setIsMapView((state) => !state)}
         >
           {!isMapView && (
             <>
               <MapIcon sx={{ mr: 1 }} />
-              Show map
+              {t("SHOW_MAP")}
             </>
           )}
           {isMapView && (
             <>
               <ViewListIcon sx={{ mr: 1 }} />
-              Show list
+              {t("SHOW_LIST")}
             </>
           )}
         </Fab>

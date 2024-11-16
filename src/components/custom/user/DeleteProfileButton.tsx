@@ -13,10 +13,10 @@ const DeleteProfileButton = () => {
     <ActionConfirmationButton
       onConfirm={deleteProfile}
       onSuccess={() => signOut({ callbackUrl: routes.HOME })}
-      content="this action will permanently delete your account and it is not reversible"
+      content={t("CONFIRM_DELETE_PROFILE_WARNING")}
       color="error"
-      title="Delete profile?"
-      confirmLabel="delete"
+      title={`${t("DELETE")} ${t("PROFILE")}?`}
+      confirmLabel={t("DELETE")}
       variant="outlined"
       fullWidth
     >

@@ -15,5 +15,10 @@
   "WISHLIST": "whishlist",
   "NOTIFICATIONS": "notifications",
   "EXPLORE": "explore",
-  "SEARCH_PLACEHOLDER": "search meal or restaurant..."
+  "SEARCH_PLACEHOLDER": "search meal or restaurant...",
+  "CONFIRM_DELETE_PROFILE_WARNING": "This action will permanently delete your account and it is not reversible",
+  "DELETE": "delete",
+  "CANCEL": "cancel",
+  "SHOW_MAP": "show map",
+  "SHOW_LIST": "show list"
 }

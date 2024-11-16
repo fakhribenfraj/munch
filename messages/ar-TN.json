@@ -15,5 +15,10 @@
   "WISHLIST": "favoris",
   "NOTIFICATIONS": "notificationet",
   "EXPLORE": "lawej",
-  "SEARCH_PLACEHOLDER": "lawej 3ala mekla wela restaurant..."
+  "SEARCH_PLACEHOLDER": "lawej 3ala mekla wela restaurant...",
+  "CONFIRM_DELETE_PROFILE_WARNING": "L action hethi rahi bech tfasa5lek profilek w ma 3adech tnajam traj3ou",
+  "DELETE": "fasa5",
+  "CANCEL": "annuler",
+  "SHOW_MAP": "warini map",
+  "SHOW_LIST": "warini lista"
 }

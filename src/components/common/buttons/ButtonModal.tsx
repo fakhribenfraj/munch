@@ -11,6 +11,7 @@ import {
   IconButton,
   IconButtonProps,
 } from "@mui/material";
+import { useTranslations } from "next-intl";
 import { ReactNode, createContext, useContext, useState } from "react";
 
 type ModalContextType = {
@@ -101,6 +102,8 @@ export const CloseModalButton = ({
   ...props
 }: ButtonProps) => {
   const { handleClose } = useModal();
+  const t = useTranslations();
+
   return (
     <Button
       {...props}
@@ -109,7 +112,7 @@ export const CloseModalButton = ({
         onClick && onClick(e);
       }}
     >
-      {children ?? "Cancel"}
+      {children ?? t("CANCEL")}
     </Button>
   );
 };
