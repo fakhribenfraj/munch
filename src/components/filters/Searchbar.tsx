@@ -1,6 +1,14 @@
 "use client";
 import SearchIcon from "@mui/icons-material/Search";
-import { Box, InputAdornment, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import TuneIcon from "@mui/icons-material/Tune";
 import ButtonModal from "../common/buttons/ButtonModal";
 import FilterForm from "@/components/forms/filter/FilterForm";
@@ -27,11 +35,20 @@ const Searchbar = () => {
             cardProps={{
               sx: {
                 alignSelf: { xs: "flex-end", sm: "center" },
-                borderRadius: { xs: "1rem 1rem 0 0", sm: 2 },
+                "& .MuiPaper-root ": {
+                  m: 0,
+                  borderRadius: { xs: "1rem 1rem 0 0", sm: 2 },
+                },
               },
             }}
           >
-            <FilterForm />
+            <DialogTitle>filter</DialogTitle>
+            <DialogContent sx={{ maxHeight: "calc(90vh - 160px)" }}>
+              <FilterForm />
+            </DialogContent>
+            <DialogActions>
+              <Button>seach</Button>
+            </DialogActions>
           </ButtonModal>
         ),
         sx: {
