@@ -8,6 +8,7 @@ import { useState } from "react";
 import MainContainer from "../../common/surfaces/MainContainer";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
+import { useFilterStore } from "@/providers/filter-store-provider";
 
 const MapView = dynamic(() => import("./views/MapView"));
 const ListView = dynamic(() => import("./views/ListView"));

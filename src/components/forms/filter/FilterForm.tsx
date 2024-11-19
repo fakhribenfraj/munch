@@ -14,6 +14,7 @@ import {
 import FormSection from "../FormSection";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { useFilterStore } from "@/providers/filter-store-provider";
 const FilterForm = () => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -49,6 +50,9 @@ const FilterForm = () => {
     { title: "letus" },
     { title: "peanut" },
   ];
+  const { count, incrementCount, reset } = useFilterStore(
+    (state) => state
+  );
   return (
     <Stack gap={4}>
       <FormSection title="resto info">
