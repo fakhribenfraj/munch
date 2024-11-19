@@ -53,7 +53,7 @@ const SubPageLayout = ({
         component="main"
         {...props}
         sx={{
-          pt: { xs: 0, md: 4 },
+          pt: { xs: 0, md: 8 },
           ...props.sx,
         }}
       >

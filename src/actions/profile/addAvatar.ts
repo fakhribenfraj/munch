@@ -13,10 +13,9 @@ const addAvatar = async (avatarUrl: string) => {
   const res = await secureFetch(`${endpoints.PROFILE}/avatar`, {
     method: "POST",
     body: data,
-    isFileContent: true,
   });
 
-  revalidatePath(`${routes.ACCOUNT}/profile`)
+  revalidatePath(`${routes.ACCOUNT}/profile`);
   return res;
 };
 

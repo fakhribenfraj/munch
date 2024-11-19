@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import LOCALES from "./constants/locales";
 
 const intlMiddleware = createMiddleware({
@@ -9,6 +9,8 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(req: NextRequest) {
+  const request = new NextRequest(req);
+  request.headers.set("x-pathname", req.nextUrl.pathname);
   return intlMiddleware(req);
 }
 export const config = {

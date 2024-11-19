@@ -1,37 +1,19 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Box,
   Card,
   CardContent,
   Grid2,
   Link,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Skeleton,
   Stack,
   Typography,
 } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import dynamic from "next/dynamic";
 const RestaurantMediaCarousel = dynamic(
-  () => import("@/components/custom/restaurant/RestaurantMediaCarousel"),
-  {
-    loading: () => (
-      <Skeleton
-        animation="wave"
-        variant="rectangular"
-        height={190}
-        sx={{
-          bgcolor: "grey.300",
-        }}
-      />
-    ),
-  }
+  () => import("@/components/custom/restaurant/RestaurantMediaCarousel")
 );
 
 const ListView = ({
