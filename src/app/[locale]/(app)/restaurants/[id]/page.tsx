@@ -3,7 +3,13 @@ import NavTabs from "@/components/common/navigation/NavTabs";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import { ImageList, ImageListItem, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  ImageList,
+  ImageListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { headers } from "next/headers";
 import { getSubpages } from "./layout";
 import Image from "next/image";
@@ -58,16 +64,26 @@ export default async function Page({
   const rowHeight = 128;
   return (
     <Stack gap={2}>
-      <NavTabs textColor="primary" links={getSubpages(id)} active={0} />
+      <Box
+        sx={{
+          width: { md: "25rem" },
+        }}
+      >
+        <NavTabs
+          textColor="primary"
+          links={getSubpages(id)}
+          active={0}
+          variant="fullWidth"
+        />
+      </Box>
       <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
         <ImageList
           variant="quilted"
           cols={4}
-          rowHeight={rowHeight}
           sx={{
             flex: 1,
-            width: rowHeight * 4,
-            margin:'auto'
+            maxWidth: rowHeight * 4,
+            margin: "auto",
           }}
         >
           {itemData.map((item) => (

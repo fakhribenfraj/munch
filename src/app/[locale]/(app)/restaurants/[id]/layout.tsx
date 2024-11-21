@@ -4,6 +4,7 @@ import NavTabs from "@/components/common/navigation/NavTabs";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { getTranslations } from "next-intl/server";
 export const getSubpages = (id: string) => [
   { label: "Overview", url: `${routes.RESTAURANTS}/${id}` },
   { label: "Menu", url: `${routes.RESTAURANTS}/${id}/menu` },
@@ -18,11 +19,11 @@ export default async function RootLayout({
   params: Promise<{ id: string }>;
 }>) {
   const { id } = await params;
-
+  const t = await getTranslations();
   const { data: restaurant } = await getRestaurantById(id);
   const logoWidth = 144;
   return (
-    <SubPageLayout disableTopGutter buttonVariant="contained">
+    <SubPageLayout prevPage={{ label: t("EXPLORE"), href: routes.HOME }}>
       <Stack alignItems="flex-start" gap={1}>
         <Box
           sx={{

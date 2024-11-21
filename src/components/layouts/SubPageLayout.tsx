@@ -5,6 +5,7 @@ import {
   Breadcrumbs,
   Container,
   ContainerProps,
+  IconButton,
   Link,
   Toolbar,
   Typography,
@@ -12,18 +13,21 @@ import {
 import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
 import ResponsiveAppBar from "../custom/ResponsiveAppBar";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
   disableTopGutter?: boolean;
   buttonVariant?: "contained" | "text";
   breadcrumbs?: { label: string; href: string }[];
+  prevPage?: { label: string; href: string };
 };
 const SubPageLayout = ({
   children,
   disableTopGutter,
   buttonVariant,
   breadcrumbs,
+  prevPage,
   ...props
 }: SubPageLayoutProps) => {
   return (
@@ -32,21 +36,28 @@ const SubPageLayout = ({
       <AppBar
         position="fixed"
         sx={{
+          backgroundColor: "grey.200",
           display: { md: "none" },
           zIndex: 1,
         }}
       >
         <Toolbar>
-          <ReturnButton
-            sx={{
-              ...(buttonVariant == "contained" && {
-                bgcolor: "grey.200",
-              }),
-            }}
-          />
+          {prevPage ? (
+            <IconButton href={prevPage.href}>
+              <ArrowBackIosNewIcon />
+            </IconButton>
+          ) : (
+            <ReturnButton
+              sx={{
+                ...(buttonVariant == "contained" && {
+                  bgcolor: "grey.200",
+                }),
+              }}
+            />
+          )}
         </Toolbar>
       </AppBar>
-      {!disableTopGutter && <Toolbar />}
+      {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
 
       <Container
         maxWidth="xl"
