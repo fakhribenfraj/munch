@@ -93,7 +93,7 @@ export default async function Page({
               rows={item.rows || 1}
             >
               <img
-                {...srcset(item.img, 121, item.rows, item.cols)}
+                {...srcset(item.img, rowHeight, item.rows, item.cols)}
                 alt={item.title}
                 loading="lazy"
               />
