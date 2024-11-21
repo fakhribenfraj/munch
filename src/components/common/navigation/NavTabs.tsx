@@ -4,18 +4,12 @@ import Tabs, { TabsProps } from "@mui/material/Tabs";
 
 type NavTabsProps = Omit<TabsProps, "value" | "onChange"> & {
   links: { label: string; url: string }[];
-  pathname: string;
+  active: number;
 };
-export default function NavTabs({ links, pathname, ...props }: NavTabsProps) {
+export default function NavTabs({ links, active, ...props }: NavTabsProps) {
   return (
     <Box sx={{ width: "100%" }}>
-      <Tabs
-        {...props}
-        value={links
-          .map((link) => link.url)
-          .findIndex((url) => pathname.endsWith(url))}
-        role="navigation"
-      >
+      <Tabs {...props} value={active} role="navigation">
         {links.map((link) => (
           <Tab key={link.label} label={link.label} href={link.url} />
         ))}

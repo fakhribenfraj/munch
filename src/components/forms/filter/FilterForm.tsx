@@ -20,8 +20,8 @@ const FilterForm = () => {
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
   const CheckBoxInputs = [
     {
-      label: "Category",
-      items: ["breakfast", "brunch", "lunch", "dinner"],
+      label: "Style",
+      items: ["calm", "normql", "lunch", "dinner"],
     },
     {
       label: "type",

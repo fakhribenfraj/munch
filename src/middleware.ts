@@ -9,8 +9,6 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(req: NextRequest) {
-  const request = new NextRequest(req);
-  request.headers.set("x-pathname", req.nextUrl.pathname);
   return intlMiddleware(req);
 }
 export const config = {
