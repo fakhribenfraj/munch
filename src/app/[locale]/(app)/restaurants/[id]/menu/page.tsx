@@ -67,6 +67,10 @@ export default async function Page({
       <Box
         sx={{
           width: { md: "25rem" },
+          position: "sticky",
+          top: { xs: 45, md: 60 },
+          zIndex: 1,
+          bgcolor: "grey.200",
         }}
       >
         <NavTabs
@@ -79,7 +83,7 @@ export default async function Page({
       <Toolbar
         sx={{
           position: "sticky",
-          top: "3.5rem",
+          top: { xs: "5.8rem", md: "7rem" },
           bgcolor: "grey.200",
           zIndex: 1,
         }}

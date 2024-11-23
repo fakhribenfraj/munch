@@ -68,6 +68,10 @@ export default async function Page({
       <Box
         sx={{
           width: { md: "25rem" },
+          position: "sticky",
+          top: { xs: 45, md: 60 },
+          zIndex: 1,
+          bgcolor: "grey.200",
         }}
       >
         <NavTabs
@@ -104,12 +108,7 @@ export default async function Page({
         </ImageList>
         <Stack spacing={2} sx={{ flex: 1 }}>
           <Typography variant="body1">{restaurant.description}</Typography>
-          <Link
-            target="_blank"
-            href={`https://www.google.com/maps/dir/36.8949404,10.1775622/${restaurant.lat},${restaurant.lng}`}
-          >
-            get direction
-          </Link>
+
           <Box
             sx={{
               borderRadius: 1,

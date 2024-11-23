@@ -1,6 +1,6 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import SafeImage from "@/components/common/image/SafeImage";
-import NavTabs from "@/components/common/navigation/NavTabs";
+import GoogleDirections from "@/components/common/navigation/GoogleDirections";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
@@ -9,7 +9,6 @@ export const getSubpages = (id: string) => [
   { label: "Overview", url: `${routes.RESTAURANTS}/${id}` },
   { label: "Menu", url: `${routes.RESTAURANTS}/${id}/menu` },
   { label: "Reviews", url: `${routes.RESTAURANTS}/${id}/reviews` },
-  { label: "Contact", url: `${routes.RESTAURANTS}/${id}/contact` },
 ];
 export default async function RootLayout({
   children,
@@ -83,9 +82,14 @@ export default async function RootLayout({
                 outline: "4px solid white",
               }}
             />
-            <Stack>
-              <Typography variant="h4">{restaurant?.name}</Typography>
-              <Typography variant="body2">{restaurant?.delegation}</Typography>
+            <Stack spacing={2} marginTop={{ xs: 0, md: 4 }}>
+              <Box>
+                <Typography variant="h4">{restaurant?.name}</Typography>
+                <Typography variant="body2">
+                  {restaurant?.delegation}
+                </Typography>
+              </Box>
+              <GoogleDirections lat={restaurant.lat} lng={restaurant.lng} />
             </Stack>
           </Box>
         </Box>
