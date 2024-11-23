@@ -63,7 +63,7 @@ export default async function Page({
   }
   const rowHeight = 128;
   return (
-    <Stack gap={2}>
+    <Stack spacing={2} sx={{ pb: 4 }}>
       <Box
         sx={{
           width: { md: "25rem" },
@@ -76,7 +76,7 @@ export default async function Page({
           variant="fullWidth"
         />
       </Box>
-      <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
         <ImageList
           variant="quilted"
           cols={4}
@@ -84,6 +84,7 @@ export default async function Page({
             flex: 1,
             maxWidth: rowHeight * 4,
             margin: "auto",
+            borderRadius: 1,
           }}
         >
           {itemData.map((item) => (
@@ -100,27 +101,35 @@ export default async function Page({
             </ImageListItem>
           ))}
         </ImageList>
-        <Typography variant="body1" sx={{ flex: 1 }}>
-          {restaurant.description}
-        </Typography>
+        <Stack spacing={2} sx={{ flex: 1 }}>
+          <Typography variant="body1">{restaurant.description}</Typography>
+          <Box
+            sx={{
+              borderRadius: 1,
+              border: "2px solid",
+              borderColor: "grey.300",
+              margin: "auto",
+              overflow: "hidden",
+            }}
+          >
+            <Map
+              initialViewState={{
+                latitude: restaurant.lat,
+                longitude: restaurant.lng,
+                zoom: 7,
+              }}
+              style={{
+                width: "20rem",
+                height: "20rem",
+              }}
+            >
+              <Marker longitude={restaurant.lng} latitude={restaurant.lat}>
+                <LocalPizzaIcon />
+              </Marker>
+            </Map>
+          </Box>
+        </Stack>
       </Stack>
-
-      <Map
-        initialViewState={{
-          latitude: restaurant.lat,
-          longitude: restaurant.lng,
-          zoom: 7,
-        }}
-        style={{
-          width: "20rem",
-          height: "20rem",
-          margin: "auto",
-        }}
-      >
-        <Marker longitude={restaurant.lng} latitude={restaurant.lat}>
-          <LocalPizzaIcon />
-        </Marker>
-      </Map>
     </Stack>
   );
 }

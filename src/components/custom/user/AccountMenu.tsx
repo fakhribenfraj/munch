@@ -136,13 +136,11 @@ export default function AccountMenu() {
         )}
 
         {!session && (
-          <ListItemButton>
-            <Link href={routes.SIGNIN}>
-              <ListItemIcon>
-                <LoginIcon />
-              </ListItemIcon>
-              {t("SIGNIN")}
-            </Link>
+          <ListItemButton href={routes.SIGNIN}>
+            <ListItemIcon>
+              <LoginIcon />
+            </ListItemIcon>
+            {t("SIGNIN")}
           </ListItemButton>
         )}
       </Menu>

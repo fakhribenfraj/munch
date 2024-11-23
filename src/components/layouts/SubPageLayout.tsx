@@ -14,6 +14,7 @@ import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
 import ResponsiveAppBar from "../custom/ResponsiveAppBar";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import HideOnScroll from "../common/navigation/HideOnScroll";
 
 type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
@@ -33,31 +34,35 @@ const SubPageLayout = ({
   return (
     <>
       <ResponsiveAppBar hideSearchField />
-      <AppBar
-        position="fixed"
-        sx={{
-          backgroundColor: "grey.200",
-          display: { md: "none" },
-          zIndex: 1,
-        }}
-      >
-        <Toolbar>
-          {prevPage ? (
-            <IconButton href={prevPage.href}>
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          ) : (
-            <ReturnButton
-              sx={{
-                ...(buttonVariant == "contained" && {
-                  bgcolor: "grey.200",
-                }),
-              }}
-            />
-          )}
-        </Toolbar>
-      </AppBar>
-      {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
+      <HideOnScroll direction="down" >
+        <Box>
+          <AppBar
+            position="fixed"
+            sx={{
+              backgroundColor: "grey.200",
+              display: { md: "none" },
+              zIndex: 1,
+            }}
+          >
+            <Toolbar>
+              {prevPage ? (
+                <IconButton href={prevPage.href}>
+                  <ArrowBackIosNewIcon />
+                </IconButton>
+              ) : (
+                <ReturnButton
+                  sx={{
+                    ...(buttonVariant == "contained" && {
+                      bgcolor: "grey.200",
+                    }),
+                  }}
+                />
+              )}
+            </Toolbar>
+          </AppBar>
+          {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
+        </Box>
+      </HideOnScroll>
 
       <Container
         maxWidth="xl"

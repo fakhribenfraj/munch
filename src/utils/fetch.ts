@@ -12,11 +12,11 @@ const secureFetch = async (url: string | URL, params?: RequestInit) => {
     ...params,
     headers: {
       ...(session && { Authorization: `Bearer ${session?.access_token}` }),
-      Accept: "application/json, text/plain",
+      Accept: "application/json",
+      "Content-Type": "application/json",
       ...params?.headers,
     },
   });
-
   const resData = await res.json();
 
   return { ...resData, ok: res.ok };

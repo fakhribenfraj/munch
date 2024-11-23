@@ -64,7 +64,18 @@ export default async function Page({
   }
   return (
     <Stack spacing={2}>
-      <NavTabs textColor="primary" links={getSubpages(id)} active={1} />
+      <Box
+        sx={{
+          width: { md: "25rem" },
+        }}
+      >
+        <NavTabs
+          textColor="primary"
+          links={getSubpages(id)}
+          active={1}
+          variant="fullWidth"
+        />
+      </Box>
       <Toolbar
         sx={{
           position: "sticky",
