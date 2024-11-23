@@ -22,6 +22,7 @@ const MapView = ({
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos.coords);
       setViewPort({
         zoom: 10,
         latitude: pos.coords.latitude,

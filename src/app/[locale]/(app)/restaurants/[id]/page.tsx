@@ -13,6 +13,7 @@ import {
 import { headers } from "next/headers";
 import { getSubpages } from "./layout";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -103,6 +104,12 @@ export default async function Page({
         </ImageList>
         <Stack spacing={2} sx={{ flex: 1 }}>
           <Typography variant="body1">{restaurant.description}</Typography>
+          <Link
+            target="_blank"
+            href={`https://www.google.com/maps/dir/36.8949404,10.1775622/${restaurant.lat},${restaurant.lng}`}
+          >
+            get direction
+          </Link>
           <Box
             sx={{
               borderRadius: 1,
