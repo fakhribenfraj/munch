@@ -1,7 +1,7 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
-import NavTabs from "@/components/common/navigation/NavTabs";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
+import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import {
   Box,
@@ -10,10 +10,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { headers } from "next/headers";
-import { getSubpages } from "./layout";
-import Image from "next/image";
-import Link from "next/link";
 
 export default async function Page({
   params,
@@ -65,22 +61,7 @@ export default async function Page({
   const rowHeight = 128;
   return (
     <Stack spacing={2} sx={{ pb: 4 }}>
-      <Box
-        sx={{
-          width: { md: "25rem" },
-          position: "sticky",
-          top: { xs: 45, md: 60 },
-          zIndex: 1,
-          bgcolor: "grey.200",
-        }}
-      >
-        <NavTabs
-          textColor="primary"
-          links={getSubpages(id)}
-          active={0}
-          variant="fullWidth"
-        />
-      </Box>
+      <RestaurantNavTabs id={id} active={0} />
       <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
         <ImageList
           variant="quilted"

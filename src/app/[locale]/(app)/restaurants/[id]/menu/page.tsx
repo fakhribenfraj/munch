@@ -1,7 +1,7 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
-import NavTabs from "@/components/common/navigation/NavTabs";
+import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
+import Searchbar from "@/components/filters/Searchbar";
 import {
-  Box,
   Card,
   CardContent,
   CardMedia,
@@ -9,8 +9,6 @@ import {
   Stack,
   Toolbar,
 } from "@mui/material";
-import { getSubpages } from "../layout";
-import Searchbar from "@/components/filters/Searchbar";
 
 export default async function Page({
   params,
@@ -64,22 +62,7 @@ export default async function Page({
   }
   return (
     <Stack spacing={2}>
-      <Box
-        sx={{
-          width: { md: "25rem" },
-          position: "sticky",
-          top: { xs: 45, md: 60 },
-          zIndex: 1,
-          bgcolor: "grey.200",
-        }}
-      >
-        <NavTabs
-          textColor="primary"
-          links={getSubpages(id)}
-          active={1}
-          variant="fullWidth"
-        />
-      </Box>
+      <RestaurantNavTabs id={id} active={1} />
       <Toolbar
         sx={{
           position: "sticky",

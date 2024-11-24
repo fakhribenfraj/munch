@@ -1,10 +1,9 @@
-import NavTabs from "@/components/common/navigation/NavTabs";
+import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
+import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import {
   Avatar,
   Box,
-  Container,
   Divider,
-  Grid,
   Grid2,
   LinearProgress,
   List,
@@ -17,8 +16,6 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { getSubpages } from "../layout";
-import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 
 // Mock data
 const restaurantData = {
@@ -105,22 +102,7 @@ const RestaurantReviews = async ({
   return (
     <Stack spacing={2}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Box
-          sx={{
-            width: { md: "25rem" },
-            position: "sticky",
-            top: { xs: 45, md: 60 },
-            zIndex: 1,
-            bgcolor: "grey.200",
-          }}
-        >
-          <NavTabs
-            textColor="primary"
-            links={getSubpages(id)}
-            active={2}
-            variant="fullWidth"
-          />
-        </Box>
+        <RestaurantNavTabs id={id} active={2} />
       </Box>
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>

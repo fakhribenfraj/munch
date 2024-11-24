@@ -5,11 +5,7 @@ import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
-export const getSubpages = (id: string) => [
-  { label: "Overview", url: `${routes.RESTAURANTS}/${id}` },
-  { label: "Menu", url: `${routes.RESTAURANTS}/${id}/menu` },
-  { label: "Reviews", url: `${routes.RESTAURANTS}/${id}/reviews` },
-];
+
 export default async function RootLayout({
   children,
   params,
