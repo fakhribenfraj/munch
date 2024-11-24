@@ -20,6 +20,7 @@ const RestaurantNavTabs = ({ id, active }: RestaurantNavTabsProps) => {
         top: { xs: 45, md: 60 },
         zIndex: 10,
         bgcolor: "grey.200",
+        transform: "scaleX(1.01)",
       }}
     >
       <NavTabs

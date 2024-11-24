@@ -7,6 +7,7 @@ import {
   Box,
   ImageList,
   ImageListItem,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -89,7 +90,12 @@ export default async function Page({
         </ImageList>
         <Stack spacing={2} sx={{ flex: 1 }}>
           <Typography variant="body1">{restaurant.description}</Typography>
-
+          <Typography variant="body1">
+            visit website:
+            <Link href={`https://${restaurant.website}`} target="_blank">
+              {restaurant.website}
+            </Link>
+          </Typography>
           <Box
             sx={{
               borderRadius: 1,
