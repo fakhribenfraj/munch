@@ -1,8 +1,10 @@
+import ButtonModal from "@/components/common/buttons/ButtonModal";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import {
   Avatar,
   Box,
+  DialogContent,
   Divider,
   Grid2,
   LinearProgress,
@@ -153,9 +155,46 @@ const RestaurantReviews = async ({
                     ))}
                   </Stack>
                 </Grid2>
+                <Grid2
+                  size={12}
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                    mt: 6,
+                    justifyContent: "center",
+                  }}
+                >
+                  <ButtonModal
+                    label="write review"
+                    buttonProps={{
+                      variant: "soft",
+                      color: "primary",
+                      fullWidth: true,
+                      sx: { maxWidth: "20rem" },
+                    }}
+                  >
+                    <DialogContent>
+                      <Box
+                        sx={{
+                          p: 4,
+                        }}
+                      >
+                        <Typography variant="h6" fontWeight="bold" gutterBottom>
+                          Add Your Review
+                        </Typography>
+                        <AddReviewForm />
+                      </Box>
+                    </DialogContent>
+                  </ButtonModal>
+                </Grid2>
               </Grid2>
             </Paper>
-            <Paper elevation={2} sx={{ p: 3 }}>
+            <Paper
+              elevation={2}
+              sx={{ p: 3, display: { xs: "none", md: "block" } }}
+            >
+              <Typography variant="h6" fontWeight="bold" gutterBottom>
+                Add Your Review
+              </Typography>
               <AddReviewForm />
             </Paper>
           </Stack>

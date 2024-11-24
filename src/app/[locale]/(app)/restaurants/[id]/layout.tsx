@@ -51,8 +51,10 @@ export default async function RootLayout({
           <SafeImage
             fallbackSrc="/assets/images/resto-logo.png"
             src={restaurant.cover}
-            fill
+            width={1440}
+            height={333}
             alt="cover"
+            style={{ objectFit: "cover", maxHeight: "100%", width: "100%" }}
             priority
           />
         </Box>
@@ -76,7 +78,7 @@ export default async function RootLayout({
               height: logoWidth,
               boxShadow: 2,
               outline: "4px solid",
-              outlineColor:'grey.200'
+              outlineColor: "grey.200",
             }}
           />
           <Stack
