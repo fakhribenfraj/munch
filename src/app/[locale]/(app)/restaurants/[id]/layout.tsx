@@ -58,8 +58,8 @@ export default async function RootLayout({
         </Box>
         <Box
           sx={{
-            mt: { xs: -10, md: -5 },
-            mx: { xs: "auto", md: 5 },
+            mt: { xs: -9, md: -4 },
+            mx: { xs: "auto", md: 4 },
             display: "flex",
             columnGap: 2,
             alignItems: "center",
@@ -75,10 +75,15 @@ export default async function RootLayout({
               width: logoWidth,
               height: logoWidth,
               boxShadow: 2,
-              outline: "4px solid white",
+              outline: "4px solid",
+              outlineColor:'grey.200'
             }}
           />
-          <Stack spacing={2} marginTop={{ xs: 0, md: 4 }}>
+          <Stack
+            spacing={2}
+            marginTop={{ xs: 0, md: 4 }}
+            alignItems={{ xs: "center", md: "flex-start" }}
+          >
             <Box>
               <Typography variant="h4">{restaurant?.name}</Typography>
               <Typography variant="body2">{restaurant?.delegation}</Typography>

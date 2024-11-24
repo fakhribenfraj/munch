@@ -40,7 +40,7 @@ const SubPageLayout = ({
           sx={{
             backgroundColor: "grey.200",
             display: { md: "none" },
-            zIndex: 1,
+            zIndex: 10,
           }}
         >
           <Toolbar>

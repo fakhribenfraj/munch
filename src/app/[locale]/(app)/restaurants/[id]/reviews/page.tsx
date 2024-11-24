@@ -101,13 +101,11 @@ const RestaurantReviews = async ({
   const { id } = await params;
   return (
     <Stack spacing={2}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <RestaurantNavTabs id={id} active={2} />
-      </Box>
+      <RestaurantNavTabs id={id} active="reviews" />
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
           <Stack spacing={2}>
-            <Paper elevation={3} sx={{ p: 3 }}>
+            <Paper elevation={2} sx={{ p: 3 }}>
               <Grid2
                 container
                 direction={{ xs: "row", sm: "row-reverse", md: "row" }}
@@ -157,7 +155,7 @@ const RestaurantReviews = async ({
                 </Grid2>
               </Grid2>
             </Paper>
-            <Paper elevation={3} sx={{ p: 3 }}>
+            <Paper elevation={2} sx={{ p: 3 }}>
               <AddReviewForm />
             </Paper>
           </Stack>

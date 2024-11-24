@@ -61,7 +61,7 @@ export default async function Page({
   const rowHeight = 128;
   return (
     <Stack spacing={2} sx={{ pb: 4 }}>
-      <RestaurantNavTabs id={id} active={0} />
+      <RestaurantNavTabs id={id} active="overview" />
       <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
         <ImageList
           variant="quilted"

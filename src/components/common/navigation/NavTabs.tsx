@@ -8,12 +8,10 @@ type NavTabsProps = Omit<TabsProps, "value" | "onChange"> & {
 };
 export default function NavTabs({ links, active, ...props }: NavTabsProps) {
   return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs {...props} value={active} role="navigation">
-        {links.map((link) => (
-          <Tab key={link.label} label={link.label} href={link.url} />
-        ))}
-      </Tabs>
-    </Box>
+    <Tabs {...props} value={active} role="navigation">
+      {links.map((link) => (
+        <Tab key={link.label} label={link.label} href={link.url} />
+      ))}
+    </Tabs>
   );
 }

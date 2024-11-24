@@ -61,8 +61,8 @@ export default async function Page({
     };
   }
   return (
-    <Stack spacing={2}>
-      <RestaurantNavTabs id={id} active={1} />
+    <Stack spacing={1}>
+      <RestaurantNavTabs id={id} active="menu" />
       <Toolbar
         sx={{
           position: "sticky",
@@ -73,7 +73,7 @@ export default async function Page({
       >
         <Searchbar />
       </Toolbar>
-      <Grid2 container spacing={2}>
+      <Grid2 container spacing={2} mt={2}>
         {itemData.map((item, index) => (
           <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2 }} key={item.title + index}>
             <Card>
