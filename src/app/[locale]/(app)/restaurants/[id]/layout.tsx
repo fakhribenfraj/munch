@@ -17,80 +17,76 @@ export default async function RootLayout({
   const t = await getTranslations();
   const { data: restaurant } = await getRestaurantById(id);
   const logoWidth = 144;
+
+  const calcCoverHeight = (offset: string = "0px") => {
+    const coverHeight = {
+      xs: "100vw / 3",
+      sm: "100vw / 4",
+      lg: "100vw / 5",
+    };
+    return Object.fromEntries(
+      Object.entries(coverHeight).map((item) => [
+        item[0],
+        `calc((${item[1]}) + ${offset})`,
+      ])
+    );
+  };
   return (
     <SubPageLayout prevPage={{ label: t("EXPLORE"), href: routes.HOME }}>
-      <Stack alignItems="flex-start" gap={1}>
+      <Stack alignItems="flex-start" mb={3}>
         <Box
           sx={{
             position: "relative",
             width: { xs: "100vw", md: "100%" },
-            height: {
-              xs: "calc(100vw / 3)",
-              sm: "calc(100vw / 4)",
-              lg: "calc(100vw / 5)",
-            },
-            mb: 17,
+            height: calcCoverHeight(),
             transform: {
               xs: `translate(-1rem,0)`,
               sm: `translate(-1.5rem,0)`,
               md: "none",
             },
+            borderRadius: { md: "0 0 0.5rem 0.5rem" },
+            overflow: "hidden",
           }}
         >
-          <Box
+          <SafeImage
+            fallbackSrc="/assets/images/resto-logo.png"
+            src={restaurant.cover}
+            fill
+            alt="cover"
+            priority
+          />
+        </Box>
+        <Box
+          sx={{
+            mt: { xs: -10, md: -5 },
+            mx: { xs: "auto", md: 5 },
+            display: "flex",
+            columnGap: 2,
+            alignItems: "center",
+            flexDirection: { xs: "column", md: "row" },
+            textAlign: { xs: "center", md: "start" },
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          <Avatar
+            src={restaurant.logo}
             sx={{
-              maxHeight: "100%",
-              borderRadius: { md: "0 0 0.5rem 0.5rem" },
-              overflow: "hidden",
+              width: logoWidth,
+              height: logoWidth,
+              boxShadow: 2,
+              outline: "4px solid white",
             }}
-          >
-            <SafeImage
-              fallbackSrc="/assets/images/resto-logo.png"
-              src={restaurant.cover}
-              width={1488}
-              height={333}
-              alt="cover"
-              priority
-            />
-          </Box>
-          <Box
-            sx={{
-              position: "absolute",
-              display: "flex",
-              columnGap: 2,
-              alignItems: "center",
-              bottom: { md: 0 },
-              left: { xs: "50%", md: 0 },
-              transform: {
-                xs: `translate(-50%,-${logoWidth / 2}px)`,
-                md: "translate(1.5rem,80%)",
-              },
-              flexDirection: { xs: "column", md: "row" },
-              textAlign: { xs: "center", md: "start" },
-            }}
-          >
-            <Avatar
-              src={restaurant.logo}
-              sx={{
-                width: logoWidth,
-                height: logoWidth,
-                boxShadow: 2,
-                outline: "4px solid white",
-              }}
-            />
-            <Stack spacing={2} marginTop={{ xs: 0, md: 4 }}>
-              <Box>
-                <Typography variant="h4">{restaurant?.name}</Typography>
-                <Typography variant="body2">
-                  {restaurant?.delegation}
-                </Typography>
-              </Box>
-              <GoogleDirections lat={restaurant.lat} lng={restaurant.lng} />
-            </Stack>
-          </Box>
+          />
+          <Stack spacing={2} marginTop={{ xs: 0, md: 4 }}>
+            <Box>
+              <Typography variant="h4">{restaurant?.name}</Typography>
+              <Typography variant="body2">{restaurant?.delegation}</Typography>
+            </Box>
+            <GoogleDirections lat={restaurant.lat} lng={restaurant.lng} />
+          </Stack>
         </Box>
       </Stack>
-
       {children}
     </SubPageLayout>
   );
