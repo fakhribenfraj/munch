@@ -5,16 +5,20 @@ import {
   Container,
   Divider,
   Grid,
+  Grid2,
+  LinearProgress,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Paper,
   Rating,
+  Stack,
   Typography,
 } from "@mui/material";
 import React from "react";
 import { getSubpages } from "../layout";
+import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 
 // Mock data
 const restaurantData = {
@@ -41,6 +45,54 @@ const restaurantData = {
       text: "Loved the desserts! Will visit again.",
       date: "1 week ago",
     },
+    {
+      id: 3,
+      name: "John Doe",
+      avatar: "/avatar1.jpg",
+      rating: 5,
+      text: "Amazing food and great atmosphere!",
+      date: "2 days ago",
+    },
+    {
+      id: 4,
+      name: "Jane Smith",
+      avatar: "/avatar2.jpg",
+      rating: 4,
+      text: "Loved the desserts! Will visit again.",
+      date: "1 week ago",
+    },
+    {
+      id: 11,
+      name: "John Doe",
+      avatar: "/avatar1.jpg",
+      rating: 5,
+      text: "Amazing food and great atmosphere!",
+      date: "2 days ago",
+    },
+    {
+      id: 12,
+      name: "Jane Smith",
+      avatar: "/avatar2.jpg",
+      rating: 4,
+      text: "Loved the desserts! Will visit again.",
+      date: "1 week ago",
+    },
+    {
+      id: 13,
+      name: "John Doe",
+      avatar: "/avatar1.jpg",
+      rating: 5,
+      text: "Amazing food and great atmosphere!",
+      date: "2 days ago",
+    },
+    {
+      id: 14,
+      name: "Jane Smith",
+      avatar: "/avatar2.jpg",
+      rating: 4,
+      text: "Loved the desserts! Will visit again.",
+      date: "1 week ago",
+    },
   ],
 };
 
@@ -51,47 +103,86 @@ const RestaurantReviews = async ({
 }) => {
   const { id } = await params;
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box
-        sx={{
-          width: { md: "25rem" },
-          position: "sticky",
-          top: { xs: 45, md: 60 },
-          zIndex: 1,
-          bgcolor: "grey.200",
-        }}
-      >
-        <NavTabs
-          textColor="primary"
-          links={getSubpages(id)}
-          active={2}
-          variant="fullWidth"
-        />
+    <Stack spacing={2}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box
+          sx={{
+            width: { md: "25rem" },
+            position: "sticky",
+            top: { xs: 45, md: 60 },
+            zIndex: 1,
+            bgcolor: "grey.200",
+          }}
+        >
+          <NavTabs
+            textColor="primary"
+            links={getSubpages(id)}
+            active={2}
+            variant="fullWidth"
+          />
+        </Box>
       </Box>
-      <Grid container spacing={4}>
-        {/* Sidebar */}
-        <Grid item xs={12} md={4}>
-          <Paper elevation={3} sx={{ p: 3 }}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom>
-              {restaurantData.name}
-            </Typography>
-            <Typography variant="body1" color="text.secondary" gutterBottom>
-              {restaurantData.description}
-            </Typography>
-            <Typography variant="body2" color="text.secondary" gutterBottom>
-              {restaurantData.address}
-            </Typography>
-            <Box display="flex" alignItems="center" mt={2}>
-              <Rating value={restaurantData.rating} readOnly precision={0.5} />
-              <Typography variant="body2" ml={1}>
-                {restaurantData.rating} ({restaurantData.totalReviews} reviews)
-              </Typography>
-            </Box>
-          </Paper>
-        </Grid>
+      <Grid2 container spacing={4}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <Stack spacing={2}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Grid2
+                container
+                direction={{ xs: "row", sm: "row-reverse", md: "row" }}
+              >
+                <Grid2 size={{ xs: 12, sm: 4, md: 12 }}>
+                  <Stack spacing={1} mb={2} alignItems="center">
+                    <Typography variant="h3">4.25</Typography>
+                    <Rating
+                      value={4.25}
+                      size="medium"
+                      precision={0.25}
+                      readOnly
+                    />
+                    <Typography component="span" variant="body2">
+                      1210 reviews
+                    </Typography>
+                  </Stack>
+                </Grid2>
+                <Grid2 size={{ xs: 12, sm: 8, md: 12 }}>
+                  <Stack spacing={2}>
+                    {[
+                      { name: "taste", rate: 4, number: 221 },
+                      { name: "service", rate: 5, number: 568 },
+                      { name: "vibe", rate: 3, number: 421 },
+                    ].map((section) => (
+                      <Grid2
+                        key={section.name}
+                        container
+                        spacing={1}
+                        alignItems="center"
+                      >
+                        <Grid2 size={3}>{section.name}</Grid2>
+                        <Grid2 size={7}>
+                          <LinearProgress
+                            variant="determinate"
+                            value={(section.rate / 5) * 100}
+                          />
+                        </Grid2>
+                        <Grid2 size={2}>
+                          <Typography fontSize={12}>
+                            {section.number}
+                          </Typography>
+                        </Grid2>
+                      </Grid2>
+                    ))}
+                  </Stack>
+                </Grid2>
+              </Grid2>
+            </Paper>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <AddReviewForm />
+            </Paper>
+          </Stack>
+        </Grid2>
 
         {/* Reviews Section */}
-        <Grid item xs={12} md={8}>
+        <Grid2 size={{ xs: 12, md: 7, lg: 8 }}>
           <List>
             {restaurantData.reviews.map((review) => (
               <React.Fragment key={review.id}>
@@ -127,48 +218,9 @@ const RestaurantReviews = async ({
           </List>
 
           {/* Add Review Form */}
-          {/* <Box mt={4}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
-              Add Your Review
-            </Typography>
-            <Box component="form" onSubmit={handleSubmit}>
-              <TextField
-                fullWidth
-                margin="normal"
-                label="Your Name"
-                name="name"
-                value={newReview.name}
-                onChange={handleInputChange}
-              />
-              <Rating
-                value={newReview.rating}
-                onChange={handleRatingChange}
-                precision={0.5}
-                sx={{ mt: 2 }}
-              />
-              <TextField
-                fullWidth
-                margin="normal"
-                label="Your Review"
-                name="text"
-                multiline
-                rows={4}
-                value={newReview.text}
-                onChange={handleInputChange}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                sx={{ mt: 2 }}
-              >
-                Submit Review
-              </Button>
-            </Box>
-          </Box> */}
-        </Grid>
-      </Grid>
-    </Container>
+        </Grid2>
+      </Grid2>
+    </Stack>
   );
 };
 
