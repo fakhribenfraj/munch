@@ -12,7 +12,6 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Paper,
   Rating,
   Stack,
   Typography,
@@ -107,7 +106,7 @@ const RestaurantReviews = async ({
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
           <Stack spacing={2}>
-            <Paper elevation={2} sx={{ p: 3 }}>
+            <Box sx={{ p: 3 }}>
               <Grid2
                 container
                 direction={{ xs: "row", sm: "row-reverse", md: "row" }}
@@ -166,10 +165,9 @@ const RestaurantReviews = async ({
                   <ButtonModal
                     label="write review"
                     buttonProps={{
-                      variant: "soft",
-                      color: "primary",
+                      variant: "outlined",
                       fullWidth: true,
-                      sx: { maxWidth: "20rem" },
+                      sx: { maxWidth: "17rem" },
                     }}
                   >
                     <DialogContent>
@@ -187,16 +185,13 @@ const RestaurantReviews = async ({
                   </ButtonModal>
                 </Grid2>
               </Grid2>
-            </Paper>
-            <Paper
-              elevation={2}
-              sx={{ p: 3, display: { xs: "none", md: "block" } }}
-            >
+            </Box>
+            <Box sx={{ p: 3, display: { xs: "none", md: "block" } }}>
               <Typography variant="h6" fontWeight="bold" gutterBottom>
                 Add Your Review
               </Typography>
               <AddReviewForm />
-            </Paper>
+            </Box>
           </Stack>
         </Grid2>
 

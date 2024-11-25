@@ -5,6 +5,7 @@ import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs"
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import {
   Box,
+  Grid2,
   ImageList,
   ImageListItem,
   Link,
@@ -63,66 +64,70 @@ export default async function Page({
   return (
     <Stack spacing={2} sx={{ pb: 4 }}>
       <RestaurantNavTabs id={id} active="overview" />
-      <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
-        <ImageList
-          variant="quilted"
-          cols={4}
-          sx={{
-            flex: 1,
-            maxWidth: rowHeight * 4,
-            margin: "auto",
-            borderRadius: 1,
-          }}
-        >
-          {itemData.map((item) => (
-            <ImageListItem
-              key={item.img}
-              cols={item.cols || 1}
-              rows={item.rows || 1}
-            >
-              <img
-                {...srcset(item.img, rowHeight, item.rows, item.cols)}
-                alt={item.title}
-                loading="lazy"
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-        <Stack spacing={2} sx={{ flex: 1 }}>
-          <Typography variant="body1">{restaurant.description}</Typography>
-          <Typography variant="body1">
-            visit website:
-            <Link href={`https://${restaurant.website}`} target="_blank">
-              {restaurant.website}
-            </Link>
-          </Typography>
-          <Box
+      <Grid2 container spacing={4}>
+        <Grid2 size={{ xs: 12, md: 4 }}>
+          <ImageList
+            variant="quilted"
+            cols={4}
             sx={{
-              borderRadius: 1,
-              border: "2px solid",
-              borderColor: "grey.300",
+              flex: 1,
+              maxWidth: rowHeight * 4,
               margin: "auto",
-              overflow: "hidden",
+              borderRadius: 1,
             }}
           >
-            <Map
-              initialViewState={{
-                latitude: restaurant.lat,
-                longitude: restaurant.lng,
-                zoom: 7,
-              }}
-              style={{
-                width: "20rem",
-                height: "20rem",
+            {itemData.map((item) => (
+              <ImageListItem
+                key={item.img}
+                cols={item.cols || 1}
+                rows={item.rows || 1}
+              >
+                <img
+                  {...srcset(item.img, rowHeight, item.rows, item.cols)}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 8 }}>
+          <Stack spacing={2} sx={{ flex: 1 }}>
+            <Typography variant="body1">{restaurant.description}</Typography>
+            <Typography variant="body1">
+              visit website:
+              <Link href={`https://${restaurant.website}`} target="_blank">
+                {restaurant.website}
+              </Link>
+            </Typography>
+            <Box
+              sx={{
+                borderRadius: 1,
+                border: "2px solid",
+                borderColor: "grey.300",
+                margin: "auto",
+                overflow: "hidden",
               }}
             >
-              <Marker longitude={restaurant.lng} latitude={restaurant.lat}>
-                <LocalPizzaIcon />
-              </Marker>
-            </Map>
-          </Box>
-        </Stack>
-      </Stack>
+              <Map
+                initialViewState={{
+                  latitude: restaurant.lat,
+                  longitude: restaurant.lng,
+                  zoom: 7,
+                }}
+                style={{
+                  width: "20rem",
+                  height: "20rem",
+                }}
+              >
+                <Marker longitude={restaurant.lng} latitude={restaurant.lat}>
+                  <LocalPizzaIcon />
+                </Marker>
+              </Map>
+            </Box>
+          </Stack>
+        </Grid2>
+      </Grid2>
     </Stack>
   );
 }

@@ -61,6 +61,46 @@ export default async function Page({
       price: 3,
       title: "Coffee",
     },
+    {
+      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+      price: 25,
+      title: "Breakfast",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+      price: 29,
+      title: "Burger",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+      price: 13,
+      title: "Honey",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+      price: 2.4,
+      title: "Coffee",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+      price: 53.22,
+      title: "Breakfast",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+      price: 32,
+      title: "Burger",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+      price: 42,
+      title: "Honey",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+      price: 3,
+      title: "Coffee",
+    },
   ];
   function srcset(image: string, size: number, rows = 1, cols = 1) {
     return {
@@ -72,14 +112,16 @@ export default async function Page({
   }
   return (
     <Stack spacing={1}>
-      <RestaurantNavTabs id={id} active="menu" />
+      <RestaurantNavTabs id={id} active="menu" hideBorder />
       <Toolbar
         sx={{
-          position: "sticky",
-          top: { xs: "5.8rem", md: "7rem" },
+          position: { xs: "sticky", md: "static" },
+          top: { xs: "5.8rem", md: "6.7rem" },
           bgcolor: "grey.200",
           zIndex: 1,
           transform: "scaleX(1.01)",
+          borderBottom: "1px solid ",
+          borderColor: "divider",
         }}
       >
         <Searchbar />
