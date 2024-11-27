@@ -1,15 +1,11 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
+import MealCard from "@/components/custom/restaurant/MealCard";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import Searchbar from "@/components/filters/Searchbar";
 import {
-  Card,
-  CardContent,
-  CardMedia,
-  Divider,
   Grid2,
   Stack,
-  Toolbar,
-  Typography,
+  Toolbar
 } from "@mui/material";
 
 export default async function Page({
@@ -102,14 +98,7 @@ export default async function Page({
       title: "Coffee",
     },
   ];
-  function srcset(image: string, size: number, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
+
   return (
     <Stack spacing={1}>
       <RestaurantNavTabs id={id} active="menu" hideBorder />
@@ -129,15 +118,7 @@ export default async function Page({
       <Grid2 container spacing={2} mt={2}>
         {itemData.map((item, index) => (
           <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2 }} key={item.title + index}>
-            <Card>
-              <CardMedia component="img" {...srcset(item.img, 140)} />
-              <CardContent>
-                <Stack>
-                  <Typography>{item.title}</Typography>
-                  <Typography>{item.price} TND</Typography>
-                </Stack>
-              </CardContent>
-            </Card>
+            <MealCard {...item} />
           </Grid2>
         ))}
       </Grid2>

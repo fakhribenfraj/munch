@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { ReactNode, createContext, useContext, useState } from "react";
+import DialogSlide from "../surfaces/DialogSlide";
 
 type ModalContextType = {
   handleClose: VoidFunction;
@@ -28,6 +29,7 @@ export type ButtonModalProps = {
   cardProps?: CardProps;
   icon?: ReactNode;
   onClose?: VoidFunction;
+  variant?: "slide";
 };
 const ButtonModal = ({
   children,
@@ -36,6 +38,7 @@ const ButtonModal = ({
   cardProps,
   icon,
   onClose,
+  variant,
 }: ButtonModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
@@ -69,10 +72,11 @@ const ButtonModal = ({
       {/* <CardModal {...cardProps} open={isOpen} onClose={() => setIsOpen(false)}>
         <>{children}</>
       </CardModal> */}
-      <Dialog
+      <DialogSlide
         {...cardProps}
         open={isOpen}
         onClose={handleClose}
+        {...(variant != "slide" && { TransitionComponent: undefined })}
         sx={{
           maxHeight: "90vh",
           outline: "none",
@@ -91,7 +95,7 @@ const ButtonModal = ({
           <CloseIcon />
         </IconButton>
         {children}
-      </Dialog>
+      </DialogSlide>
     </ModalContext.Provider>
   );
 };

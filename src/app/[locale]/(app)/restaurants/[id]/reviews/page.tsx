@@ -1,5 +1,6 @@
 import ButtonModal from "@/components/common/buttons/ButtonModal";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
+import ReviewsList from "@/components/custom/restaurant/ReviewsList";
 import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import {
   Avatar,
@@ -195,43 +196,8 @@ const RestaurantReviews = async ({
           </Stack>
         </Grid2>
 
-        {/* Reviews Section */}
         <Grid2 size={{ xs: 12, md: 7, lg: 8 }}>
-          <List>
-            {restaurantData.reviews.map((review) => (
-              <React.Fragment key={review.id}>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar alt={review.name} src={review.avatar} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={
-                      <Box display="flex" alignItems="center">
-                        <Typography fontWeight="bold">{review.name}</Typography>
-                        <Rating
-                          value={review.rating}
-                          readOnly
-                          size="small"
-                          sx={{ ml: 1 }}
-                        />
-                      </Box>
-                    }
-                    secondary={
-                      <>
-                        <Typography variant="body2" color="text.secondary">
-                          {review.date}
-                        </Typography>
-                        <Typography variant="body1">{review.text}</Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </React.Fragment>
-            ))}
-          </List>
-
-          {/* Add Review Form */}
+          <ReviewsList reviews={restaurantData.reviews} />
         </Grid2>
       </Grid2>
     </Stack>

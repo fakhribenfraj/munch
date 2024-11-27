@@ -32,6 +32,7 @@ const Searchbar = () => {
           <ButtonModal
             buttonProps={{ "aria-label": "filters" }}
             icon={<TuneIcon />}
+            variant="slide"
             cardProps={{
               sx: {
                 alignSelf: { xs: "flex-end", sm: "center" },
