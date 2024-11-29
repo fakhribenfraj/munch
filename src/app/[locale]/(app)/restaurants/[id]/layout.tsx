@@ -5,6 +5,7 @@ import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
+import StarIcon from "@mui/icons-material/Star";
 
 export default async function RootLayout({
   children,
@@ -82,7 +83,7 @@ export default async function RootLayout({
             }}
           />
           <Stack
-            spacing={2}
+            spacing={1.5}
             marginTop={{ xs: 0, md: 4 }}
             alignItems={{ xs: "center", md: "flex-start" }}
           >
@@ -90,7 +91,15 @@ export default async function RootLayout({
               <Typography variant="h4">{restaurant?.name}</Typography>
               <Typography variant="body2">{restaurant?.delegation}</Typography>
             </Box>
-            <GoogleDirections lat={restaurant.lat} lng={restaurant.lng} />
+            <Stack direction="row" spacing={0.5} alignItems='flex-end'>
+              <StarIcon color="warning" />
+              <Stack direction="row">
+                <Typography variant="subtitle2">4.5</Typography>
+                <Typography variant="body2" sx={{ ml: 2 }}>
+                  (1.2k reviews)
+                </Typography>
+              </Stack>
+            </Stack>
           </Stack>
         </Box>
       </Stack>
