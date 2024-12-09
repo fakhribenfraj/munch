@@ -41,8 +41,8 @@ const ListView = ({
           >
             <FavoriteBorderIcon />
           </Box>
+          <RestaurantMediaCarousel id="101" />
           <Link href={`${routes.RESTAURANTS}/101`}>
-            <RestaurantMediaCarousel id="101" />
             <CardContent>
               <Stack spacing={1}>
                 <Typography component="span" variant="h6">
@@ -80,8 +80,8 @@ const ListView = ({
             >
               <FavoriteBorderIcon />
             </Box>
+            <RestaurantMediaCarousel id={restaurant.id} />
             <Link href={`${routes.RESTAURANTS}/${restaurant.id}`}>
-              <RestaurantMediaCarousel id={restaurant.id} />
               <CardContent>
                 <Stack spacing={1}>
                   <Typography component="span" variant="h6">

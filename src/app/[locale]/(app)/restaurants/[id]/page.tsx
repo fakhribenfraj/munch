@@ -1,6 +1,7 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
+import Carousel from "@/components/custom/Carousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import {
@@ -32,24 +33,32 @@ export default async function Page({
       img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
       title: "Burger",
       rows: 2,
-      cols: 2,
+      cols: 4,
     },
     {
       img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
       title: "Honey",
+      rows: 2,
+      cols: 4,
     },
     {
       img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
       title: "Coffee",
+      rows: 2,
+      cols: 4,
     },
     {
       img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
       title: "Hats",
+      rows: 2,
+      cols: 4,
     },
 
     {
       img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
       title: "Basketball",
+      rows: 2,
+      cols: 4,
     },
   ];
   function srcset(image: string, size: number, rows = 1, cols = 1) {
@@ -66,30 +75,34 @@ export default async function Page({
       <RestaurantNavTabs id={id} active="overview" />
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
-          <ImageList
-            variant="quilted"
-            cols={4}
-            sx={{
-              flex: 1,
-              maxWidth: rowHeight * 4,
-              margin: "auto",
-              borderRadius: 1,
+          <Carousel
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={1.3}
+            pagination={{}}
+            coverflowEffect={{
+              rotate: -30,
+              depth: 200,
             }}
           >
             {itemData.map((item) => (
-              <ImageListItem
-                key={item.img}
-                cols={item.cols || 1}
-                rows={item.rows || 1}
+              <Box
+                key={item.title}
+                sx={{
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  boxShadow: 4,
+                }}
               >
                 <img
                   {...srcset(item.img, rowHeight, item.rows, item.cols)}
                   alt={item.title}
                   loading="lazy"
                 />
-              </ImageListItem>
+              </Box>
             ))}
-          </ImageList>
+          </Carousel>
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
           <Stack spacing={2} sx={{ flex: 1 }}>

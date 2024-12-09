@@ -4,10 +4,11 @@ import {
   getRestaurantAttachementsById,
 } from "@/actions/restaurants/getRestaurantAttachementsById";
 import useServerAction from "@/hooks/useServerAction";
-import { ActionResponse } from "@/types/api";
 import { CardMedia, Skeleton } from "@mui/material";
 import { useEffect } from "react";
 import Carousel from "../Carousel";
+import { routes } from "@/constants/routes";
+import Link from "next/link";
 
 type RestaurantMediaCarouselProps = {
   id: string;
@@ -15,12 +16,12 @@ type RestaurantMediaCarouselProps = {
 const RestaurantMediaCarousel = ({ id }: RestaurantMediaCarouselProps) => {
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/2533/2533563.png";
   const { isPending, response, startAction } =
-    useServerAction<ActionResponse<GetRestaurantAttachementResponse[]>>();
+    useServerAction<GetRestaurantAttachementResponse[]>();
   useEffect(() => {
     if (id) {
       startAction(getRestaurantAttachementsById(id));
     }
-  }, [id]);
+  }, [id, startAction]);
   const images =
     response?.data && response?.data.length > 0
       ? response?.data
@@ -37,29 +38,18 @@ const RestaurantMediaCarousel = ({ id }: RestaurantMediaCarouselProps) => {
           }}
         />
       )}
-      {!isPending &&
-        response?.data.length &&
-        response?.data.length > 0 &&
-        response?.data?.map((image) => (
-          <CardMedia
-            key={image.id}
-            sx={{
-              height: 190,
-            }}
-            image={image.url}
-            title={image.name}
-          />
-        ))}
+
       {!isPending &&
         images.map((image) => (
-          <CardMedia
-            key={image.id}
-            sx={{
-              height: 190,
-            }}
-            image={image.url}
-            title={image.name}
-          />
+          <Link href={`${routes.RESTAURANTS}/${id}`} key={image.id}>
+            <CardMedia
+              sx={{
+                height: 190,
+              }}
+              image={image.url}
+              title={image.name}
+            />
+          </Link>
         ))}
     </Carousel>
   );

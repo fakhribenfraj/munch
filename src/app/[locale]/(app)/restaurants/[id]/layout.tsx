@@ -91,15 +91,7 @@ export default async function RootLayout({
               <Typography variant="h4">{restaurant?.name}</Typography>
               <Typography variant="body2">{restaurant?.delegation}</Typography>
             </Box>
-            <Stack direction="row" spacing={0.5} alignItems='flex-end'>
-              <StarIcon color="warning" />
-              <Stack direction="row">
-                <Typography variant="subtitle2">4.5</Typography>
-                <Typography variant="body2" sx={{ ml: 2 }}>
-                  (1.2k reviews)
-                </Typography>
-              </Stack>
-            </Stack>
+            <GoogleDirections lat={restaurant.lat} lng={restaurant.lng} />
           </Stack>
         </Box>
       </Stack>
