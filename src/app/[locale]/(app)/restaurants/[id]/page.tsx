@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 
 export default async function Page({
   params,
@@ -75,17 +76,7 @@ export default async function Page({
       <RestaurantNavTabs id={id} active="overview" />
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
-          <Carousel
-            effect={"coverflow"}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={1.3}
-            pagination={{}}
-            coverflowEffect={{
-              rotate: -30,
-              depth: 200,
-            }}
-          >
+          <Carousel>
             {itemData.map((item) => (
               <Box
                 key={item.title}
@@ -95,10 +86,11 @@ export default async function Page({
                   boxShadow: 4,
                 }}
               >
-                <img
-                  {...srcset(item.img, rowHeight, item.rows, item.cols)}
+                <Image
+                  width={400}
+                  height={200}
+                  src={`${item.img}?w=${400}&h=${200}&fit=crop&auto=format`}
                   alt={item.title}
-                  loading="lazy"
                 />
               </Box>
             ))}
