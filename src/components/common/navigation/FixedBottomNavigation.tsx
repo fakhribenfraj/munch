@@ -4,7 +4,12 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Paper,
+  useScrollTrigger,
+} from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
@@ -15,6 +20,7 @@ const FixedBottomNavigation = () => {
   const [activeTabIndex, setActiveTabIndex] = useState(-1);
   const pathname = usePathname();
   const { data: session } = useSession();
+  const trigger = useScrollTrigger();
   const navigationItems = useMemo(
     () => [
       { label: t("EXPLORE"), icon: <SearchIcon />, url: routes.HOME },
@@ -66,6 +72,13 @@ const FixedBottomNavigation = () => {
         overflow: "hidden",
         boxShadow: 24,
         py: 1,
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10,
+        transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1)",
+        transform: `translateY(${trigger ? "100%" : 0})`,
       }}
     >
       <BottomNavigation showLabels value={activeTabIndex}>
