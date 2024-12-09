@@ -84,28 +84,39 @@ const MapView = ({
           sx={{
             position: "absolute",
             bottom: 0,
-            width: "100%",
+            left: { xs: "50%", md: 0 },
+            transform: { xs: "translateX(-50%)", md: "none" },
+            width: { xs: "100%", sm: "80%", md: 400 },
+            height: { md: "100%" },
             zIndex: 20,
             p: 2,
           }}
         >
           <Paper
             sx={{
-              margin: "auto",
               overflow: "hidden",
-              width: { xs: "100%", sm: "80%", md: "50%" },
+              height: "100%",
+              width: "100%",
             }}
           >
-            <Stack direction="row" justifyContent="space-between">
-              <Stack direction="row">
+            <Stack
+              direction={{ xs: "row", md: "column-reverse" }}
+              justifyContent="space-between"
+            >
+              <Stack direction={{ xs: "row", md: "column" }}>
                 <Box
                   sx={{
-                    width: { xs: 112, md: 132 },
-                    height: "100%",
+                    width: { xs: 112, sm: 132, md: "100%" },
+                    aspectRatio: { xs: "1/1", md: "2" },
                     position: "relative",
                   }}
                 >
-                  <Image src={selectedRestaurant.logo} fill alt="logo" />
+                  <Image
+                    src={selectedRestaurant.logo}
+                    fill
+                    alt="logo"
+                    style={{ objectFit: "cover" }}
+                  />
                 </Box>
                 <Stack
                   sx={{
@@ -134,7 +145,7 @@ const MapView = ({
                 size="small"
                 sx={{
                   justifySelf: "flex-end",
-                  alignSelf: "self-start",
+                  alignSelf: { xs: "flex-start", md: "flex-end" },
                 }}
                 onClick={(e) => {
                   setSelectedRestaurant(null);
