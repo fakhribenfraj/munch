@@ -53,7 +53,7 @@ const Carousel = ({ children, width, height, ...settings }: CarouselProps) => {
       sx={{
         width: "100%",
         maxWidth: width,
-
+        mb: 2,
         height: "100%",
         maxHeight: height,
       }}

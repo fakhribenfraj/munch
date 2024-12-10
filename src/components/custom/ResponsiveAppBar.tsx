@@ -31,7 +31,6 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
         display: { xs: hideSearchField ? "none" : "block", md: "block" },
         backgroundColor: "grey.200",
         boxShadow: 3,
-        zIndex: 10,
       }}
     >
       <Toolbar

@@ -1,19 +1,25 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
+import Carousel from "@/components/custom/Carousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import Searchbar from "@/components/filters/Searchbar";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
+  Fab,
   Grid,
+  Grid2,
   IconButton,
   Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import FoodCategory from "@/components/custom/restaurant/FoodCategory";
 
 export default async function Page({
   params,
@@ -39,6 +45,30 @@ export default async function Page({
           rating: 4.9,
           image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
         },
+        {
+          name: "Chicken Burger",
+          price: "6.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+        },
+        {
+          name: "Beef Burger",
+          price: "10.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+        },
+        {
+          name: "Chicken Burger",
+          price: "6.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+        },
+        {
+          name: "Beef Burger",
+          price: "10.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+        },
       ],
     },
     {
@@ -55,6 +85,18 @@ export default async function Page({
           price: "20.00 DT",
           rating: 4.9,
           image: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+        },
+        {
+          name: "Chicken Burger",
+          price: "6.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+        },
+        {
+          name: "Beef Burger",
+          price: "10.00 DT",
+          rating: 4.9,
+          image: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
         },
       ],
     },
@@ -93,89 +135,6 @@ export default async function Page({
       ],
     },
   ];
-  const itemData = [
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      price: 25,
-      title: "Breakfast",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      price: 29,
-      title: "Burger",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-      price: 13,
-      title: "Honey",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      price: 2.4,
-      title: "Coffee",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      price: 53.22,
-      title: "Breakfast",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      price: 32,
-      title: "Burger",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-      price: 42,
-      title: "Honey",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      price: 3,
-      title: "Coffee",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      price: 25,
-      title: "Breakfast",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      price: 29,
-      title: "Burger",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-      price: 13,
-      title: "Honey",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      price: 2.4,
-      title: "Coffee",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      price: 53.22,
-      title: "Breakfast",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      price: 32,
-      title: "Burger",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-      price: 42,
-      title: "Honey",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      price: 3,
-      title: "Coffee",
-    },
-  ];
-
   return (
     <Stack spacing={1}>
       <RestaurantNavTabs id={id} active="menu" hideBorder />
@@ -184,7 +143,7 @@ export default async function Page({
           position: { xs: "sticky", md: "static" },
           top: { xs: "5.8rem", md: "6.7rem" },
           bgcolor: "grey.200",
-          zIndex: 1,
+          zIndex: "appBar",
           transform: "scaleX(1.01)",
           borderBottom: "1px solid ",
           borderColor: "divider",
@@ -201,66 +160,7 @@ export default async function Page({
       </Grid2> */}
       <Box sx={{ padding: 2 }}>
         {categories.map((category, index) => (
-          <Box key={index} mb={4}>
-            {/* Category Title */}
-            <Typography variant="h6" fontWeight="bold" mb={2}>
-              {category.title}
-            </Typography>
-
-            {/* Food Items Grid */}
-            <Grid container spacing={2}>
-              {category.items.map((item, idx) => (
-                <Grid item xs={6} sm={4} md={3} key={idx}>
-                  <Card sx={{ position: "relative" }}>
-                    {/* Food Image */}
-                    <CardMedia
-                      component="img"
-                      height="140"
-                      image={item.image}
-                      alt={item.name}
-                    />
-                    {/* Favorite Button */}
-                    <IconButton
-                      sx={{
-                        position: "absolute",
-                        top: 8,
-                        right: 8,
-                        backgroundColor: "white",
-                        zIndex: 1,
-                      }}
-                    >
-                      <FavoriteBorderIcon fontSize="small" />
-                    </IconButton>
-
-                    {/* Food Info */}
-                    <CardContent>
-                      <Typography variant="subtitle1" fontWeight="bold" noWrap>
-                        {item.name}
-                      </Typography>
-                      <Box display="flex" alignItems="center" mt={1}>
-                        <StarIcon fontSize="small" color="warning" />
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                          ml={0.5}
-                        >
-                          {item.rating}
-                        </Typography>
-                      </Box>
-                      <Typography
-                        variant="body2"
-                        color="primary"
-                        mt={1}
-                        fontWeight="bold"
-                      >
-                        {item.price}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
+          <FoodCategory category={category} key={index} />
         ))}
       </Box>
     </Stack>

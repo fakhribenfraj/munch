@@ -46,7 +46,7 @@ const HomeScreen = ({
           position: "fixed",
           bottom: 0,
           left: 0,
-          right: 0,
+          right: "appBar",
           zIndex: 10,
           transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1)",
           transform: `translateY(${trigger || isMapView ? "100%" : 0})`,

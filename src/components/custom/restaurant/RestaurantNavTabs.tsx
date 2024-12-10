@@ -23,7 +23,7 @@ const RestaurantNavTabs = ({
         width: { md: "25rem" },
         position: { xs: "sticky", md: "static" },
         top: { xs: 45, md: 60 },
-        zIndex: 9,
+        zIndex: "appBar",
         bgcolor: "grey.200",
         transform: "scaleX(1.01)",
         borderBottom: hideBorder ? "none" : "1px solid ",

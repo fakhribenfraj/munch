@@ -69,7 +69,6 @@ export default async function RootLayout({
             flexDirection: { xs: "column", md: "row" },
             textAlign: { xs: "center", md: "start" },
             position: "relative",
-            zIndex: 1,
           }}
         >
           <Avatar
