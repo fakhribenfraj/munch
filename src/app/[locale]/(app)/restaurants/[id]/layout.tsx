@@ -6,6 +6,7 @@ import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 import StarIcon from "@mui/icons-material/Star";
+import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 
 export default async function RootLayout({
   children,
@@ -97,4 +98,10 @@ export default async function RootLayout({
       {children}
     </SubPageLayout>
   );
+}
+export async function generateStaticParams() {
+  const { data: restaurants } = await getRestaurants();
+  return restaurants.map((restaurant) => ({
+    id: restaurant.id.toString(),
+  }));
 }

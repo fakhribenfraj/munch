@@ -70,7 +70,13 @@ export default async function Page({
       <RestaurantNavTabs id={id} active="overview" />
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
-          <Carousel slidesToShow={3} centerMode>
+          <Carousel
+            slidesToShow={1}
+            centerMode
+            autoplay
+            autoplaySpeed={1000}
+            infinite
+          >
             {itemData.map((item) => (
               <Box
                 key={item.title}
