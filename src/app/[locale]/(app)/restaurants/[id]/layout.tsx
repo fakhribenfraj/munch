@@ -51,7 +51,7 @@ export default async function RootLayout({
         >
           <SafeImage
             fallbackSrc="/assets/images/resto-logo.png"
-            src={restaurant.cover}
+            src={restaurant?.cover}
             width={1440}
             height={333}
             alt="cover"

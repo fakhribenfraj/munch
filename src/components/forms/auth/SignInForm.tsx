@@ -6,7 +6,7 @@ import { routes } from "@/constants/routes";
 import useServerAction from "@/hooks/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Link, Stack, Typography } from "@mui/material";
-import { signIn } from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -32,10 +32,7 @@ export default function SignInForm() {
     },
   });
   const { handleSubmit } = methods;
-  const { startAction, response } = useServerAction<{
-    ok: boolean;
-    error: string;
-  }>();
+  const { startAction, response } = useServerAction<SignInResponse>();
   const onSubmit = handleSubmit((data: FormData) =>
     startAction(
       signIn("credentials", {

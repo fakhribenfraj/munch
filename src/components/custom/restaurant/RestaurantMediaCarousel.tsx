@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import Carousel from "../Carousel";
 import { routes } from "@/constants/routes";
 import Link from "next/link";
+import { ActionResponse } from "@/types/api";
 
 type RestaurantMediaCarouselProps = {
   id: string;
@@ -16,7 +17,7 @@ type RestaurantMediaCarouselProps = {
 const RestaurantMediaCarousel = ({ id }: RestaurantMediaCarouselProps) => {
   const defaultImg = "https://cdn-icons-png.flaticon.com/512/2533/2533563.png";
   const { isPending, response, startAction } =
-    useServerAction<GetRestaurantAttachementResponse[]>();
+    useServerAction<ActionResponse<GetRestaurantAttachementResponse[]>>();
   useEffect(() => {
     if (id) {
       startAction(getRestaurantAttachementsById(id));

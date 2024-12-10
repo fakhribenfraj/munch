@@ -16,8 +16,9 @@ export type Pager = {
 
 export type ActionResponse<T = undefined> = {
   ok: boolean;
+  message: string;
   data: T;
-  error?: string;
+  error?: string | null;
 };
 
 export type PageWithIdProps = {

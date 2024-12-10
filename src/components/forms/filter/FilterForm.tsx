@@ -5,6 +5,7 @@ import {
 import RangeInput from "@/components/common/inputs/RangeInput";
 import useServerAction from "@/hooks/useServerAction";
 import { useFilterStore } from "@/providers/filter-store-provider";
+import { ActionResponse } from "@/types/api";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import {
@@ -33,7 +34,7 @@ const FilterForm = () => {
     isPending,
     response: filtersBlocks,
     startAction,
-  } = useServerAction<getFiltersResponse[]>();
+  } = useServerAction<ActionResponse<getFiltersResponse[]>>();
   const RangeInputs = [
     {
       label: "Distance",
