@@ -106,7 +106,7 @@ const MapView = ({
             transform: { xs: "translateX(-50%)", md: "none" },
             width: { xs: "100%", sm: "80%", md: 400 },
             height: { md: "100%" },
-            zIndex: 20,
+            zIndex: "appBar",
             p: 2,
           }}
         >
