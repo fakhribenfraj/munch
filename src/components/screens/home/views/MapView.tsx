@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import { Box, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GeolocateControl, ViewState } from "react-map-gl";
 
@@ -19,17 +20,29 @@ const MapView = ({
 
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
-
+  const searchParams = useSearchParams();
+  const { replace } = useRouter();
+  const pathname = usePathname();
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      console.log(pos.coords);
+    const lng = searchParams.get("lng");
+    const lat = searchParams.get("lat");
+    if (lng && lat) {
       setViewPort({
         zoom: 10,
-        latitude: pos.coords.latitude,
-        longitude: pos.coords.longitude,
+        latitude: parseFloat(lat),
+        longitude: parseFloat(lng),
       });
-    });
-  }, []);
+    } else {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(pos.coords);
+        setViewPort({
+          zoom: 10,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
+      });
+    }
+  }, [searchParams]);
 
   return (
     <Box
@@ -63,6 +76,11 @@ const MapView = ({
                   center: { lat: restaurant.lat, lng: restaurant.lng },
                   zoom: 14,
                 });
+                const params = new URLSearchParams(searchParams);
+                params.set("lng", restaurant.lng.toString());
+                params.set("lat", restaurant.lat.toString());
+                replace(`${pathname}?${params.toString()}`);
+
                 setSelectedRestaurant(restaurant);
               }}
             >
