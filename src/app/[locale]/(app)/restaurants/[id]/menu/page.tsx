@@ -1,25 +1,8 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
-import Carousel from "@/components/custom/Carousel";
+import FoodCategory from "@/components/custom/restaurant/FoodCategory";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import Searchbar from "@/components/filters/Searchbar";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import StarIcon from "@mui/icons-material/Star";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Fab,
-  Grid,
-  Grid2,
-  IconButton,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import { useState } from "react";
-import FoodCategory from "@/components/custom/restaurant/FoodCategory";
+import { Stack, Toolbar } from "@mui/material";
 
 export default async function Page({
   params,
