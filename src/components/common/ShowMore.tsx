@@ -2,7 +2,7 @@
 import Carousel from "@/components/custom/Carousel";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import { Collapse, Fab, Grid2, Icon, IconButton, Stack } from "@mui/material";
+import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
 
 interface FoodCategoryProps {
@@ -22,6 +22,7 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
       sx={{
         display: "block",
         margin: "auto",
+        mt: 2,
       }}
       onClick={() => {
         if (showingMore) {
@@ -41,7 +42,7 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
     </IconButton>
   );
   return (
-    <Stack mb={4} spacing={2} ref={ref}>
+    <Box ref={ref}>
       {!showingMore && (
         <Carousel
           slidesToShow={slidesToShow}
@@ -52,7 +53,7 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
         </Carousel>
       )}
       {!isSmallList && (
-        <Collapse in={showingMore} timeout="auto" collapsedSize={40}>
+        <Collapse in={showingMore} timeout="auto" collapsedSize={56}>
           {!showingMore && triggerButton}
           <Grid2 container ref={ref}>
             {Children.map(children, (child, idx) => (
@@ -64,7 +65,7 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
           {showingMore && triggerButton}
         </Collapse>
       )}
-    </Stack>
+    </Box>
   );
 };
 

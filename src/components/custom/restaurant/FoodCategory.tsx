@@ -1,23 +1,15 @@
-"use client";
-
 import ShowMore from "@/components/common/ShowMore";
-import Carousel from "@/components/custom/Carousel";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import StarIcon from "@mui/icons-material/Star";
 import {
   Box,
   Card,
   CardContent,
   CardMedia,
-  Fab,
-  Grid2,
   IconButton,
   Stack,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 
 interface FoodCategoryProps {
   category: {
@@ -27,10 +19,8 @@ interface FoodCategoryProps {
 }
 
 const FoodCategory = ({ category }: FoodCategoryProps) => {
-  const [showMore, setShowMore] = useState(false);
-
   return (
-    <Stack mb={4} spacing={2}>
+    <Stack spacing={2}>
       {/* Category Title */}
       <Typography variant="h6" fontWeight="bold" mb={2}>
         {category.title}

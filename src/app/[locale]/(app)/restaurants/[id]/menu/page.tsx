@@ -151,18 +151,11 @@ export default async function Page({
       >
         <Searchbar />
       </Toolbar>
-      {/* <Grid2 container spacing={2} mt={2}>
-        {itemData.map((item, index) => (
-          <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2 }} key={item.title + index}>
-            <MealCard {...item} />
-          </Grid2>
-        ))}
-      </Grid2> */}
-      <Box sx={{ padding: 2 }}>
+      <Stack spacing={2}>
         {categories.map((category, index) => (
           <FoodCategory category={category} key={index} />
         ))}
-      </Box>
+      </Stack>
     </Stack>
   );
 }

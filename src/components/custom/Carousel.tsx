@@ -49,6 +49,7 @@ const Carousel = ({
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    swipeToSlide: true,
     arrows: true,
     nextArrow: <Arrow variant="next" />,
     prevArrow: <Arrow variant="prev" />,
