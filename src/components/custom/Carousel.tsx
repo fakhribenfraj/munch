@@ -8,8 +8,15 @@ type CarouselProps = SlickSettings & {
   children: ReactNode;
   width?: string | number;
   height?: string | number;
+  ref?: React.RefObject<HTMLDivElement>;
 };
-const Carousel = ({ children, width, height, ...settings }: CarouselProps) => {
+const Carousel = ({
+  ref,
+  children,
+  width,
+  height,
+  ...settings
+}: CarouselProps) => {
   const Arrow = ({
     onClick,
     variant,
@@ -50,6 +57,7 @@ const Carousel = ({ children, width, height, ...settings }: CarouselProps) => {
   const slidesCount = React.Children.count(children);
   return (
     <Box
+      ref={ref}
       sx={{
         width: "100%",
         maxWidth: width,
