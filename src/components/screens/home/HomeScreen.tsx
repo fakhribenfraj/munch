@@ -5,10 +5,10 @@ import ViewListIcon from "@mui/icons-material/ViewList";
 import { Box, Stack, useScrollTrigger } from "@mui/material";
 import { useState } from "react";
 
-import MainContainer from "../../common/surfaces/MainContainer";
-import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
-import { useFilterStore } from "@/providers/filter-store-provider";
+import dynamic from "next/dynamic";
+import MainContainer from "../../common/surfaces/MainContainer";
+import RestaurantsList from "./views/RestaurantsList";
 
 const MapView = dynamic(() => import("./views/MapView"));
 const ListView = dynamic(() => import("./views/ListView"));
@@ -35,11 +35,18 @@ const HomeScreen = ({
           ...(isMapView ? { pb: 0, px: { xs: 0 } } : undefined),
         }}
       >
-        {isMapView ? (
+        {/* {isMapView ? (
           <MapView restaurants={restaurants} />
         ) : (
           <ListView restaurants={restaurants} />
-        )}
+          
+        )} */}
+        <RestaurantsList
+        // initialItems={restaurants}
+        // fetchItems={fetchItems}
+        // hasMore={false}
+        // pageSize={restaurants.length}
+        />
       </MainContainer>
       <Stack
         sx={{
