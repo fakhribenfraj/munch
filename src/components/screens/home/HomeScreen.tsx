@@ -35,18 +35,12 @@ const HomeScreen = ({
           ...(isMapView ? { pb: 0, px: { xs: 0 } } : undefined),
         }}
       >
-        {/* {isMapView ? (
+        {isMapView ? (
           <MapView restaurants={restaurants} />
         ) : (
-          <ListView restaurants={restaurants} />
-          
-        )} */}
-        <RestaurantsList
-        // initialItems={restaurants}
-        // fetchItems={fetchItems}
-        // hasMore={false}
-        // pageSize={restaurants.length}
-        />
+          // <ListView restaurants={restaurants} />
+          <RestaurantsList />
+        )}
       </MainContainer>
       <Stack
         sx={{

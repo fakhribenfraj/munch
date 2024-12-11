@@ -35,7 +35,7 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
               <CardMedia
                 component="img"
                 height="140"
-                image={item.image}
+                image={`${item.image}?w=200&h=140&fit=crop&auto=format`}
                 alt={item.name}
               />
               {/* Favorite Button */}
