@@ -64,7 +64,7 @@ const SubPageLayout = ({
 
       <MainContainer
         sx={{
-          pt: { xs: 0, sm: 8 },
+          pt: { xs: 0, md: 8 },
           pb: 0,
           ...props.sx,
         }}

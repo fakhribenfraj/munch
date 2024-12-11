@@ -15,6 +15,7 @@ import { componentsOverrides } from "./overrides";
 import { palette } from "./palette";
 import { shadows } from "./shadows";
 import { typography } from "./typography";
+import { zIndex } from "./zIndex";
 
 type Props = {
   children: React.ReactNode;
@@ -28,6 +29,7 @@ export default function ThemeProvider({ children }: Props) {
       customShadows: customShadows("light"), // or customShadows('dark')
       shape: { borderRadius: 8 },
       typography,
+      zIndex,
     }),
     []
   );
