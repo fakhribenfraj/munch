@@ -15,6 +15,7 @@ import ReturnButton from "../common/navigation/ReturnButton";
 import ResponsiveAppBar from "../custom/ResponsiveAppBar";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import HideOnScroll from "../common/navigation/HideOnScroll";
+import MainContainer from "../common/surfaces/MainContainer";
 
 type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
@@ -61,12 +62,10 @@ const SubPageLayout = ({
         {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
       </Box>
 
-      <Container
-        maxWidth="xl"
-        component="main"
-        {...props}
+      <MainContainer
         sx={{
-          pt: { xs: 0, md: 8 },
+          pt: { xs: 0, sm: 8 },
+          pb: 0,
           ...props.sx,
         }}
       >
@@ -94,7 +93,7 @@ const SubPageLayout = ({
           </Box>
         )}
         {children}
-      </Container>
+      </MainContainer>
     </>
   );
 };

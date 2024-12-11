@@ -9,6 +9,7 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
       sx={{
         height: "100%",
         width: "100%",
+        overflowY: "auto",
         pb: 9,
         pt: { xs: 2, md: 8 },
         ...sx,

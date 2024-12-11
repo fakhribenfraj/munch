@@ -124,7 +124,7 @@ export default async function Page({
       <Toolbar
         sx={{
           position: { xs: "sticky", md: "static" },
-          top: { xs: "5.8rem", md: "6.7rem" },
+          top: { xs: "3rem", sm: -17 },
           bgcolor: "grey.200",
           zIndex: "appBar",
           transform: "scaleX(1.01)",
