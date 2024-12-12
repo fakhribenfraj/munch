@@ -11,7 +11,9 @@ import { ActionResponse } from "@/types/api";
 type InfiniteVirtualListProps = {
   itemHeight?: number;
   itemWidth?: number;
-  gutterSize?: number;
+  spacing?: number;
+  padding?: number;
+  itemsPerRow?: number;
   loadingComponent: React.ReactNode;
   itemComponent: (item: any) => React.ReactNode;
   fetchItems: () => Promise<ActionResponse<unknown[]>>;
@@ -20,9 +22,10 @@ export default function InfiniteVirtualList({
   fetchItems,
   loadingComponent,
   itemComponent,
-  itemHeight = 350,
-  itemWidth = 300,
-  gutterSize = 16,
+  itemHeight = 300,
+  spacing = 16,
+  padding = 0,
+  itemsPerRow = 1,
 }: InfiniteVirtualListProps) {
   const [items, setItems] = useState<unknown[]>([]);
   const [hasMore, setHasMore] = useState(true);
@@ -30,17 +33,18 @@ export default function InfiniteVirtualList({
 
   const isItemLoaded = (index: number) => !hasMore || index < items.length;
 
-  const loadMoreItems = useCallback(async (startIndex: number) => {
-    try {
-      const res = await fetchItems();
-      setItems((prev) => [...prev, ...res.data]);
-      setHasMore(false);
-    } catch (error) {
-      console.error("Failed to load more items:", error);
-    }
-  }, []);
-
-  const getRowHeight = () => itemHeight; // Fixed height for all rows
+  const loadMoreItems = useCallback(
+    async (startIndex: number) => {
+      try {
+        const res = await fetchItems();
+        setItems((prev) => [...prev, ...res.data]);
+        setHasMore(false);
+      } catch (error) {
+        console.error("Failed to load more items:", error);
+      }
+    },
+    [fetchItems]
+  );
 
   const renderCell = useCallback(
     ({
@@ -56,17 +60,11 @@ export default function InfiniteVirtualList({
       data: unknown[];
       isItemLoaded: (index: number) => boolean;
     }) => {
-      const itemsPerRow = Math.max(
-        1,
-        Math.floor((style.width as number) / itemWidth)
-      );
       const index = rowIndex * itemsPerRow + columnIndex;
       const globalStyles = {
         ...style,
-        left: (style.left as number) + gutterSize,
-        top: (style.top as number) + gutterSize,
-        width: (style.width as number) - gutterSize,
-        height: (style.height as number) - gutterSize,
+        left: (style.left as number) + padding,
+        padding: spacing / 2,
       };
 
       if (!isItemLoaded(index)) {
@@ -78,18 +76,16 @@ export default function InfiniteVirtualList({
 
       return <Box style={globalStyles}>{itemComponent(item)}</Box>;
     },
-    [itemComponent, loadingComponent, itemWidth, gutterSize]
+    [itemComponent, loadingComponent, itemsPerRow, spacing, padding]
   );
 
   return (
     <Box sx={{ height: "100%", width: "100%" }}>
       <AutoSizer>
         {({ height, width }) => {
-          const itemsPerRow = Math.max(1, Math.floor(width / itemWidth));
           const rowCount = Math.ceil(
             items.length / itemsPerRow + (hasMore ? 1 : 0)
           );
-          const cellWidth = width / itemsPerRow;
 
           return (
             <InfiniteLoader
@@ -102,9 +98,9 @@ export default function InfiniteVirtualList({
                   height={height}
                   width={width}
                   columnCount={itemsPerRow}
-                  columnWidth={() => cellWidth} // Use dynamic cell width
+                  columnWidth={() => (width - padding * 2) / itemsPerRow} // Use dynamic cell width
                   rowCount={rowCount}
-                  rowHeight={getRowHeight}
+                  rowHeight={() => itemHeight}
                   itemData={items}
                   onItemsRendered={({
                     visibleRowStartIndex,

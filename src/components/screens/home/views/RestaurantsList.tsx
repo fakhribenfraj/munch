@@ -1,12 +1,15 @@
 "use client";
 
 import {
+  Box,
   Card,
   CardContent,
   CardMedia,
   Skeleton,
   Stack,
-  Typography
+  Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useCallback } from "react";
 
@@ -17,9 +20,22 @@ import {
 import InfiniteVirtualList from "@/components/common/data-display/InfiniteVirtualList";
 
 export default function RestaurantGrid() {
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isLargeDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+
+  let itemsPerRow = 1;
+  if (isTablet) {
+    itemsPerRow = 2;
+  } else if (isDesktop) {
+    itemsPerRow = 3;
+  } else if (isLargeDesktop) {
+    itemsPerRow = 4;
+  }
   const renderCell = useCallback((restaurant: GetRestaurantsResponse) => {
     return (
-      <Card>
+      <Card sx={{ maxHeight: "100%" }}>
         <CardMedia
           component="img"
           height={190}
@@ -41,6 +57,9 @@ export default function RestaurantGrid() {
     <InfiniteVirtualList
       fetchItems={getRestaurants}
       itemComponent={renderCell}
+      itemsPerRow={itemsPerRow}
+      itemHeight={310}
+      padding={16}
       loadingComponent={
         <Card>
           <Skeleton
