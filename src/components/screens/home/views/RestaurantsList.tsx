@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Link,
   Skeleton,
   Stack,
   Typography,
@@ -18,6 +19,7 @@ import {
   GetRestaurantsResponse,
 } from "@/actions/restaurants/getRestaurants";
 import InfiniteVirtualList from "@/components/common/data-display/InfiniteVirtualList";
+import { routes } from "@/constants/routes";
 
 export default function RestaurantGrid() {
   const theme = useTheme();
@@ -43,7 +45,9 @@ export default function RestaurantGrid() {
           alt={restaurant.name}
         />
         <CardContent>
-          <Typography variant="h6">{restaurant.name}</Typography>
+          <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
+            <Typography variant="h6">{restaurant.name}</Typography>
+          </Link>
           <Typography variant="body2" color="textSecondary">
             {restaurant.email}
           </Typography>
