@@ -112,7 +112,6 @@ const FilterForm = () => {
   useEffect(() => {
     startAction(getFilters());
   }, [startAction]);
-  console.log(filtersBlocks);
   return (
     <Stack
       gap={4}

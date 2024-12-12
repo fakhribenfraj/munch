@@ -32,7 +32,9 @@ const HomeScreen = ({
       <MainContainer
         sx={{
           pt: { xs: 15, sm: 17 },
-          ...(isMapView ? { pb: 0, px: { xs: 0 } } : undefined),
+          px: { xs: 0 },
+          overflow: "hidden",
+          pb: { xs: isMapView ? 0 : undefined, md: 0 },
         }}
       >
         {isMapView ? (

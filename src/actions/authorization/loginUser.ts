@@ -11,6 +11,5 @@ export const loginUser = async (email: string, password: string) => {
     method: "POST",
     body: JSON.stringify({ email, password, device_name: browser.name }),
   });
-  console.log(JSON.stringify({ email, password, device_name: browser.name }));
   return res;
 };

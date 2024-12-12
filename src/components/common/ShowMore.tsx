@@ -15,7 +15,6 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const openedHeight = ref.current?.offsetTop ?? 0;
-  console.log(openedHeight, ref);
   const isSmallList = Children.count(children) <= slidesToShow;
   const triggerButton = (
     <IconButton

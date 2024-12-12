@@ -5,7 +5,6 @@ import secureFetch from "@/utils/fetch";
 
 const getProfile = async () => {
   const res = await secureFetch(endpoints.PROFILE);
-  console.log(res)
   return res;
 };
 
