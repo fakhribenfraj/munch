@@ -41,6 +41,7 @@ export default async function RootLayout({
             position: "relative",
             width: { xs: "100vw", md: "100%" },
             height: calcCoverHeight(),
+            maxHeight: 333,
             transform: {
               xs: `translate(-1rem,0)`,
               sm: `translate(-1.5rem,0)`,
@@ -56,7 +57,7 @@ export default async function RootLayout({
             width={1440}
             height={333}
             alt="cover"
-            style={{ objectFit: "cover", maxHeight: "100%", width: "100%" }}
+            style={{ objectFit: "cover" }}
             priority
           />
         </Box>
