@@ -1,5 +1,6 @@
 import { alpha, Theme } from "@mui/material/styles";
 import { ButtonProps, buttonClasses } from "@mui/material/Button";
+import Link from "next/link";
 
 // ----------------------------------------------------------------------
 
@@ -156,6 +157,9 @@ export function button(theme: Theme) {
 
   return {
     MuiButton: {
+      defaultProps: {
+        LinkComponent: Link,
+      },
       styleOverrides: {
         root: ({ ownerState }: { ownerState: ButtonProps }) =>
           rootStyles(ownerState),
