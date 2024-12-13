@@ -28,14 +28,18 @@ const Carousel = ({
       <Fab
         size="small"
         color="default"
-        className={`arrow ${variant}`}
+        className={`slick-arrow arrow-${variant}`}
         sx={{
           position: "absolute",
           top: "50%",
           transform: "translateY(-50%)",
           right: variant === "next" ? 0 : undefined,
           left: variant === "prev" ? 0 : undefined,
-          m: 1,
+          m: 2,
+          boxShadow: 2,
+          backgroundColor: "common.white",
+          border: "1px solid",
+          borderColor: "grey.300",
         }}
         onClick={onClick}
       >
@@ -65,6 +69,12 @@ const Carousel = ({
         mb: 2,
         height: "100%",
         maxHeight: height,
+        "& .slick-arrow": {
+          display: "none",
+        },
+        "&:hover .slick-arrow": {
+          display: { md: "flex" },
+        },
       }}
     >
       <Slider
