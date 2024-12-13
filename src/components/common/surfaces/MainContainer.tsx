@@ -14,7 +14,14 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
         ...sx,
       }}
     >
-      <Container maxWidth="xl" {...props}>
+      <Container
+        maxWidth="xl"
+        sx={{
+          height: "100%",
+          width: "100%",
+        }}
+        {...props}
+      >
         {children}
       </Container>
     </Box>
