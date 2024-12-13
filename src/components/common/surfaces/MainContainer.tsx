@@ -1,10 +1,9 @@
-import { Container, ContainerOwnProps } from "@mui/material";
+import { Box, Container, ContainerOwnProps } from "@mui/material";
 import React from "react";
 
 const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
   return (
-    <Container
-      maxWidth="xl"
+    <Box
       component="main"
       sx={{
         height: "100%",
@@ -14,10 +13,11 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
         pt: { xs: 2, md: 8 },
         ...sx,
       }}
-      {...props}
     >
-      {children}
-    </Container>
+      <Container maxWidth="xl" {...props}>
+        {children}
+      </Container>
+    </Box>
   );
 };
 

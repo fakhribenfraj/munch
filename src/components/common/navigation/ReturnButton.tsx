@@ -19,8 +19,8 @@ const ReturnButton = ({ label, fixed, sx, ...props }: ReturnButtonProps) => {
   const styles: SxProps<Theme> = {
     justifyContent: "start",
     columnGap: 2,
-    bgcolor: "transparent",
-    color: "black",
+    bgcolor: "common.white",
+    color: "common.black",
     ...(fixed && { position: "fixed", top: 0, left: 0, m: 2 }),
     ...sx,
   };
