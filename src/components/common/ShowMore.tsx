@@ -25,8 +25,8 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
       }}
       onClick={() => {
         if (showingMore) {
-          window.scroll({
-            top: openedHeight - 200,
+          document?.querySelector("main")?.scroll({
+            top: openedHeight - 215,
             behavior: "smooth",
           });
         }
