@@ -102,12 +102,13 @@ const RestaurantReviews = async ({
 }) => {
   const { id } = await params;
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} position="relative">
       <RestaurantNavTabs id={id} active="reviews" />
       <Grid2 container spacing={4}>
-        <Grid2 size={{ xs: 12, md: 4 }}>
-          <Stack spacing={2}>
-            <Box sx={{ p: 3 }}>
+        {/* Rating */}
+        <Grid2 size={{ xs: 12, md: 4 }} sx={{ p: 2 }}>
+          <Stack spacing={4}>
+            <Box>
               <Grid2
                 container
                 direction={{ xs: "row", sm: "row-reverse", md: "row" }}
@@ -155,39 +156,10 @@ const RestaurantReviews = async ({
                     ))}
                   </Stack>
                 </Grid2>
-                <Grid2
-                  size={12}
-                  sx={{
-                    display: { xs: "flex", md: "none" },
-                    mt: 6,
-                    justifyContent: "center",
-                  }}
-                >
-                  <ButtonModal
-                    label="write review"
-                    buttonProps={{
-                      variant: "outlined",
-                      fullWidth: true,
-                      sx: { maxWidth: "17rem" },
-                    }}
-                  >
-                    <DialogContent>
-                      <Box
-                        sx={{
-                          p: 4,
-                        }}
-                      >
-                        <Typography variant="h6" fontWeight="bold" gutterBottom>
-                          Add Your Review
-                        </Typography>
-                        <AddReviewForm />
-                      </Box>
-                    </DialogContent>
-                  </ButtonModal>
-                </Grid2>
               </Grid2>
             </Box>
-            <Box sx={{ p: 3, display: { xs: "none", md: "block" } }}>
+            <Divider />
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
               <Typography variant="h6" fontWeight="bold" gutterBottom>
                 Add Your Review
               </Typography>
@@ -196,10 +168,51 @@ const RestaurantReviews = async ({
           </Stack>
         </Grid2>
 
+        {/* Reviews */}
         <Grid2 size={{ xs: 12, md: 7, lg: 8 }}>
           <ReviewsList reviews={restaurantData.reviews} />
         </Grid2>
       </Grid2>
+      <Box
+        sx={{
+          display: { xs: "block", md: "none" },
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          left: 0,
+          bgcolor: "grey.200",
+          px: 3,
+          py: 2,
+          zIndex: "appBar",
+        }}
+      >
+        <ButtonModal
+          label="write review"
+          buttonProps={{
+            variant: "contained",
+            color: "primary",
+            fullWidth: true,
+            sx: {
+              display: "block",
+              maxWidth: "24rem",
+              m: "auto",
+            },
+          }}
+        >
+          <DialogContent>
+            <Box
+              sx={{
+                p: 4,
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold" gutterBottom>
+                Add Your Review
+              </Typography>
+              <AddReviewForm />
+            </Box>
+          </DialogContent>
+        </ButtonModal>
+      </Box>
     </Stack>
   );
 };
