@@ -3,12 +3,13 @@ import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import MapIcon from "@mui/icons-material/Map";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import { Box, Stack, useScrollTrigger } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import MainContainer from "../../common/surfaces/MainContainer";
-import RestaurantsList from "./views/RestaurantsList";
+import useRouterSearchParams from "@/hooks/useRouterSearchParams";
+import ViewChangeButton from "@/app/[locale]/(app)/(home)/ViewChangeButton";
 
 const MapView = dynamic(() => import("./views/MapView"));
 const ListView = dynamic(() => import("./views/ListView"));
@@ -22,8 +23,6 @@ const HomeScreen = ({
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
-  const t = useTranslations();
-  const [isMapView, setIsMapView] = useState<boolean>(false);
   const trigger = useScrollTrigger();
 
   return (
@@ -34,16 +33,12 @@ const HomeScreen = ({
           pt: { xs: 15, sm: 17 },
           px: { xs: 0 },
           overflow: "hidden",
-          pb: { xs: isMapView ? 0 : undefined, md: 0 },
+          pb: { md: 0 },
         }}
       >
-        {isMapView ? (
-          <MapView restaurants={restaurants} />
-        ) : (
-          // <ListView restaurants={restaurants} />
-          <RestaurantsList />
-        )}
+        <ListView />
       </MainContainer>
+      <ViewChangeButton isMapView={false} sx={{ bottom: 72 }} />
       <Stack
         sx={{
           position: "fixed",
@@ -52,45 +47,10 @@ const HomeScreen = ({
           right: 0,
           zIndex: "fab",
           transition: "transform 225ms cubic-bezier(0, 0, 0.2, 1)",
-          transform: `translateY(${trigger || isMapView ? "100%" : 0})`,
+          transform: `translateY(${trigger ? "100%" : 0})`,
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            transform: isMapView ? "none" : `translateY(100%)`,
-          }}
-        >
-          <Fab
-            variant="extended"
-            sx={{
-              margin: "auto",
-              alignSelf: "center",
-              mb: 2,
-              textTransform: "capitalize",
-              position: "absolut",
-              top: "0",
-              left: "50%",
-              transform: `translate(-50% , calc(-100% - 1rem))`,
-            }}
-            color="inherit"
-            onClick={() => setIsMapView((state) => !state)}
-          >
-            {!isMapView && (
-              <>
-                <MapIcon sx={{ mr: 1 }} />
-                {t("SHOW_MAP")}
-              </>
-            )}
-            {isMapView && (
-              <>
-                <ViewListIcon sx={{ mr: 1 }} />
-                {t("SHOW_LIST")}
-              </>
-            )}
-          </Fab>
-        </Box>
-        {!isMapView && <FixedBottomNavigation />}
+        <FixedBottomNavigation />
       </Stack>
     </>
   );

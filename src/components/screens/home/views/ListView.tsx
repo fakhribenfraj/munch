@@ -1,110 +1,93 @@
-import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
-import { routes } from "@/constants/routes";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+"use client";
+
 import {
-  Box,
   Card,
   CardContent,
-  Grid2,
+  CardMedia,
   Link,
+  Skeleton,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
-import dynamic from "next/dynamic";
-const RestaurantMediaCarousel = dynamic(
-  () => import("@/components/custom/restaurant/RestaurantMediaCarousel")
-);
+import { useCallback } from "react";
 
-const ListView = ({
-  restaurants,
-}: {
-  restaurants: GetRestaurantsResponse[];
-}) => {
-  return (
-    <Grid2 container justifyContent="center" spacing={2}>
-      <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-        <Card
-          sx={{
-            position: "relative",
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: 0,
-              right: 0,
-              zIndex: 1,
-              padding: 1,
-              color: "common.white",
-            }}
-          >
-            <FavoriteBorderIcon />
-          </Box>
-          <RestaurantMediaCarousel id="101" />
-          <Link href={`${routes.RESTAURANTS}/101`}>
-            <CardContent>
-              <Stack spacing={1}>
-                <Typography component="span" variant="h6">
-                  hijon
-                </Typography>
-                <Stack
-                  direction="row"
-                  spacing={1}
-                  sx={{ color: "text.secondary" }}
-                >
-                  <LocationOnIcon />
-                  <Typography variant="subtitle2">hay cheker</Typography>
-                </Stack>
-              </Stack>
-            </CardContent>
+import {
+  getRestaurants,
+  GetRestaurantsResponse,
+} from "@/actions/restaurants/getRestaurants";
+import InfiniteVirtualList from "@/components/common/data-display/InfiniteVirtualList";
+import { routes } from "@/constants/routes";
+
+export default function ListView() {
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isDesktop = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isLargeDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+
+  let itemsPerRow = 1;
+  if (isTablet) {
+    itemsPerRow = 2;
+  } else if (isDesktop) {
+    itemsPerRow = 3;
+  } else if (isLargeDesktop) {
+    itemsPerRow = 4;
+  }
+  const renderCell = useCallback((restaurant: GetRestaurantsResponse) => {
+    return (
+      <Card sx={{ maxHeight: "100%" }}>
+        <CardMedia
+          component="img"
+          height={190}
+          image={restaurant.images[0]}
+          alt={restaurant.name}
+        />
+        <CardContent>
+          <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
+            <Typography variant="h6">{restaurant.name}</Typography>
           </Link>
-        </Card>
-      </Grid2>
-      {restaurants?.map((restaurant, i) => (
-        <Grid2 key={restaurant.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <Card
-            sx={{
-              position: "relative",
-            }}
-          >
-            <Box
-              sx={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                zIndex: 1,
-                padding: 1,
-                color: "common.white",
-              }}
-            >
-              <FavoriteBorderIcon />
-            </Box>
-            <RestaurantMediaCarousel id={restaurant.id} />
-            <Link href={`${routes.RESTAURANTS}/${restaurant.id}`}>
-              <CardContent>
-                <Stack spacing={1}>
-                  <Typography component="span" variant="h6">
-                    {restaurant.name}
-                  </Typography>
-                  <Stack
-                    direction="row"
-                    spacing={1}
-                    sx={{ color: "text.secondary" }}
-                  >
-                    <LocationOnIcon />
-                    <Typography variant="subtitle2">
-                      {restaurant.delegation}
-                    </Typography>
-                  </Stack>
-                </Stack>
-              </CardContent>
-            </Link>
-          </Card>
-        </Grid2>
-      ))}
-    </Grid2>
-  );
-};
+          <Typography variant="body2" color="textSecondary">
+            {restaurant.email}
+          </Typography>
+          <Typography variant="body2">{restaurant.address}</Typography>
+        </CardContent>
+      </Card>
+    );
+  }, []);
 
-export default ListView;
+  return (
+    <InfiniteVirtualList
+      fetchItems={getRestaurants}
+      itemComponent={renderCell}
+      itemsPerRow={itemsPerRow}
+      itemHeight={310}
+      padding={16}
+      loadingComponent={
+        <Card>
+          <Skeleton
+            variant="rectangular"
+            height={190}
+            sx={{ bgcolor: "grey.300" }}
+          />
+          <CardContent>
+            <Stack spacing={2}>
+              <Skeleton
+                variant="rectangular"
+                height={10}
+                width={100}
+                sx={{ bgcolor: "grey.300", borderRadius: 4 }}
+              />
+              <Skeleton
+                variant="rectangular"
+                height={10}
+                width={50}
+                sx={{ bgcolor: "grey.300", borderRadius: 4 }}
+              />
+            </Stack>
+          </CardContent>
+        </Card>
+      }
+    />
+  );
+}

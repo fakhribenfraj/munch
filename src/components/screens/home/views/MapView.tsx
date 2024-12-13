@@ -3,6 +3,7 @@ import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
 import { routes } from "@/constants/routes";
+import useRouterSearchParams from "@/hooks/useRouterSearchParams";
 import CloseIcon from "@mui/icons-material/Close";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import { Box, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
@@ -20,12 +21,10 @@ const MapView = ({
 
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
-  const searchParams = useSearchParams();
-  const { replace } = useRouter();
-  const pathname = usePathname();
+  const { setParam, getParam } = useRouterSearchParams();
   useEffect(() => {
-    const lng = searchParams.get("lng");
-    const lat = searchParams.get("lat");
+    const lng = getParam("lng");
+    const lat = getParam("lat");
     if (lng && lat) {
       setViewPort({
         zoom: 10,
@@ -41,7 +40,7 @@ const MapView = ({
         });
       });
     }
-  }, [searchParams]);
+  }, []);
 
   return (
     <Box
@@ -75,11 +74,8 @@ const MapView = ({
                   center: { lat: restaurant.lat, lng: restaurant.lng },
                   zoom: 14,
                 });
-                const params = new URLSearchParams(searchParams);
-                params.set("lng", restaurant.lng.toString());
-                params.set("lat", restaurant.lat.toString());
-                replace(`${pathname}?${params.toString()}`);
-
+                setParam("lng", restaurant.lng.toString());
+                setParam("lat", restaurant.lat.toString());
                 setSelectedRestaurant(restaurant);
               }}
             >

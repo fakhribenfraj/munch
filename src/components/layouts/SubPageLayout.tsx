@@ -1,21 +1,17 @@
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import {
-  AppBar,
   Box,
   Breadcrumbs,
-  Container,
   ContainerProps,
   IconButton,
   Link,
-  Toolbar,
-  Typography,
+  Typography
 } from "@mui/material";
 import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
-import ResponsiveAppBar from "../custom/ResponsiveAppBar";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import HideOnScroll from "../common/navigation/HideOnScroll";
 import MainContainer from "../common/surfaces/MainContainer";
+import ResponsiveAppBar from "../custom/ResponsiveAppBar";
 
 type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
@@ -35,34 +31,6 @@ const SubPageLayout = ({
   return (
     <>
       <ResponsiveAppBar hideSearchField />
-      {/* <Box>
-        <AppBar
-          position="fixed"
-          sx={{
-            backgroundColor: "grey.200",
-            display: { md: "none" },
-          }}
-        >
-          <Toolbar>
-            {prevPage ? (
-              <IconButton href={prevPage.href}>
-                <ArrowBackIosNewIcon />
-              </IconButton>
-            ) : (
-              <ReturnButton
-                sx={{
-                  ...(buttonVariant == "contained" && {
-                    bgcolor: "grey.200",
-                  }),
-                }}
-              />
-            )}
-          </Toolbar>
-        </AppBar>
-        {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
-      </Box> */}
-
-      {/* )} */}
       <MainContainer
         sx={{
           pt: { xs: 0, md: 8 },
