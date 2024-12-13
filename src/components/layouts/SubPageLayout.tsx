@@ -35,7 +35,7 @@ const SubPageLayout = ({
   return (
     <>
       <ResponsiveAppBar hideSearchField />
-      <Box>
+      {/* <Box>
         <AppBar
           position="fixed"
           sx={{
@@ -60,15 +60,48 @@ const SubPageLayout = ({
           </Toolbar>
         </AppBar>
         {!disableTopGutter && <Toolbar sx={{ display: { md: "none" } }} />}
-      </Box>
+      </Box> */}
 
+      {/* )} */}
       <MainContainer
         sx={{
           pt: { xs: 0, md: 8 },
           pb: 0,
+          position: "relative",
           ...props.sx,
         }}
       >
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            zIndex: "appBar",
+            m: 2,
+            display: { xs: "initial", md: "none" },
+          }}
+        >
+          {prevPage ? (
+            <IconButton
+              href={prevPage.href}
+              sx={{
+                ...(buttonVariant == "contained" && {
+                  bgcolor: "common.white",
+                }),
+              }}
+            >
+              <ArrowBackIosNewIcon />
+            </IconButton>
+          ) : (
+            <ReturnButton
+              sx={{
+                ...(buttonVariant == "contained" && {
+                  bgcolor: "common.white",
+                }),
+              }}
+            />
+          )}
+        </Box>
         {breadcrumbs && (
           <Box sx={{ mb: 4 }}>
             <Breadcrumbs

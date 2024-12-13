@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   const calcCoverHeight = (offset: string = "0px") => {
     const coverHeight = {
-      xs: "100vw / 3",
+      xs: "100vw / 2.5",
       sm: "100vw / 4",
       lg: "100vw / 5",
     };
@@ -34,7 +34,10 @@ export default async function RootLayout({
     );
   };
   return (
-    <SubPageLayout prevPage={{ label: t("EXPLORE"), href: routes.HOME }}>
+    <SubPageLayout
+      prevPage={{ label: t("EXPLORE"), href: routes.HOME }}
+      buttonVariant="contained"
+    >
       <Stack alignItems="flex-start" mb={3}>
         <Box
           sx={{
@@ -54,8 +57,7 @@ export default async function RootLayout({
           <SafeImage
             fallbackSrc="/assets/images/resto-logo.png"
             src={restaurant?.cover}
-            width={1440}
-            height={333}
+            fill
             alt="cover"
             style={{ objectFit: "cover" }}
             priority
