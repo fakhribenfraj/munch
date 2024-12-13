@@ -1,21 +1,32 @@
 "use client";
 import Carousel from "@/components/custom/Carousel";
+import useResponsive from "@/hooks/useResponsive";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import { Box, Collapse, Grid2, IconButton } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Grid2,
+  IconButton,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { Children, useRef, useState } from "react";
 
 interface FoodCategoryProps {
   children: React.ReactNode;
-  slidesToShow?: number;
+  slidesToShow?: number | { xs?: number; sm?: number; md?: number };
+  align?: "left" | "center" | "right";
 }
 
-const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
+const ShowMore = ({ children, slidesToShow, align }: FoodCategoryProps) => {
   const [showingMore, setShowingMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  let currentSlidesToShow = useResponsive<number>(slidesToShow, 1);
+
   const openedHeight = ref.current?.offsetTop ?? 0;
-  const isSmallList = Children.count(children) <= slidesToShow;
+  const isNoSlides = Children.count(children) <= currentSlidesToShow;
   const triggerButton = (
     <IconButton
       sx={{
@@ -44,19 +55,20 @@ const ShowMore = ({ children, slidesToShow = 1 }: FoodCategoryProps) => {
     <Box ref={ref}>
       {!showingMore && (
         <Carousel
-          slidesToShow={slidesToShow}
-          arrows={!isSmallList}
-          dots={!isSmallList}
+          slidesToShow={currentSlidesToShow}
+          arrows={!isNoSlides}
+          dots={!isNoSlides}
+          align={align}
         >
           {children}
         </Carousel>
       )}
-      {!isSmallList && (
+      {!isNoSlides && (
         <Collapse in={showingMore} timeout="auto" collapsedSize={56}>
           {!showingMore && triggerButton}
           <Grid2 container ref={ref}>
             {Children.map(children, (child, idx) => (
-              <Grid2 size={12 / slidesToShow} key={idx}>
+              <Grid2 size={12 / currentSlidesToShow} key={idx}>
                 {child}
               </Grid2>
             ))}

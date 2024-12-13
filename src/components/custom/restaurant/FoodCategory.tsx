@@ -27,7 +27,7 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
       </Typography>
 
       {/* Food Items Grid */}
-      <ShowMore slidesToShow={2}>
+      <ShowMore slidesToShow={{ xs: 2, sm: 3, md: 5 }} align="left">
         {category.items.map((item, idx) => (
           <Box key={idx} p={1}>
             <Card sx={{ position: "relative" }}>

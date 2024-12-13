@@ -9,12 +9,14 @@ type CarouselProps = SlickSettings & {
   width?: string | number;
   height?: string | number;
   ref?: React.RefObject<HTMLDivElement>;
+  align?: "left" | "center" | "right";
 };
 const Carousel = ({
   ref,
   children,
   width,
   height,
+  align = "center",
   ...settings
 }: CarouselProps) => {
   const Arrow = ({
@@ -71,6 +73,10 @@ const Carousel = ({
         maxHeight: height,
         "& .slick-arrow": {
           display: "none",
+        },
+        "& .slick-track": {
+          ml: align === "left" ? 0 : "auto",
+          mr: align === "right" ? 0 : "auto",
         },
         "&:hover .slick-arrow": {
           display: { md: "flex" },
