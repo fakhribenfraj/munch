@@ -7,7 +7,7 @@ export function bottomNavigationAction(theme: Theme) {
   return {
     MuiTab: {
       defaultProps: {
-        component: Link,
+        LinkComponent: Link,
       },
     },
   };
