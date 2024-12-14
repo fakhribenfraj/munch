@@ -28,6 +28,7 @@ const PlatePage = () => {
           maxWidth: 480,
           margin: "0 auto",
           backgroundColor: "#fff",
+          pb: 8,
         }}
       >
         {/* Header Section */}
@@ -189,35 +190,47 @@ const PlatePage = () => {
             </ShowMore>
           </Stack>
           {/* Add Review Button */}
-          <ButtonModal
-            label="write review"
-            buttonProps={{
-              variant: "contained",
-              color: "primary",
-              fullWidth: true,
-              sx: {
-                display: "block",
-                maxWidth: "24rem",
-                mx: "auto",
-                mt: 4,
-                mb: 2,
-              },
-            }}
-          >
-            <DialogContent>
-              <Box
-                sx={{
-                  p: 4,
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Add Your Review
-                </Typography>
-                <AddReviewForm />
-              </Box>
-            </DialogContent>
-          </ButtonModal>
         </Stack>
+      </Box>
+      <Box
+        sx={{
+          display: { xs: "block", md: "none" },
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          left: 0,
+          bgcolor: "grey.200",
+          px: 3,
+          py: 2,
+          zIndex: "appBar",
+        }}
+      >
+        <ButtonModal
+          label="write review"
+          buttonProps={{
+            variant: "contained",
+            color: "primary",
+            fullWidth: true,
+            sx: {
+              display: "block",
+              maxWidth: "24rem",
+              m: "auto",
+            },
+          }}
+        >
+          <DialogContent>
+            <Box
+              sx={{
+                p: 4,
+              }}
+            >
+              <Typography variant="h6" fontWeight="bold" gutterBottom>
+                Add Your Review
+              </Typography>
+              <AddReviewForm />
+            </Box>
+          </DialogContent>
+        </ButtonModal>
       </Box>
     </SubPageLayout>
   );
