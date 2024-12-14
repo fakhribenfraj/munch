@@ -31,7 +31,7 @@ const HomeScreen = ({
       >
         <ListView />
       </MainContainer>
-      <ViewChangeButton isMapView={false} sx={{ bottom: 72 }} />
+      <ViewChangeButton isMapView={false} sx={{ bottom: { xs: 64, md: 0 } }} />
       <Stack
         sx={{
           position: "fixed",
