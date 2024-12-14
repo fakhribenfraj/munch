@@ -1,4 +1,5 @@
 import ShowMore from "@/components/common/ShowMore";
+import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
 import {
@@ -7,6 +8,7 @@ import {
   CardContent,
   CardMedia,
   IconButton,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -52,9 +54,10 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
               </IconButton>
 
               {/* Food Info */}
-              <CardContent>
-                <Typography variant="subtitle1" fontWeight="bold" noWrap>
-                  {item.name}
+              <Link href={`${routes.PLATES}/${item.id}`}>
+                <CardContent>
+                  <Typography variant="subtitle1" fontWeight="bold" noWrap>
+                    {item.name}
                 </Typography>
                 <Box display="flex" alignItems="center" mt={1}>
                   <StarIcon fontSize="small" color="warning" />
@@ -69,8 +72,9 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
                   fontWeight="bold"
                 >
                   {item.price}
-                </Typography>
-              </CardContent>
+                  </Typography>
+                </CardContent>
+              </Link>
             </Card>
           </Box>
         ))}

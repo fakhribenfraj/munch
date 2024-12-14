@@ -19,6 +19,7 @@ type SubPageLayoutProps = ContainerProps & {
   buttonVariant?: "contained" | "text";
   breadcrumbs?: { label: string; href: string }[];
   prevPage?: { label: string; href: string };
+  disablePadding?: boolean;
 };
 const SubPageLayout = ({
   children,
@@ -26,6 +27,7 @@ const SubPageLayout = ({
   buttonVariant,
   breadcrumbs,
   prevPage,
+  disablePadding,
   ...props
 }: SubPageLayoutProps) => {
   return (
@@ -38,6 +40,7 @@ const SubPageLayout = ({
           position: "relative",
           ...props.sx,
         }}
+        disablePadding={disablePadding}
       >
         <Box
           sx={{

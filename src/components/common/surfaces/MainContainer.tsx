@@ -1,7 +1,15 @@
 import { Box, Container, ContainerOwnProps } from "@mui/material";
 import React from "react";
 
-const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
+type MainContainerProps = ContainerOwnProps & {
+  disablePadding?: boolean;
+};
+const MainContainer = ({
+  children,
+  sx,
+  disablePadding = false,
+  ...props
+}: MainContainerProps) => {
   return (
     <Box
       component="main"
@@ -19,6 +27,7 @@ const MainContainer = ({ children, sx, ...props }: ContainerOwnProps) => {
         sx={{
           height: "100%",
           width: "100%",
+          px: disablePadding ? 0 : 2,
         }}
         {...props}
       >

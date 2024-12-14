@@ -8,6 +8,7 @@ export const routes = {
   WISHLIST: "/wishlist",
   NOTIFICATION: "/notification",
   RESTAURANTS: "/restaurants",
+  PLATES: "/plates",
 };
 const dashboardRoot = "/dashboard";
 export const dashboardRoutes = {
