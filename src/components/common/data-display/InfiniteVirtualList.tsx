@@ -65,6 +65,7 @@ export default function InfiniteVirtualList({
         ...style,
         left: (style.left as number) + padding,
         paddingLeft: columnIndex === 0 ? 0 : spacing,
+        paddingTop: rowIndex === 0 ? 0 : spacing,
       };
 
       if (!isItemLoaded(index)) {
