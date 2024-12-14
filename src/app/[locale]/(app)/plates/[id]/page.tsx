@@ -17,6 +17,7 @@ import SubPageLayout from "@/components/layouts/SubPageLayout";
 import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import ShowMore from "@/components/common/ShowMore";
 import ButtonModal from "@/components/common/buttons/ButtonModal";
+import PlateCard from "@/components/custom/plate/PlateCard";
 
 const PlatePage = () => {
   const img =
@@ -138,53 +139,43 @@ const PlatePage = () => {
               {[
                 {
                   title: "Ramen Noodles",
-                  price: "15.00 DT",
+                  price: 15.0,
                   image: img,
                 },
                 {
                   title: "Pho Noodles",
-                  price: "20.00 DT",
+                  price: 20.0,
                   image: img,
                 },
                 {
                   title: "Ramen Noodles",
-                  price: "15.00 DT",
+                  price: 15.0,
                   image: img,
                 },
                 {
                   title: "Pho Noodles",
-                  price: "20.00 DT",
+                  price: 20.0,
                   image: img,
                 },
                 {
                   title: "Ramen Noodles",
-                  price: "15.00 DT",
+                  price: 15.0,
                   image: img,
                 },
                 {
                   title: "Pho Noodles",
-                  price: "20.00 DT",
+                  price: 20.0,
                   image: img,
                 },
               ].map((dish, index) => (
                 <Box key={index} p={1}>
-                  <Card sx={{ minWidth: 120, boxShadow: "none" }}>
-                    <CardMedia
-                      component="img"
-                      height="80"
-                      image={dish.image}
-                      alt={dish.title}
-                      sx={{ borderRadius: 1 }}
-                    />
-                    <CardContent sx={{ padding: 1 }}>
-                      <Typography variant="body2" fontWeight="bold">
-                        {dish.title}
-                      </Typography>
-                      <Typography variant="caption" color="text.secondary">
-                        {dish.price}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+                  <PlateCard
+                    id={index.toString()}
+                    title={dish.title}
+                    image={dish.image}
+                    price={dish.price}
+                    rating={4.9}
+                  />
                 </Box>
               ))}
             </ShowMore>

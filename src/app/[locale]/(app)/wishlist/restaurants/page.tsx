@@ -1,16 +1,16 @@
-import getProfile from "@/actions/profile/getProfile";
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import NavTabs from "@/components/common/navigation/NavTabs";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
 import MainLayout from "@/components/layouts/MainLayout";
 import { routes } from "@/constants/routes";
-import { Box, Grid2, List, Paper, Stack, Typography } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
 const Home: NextPage = async () => {
   const { data: restaurants } = await getRestaurants();
   return (
     <MainLayout>
       <NavTabs
+        textColor="primary"
         links={[
           { label: "restaurants", url: `${routes.WISHLIST}/restaurants` },
           { label: "plates", url: `${routes.WISHLIST}/plates` },

@@ -23,7 +23,7 @@ const FixedBottomNavigation = () => {
             {
               label: t("WISHLIST"),
               icon: <FavoriteBorderIcon />,
-              url: routes.WISHLIST,
+              url: `${routes.WISHLIST}/restaurants`,
             },
             {
               label: t("NOTIFICATIONS"),
