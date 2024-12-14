@@ -29,11 +29,11 @@ const HomeScreen = ({
     <>
       <ResponsiveAppBar />
       <MainContainer
+        fullHeight
         sx={{
           pt: { xs: 15, sm: 17 },
           px: { xs: 0 },
           overflow: "hidden",
-          pb: { md: 0 },
         }}
       >
         <ListView />

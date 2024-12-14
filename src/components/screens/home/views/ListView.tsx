@@ -3,11 +3,8 @@
 import {
   Card,
   CardContent,
-  CardMedia,
-  Link,
   Skeleton,
-  Stack,
-  Typography,
+  Stack
 } from "@mui/material";
 import { useCallback } from "react";
 
@@ -16,9 +13,8 @@ import {
   GetRestaurantsResponse,
 } from "@/actions/restaurants/getRestaurants";
 import InfiniteVirtualList from "@/components/common/data-display/InfiniteVirtualList";
-import { routes } from "@/constants/routes";
-import useResponsive from "@/hooks/useResponsive";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
+import useResponsive from "@/hooks/useResponsive";
 
 export default function ListView() {
   const itemsPerRow = useResponsive(
