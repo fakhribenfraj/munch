@@ -57,7 +57,9 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
         height: 64,
         display: { xs: "flex", md: "none" },
         borderRadius: "1rem 1rem 0 0",
+        px: { xs: 1, sm: 2 },
         boxShadow: 24,
+        justifyContent: { xs: "space-between", sm: "space-around" },
       }}
     >
       {navigationItems.map((item) => (
@@ -67,8 +69,8 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
           label={item.label}
           icon={item.icon}
           sx={{
-            position: "relative",
-            flex: 1,
+            flex: "none",
+            positio: "relative",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -92,7 +94,7 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
                 color: "common.white",
                 borderRadius: "50%",
                 padding: 1.5,
-                boxShadow: 24,
+                boxShadow: 15,
               },
             },
           }}
