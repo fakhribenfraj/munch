@@ -35,11 +35,6 @@ export default function AccountMenu() {
         icon: <FavoriteBorderIcon />,
         url: `${routes.WISHLIST}/restaurants`,
       },
-      {
-        label: t("NOTIFICATIONS"),
-        icon: <NotificationsNoneIcon />,
-        url: routes.NOTIFICATION,
-      },
     ],
     [t]
   );

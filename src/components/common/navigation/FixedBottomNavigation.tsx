@@ -26,11 +26,6 @@ const FixedBottomNavigation = () => {
               url: `${routes.WISHLIST}/restaurants`,
             },
             {
-              label: t("NOTIFICATIONS"),
-              icon: <NotificationsNoneIcon />,
-              url: routes.NOTIFICATION,
-            },
-            {
               label: t("ACCOUNT"),
               icon: <AccountCircleOutlinedIcon />,
               url: routes.ACCOUNT,
