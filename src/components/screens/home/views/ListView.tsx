@@ -37,7 +37,6 @@ export default function ListView() {
       itemComponent={renderCell}
       itemsPerRow={itemsPerRow}
       itemHeight={310}
-      padding={16}
       loadingComponent={
         <Card>
           <Skeleton

@@ -64,7 +64,7 @@ export default function InfiniteVirtualList({
       const globalStyles = {
         ...style,
         left: (style.left as number) + padding,
-        padding: spacing / 2,
+        paddingLeft: columnIndex === 0 ? 0 : spacing,
       };
 
       if (!isItemLoaded(index)) {
