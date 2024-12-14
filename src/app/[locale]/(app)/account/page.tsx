@@ -28,7 +28,7 @@ const Home: NextPage = async () => {
   const t = await getTranslations();
 
   return (
-    <MainLayout>
+    <MainLayout activeTab="account">
       <Stack sx={{ pb: 2 }}>
         <Typography variant="h3">{t("ACCOUNT")}</Typography>
         <List>

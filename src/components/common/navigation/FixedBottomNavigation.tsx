@@ -2,19 +2,26 @@
 import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from "@mui/icons-material/Search";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 
-const FixedBottomNavigation = () => {
+type FixedBottomNavigationProps = {
+  activeTab: "explore" | "wishlist" | "account";
+};
+const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
   const t = useTranslations();
-  const [activeTabIndex, setActiveTabIndex] = useState(-1);
-  const pathname = usePathname();
+
   const { data: session } = useSession();
+  const tabsIndexes = useMemo(() => {
+    return {
+      explore: 0,
+      wishlist: 1,
+      account: 2,
+    };
+  }, []);
   const navigationItems = useMemo(
     () => [
       { label: t("EXPLORE"), icon: <SearchIcon />, url: routes.HOME },
@@ -41,18 +48,7 @@ const FixedBottomNavigation = () => {
     ],
     [session, t]
   );
-  useEffect(() => {
-    if (pathname && pathname != routes.HOME) {
-      setActiveTabIndex(
-        navigationItems.findIndex(
-          (item) =>
-            item.url && item.url != routes.HOME && pathname.startsWith(item.url)
-        )
-      );
-    } else {
-      setActiveTabIndex(0);
-    }
-  }, [pathname, navigationItems]);
+
   return (
     <Paper
       sx={{
@@ -63,7 +59,7 @@ const FixedBottomNavigation = () => {
         py: 1,
       }}
     >
-      <BottomNavigation showLabels value={activeTabIndex}>
+      <BottomNavigation showLabels value={tabsIndexes[activeTab]}>
         {navigationItems.map((item) => (
           <BottomNavigationAction
             key={"nav-bottom-" + item.label}

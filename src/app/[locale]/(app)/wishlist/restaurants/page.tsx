@@ -8,7 +8,7 @@ import { NextPage } from "next";
 const Home: NextPage = async () => {
   const { data: restaurants } = await getRestaurants();
   return (
-    <MainLayout>
+    <MainLayout activeTab="wishlist">
       <NavTabs
         textColor="primary"
         links={[

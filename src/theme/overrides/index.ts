@@ -47,6 +47,7 @@ import { toggleButton } from "./components/toggle-button";
 import { loadingButton } from "./components/loading-button";
 import { link } from "./components/link";
 import { tab } from "./components/tab";
+import { bottomNavigationAction } from "./components/bottom-navigation-action";
 
 // ----------------------------------------------------------------------
 
@@ -98,6 +99,7 @@ export function componentsOverrides(theme: Theme) {
     loadingButton(theme),
     link(theme),
     tab(theme),
+    bottomNavigationAction(theme),
   );
 
   return components;

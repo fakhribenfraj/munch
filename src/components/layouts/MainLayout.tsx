@@ -11,8 +11,9 @@ const FixedBottomNavigation = dynamic(
 type MainLayoutProps = {
   children: ReactNode;
   hideSearchField?: boolean;
+  activeTab: "explore" | "wishlist" | "account";
 };
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children, activeTab }: MainLayoutProps) => {
   return (
     <>
       <ResponsiveAppBar hideSearchField />
@@ -27,7 +28,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
             width: "100%",
           }}
         >
-          <FixedBottomNavigation />
+          <FixedBottomNavigation activeTab={activeTab} />
         </Box>
       </HideOnScroll>
     </>

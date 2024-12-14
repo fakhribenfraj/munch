@@ -40,7 +40,7 @@ const Home: NextPage = async () => {
     },
   ];
   return (
-    <MainLayout>
+    <MainLayout activeTab="wishlist">
       <NavTabs
         textColor="primary"
         links={[

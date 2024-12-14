@@ -50,7 +50,7 @@ const HomeScreen = ({
           transform: `translateY(${trigger ? "100%" : 0})`,
         }}
       >
-        <FixedBottomNavigation />
+        <FixedBottomNavigation activeTab="explore" />
       </Stack>
     </>
   );
