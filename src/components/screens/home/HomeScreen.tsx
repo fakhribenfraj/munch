@@ -1,19 +1,12 @@
 "use client";
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
-import MapIcon from "@mui/icons-material/Map";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import { Box, Stack, useScrollTrigger } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Stack, useScrollTrigger } from "@mui/material";
 
-import { useTranslations } from "next-intl";
+import ViewChangeButton from "@/app/[locale]/(app)/(home)/ViewChangeButton";
 import dynamic from "next/dynamic";
 import MainContainer from "../../common/surfaces/MainContainer";
-import useRouterSearchParams from "@/hooks/useRouterSearchParams";
-import ViewChangeButton from "@/app/[locale]/(app)/(home)/ViewChangeButton";
 
-const MapView = dynamic(() => import("./views/MapView"));
 const ListView = dynamic(() => import("./views/ListView"));
-const Fab = dynamic(() => import("@mui/material/Fab"));
 const ResponsiveAppBar = dynamic(() => import("../../custom/ResponsiveAppBar"));
 const FixedBottomNavigation = dynamic(
   () => import("../../common/navigation/FixedBottomNavigation")

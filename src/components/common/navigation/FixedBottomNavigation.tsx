@@ -3,7 +3,7 @@ import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
@@ -11,6 +11,7 @@ import { useMemo } from "react";
 type FixedBottomNavigationProps = {
   activeTab: "explore" | "wishlist" | "account";
 };
+
 const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
   const t = useTranslations();
 
@@ -50,27 +51,54 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
   );
 
   return (
-    <Paper
+    <BottomNavigation
+      value={tabsIndexes[activeTab]}
       sx={{
-        display: { xs: "block", md: "none" },
+        height: 64,
+        display: { xs: "flex", md: "none" },
         borderRadius: "1rem 1rem 0 0",
-        overflow: "hidden",
         boxShadow: 24,
-        py: 1,
       }}
     >
-      <BottomNavigation showLabels value={tabsIndexes[activeTab]}>
-        {navigationItems.map((item) => (
-          <BottomNavigationAction
-            key={"nav-bottom-" + item.label}
-            href={item.url}
-            label={item.label}
-            icon={item.icon}
-            sx={{ textTransform: "capitalize" }}
-          />
-        ))}
-      </BottomNavigation>
-    </Paper>
+      {navigationItems.map((item) => (
+        <BottomNavigationAction
+          key={"nav-bottom-" + item.label}
+          href={item.url}
+          label={item.label}
+          icon={item.icon}
+          sx={{
+            position: "relative",
+            flex: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "grey.500",
+            py: 1,
+            textTransform: "capitalize",
+            fontWeight: 600,
+            "& .MuiBottomNavigationAction-iconOnly": {
+              display: "none",
+            },
+            "&.Mui-selected": {
+              justifyContent: "flex-end",
+              "& .MuiSvgIcon-root": {
+                position: "absolute",
+                top: 0,
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 48,
+                height: 48,
+                backgroundColor: "primary.main",
+                color: "common.white",
+                borderRadius: "50%",
+                padding: 1.5,
+                boxShadow: 24,
+              },
+            },
+          }}
+        />
+      ))}
+    </BottomNavigation>
   );
 };
 
