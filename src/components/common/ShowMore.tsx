@@ -3,23 +3,24 @@ import Carousel from "@/components/custom/Carousel";
 import useResponsive from "@/hooks/useResponsive";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
-import {
-  Box,
-  Collapse,
-  Grid2,
-  IconButton,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
 
 interface FoodCategoryProps {
   children: React.ReactNode;
   slidesToShow?: number | { xs?: number; sm?: number; md?: number };
   align?: "left" | "center" | "right";
+  autoPlay?: number;
+  infinite?: boolean;
 }
 
-const ShowMore = ({ children, slidesToShow, align }: FoodCategoryProps) => {
+const ShowMore = ({
+  children,
+  slidesToShow,
+  align,
+  autoPlay,
+  infinite,
+}: FoodCategoryProps) => {
   const [showingMore, setShowingMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -59,6 +60,11 @@ const ShowMore = ({ children, slidesToShow, align }: FoodCategoryProps) => {
           arrows={!isNoSlides}
           dots={!isNoSlides}
           align={align}
+          {...(autoPlay !== undefined && {
+            autoplay: true,
+            autoplaySpeed: autoPlay,
+          })}
+          infinite={infinite}
         >
           {children}
         </Carousel>

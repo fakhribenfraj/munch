@@ -9,6 +9,7 @@ import {
   CardContent,
   Stack,
   DialogContent,
+  Divider,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
@@ -121,65 +122,72 @@ const PlatePage = () => {
           <Typography variant="body2" color="text.secondary">
             Contains dairy. May contain traces of nuts.
           </Typography>
-
+          <Divider sx={{ my: 4 }} />
           {/* Similar Dishes */}
-          <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
-            Similar dishes
-          </Typography>
-          <ShowMore slidesToShow={{ xs: 2, sm: 3 }} align="left">
-            {[
-              {
-                title: "Ramen Noodles",
-                price: "15.00 DT",
-                image: img,
-              },
-              {
-                title: "Pho Noodles",
-                price: "20.00 DT",
-                image: img,
-              },
-              {
-                title: "Ramen Noodles",
-                price: "15.00 DT",
-                image: img,
-              },
-              {
-                title: "Pho Noodles",
-                price: "20.00 DT",
-                image: img,
-              },
-              {
-                title: "Ramen Noodles",
-                price: "15.00 DT",
-                image: img,
-              },
-              {
-                title: "Pho Noodles",
-                price: "20.00 DT",
-                image: img,
-              },
-            ].map((dish, index) => (
-              <Box key={index} p={1}>
-                <Card sx={{ minWidth: 120, boxShadow: "none" }}>
-                  <CardMedia
-                    component="img"
-                    height="80"
-                    image={dish.image}
-                    alt={dish.title}
-                    sx={{ borderRadius: 1 }}
-                  />
-                  <CardContent sx={{ padding: 1 }}>
-                    <Typography variant="body2" fontWeight="bold">
-                      {dish.title}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {dish.price}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-            ))}
-          </ShowMore>
+          <Stack>
+            <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
+              Similar dishes
+            </Typography>
+            <ShowMore
+              slidesToShow={{ xs: 2, sm: 3 }}
+              align="left"
+              autoPlay={2000}
+              infinite
+            >
+              {[
+                {
+                  title: "Ramen Noodles",
+                  price: "15.00 DT",
+                  image: img,
+                },
+                {
+                  title: "Pho Noodles",
+                  price: "20.00 DT",
+                  image: img,
+                },
+                {
+                  title: "Ramen Noodles",
+                  price: "15.00 DT",
+                  image: img,
+                },
+                {
+                  title: "Pho Noodles",
+                  price: "20.00 DT",
+                  image: img,
+                },
+                {
+                  title: "Ramen Noodles",
+                  price: "15.00 DT",
+                  image: img,
+                },
+                {
+                  title: "Pho Noodles",
+                  price: "20.00 DT",
+                  image: img,
+                },
+              ].map((dish, index) => (
+                <Box key={index} p={1}>
+                  <Card sx={{ minWidth: 120, boxShadow: "none" }}>
+                    <CardMedia
+                      component="img"
+                      height="80"
+                      image={dish.image}
+                      alt={dish.title}
+                      sx={{ borderRadius: 1 }}
+                    />
+                    <CardContent sx={{ padding: 1 }}>
+                      <Typography variant="body2" fontWeight="bold">
+                        {dish.title}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        {dish.price}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
+            </ShowMore>
+          </Stack>
           {/* Add Review Button */}
           <ButtonModal
             label="write review"
@@ -191,7 +199,8 @@ const PlatePage = () => {
                 display: "block",
                 maxWidth: "24rem",
                 mx: "auto",
-                my: 2,
+                mt: 4,
+                mb: 2,
               },
             }}
           >
