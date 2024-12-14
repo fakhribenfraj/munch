@@ -8,8 +8,6 @@ import {
   Skeleton,
   Stack,
   Typography,
-  useMediaQuery,
-  useTheme
 } from "@mui/material";
 import { useCallback } from "react";
 
@@ -19,41 +17,22 @@ import {
 } from "@/actions/restaurants/getRestaurants";
 import InfiniteVirtualList from "@/components/common/data-display/InfiniteVirtualList";
 import { routes } from "@/constants/routes";
+import useResponsive from "@/hooks/useResponsive";
+import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
 
 export default function ListView() {
-  const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-  const isDesktop = useMediaQuery(theme.breakpoints.between("md", "lg"));
-  const isLargeDesktop = useMediaQuery(theme.breakpoints.up("lg"));
+  const itemsPerRow = useResponsive(
+    {
+      xs: 1,
+      sm: 2,
+      md: 3,
+      lg: 4,
+    },
+    1
+  );
 
-  let itemsPerRow = 1;
-  if (isTablet) {
-    itemsPerRow = 2;
-  } else if (isDesktop) {
-    itemsPerRow = 3;
-  } else if (isLargeDesktop) {
-    itemsPerRow = 4;
-  }
   const renderCell = useCallback((restaurant: GetRestaurantsResponse) => {
-    return (
-      <Card sx={{ maxHeight: "100%" }}>
-        <CardMedia
-          component="img"
-          height={190}
-          image={restaurant.images[0]}
-          alt={restaurant.name}
-        />
-        <CardContent>
-          <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
-            <Typography variant="h6">{restaurant.name}</Typography>
-          </Link>
-          <Typography variant="body2" color="textSecondary">
-            {restaurant.email}
-          </Typography>
-          <Typography variant="body2">{restaurant.address}</Typography>
-        </CardContent>
-      </Card>
-    );
+    return <RestaurantCard restaurant={restaurant} />;
   }, []);
 
   return (

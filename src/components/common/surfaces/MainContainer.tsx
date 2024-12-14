@@ -25,7 +25,6 @@ const MainContainer = ({
       <Container
         maxWidth="xl"
         sx={{
-          height: "100%",
           width: "100%",
           px: disablePadding ? 0 : 2,
         }}

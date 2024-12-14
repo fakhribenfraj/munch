@@ -123,7 +123,7 @@ const PlatePage = () => {
           <Typography variant="body2" color="text.secondary">
             Contains dairy. May contain traces of nuts.
           </Typography>
-          <Divider sx={{ my: 4 }} />
+          <Divider sx={{ my: 5 }} />
           {/* Similar Dishes */}
           <Stack>
             <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>

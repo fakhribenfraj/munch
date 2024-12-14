@@ -16,11 +16,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import ReviewsList from "./ReviewsList";
+import ReviewsList from "../restaurant/ReviewsList";
 import { TransitionProps } from "@mui/material/transitions";
 import DialogSlide from "@/components/common/surfaces/DialogSlide";
 
-type MealCardProps = {
+type PlateCardProps = {
   title: string;
   price: number;
   img: string;
@@ -114,7 +114,7 @@ const mealData = {
   ],
 };
 
-const MealCard = ({ img, price, title }: MealCardProps) => {
+const PlateCard = ({ img, price, title }: PlateCardProps) => {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -178,4 +178,4 @@ const MealCard = ({ img, price, title }: MealCardProps) => {
   );
 };
 
-export default MealCard;
+export default PlateCard;
