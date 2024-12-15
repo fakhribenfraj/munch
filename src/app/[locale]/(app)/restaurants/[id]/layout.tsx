@@ -37,7 +37,6 @@ export default async function RootLayout({
   return (
     <SubPageLayout
       buttonVariant="contained"
-      sx={{ px: 0 }}
       disablePadding
       returnVariant="absolute"
       prevLinks={[
@@ -55,7 +54,7 @@ export default async function RootLayout({
             height: calcCoverHeight(),
             maxHeight: 333,
             transform: {
-              xs: `translate(-1rem,0)`,
+              
               sm: `translate(-1.5rem,0)`,
               md: "none",
             },
@@ -107,7 +106,7 @@ export default async function RootLayout({
           </Stack>
         </Box>
       </Stack>
-      {children}
+      <Stack sx={{ px: { xs: 2, md: 0 } }}>{children}</Stack>
     </SubPageLayout>
   );
 }

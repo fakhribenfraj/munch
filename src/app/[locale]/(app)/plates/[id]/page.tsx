@@ -27,7 +27,6 @@ const PlatePage = () => {
   return (
     <SubPageLayout
       buttonVariant="contained"
-      sx={{ px: 0 }}
       disablePadding
       returnVariant="absolute"
       prevLinks={[
