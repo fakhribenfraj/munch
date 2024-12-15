@@ -117,7 +117,7 @@ const base = {
   error,
   grey,
   common,
-  divider: "#BDBDBD",
+  divider: alpha(grey[500], 0.2),
   action,
 };
 
