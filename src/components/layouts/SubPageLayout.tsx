@@ -27,7 +27,7 @@ const SubPageLayout = ({
   buttonVariant,
   prevLinks,
   disablePadding,
-  returnVariant,
+  returnVariant = "fixed",
   ...props
 }: SubPageLayoutProps) => {
   return (
