@@ -29,7 +29,7 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
       position="fixed"
       sx={{
         display: { xs: hideSearchField ? "none" : "block", md: "block" },
-        backgroundColor: "grey.200",
+        backgroundColor: "common.white",
         boxShadow: 3,
       }}
     >

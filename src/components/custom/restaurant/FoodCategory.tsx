@@ -19,7 +19,7 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
   return (
     <Stack spacing={2}>
       {/* Category Title */}
-      <Typography variant="h6" fontWeight="bold" mb={2}>
+      <Typography variant="h6" fontWeight="bold">
         {category.title}
       </Typography>
 

@@ -190,7 +190,6 @@ const PlatePage = () => {
           bottom: 0,
           right: 0,
           left: 0,
-          bgcolor: "grey.200",
           px: 3,
           py: 2,
           zIndex: "appBar",

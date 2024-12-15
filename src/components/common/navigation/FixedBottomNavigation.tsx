@@ -66,6 +66,7 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
         <BottomNavigationAction
           key={"nav-bottom-" + item.label}
           href={item.url}
+          aria-label={item.label}
           label={item.label}
           icon={item.icon}
           sx={{

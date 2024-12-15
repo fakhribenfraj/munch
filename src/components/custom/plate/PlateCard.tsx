@@ -9,6 +9,7 @@ import {
   CardMedia,
   IconButton,
   Link,
+  Stack,
   Typography,
 } from "@mui/material";
 
@@ -22,7 +23,7 @@ type PlateCardProps = {
 
 const PlateCard = ({ image, price, title, id, rating }: PlateCardProps) => {
   return (
-    <Card sx={{ position: "relative" }}>
+    <Card sx={{ position: "relative", borderRadius: 1, boxShadow: "none" }}>
       {/* Food Image */}
       <CardMedia
         component="img"
@@ -45,19 +46,31 @@ const PlateCard = ({ image, price, title, id, rating }: PlateCardProps) => {
 
       {/* Food Info */}
       <Link href={`${routes.PLATES}/${id}`}>
-        <CardContent>
+        <CardContent sx={{ padding: 1 }}>
           <Typography variant="subtitle1" fontWeight="bold" noWrap>
             {title}
           </Typography>
-          <Box display="flex" alignItems="center" mt={1}>
-            <StarIcon fontSize="small" color="warning" />
-            <Typography variant="body2" color="text.secondary" ml={0.5}>
-              {rating}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            mt={1}
+          >
+            <Box display="flex" alignItems="center">
+              <StarIcon fontSize="small" color="warning" />
+              <Typography variant="body2" color="text.secondary" ml={0.5}>
+                {rating}
+              </Typography>
+            </Box>
+            <Typography
+              variant="body2"
+              color="primary"
+              sx={{ fontSize: 16 }}
+              fontWeight="bold"
+            >
+              {price}.00 DT
             </Typography>
-          </Box>
-          <Typography variant="body2" color="primary" mt={1} fontWeight="bold">
-            {price} DT
-          </Typography>
+          </Stack>
         </CardContent>
       </Link>
     </Card>

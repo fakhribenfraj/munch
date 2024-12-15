@@ -21,7 +21,6 @@ export function cssBaseline(theme: Theme) {
           padding: 0,
           width: "100%",
           height: "100%",
-          backgroundColor: theme.palette.grey[200],
         },
         "#root, #__next": {
           width: "100%",

@@ -12,14 +12,14 @@ type RestaurantCardProps = {
 };
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   return (
-    <Card sx={{ maxHeight: "100%" }}>
+    <Card sx={{ maxHeight: "100%", borderRadius: 1, boxShadow: "none" }}>
       <CardMedia
         component="img"
         height={190}
         image={restaurant.images[0]}
         alt={restaurant.name}
       />
-      <CardContent>
+      <CardContent sx={{ padding: 1 }}>
         <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
           <Typography variant="h6">{restaurant.name}</Typography>
         </Link>

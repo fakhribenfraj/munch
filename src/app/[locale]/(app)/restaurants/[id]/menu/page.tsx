@@ -139,9 +139,9 @@ export default async function Page({
         sx={{
           position: { xs: "sticky", md: "static" },
           top: 47,
-          bgcolor: "grey.200",
+          bgcolor: "common.white",
           zIndex: "subBar",
-          transform: "scaleX(1.01)",
+          transform: "scale(1.01)",
           borderBottom: "1px solid ",
           borderColor: "divider",
         }}
