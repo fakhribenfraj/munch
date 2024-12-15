@@ -41,9 +41,9 @@ export const grey = {
 
 export const primary = {
   lighter: "#FFB74D",
-  light: "#FFA726",
+  light: "#FFCCBC",
   main: "#FF6C37",
-  dark: "#FB8C00",
+  dark: "#E64A19",
   darker: "#F57C00",
   contrastText: "#FFFFFF",
 };
@@ -51,7 +51,7 @@ export const primary = {
 export const secondary = {
   lighter: "#46bdff",
   light: "#00adff",
-  main: "#009dff",
+  main: "#22ff56",
   dark: "#008eff",
   darker: "#0079ff",
   contrastText: "#000000",
@@ -94,7 +94,7 @@ export const error = {
 };
 
 export const common = {
-  black: "#000000",
+  black: "#212121",
   white: "#FFFFFF",
 };
 
@@ -117,7 +117,7 @@ const base = {
   error,
   grey,
   common,
-  divider: alpha(grey[500], 0.2),
+  divider: "#BDBDBD",
   action,
 };
 
