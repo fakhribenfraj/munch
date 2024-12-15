@@ -78,45 +78,41 @@ function ResponsiveAppBar({
       </Toolbar>
 
       {!hideSearchField && (
-        <>
-          <Divider />
-
-          <HorizontalScrollbarBox
+        <HorizontalScrollbarBox
+          sx={{
+            maxWidth: "100%",
+            margin: "auto",
+            justifyContent: "center",
+          }}
+        >
+          <Toolbar
             sx={{
-              maxWidth: "100%",
-              margin: "auto",
-              justifyContent: "center",
+              columnGap: { xs: 1, md: 2 },
             }}
           >
-            <Toolbar
-              sx={{
-                columnGap: { xs: 1, md: 2 },
-              }}
-            >
-              {[
-                { label: "sandwiches", icon: <LunchDiningIcon /> },
-                { label: "pizza", icon: <LocalPizzaIcon /> },
-                { label: "pasta", icon: <DinnerDiningIcon /> },
-                { label: "spicy", icon: <WhatshotIcon /> },
-                { label: "drinks", icon: <LocalBarIcon /> },
-                { label: "coffe", icon: <LocalCafeIcon /> },
-                { label: "ice cream", icon: <IcecreamIcon /> },
-                { label: "fast food", icon: <FastfoodIcon /> },
-                { label: "cake", icon: <CakeIcon /> },
-              ].map((category) => (
-                <Chip
-                  variant="outlined"
-                  key={category.label}
-                  {...category}
-                  clickable
-                  sx={{
-                    backgroundColor: "common.white",
-                  }}
-                />
-              ))}
-            </Toolbar>
-          </HorizontalScrollbarBox>
-        </>
+            {[
+              { label: "sandwiches", icon: <LunchDiningIcon /> },
+              { label: "pizza", icon: <LocalPizzaIcon /> },
+              { label: "pasta", icon: <DinnerDiningIcon /> },
+              { label: "spicy", icon: <WhatshotIcon /> },
+              { label: "drinks", icon: <LocalBarIcon /> },
+              { label: "coffe", icon: <LocalCafeIcon /> },
+              { label: "ice cream", icon: <IcecreamIcon /> },
+              { label: "fast food", icon: <FastfoodIcon /> },
+              { label: "cake", icon: <CakeIcon /> },
+            ].map((category) => (
+              <Chip
+                variant="outlined"
+                key={category.label}
+                {...category}
+                clickable
+                sx={{
+                  backgroundColor: "common.white",
+                }}
+              />
+            ))}
+          </Toolbar>
+        </HorizontalScrollbarBox>
       )}
     </AppBar>
   );
