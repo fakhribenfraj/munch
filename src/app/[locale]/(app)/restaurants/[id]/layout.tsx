@@ -1,12 +1,13 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
+import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import SafeImage from "@/components/common/image/SafeImage";
 import GoogleDirections from "@/components/common/navigation/GoogleDirections";
+import ReturnButton from "@/components/common/navigation/ReturnButton";
+import MainContainer from "@/components/common/surfaces/MainContainer";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
-import StarIcon from "@mui/icons-material/Star";
-import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 
 export default async function RootLayout({
   children,
@@ -35,8 +36,16 @@ export default async function RootLayout({
   };
   return (
     <SubPageLayout
-      prevPage={{ label: t("EXPLORE"), href: routes.HOME }}
       buttonVariant="contained"
+      sx={{ px: 0 }}
+      disablePadding
+      returnVariant="absolute"
+      prevLinks={[
+        {
+          href: routes.HOME,
+          label: "HOME",
+        },
+      ]}
     >
       <Stack alignItems="flex-start" mb={3}>
         <Box

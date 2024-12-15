@@ -6,7 +6,7 @@ import {
   ContainerProps,
   IconButton,
   Link,
-  Typography
+  Typography,
 } from "@mui/material";
 import { ReactNode } from "react";
 import ReturnButton from "../common/navigation/ReturnButton";
@@ -17,63 +17,55 @@ type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
   disableTopGutter?: boolean;
   buttonVariant?: "contained" | "text";
-  breadcrumbs?: { label: string; href: string }[];
-  prevPage?: { label: string; href: string };
+  prevLinks: { label: string; href: string }[];
   disablePadding?: boolean;
+  returnVariant?: "fixed" | "absolute";
 };
 const SubPageLayout = ({
   children,
   disableTopGutter,
   buttonVariant,
-  breadcrumbs,
-  prevPage,
+  prevLinks,
   disablePadding,
+  returnVariant,
   ...props
 }: SubPageLayoutProps) => {
   return (
     <>
-      <ResponsiveAppBar hideSearchField />
+      <ResponsiveAppBar
+        hideSearchField
+        backButton={
+          returnVariant == "fixed" ? (
+            <ReturnButton url={prevLinks[0]?.href} />
+          ) : undefined
+        }
+      />
       <MainContainer
         sx={{
-          pt: { xs: 0, md: 8 },
           pb: 0,
           position: "relative",
+          ...(returnVariant == "absolute" && {
+            pt: { xs: 0, md: 8 },
+          }),
           ...props.sx,
         }}
         disablePadding={disablePadding}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            zIndex: "appBar",
-            m: 2,
-            display: { xs: "initial", md: "none" },
-          }}
-        >
-          {prevPage ? (
-            <IconButton
-              href={prevPage.href}
-              sx={{
-                ...(buttonVariant == "contained" && {
-                  bgcolor: "common.white",
-                }),
-              }}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          ) : (
-            <ReturnButton
-              sx={{
-                ...(buttonVariant == "contained" && {
-                  bgcolor: "common.white",
-                }),
-              }}
-            />
-          )}
-        </Box>
-        {breadcrumbs && (
+        {returnVariant == "absolute" && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              zIndex: "appBar",
+              m: 2,
+              display: { xs: "initial", md: "none" },
+            }}
+          >
+            <ReturnButton url={prevLinks[0]?.href} />
+          </Box>
+        )}
+        {prevLinks && prevLinks.length > 1 && (
           <Box sx={{ mb: 4 }}>
             <Breadcrumbs
               separator={<NavigateNextIcon fontSize="small" />}
@@ -82,8 +74,8 @@ const SubPageLayout = ({
                 display: { xs: "none", md: "initial" },
               }}
             >
-              {breadcrumbs?.map((item, index) =>
-                index == breadcrumbs.length - 1 ? (
+              {prevLinks?.map((item, index) =>
+                index == prevLinks.length - 1 ? (
                   <Typography key={item.label} sx={{ color: "text.primary" }}>
                     {item.label}
                   </Typography>

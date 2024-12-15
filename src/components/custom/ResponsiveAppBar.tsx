@@ -12,6 +12,8 @@ import { AppBar, Box, Chip, Container, Divider, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Logo from "./Logo";
 import dynamic from "next/dynamic";
+import ReturnButton from "../common/navigation/ReturnButton";
+import { ReactNode } from "react";
 
 const SearchBar = dynamic(() => import("../filters/Searchbar"));
 const AccountMenu = dynamic(() => import("./user/AccountMenu"));
@@ -21,14 +23,21 @@ const HorizontalScrollbarBox = dynamic(
 
 type ResponsiveAppBarProps = {
   hideSearchField?: boolean;
+  backButton?: ReactNode;
 };
 
-function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
+function ResponsiveAppBar({
+  hideSearchField,
+  backButton,
+}: ResponsiveAppBarProps) {
   return (
     <AppBar
       position="fixed"
       sx={{
-        display: { xs: hideSearchField ? "none" : "block", md: "block" },
+        display: {
+          xs: hideSearchField && !backButton ? "none" : "block",
+          md: "block",
+        },
         backgroundColor: "common.white",
         boxShadow: 3,
       }}
@@ -48,6 +57,11 @@ function ResponsiveAppBar({ hideSearchField }: ResponsiveAppBarProps) {
             columnGap: 2,
           }}
         >
+          {backButton && (
+            <Box sx={{ display: { xs: "initial", md: "none" } }}>
+              {backButton}
+            </Box>
+          )}
           <Box sx={{ display: { xs: "none", md: "block" } }}>
             <Logo direction="horizontal" />
           </Box>

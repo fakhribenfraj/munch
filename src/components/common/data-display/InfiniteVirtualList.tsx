@@ -87,7 +87,6 @@ export default function InfiniteVirtualList({
           const rowCount = Math.ceil(
             items.length / itemsPerRow + (hasMore ? 1 : 0)
           );
-          console.log(height, width);
           return (
             <InfiniteLoader
               isItemLoaded={isItemLoaded}

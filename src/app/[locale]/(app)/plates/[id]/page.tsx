@@ -18,12 +18,25 @@ import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import ShowMore from "@/components/common/ShowMore";
 import ButtonModal from "@/components/common/buttons/ButtonModal";
 import PlateCard from "@/components/custom/plate/PlateCard";
+import { routes } from "@/constants/routes";
 
 const PlatePage = () => {
+  const id = 84;
   const img =
     "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=200&h=140&fit=crop&auto=format";
   return (
-    <SubPageLayout buttonVariant="contained" sx={{ px: 0 }} disablePadding>
+    <SubPageLayout
+      buttonVariant="contained"
+      sx={{ px: 0 }}
+      disablePadding
+      returnVariant="absolute"
+      prevLinks={[
+        {
+          href: `${routes.RESTAURANTS}/${id}`,
+          label: "plates",
+        },
+      ]}
+    >
       <Box
         sx={{
           maxWidth: 480,
