@@ -68,10 +68,11 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
     <BottomNavigation
       value={tabsIndexes[activeTab]}
       sx={{
-        height: 64,
+        height: 72,
         display: { xs: "flex", md: "none" },
         borderRadius: "1rem 1rem 0 0",
         px: { xs: 1, sm: 2 },
+        pb: 1,
         boxShadow: 24,
         justifyContent: { xs: "space-between", sm: "space-around" },
       }}

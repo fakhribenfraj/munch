@@ -61,10 +61,11 @@ const ReturnButton = ({
       ) : (
         <IconButton
           {...(props as IconButtonProps)}
-          sx={{ ...styles, p: 1.5 }}
+          disableRipple
+          sx={{ ...styles }}
           onClick={handleClick}
         >
-          <ArrowLeftIconOutlined />
+          <ArrowLeftIconOutlined sx={{ fontSize: 20 }} />
         </IconButton>
       )}
     </>
