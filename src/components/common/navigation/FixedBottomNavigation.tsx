@@ -1,4 +1,9 @@
 "use client";
+import HeartIconFilled from "@/components/icons/filled/Heart";
+import HomeIconFilled from "@/components/icons/filled/Home";
+import HeartIconOutlined from "@/components/icons/outlined/Heart";
+import HomeIconOutlined from "@/components/icons/outlined/Home";
+import UserIconOutlined from "@/components/icons/outlined/User";
 import { routes } from "@/constants/routes";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -25,24 +30,33 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
   }, []);
   const navigationItems = useMemo(
     () => [
-      { label: t("EXPLORE"), icon: <SearchIcon />, url: routes.HOME },
+      {
+        label: t("EXPLORE"),
+        icon: <HomeIconOutlined />,
+        activeIcon: <HomeIconFilled />,
+        url: routes.HOME,
+      },
       ...(session
         ? [
             {
               label: t("WISHLIST"),
-              icon: <FavoriteBorderIcon />,
+              icon: <HeartIconOutlined />,
+              activeIcon: <HeartIconFilled />,
               url: `${routes.WISHLIST}/restaurants`,
             },
             {
               label: t("ACCOUNT"),
-              icon: <AccountCircleOutlinedIcon />,
+              icon: <UserIconOutlined />,
+              activeIcon: <UserIconOutlined />,
               url: routes.ACCOUNT,
             },
           ]
         : [
             {
               label: t("SIGNIN"),
-              icon: <AccountCircleOutlinedIcon />,
+              icon: <UserIconOutlined />,
+              activeIcon: <UserIconOutlined />,
+
               url: routes.SIGNIN,
             },
           ]),
@@ -62,13 +76,13 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
         justifyContent: { xs: "space-between", sm: "space-around" },
       }}
     >
-      {navigationItems.map((item) => (
+      {navigationItems.map((item, index) => (
         <BottomNavigationAction
           key={"nav-bottom-" + item.label}
           href={item.url}
           aria-label={item.label}
           label={item.label}
-          icon={item.icon}
+          icon={index === tabsIndexes[activeTab] ? item.activeIcon : item.icon}
           sx={{
             flex: "none",
             positio: "relative",

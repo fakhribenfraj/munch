@@ -1,5 +1,4 @@
 "use client";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   Button,
@@ -10,10 +9,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import TuneIcon from "@mui/icons-material/Tune";
 import ButtonModal from "../common/buttons/ButtonModal";
 import FilterForm from "@/components/forms/filter/FilterForm";
 import { useTranslations } from "next-intl";
+import FineTuningIconOutlined from "../icons/outlined/FineTuning";
+import SearchIconOutlined from "../icons/outlined/SearchIcon";
 
 const Searchbar = () => {
   const t = useTranslations();
@@ -26,13 +26,13 @@ const Searchbar = () => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <SearchIcon />
+            <SearchIconOutlined />
           </InputAdornment>
         ),
         endAdornment: (
           <ButtonModal
             buttonProps={{ "aria-label": "filters" }}
-            icon={<TuneIcon />}
+            icon={<FineTuningIconOutlined />}
             variant="slide"
             cardProps={{
               sx: {

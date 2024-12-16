@@ -5,6 +5,7 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
+import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
 
 interface FoodCategoryProps {
   children: React.ReactNode;
@@ -45,11 +46,16 @@ const ShowMore = ({
         setShowingMore(!showingMore);
       }}
     >
-      {showingMore ? (
-        <KeyboardDoubleArrowUpIcon />
-      ) : (
-        <KeyboardDoubleArrowDownIcon />
-      )}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          transform: showingMore ? "rotate(180deg)" : "rotate(0deg)",
+          transition: "transform 0.3s ease-in-out",
+        }}
+      >
+        <ArrowsDownIconOutlined />
+      </Box>
     </IconButton>
   );
   return (

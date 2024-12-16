@@ -1,6 +1,6 @@
 "use client";
+import ArrowLeftIconOutlined from "@/components/icons/outlined/ArrowLeft";
 import { useNavigation } from "@/contexts/navigation-context";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
   Button,
   ButtonBaseProps,
@@ -54,17 +54,17 @@ const ReturnButton = ({
           {...(props as ButtonProps)}
           sx={styles}
           onClick={handleClick}
-          startIcon={<ArrowBackIosNewIcon />}
+          startIcon={<ArrowLeftIconOutlined />}
         >
           {label && label}
         </Button>
       ) : (
         <IconButton
           {...(props as IconButtonProps)}
-          sx={styles}
+          sx={{ ...styles, p: 1.5 }}
           onClick={handleClick}
         >
-          <ArrowBackIosNewIcon />
+          <ArrowLeftIconOutlined />
         </IconButton>
       )}
     </>
