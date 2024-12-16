@@ -28,13 +28,12 @@ const ShowMore = ({
   let currentSlidesToShow = useResponsive<number>(slidesToShow, 1);
 
   const openedHeight = ref.current?.offsetTop ?? 0;
-  const isNoSlides = Children.count(children) <= currentSlidesToShow;
+  const isCarousel = Children.count(children) > currentSlidesToShow;
   const triggerButton = (
     <IconButton
       sx={{
         display: "block",
         margin: "auto",
-        mt: 2,
       }}
       onClick={() => {
         if (showingMore) {
@@ -60,11 +59,11 @@ const ShowMore = ({
   );
   return (
     <Box ref={ref}>
-      {!showingMore && (
+      {!showingMore && isCarousel && (
         <Carousel
-          slidesToShow={currentSlidesToShow}
-          arrows={!isNoSlides}
-          dots={!isNoSlides}
+          slidesToShow={currentSlidesToShow * 1.1}
+          arrows={false}
+          dots={false}
           align={align}
           {...(autoPlay !== undefined && {
             autoplay: true,
@@ -75,19 +74,17 @@ const ShowMore = ({
           {children}
         </Carousel>
       )}
-      {!isNoSlides && (
-        <Collapse in={showingMore} timeout="auto" collapsedSize={56}>
-          {!showingMore && triggerButton}
-          <Grid2 container ref={ref}>
-            {Children.map(children, (child, idx) => (
-              <Grid2 size={12 / currentSlidesToShow} key={idx}>
-                {child}
-              </Grid2>
-            ))}
-          </Grid2>
-          {showingMore && triggerButton}
-        </Collapse>
-      )}
+
+      <Collapse in={showingMore || !isCarousel} timeout="auto">
+        <Grid2 container ref={ref}>
+          {Children.map(children, (child, idx) => (
+            <Grid2 size={12 / currentSlidesToShow} key={idx}>
+              {child}
+            </Grid2>
+          ))}
+        </Grid2>
+      </Collapse>
+      {isCarousel && triggerButton}
     </Box>
   );
 };

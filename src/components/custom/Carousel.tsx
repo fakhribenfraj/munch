@@ -68,7 +68,7 @@ const Carousel = ({
       sx={{
         width: "100%",
         maxWidth: width,
-        mb: 2,
+        mb: props.dots ? 2 : 0,
         height: "100%",
         maxHeight: height,
         "& .slick-arrow": {

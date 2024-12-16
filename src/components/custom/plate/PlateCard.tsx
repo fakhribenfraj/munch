@@ -46,7 +46,7 @@ const PlateCard = ({ image, price, title, id, rating }: PlateCardProps) => {
 
       {/* Food Info */}
       <Link href={`${routes.PLATES}/${id}`}>
-        <CardContent sx={{ padding: 1 }}>
+        <CardContent sx={{ padding: 1, "&:last-child": { paddingBottom: 1 } }}>
           <Typography variant="subtitle1" fontWeight="bold" noWrap>
             {title}
           </Typography>
