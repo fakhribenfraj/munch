@@ -1,4 +1,5 @@
 "use client";
+import { useNavigation } from "@/contexts/navigation-context";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import {
   Button,
@@ -32,6 +33,8 @@ const ReturnButton = ({
     ...(fixed && { position: "fixed", top: 0, left: 0, m: 2 }),
     ...sx,
   };
+  const { getLastVisited, history } = useNavigation();
+  console.log(history);
   useEffect(() => {
     if (url) {
       router.prefetch(url);

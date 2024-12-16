@@ -1,6 +1,6 @@
 "use client";
 import updatePassword from "@/actions/profile/updatePassword";
-import ActionForm from "@/components/common/compound/ActionForm";
+import ActionForm from "@/components/common/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack, Typography } from "@mui/material";

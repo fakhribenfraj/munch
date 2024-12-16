@@ -1,5 +1,5 @@
 "use client";
-import ActionForm from "@/components/common/compound/ActionForm";
+import ActionForm from "@/components/common/ActionForm";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import useServerAction from "@/hooks/useServerAction";

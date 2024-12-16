@@ -1,0 +1,6 @@
+.slick-thumb li {
+  width: 60px;
+}
+.slick-thumb .slick-active div {
+  filter: none;
+}

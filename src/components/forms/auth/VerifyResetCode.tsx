@@ -1,7 +1,7 @@
 "use client";
 
 import { forgotPassword } from "@/actions/authorization/forgotPassword";
-import ActionForm from "@/components/common/compound/ActionForm";
+import ActionForm from "@/components/common/ActionForm";
 import DigitInput from "@/components/common/inputs/DigitInput";
 import { routes } from "@/constants/routes";
 import useServerAction from "@/hooks/useServerAction";

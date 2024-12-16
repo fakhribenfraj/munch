@@ -1,5 +1,6 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import Carousel from "@/components/custom/Carousel";
+import RestaurantMediaCarousel from "@/components/custom/restaurant/RestaurantMediaCarousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import EmailIcon from "@mui/icons-material/Email";
@@ -70,31 +71,7 @@ export default async function Page({
       <RestaurantNavTabs id={id} active="overview" />
       <Grid2 container spacing={4}>
         <Grid2 size={{ xs: 12, md: 4 }}>
-          <Carousel
-            slidesToShow={1}
-            centerMode
-            autoplay
-            autoplaySpeed={1000}
-            infinite
-          >
-            {itemData.map((item) => (
-              <Box
-                key={item.title}
-                sx={{
-                  borderRadius: 2,
-                  overflow: "hidden",
-                  boxShadow: 4,
-                }}
-              >
-                <Image
-                  width={400}
-                  height={200}
-                  src={`${item.img}?w=${400}&h=${200}&fit=crop&auto=format`}
-                  alt={item.title}
-                />
-              </Box>
-            ))}
-          </Carousel>
+          <RestaurantMediaCarousel itemData={itemData} />
         </Grid2>
         <Grid2 size={{ xs: 12, md: 8 }}>
           <Stack spacing={2} sx={{ flex: 1 }}>

@@ -1,6 +1,6 @@
 import ClientProviders, {
   SessionProvider,
-} from "@/components/common/compound/ClientProviders";
+} from "@/components/common/ClientProviders";
 import LOCALES from "@/constants/locales";
 import ThemeProvider from "@/theme";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
@@ -15,6 +15,7 @@ import "slick-carousel/slick/slick.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import "../globals.css";
+import NavigationProvider from "@/contexts/navigation-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,9 +53,11 @@ export default async function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider>
             <SessionProvider session={session}>
-              <body className={inter.className}>
-                <ClientProviders>{children}</ClientProviders>
-              </body>
+              <NavigationProvider>
+                <ClientProviders>
+                  <body className={inter.className}>{children}</body>
+                </ClientProviders>
+              </NavigationProvider>
             </SessionProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
