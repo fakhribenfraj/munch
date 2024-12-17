@@ -205,6 +205,7 @@ const PlatePage = () => {
           px: 3,
           py: 2,
           zIndex: "appBar",
+          backgroundColor: "common.white",
         }}
       >
         <ButtonModal
@@ -217,6 +218,7 @@ const PlatePage = () => {
               display: "block",
               maxWidth: "24rem",
               m: "auto",
+              p: 2,
             },
           }}
         >

@@ -61,9 +61,12 @@ const ShowMore = ({
     <Box ref={ref}>
       {!showingMore && isCarousel && (
         <Carousel
-          slidesToShow={currentSlidesToShow * 1.1}
+          slidesToShow={currentSlidesToShow}
+          initialSlide={currentSlidesToShow/2}
           arrows={false}
           dots={false}
+          centerMode={true}
+          centerPadding="20px"
           align={align}
           {...(autoPlay !== undefined && {
             autoplay: true,

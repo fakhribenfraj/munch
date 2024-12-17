@@ -24,28 +24,28 @@ type PlateCardProps = {
 const PlateCard = ({ image, price, title, id, rating }: PlateCardProps) => {
   return (
     <Card sx={{ position: "relative", borderRadius: 1, boxShadow: "none" }}>
-      {/* Food Image */}
-      <CardMedia
-        component="img"
-        height="140"
-        image={`${image}?w=200&h=140&fit=crop&auto=format`}
-        alt={title}
-      />
-      {/* Favorite Button */}
-      <IconButton
-        sx={{
-          position: "absolute",
-          top: 8,
-          right: 8,
-          backgroundColor: "white",
-          zIndex: 1,
-        }}
-      >
-        <FavoriteBorderIcon fontSize="small" />
-      </IconButton>
-
-      {/* Food Info */}
       <Link href={`${routes.PLATES}/${id}`}>
+        {/* Food Image */}
+        <CardMedia
+          component="img"
+          height="140"
+          image={`${image}?w=200&h=140&fit=crop&auto=format`}
+          alt={title}
+        />
+        {/* Favorite Button */}
+        <IconButton
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            backgroundColor: "white",
+            zIndex: 1,
+          }}
+        >
+          <FavoriteBorderIcon fontSize="small" />
+        </IconButton>
+
+        {/* Food Info */}
         <CardContent sx={{ padding: 1, "&:last-child": { paddingBottom: 1 } }}>
           <Typography variant="subtitle1" fontWeight="bold" noWrap>
             {title}

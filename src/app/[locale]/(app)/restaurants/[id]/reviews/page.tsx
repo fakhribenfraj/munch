@@ -183,6 +183,7 @@ const RestaurantReviews = async ({
           px: 3,
           py: 2,
           zIndex: "appBar",
+          backgroundColor: "common.white",
         }}
       >
         <ButtonModal
@@ -195,6 +196,7 @@ const RestaurantReviews = async ({
               display: "block",
               maxWidth: "24rem",
               m: "auto",
+              p: 2,
             },
           }}
         >
