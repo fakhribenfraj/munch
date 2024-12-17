@@ -22,21 +22,13 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 
-const FilterForm = () => {
+const FilterForm = ({filtersBlocks}: {filtersBlocks: getFiltersResponse[]}) => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
-  const {
-    isPending,
-    response: filtersBlocks,
-    startAction,
-  } = useServerAction<ActionResponse<getFiltersResponse[]>>();
-
-  useEffect(() => {
-    startAction(getFilters());
-  }, [startAction]);
+ 
   return (
     <Stack spacing={4}>
-      {filtersBlocks?.data.map((block) => (
+      {filtersBlocks.map((block) => (
         <React.Fragment key={block.category}>
           <Stack spacing={3}>
             <Typography variant="h6" fontWeight="medium" gutterBottom>
@@ -85,6 +77,7 @@ const FilterForm = () => {
                   )}
                   {inputItem.type == "autocomplete" && (
                     <Autocomplete
+                    limitTags={2}
                       multiple
                       options={inputItem.options}
                       disableCloseOnSelect

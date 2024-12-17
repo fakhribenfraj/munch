@@ -14,9 +14,23 @@ import FilterForm from "@/components/forms/filter/FilterForm";
 import { useTranslations } from "next-intl";
 import FineTuningIconOutlined from "../icons/outlined/FineTuning";
 import SearchIconOutlined from "../icons/outlined/SearchIcon";
+import { useEffect } from "react";
+import { getFilters } from "@/actions/restaurants/getFilters";
+import useServerAction from "@/hooks/useServerAction";
+import { ActionResponse } from "@/types/api";
+import { getFiltersResponse } from "@/actions/restaurants/getFilters";
 
 const Searchbar = () => {
   const t = useTranslations();
+  const {
+    isPending,
+    response: filtersBlocks,
+    startAction,
+  } = useServerAction<ActionResponse<getFiltersResponse[]>>();
+
+  useEffect(() => {
+    startAction(getFilters());
+  }, [startAction]);
   return (
     <TextField
       color="primary"
@@ -55,7 +69,7 @@ const Searchbar = () => {
               </Typography>
             </DialogTitle>
             <DialogContent sx={{ maxHeight: "calc(90vh - 160px)" }}>
-              <FilterForm />
+              <FilterForm filtersBlocks={filtersBlocks?.data ?? []} />
             </DialogContent>
             <DialogActions>
               <Button variant="soft">reset</Button>
