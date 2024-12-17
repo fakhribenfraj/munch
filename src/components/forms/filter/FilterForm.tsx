@@ -4,28 +4,23 @@ import {
 } from "@/actions/restaurants/getFilters";
 import RangeInput from "@/components/common/inputs/RangeInput";
 import useServerAction from "@/hooks/useServerAction";
-import { useFilterStore } from "@/providers/filter-store-provider";
 import { ActionResponse } from "@/types/api";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import {
   Autocomplete,
+  Box,
   Checkbox,
   Chip,
+  Divider,
   FormControlLabel,
+  Grid2,
   Rating,
   Stack,
   TextField,
   Typography,
-  Divider,
-  Button,
-  Box,
-  Grid2,
-  FormControl,
-  FormLabel,
-  FormGroup,
 } from "@mui/material";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 const FilterForm = () => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -42,12 +37,12 @@ const FilterForm = () => {
   return (
     <Stack spacing={4}>
       {filtersBlocks?.data.map((block) => (
-        <Box key={block.category}>
-          <Stack gap={3}>
+        <React.Fragment key={block.category}>
+          <Stack spacing={3}>
             <Typography variant="h6" fontWeight="medium" gutterBottom>
               {block.category}
             </Typography>
-            <Grid2 container spacing={2} sx={{ px: 4 }}>
+            <Grid2 container spacing={4} sx={{ px: 4 }}>
               {block.inputs.map((inputItem) => (
                 <Grid2
                   size={{
@@ -56,9 +51,9 @@ const FilterForm = () => {
                   key={inputItem.name}
                 >
                   {inputItem.type == "range" && (
-                    <Stack key={inputItem.label} spacing={4}>
+                    <Stack key={inputItem.label}>
                       <Typography>{inputItem.label}</Typography>
-                      <Stack spacing={2} alignItems="center">
+                      <Stack alignItems="center">
                         <Typography width="100px">from 15 to 30</Typography>
                         <RangeInput
                           min={inputItem.min}
@@ -123,7 +118,6 @@ const FilterForm = () => {
                       renderInput={(params) => (
                         <TextField
                           {...params}
-                          autoFocus
                           label={inputItem.label}
                           placeholder="Type to search"
                           variant="outlined"
@@ -136,7 +130,7 @@ const FilterForm = () => {
             </Grid2>
           </Stack>
           <Divider />
-        </Box>
+        </React.Fragment>
       ))}
 
       {/* Ratings */}
