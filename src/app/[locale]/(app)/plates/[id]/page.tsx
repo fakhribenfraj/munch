@@ -136,7 +136,6 @@ const PlatePage = () => {
             </Typography>
             <ShowMore
               slidesToShow={{ xs: 2, sm: 3 }}
-              align="left"
               autoPlay={2000}
               infinite
             >

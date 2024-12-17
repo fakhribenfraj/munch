@@ -1,8 +1,6 @@
 "use client";
-import Carousel from "@/components/custom/Carousel";
+import Carousel from "@/components/common/surfaces/carousel";
 import useResponsive from "@/hooks/useResponsive";
-import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
 import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
@@ -10,7 +8,6 @@ import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
 interface FoodCategoryProps {
   children: React.ReactNode;
   slidesToShow?: number | { xs?: number; sm?: number; md?: number };
-  align?: "left" | "center" | "right";
   autoPlay?: number;
   infinite?: boolean;
 }
@@ -18,7 +15,6 @@ interface FoodCategoryProps {
 const ShowMore = ({
   children,
   slidesToShow,
-  align,
   autoPlay,
   infinite,
 }: FoodCategoryProps) => {
@@ -57,17 +53,12 @@ const ShowMore = ({
       </Box>
     </IconButton>
   );
+  console.log(Math.floor(currentSlidesToShow / 2));
   return (
     <Box ref={ref}>
       {!showingMore && isCarousel && (
         <Carousel
           slidesToShow={currentSlidesToShow}
-          initialSlide={currentSlidesToShow/2}
-          arrows={false}
-          dots={false}
-          centerMode={true}
-          centerPadding="20px"
-          align={align}
           {...(autoPlay !== undefined && {
             autoplay: true,
             autoplaySpeed: autoPlay,

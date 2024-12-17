@@ -1,54 +1,28 @@
 "use client";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Box, Fab } from "@mui/material";
+import { Box, Fab, SxProps, Theme, useTheme } from "@mui/material";
 import React, { ReactNode } from "react";
 import Slider, { Settings as SlickSettings } from "react-slick";
+import Arrow from "./Arrow";
+import Dots from "./Dots";
+import Paging from "./Paging";
 type CarouselProps = SlickSettings & {
   children: ReactNode;
   width?: string | number;
   height?: string | number;
   ref?: React.RefObject<HTMLDivElement>;
-  align?: "left" | "center" | "right";
+  sx?: SxProps<Theme>;
 };
 const Carousel = ({
   ref,
   children,
   width,
   height,
-  align = "center",
+  sx,
   ...settings
 }: CarouselProps) => {
-  const Arrow = ({
-    onClick,
-    variant,
-  }: {
-    onClick?: () => void;
-    variant: "next" | "prev";
-  }) => {
-    return (
-      <Fab
-        size="small"
-        color="default"
-        className={`slick-arrow arrow-${variant}`}
-        sx={{
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          right: variant === "next" ? 0 : undefined,
-          left: variant === "prev" ? 0 : undefined,
-          m: 2,
-          boxShadow: 2,
-          backgroundColor: "common.white",
-          border: "1px solid",
-          borderColor: "grey.300",
-        }}
-        onClick={onClick}
-      >
-        {variant === "next" ? <ArrowForwardIosIcon /> : <ArrowBackIosNewIcon />}
-      </Fab>
-    );
-  };
+  const theme = useTheme();
 
   const defaultSettings: SlickSettings = {
     dots: true,
@@ -58,6 +32,8 @@ const Carousel = ({
     slidesToScroll: 1,
     nextArrow: <Arrow variant="next" />,
     prevArrow: <Arrow variant="prev" />,
+    appendDots: (dots) => <Dots>{dots}</Dots>,
+    customPaging: (i) => <Paging index={i} />,
   };
   const props = { ...defaultSettings, ...settings };
   const slidesCount = React.Children.count(children);
@@ -67,19 +43,18 @@ const Carousel = ({
       sx={{
         width: "100%",
         maxWidth: width,
-        mb: props.dots ? 2 : 0,
         height: "100%",
         maxHeight: height,
         "& .slick-arrow": {
           display: "none",
         },
-        "& .slick-track": {
-          ml: align === "left" ? 0 : "auto",
-          mr: align === "right" ? 0 : "auto",
+        "& .slick-dots": {
+          bottom: 0,
         },
         "&:hover .slick-arrow": {
           display: { md: "flex" },
         },
+        ...sx,
       }}
     >
       <Slider
