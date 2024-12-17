@@ -2,8 +2,6 @@ import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
 import SafeImage from "@/components/common/image/SafeImage";
 import GoogleDirections from "@/components/common/navigation/GoogleDirections";
-import ReturnButton from "@/components/common/navigation/ReturnButton";
-import MainContainer from "@/components/common/surfaces/MainContainer";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
@@ -17,7 +15,6 @@ export default async function RootLayout({
   params: Promise<{ id: string }>;
 }>) {
   const { id } = await params;
-  const t = await getTranslations();
   const { data: restaurant } = await getRestaurantById(id);
   const logoWidth = 144;
 
@@ -39,12 +36,7 @@ export default async function RootLayout({
       buttonVariant="contained"
       disablePadding
       returnVariant="absolute"
-      prevLinks={[
-        {
-          href: routes.HOME,
-          label: "HOME",
-        },
-      ]}
+      possiblePrevLinks={[routes.HOME, `${routes.WISHLIST}/restaurants`]}
     >
       <Stack alignItems="flex-start" mb={3}>
         <Box
@@ -54,7 +46,6 @@ export default async function RootLayout({
             height: calcCoverHeight(),
             maxHeight: 333,
             transform: {
-              
               sm: `translate(-1.5rem,0)`,
               md: "none",
             },

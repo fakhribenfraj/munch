@@ -1,7 +1,9 @@
 "use client";
 import ArrowLeftIconOutlined from "@/components/icons/outlined/ArrowLeft";
 import { useNavigation } from "@/contexts/navigation-context";
+import ArrowBackIosNew from "@mui/icons-material/ArrowBackIosNew";
 import {
+  alpha,
   Button,
   ButtonBaseProps,
   ButtonProps,
@@ -11,38 +13,45 @@ import {
   Theme,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 type ReturnButtonProps = Omit<ButtonBaseProps, "href"> & {
   label?: string;
   fixed?: boolean;
-  url?: string;
+  possiblePrevLinks?: string[];
 };
 const ReturnButton = ({
   label,
   fixed,
   sx,
-  url,
+  possiblePrevLinks,
   ...props
 }: ReturnButtonProps) => {
   const router = useRouter();
   const styles: SxProps<Theme> = {
     justifyContent: "start",
     columnGap: 2,
-    bgcolor: "common.white",
+    bgcolor: (theme) => alpha(theme.palette.common.white, 0.5),
     color: "common.black",
     ...(fixed && { position: "fixed", top: 0, left: 0, m: 2 }),
     ...sx,
   };
-  const { getLastVisited, history } = useNavigation();
-  console.log(history);
+  const { getLastVisited } = useNavigation();
+
+  const prevLink = useMemo(
+    () =>
+      possiblePrevLinks
+        ? getLastVisited(possiblePrevLinks) ?? possiblePrevLinks[0]
+        : undefined,
+    [getLastVisited, possiblePrevLinks]
+  );
   useEffect(() => {
-    if (url) {
-      router.prefetch(url);
+    if (prevLink) {
+      router.prefetch(prevLink);
     }
-  }, [router, url]);
+  }, [router, prevLink]);
   const handleClick = () => {
-    if (url) {
-      router.push(url);
+    if (prevLink) {
+      router.push(prevLink);
     } else {
       router.back();
     }
@@ -65,7 +74,7 @@ const ReturnButton = ({
           sx={{ ...styles }}
           onClick={handleClick}
         >
-          <ArrowLeftIconOutlined sx={{ fontSize: 20 }} />
+          <ArrowBackIosNew sx={{ fontSize: 20 }} />
         </IconButton>
       )}
     </>

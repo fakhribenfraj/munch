@@ -10,7 +10,7 @@ const Page: NextPage = async () => {
   return (
     <SubPageLayout
       maxWidth="lg"
-      prevLinks={[
+      breadcrumbLinks={[
         {
           href: routes.ACCOUNT,
           label: t("ACCOUNT"),

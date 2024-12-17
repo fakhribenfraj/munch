@@ -8,12 +8,11 @@ import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
-import { AppBar, Box, Chip, Container, Divider, Stack } from "@mui/material";
+import { AppBar, Box, Chip, Container, Stack } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
-import Logo from "./Logo";
 import dynamic from "next/dynamic";
-import ReturnButton from "../common/navigation/ReturnButton";
 import { ReactNode } from "react";
+import Logo from "./Logo";
 
 const SearchBar = dynamic(() => import("../filters/Searchbar"));
 const AccountMenu = dynamic(() => import("./user/AccountMenu"));

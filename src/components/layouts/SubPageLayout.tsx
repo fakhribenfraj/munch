@@ -17,7 +17,8 @@ type SubPageLayoutProps = ContainerProps & {
   children: ReactNode;
   disableTopGutter?: boolean;
   buttonVariant?: "contained" | "text";
-  prevLinks: { label: string; href: string }[];
+  possiblePrevLinks?: string[];
+  breadcrumbLinks?: { label: string; href: string }[];
   disablePadding?: boolean;
   returnVariant?: "fixed" | "absolute";
 };
@@ -25,7 +26,8 @@ const SubPageLayout = ({
   children,
   disableTopGutter,
   buttonVariant,
-  prevLinks,
+  possiblePrevLinks,
+  breadcrumbLinks,
   disablePadding,
   returnVariant = "fixed",
   ...props
@@ -35,8 +37,8 @@ const SubPageLayout = ({
       <ResponsiveAppBar
         hideSearchField
         backButton={
-          returnVariant == "fixed" ? (
-            <ReturnButton url={prevLinks[0]?.href} />
+          returnVariant == "fixed" && possiblePrevLinks? (
+            <ReturnButton possiblePrevLinks={possiblePrevLinks} />
           ) : undefined
         }
       />
@@ -62,10 +64,10 @@ const SubPageLayout = ({
               display: { xs: "initial", md: "none" },
             }}
           >
-            <ReturnButton url={prevLinks[0]?.href} />
+            <ReturnButton possiblePrevLinks={possiblePrevLinks} />
           </Box>
         )}
-        {prevLinks && prevLinks.length > 1 && (
+        {breadcrumbLinks && breadcrumbLinks.length > 1 && (
           <Box sx={{ mb: 4 }}>
             <Breadcrumbs
               separator={<NavigateNextIcon fontSize="small" />}
@@ -74,8 +76,8 @@ const SubPageLayout = ({
                 display: { xs: "none", md: "initial" },
               }}
             >
-              {prevLinks?.map((item, index) =>
-                index == prevLinks.length - 1 ? (
+              {breadcrumbLinks?.map((item, index) =>
+                index == breadcrumbLinks.length - 1 ? (
                   <Typography key={item.label} sx={{ color: "text.primary" }}>
                     {item.label}
                   </Typography>

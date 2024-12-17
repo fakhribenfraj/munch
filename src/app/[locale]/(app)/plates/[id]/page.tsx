@@ -29,11 +29,9 @@ const PlatePage = () => {
       buttonVariant="contained"
       disablePadding
       returnVariant="absolute"
-      prevLinks={[
-        {
-          href: `${routes.RESTAURANTS}/${id}`,
-          label: "plates",
-        },
+      possiblePrevLinks={[
+        `${routes.RESTAURANTS}/${id}/menu`,
+        `${routes.WISHLIST}/plates`,
       ]}
     >
       <Box

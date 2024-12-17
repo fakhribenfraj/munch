@@ -3,14 +3,14 @@ import AvatarSelect from "@/components/custom/user/AvatarSelect";
 import ProfileForm from "@/components/forms/account/ProfileForm";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
-import { Grid2, Stack } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
 const Page: NextPage = async () => {
   const profile = await getProfile();
   return (
     <SubPageLayout
       maxWidth="lg"
-      prevLinks={[
+      breadcrumbLinks={[
         {
           href: routes.ACCOUNT,
           label: "account",
