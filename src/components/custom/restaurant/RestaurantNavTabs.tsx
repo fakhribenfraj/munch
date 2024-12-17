@@ -1,16 +1,17 @@
 import NavTabs from "@/components/common/navigation/NavTabs";
+import Searchbar from "@/components/filters/Searchbar";
 import { routes } from "@/constants/routes";
-import { Box } from "@mui/material";
+import { Box, Stack, Toolbar } from "@mui/material";
 
 type RestaurantNavTabsProps = {
   id: string;
   active: "menu" | "overview" | "reviews";
-  hideBorder?: boolean;
+  showSearchBar?: boolean;
 };
 const RestaurantNavTabs = ({
   id,
   active,
-  hideBorder,
+  showSearchBar,
 }: RestaurantNavTabsProps) => {
   const tabs = [
     { label: "Overview", url: `${routes.RESTAURANTS}/${id}` },
@@ -22,22 +23,29 @@ const RestaurantNavTabs = ({
       sx={{
         width: { md: "25rem" },
         position: { xs: "sticky", md: "static" },
-        top: -1,
+        top: 0,
         zIndex: "subBar",
         bgcolor: "common.white",
-        transform: "scaleX(1.01)",
-        borderBottom: hideBorder ? "none" : "1px solid ",
+        borderBottom: "1px solid ",
         borderColor: "divider",
+        alignItems: "center",
       }}
     >
-      <NavTabs
-        textColor="primary"
-        links={tabs}
-        active={tabs.findIndex(
-          (tab) => tab.label.toLocaleLowerCase() == active
-        )}
-        variant="fullWidth"
-      />
+      <Toolbar sx={{ display: "block" }}>
+        <NavTabs
+          textColor="primary"
+          links={tabs}
+          active={tabs.findIndex(
+            (tab) => tab.label.toLocaleLowerCase() == active
+          )}
+          variant="fullWidth"
+        />
+      </Toolbar>
+      {showSearchBar && (
+        <Toolbar>
+          <Searchbar />
+        </Toolbar>
+      )}
     </Box>
   );
 };
