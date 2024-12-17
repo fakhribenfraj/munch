@@ -1,5 +1,4 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
-import Carousel from "@/components/custom/Carousel";
 import RestaurantMediaCarousel from "@/components/custom/restaurant/RestaurantMediaCarousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
@@ -9,8 +8,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import RoomIcon from "@mui/icons-material/Room";
 import TakeoutDiningIcon from "@mui/icons-material/TakeoutDining";
-import { Box, Button, Grid, Grid2, Stack, Typography } from "@mui/material";
-import Image from "next/image";
+import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
 export default async function Page({
   params,
 }: {
