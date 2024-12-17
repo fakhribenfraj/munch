@@ -1,24 +1,18 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Chip,
-  Card,
-  CardMedia,
-  CardContent,
-  Stack,
-  DialogContent,
-  Divider,
-} from "@mui/material";
+import ShowMore from "@/components/common/ShowMore";
+import AddReviewActionButton from "@/components/custom/action-buttons/AddReviewActionButton";
+import PlateCard from "@/components/custom/plate/PlateCard";
+import SubPageLayout from "@/components/layouts/SubPageLayout";
+import { routes } from "@/constants/routes";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import StarIcon from "@mui/icons-material/Star";
-import SubPageLayout from "@/components/layouts/SubPageLayout";
-import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
-import ShowMore from "@/components/common/ShowMore";
-import ButtonModal from "@/components/common/buttons/ButtonModal";
-import PlateCard from "@/components/custom/plate/PlateCard";
-import { routes } from "@/constants/routes";
+import {
+  Box,
+  CardMedia,
+  Chip,
+  Divider,
+  Stack,
+  Typography,
+} from "@mui/material";
 
 const PlatePage = () => {
   const id = 84;
@@ -193,47 +187,7 @@ const PlatePage = () => {
           {/* Add Review Button */}
         </Stack>
       </Box>
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          left: 0,
-          px: 3,
-          py: 2,
-          zIndex: "appBar",
-          backgroundColor: "common.white",
-        }}
-      >
-        <ButtonModal
-          label="write review"
-          buttonProps={{
-            variant: "contained",
-            color: "primary",
-            fullWidth: true,
-            sx: {
-              display: "block",
-              maxWidth: "24rem",
-              m: "auto",
-              p: 2,
-            },
-          }}
-        >
-          <DialogContent>
-            <Box
-              sx={{
-                p: 4,
-              }}
-            >
-              <Typography variant="h6" fontWeight="bold" gutterBottom>
-                Add Your Review
-              </Typography>
-              <AddReviewForm />
-            </Box>
-          </DialogContent>
-        </ButtonModal>
-      </Box>
+      <AddReviewActionButton label="write review" />
     </SubPageLayout>
   );
 };

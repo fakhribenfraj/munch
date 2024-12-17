@@ -1,23 +1,16 @@
-import ButtonModal from "@/components/common/buttons/ButtonModal";
+import AddReviewActionButton from "@/components/custom/action-buttons/AddReviewActionButton";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import ReviewsList from "@/components/custom/restaurant/ReviewsList";
 import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
 import {
-  Avatar,
   Box,
-  DialogContent,
   Divider,
   Grid2,
   LinearProgress,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
   Rating,
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 // Mock data
 const restaurantData = {
@@ -173,47 +166,7 @@ const RestaurantReviews = async ({
           <ReviewsList reviews={restaurantData.reviews} />
         </Grid2>
       </Grid2>
-      <Box
-        sx={{
-          display: { xs: "block", md: "none" },
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          left: 0,
-          px: 3,
-          py: 2,
-          zIndex: "appBar",
-          backgroundColor: "common.white",
-        }}
-      >
-        <ButtonModal
-          label="write review"
-          buttonProps={{
-            variant: "contained",
-            color: "primary",
-            fullWidth: true,
-            sx: {
-              display: "block",
-              maxWidth: "24rem",
-              m: "auto",
-              p: 2,
-            },
-          }}
-        >
-          <DialogContent>
-            <Box
-              sx={{
-                p: 4,
-              }}
-            >
-              <Typography variant="h6" fontWeight="bold" gutterBottom>
-                Add Your Review
-              </Typography>
-              <AddReviewForm />
-            </Box>
-          </DialogContent>
-        </ButtonModal>
-      </Box>
+      <AddReviewActionButton label="write review" />
     </Stack>
   );
 };
