@@ -22,7 +22,6 @@ const Searchbar = () => {
       color="primary"
       placeholder={t("SEARCH_PLACEHOLDER")}
       fullWidth
-      sx={{ maxWidth: { xs: "100%", md: "70%", lg: "50%" } }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
@@ -46,7 +45,12 @@ const Searchbar = () => {
             }}
           >
             <DialogTitle>
-              <Typography variant="h5" color="primary" fontWeight="bold">
+              <Typography
+                component="span"
+                variant="h5"
+                color="primary"
+                fontWeight="bold"
+              >
                 Filters
               </Typography>
             </DialogTitle>

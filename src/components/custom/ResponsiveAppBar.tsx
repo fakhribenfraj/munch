@@ -65,7 +65,16 @@ function ResponsiveAppBar({
             <Logo direction="horizontal" />
           </Box>
 
-          {!hideSearchField && <SearchBar />}
+          {!hideSearchField && (
+            <Box
+              sx={{
+                width: "100%",
+                maxWidth: { xs: "100%", md: "70%", lg: "50%" },
+              }}
+            >
+              <SearchBar />
+            </Box>
+          )}
           <Stack
             flexDirection="row"
             columnGap={1}

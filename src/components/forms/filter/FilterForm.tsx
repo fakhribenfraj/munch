@@ -35,118 +35,38 @@ const FilterForm = () => {
     response: filtersBlocks,
     startAction,
   } = useServerAction<ActionResponse<getFiltersResponse[]>>();
-  const RangeInputs = [
-    {
-      label: "Distance",
-      min: 1,
-      max: 100,
-    },
-    {
-      label: "Price",
-      min: 1,
-      max: 120,
-    },
-  ];
 
-  const ingredients = [
-    { title: "tomato" },
-    { title: "potato" },
-    { title: "garlic" },
-    { title: "onion" },
-    { title: "meat" },
-    { title: "cheese" },
-    { title: "lettuce" },
-    { title: "peanut" },
-  ];
-
-  const filters = [
-    {
-      title: "Resto Info",
-      items: [
-        { label: "Calm", name: "calm" },
-        { label: "Normal", name: "normal" },
-        { label: "Antique", name: "antique" },
-        { label: "Bar", name: "bar" },
-      ],
-    },
-    {
-      title: "Space",
-      items: [
-        { label: "Terrace", name: "terrace" },
-        { label: "Smoking Area", name: "smoking" },
-        { label: "Kids Space", name: "kids" },
-      ],
-    },
-    {
-      title: "Service",
-      items: [
-        { label: "WiFi", name: "wifi" },
-        { label: "Takeout", name: "takeout" },
-        { label: "Reservation", name: "reservation" },
-        { label: "Delivery", name: "delivery" },
-      ],
-    },
-  ];
-  const foodPreferences = [
-    {
-      label: "Type",
-      items: ["Meat", "Fruit", "Drinks", "Bread", "Veggies", "Dairy"],
-    },
-    {
-      label: "Cuisine",
-      items: ["Italian", "Indian", "Mexican", "Chinese", "Tunisian"],
-    },
-    {
-      label: "Cooking Style",
-      items: ["Grilled", "Fried", "Baked", "Steamed", "Raw"],
-    },
-    {
-      label: "Size",
-      items: ["1 Person", "2 Persons", "4 Persons", "8 Persons"],
-    },
-    {
-      label: "Time",
-      items: ["Quick", "Medium", "Slow-Cooked"],
-    },
-  ];
   useEffect(() => {
     startAction(getFilters());
   }, [startAction]);
   return (
-    <Stack
-      gap={4}
-      sx={{ p: 4, background: "#fafafa", borderRadius: 2, boxShadow: 3 }}
-    >
+    <Stack spacing={4}>
       {filtersBlocks?.data.map((block) => (
         <Box key={block.category}>
           <Stack gap={3}>
             <Typography variant="h6" fontWeight="medium" gutterBottom>
               {block.category}
             </Typography>
-            <Grid2 container spacing={2}>
+            <Grid2 container spacing={2} sx={{ px: 4 }}>
               {block.inputs.map((inputItem) => (
                 <Grid2
                   size={{
                     xs: 12,
-                    md: inputItem.type == "autocomplete" ? 6 : 12,
                   }}
                   key={inputItem.name}
                 >
                   {inputItem.type == "range" && (
-                    <Box
-                      key={inputItem.label}
-                      display="flex"
-                      alignItems="center"
-                      gap={2}
-                    >
-                      <Typography width="100px">{inputItem.label}</Typography>
-                      <RangeInput
-                        size="medium"
-                        min={inputItem.min}
-                        max={inputItem.max}
-                        disableSwap
-                      />
-                    </Box>
+                    <Stack key={inputItem.label} spacing={4}>
+                      <Typography>{inputItem.label}</Typography>
+                      <Stack spacing={2} alignItems="center">
+                        <Typography width="100px">from 15 to 30</Typography>
+                        <RangeInput
+                          min={inputItem.min}
+                          max={inputItem.max}
+                          disableSwap
+                        />
+                      </Stack>
+                    </Stack>
                   )}
                   {inputItem.type == "checkbox" && (
                     <Grid2 container>
@@ -174,8 +94,12 @@ const FilterForm = () => {
                       options={inputItem.options}
                       disableCloseOnSelect
                       getOptionLabel={(option) => option.label}
-                      renderOption={(props, option, { selected }) => (
-                        <li {...props}>
+                      renderOption={(
+                        { key, ...props },
+                        option,
+                        { selected }
+                      ) => (
+                        <li key={key} {...props}>
                           <Checkbox
                             icon={icon}
                             checkedIcon={checkedIcon}
@@ -185,7 +109,6 @@ const FilterForm = () => {
                           {option.label}
                         </li>
                       )}
-                      fullWidth
                       renderTags={(tagValue, getTagProps) =>
                         tagValue.map((option, index) => (
                           <Chip
@@ -222,14 +145,12 @@ const FilterForm = () => {
           Ratings
         </Typography>
         <Grid2 container spacing={2}>
-          {["Taste", "Vibe", "Service"].map((rating) => (
-            <Grid2 size={{ xs: 12, sm: 4 }} key={rating}>
-              <Typography variant="body1" gutterBottom>
-                {rating}
-              </Typography>
-              <Rating name={`${rating}-rating`} defaultValue={5} size="large" />
-            </Grid2>
-          ))}
+          <Grid2 size={{ xs: 12, sm: 4 }}>
+            <Typography variant="body1" gutterBottom>
+              {4.5}
+            </Typography>
+            <Rating name={`rating`} defaultValue={5} size="large" />
+          </Grid2>
         </Grid2>
       </Stack>
     </Stack>

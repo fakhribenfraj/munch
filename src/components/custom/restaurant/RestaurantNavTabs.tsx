@@ -21,7 +21,6 @@ const RestaurantNavTabs = ({
   return (
     <Box
       sx={{
-        width: { md: "25rem" },
         position: { xs: "sticky", md: "static" },
         top: 0,
         zIndex: "subBar",
@@ -31,7 +30,7 @@ const RestaurantNavTabs = ({
         alignItems: "center",
       }}
     >
-      <Toolbar sx={{ display: "block" }}>
+      <Toolbar sx={{ display: "block", width: { md: "25rem" } }}>
         <NavTabs
           textColor="primary"
           links={tabs}
@@ -42,7 +41,7 @@ const RestaurantNavTabs = ({
         />
       </Toolbar>
       {showSearchBar && (
-        <Toolbar>
+        <Toolbar sx={{ px: { lg: 8 } }}>
           <Searchbar />
         </Toolbar>
       )}
