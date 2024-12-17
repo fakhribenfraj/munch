@@ -1,7 +1,7 @@
 "use client";
 import { Box } from "@mui/material";
 import Image from "next/image";
-import Carousel from "../../../common/surfaces/carousel/Carousel";
+import Carousel from "../../../common/surfaces/carousel";
 import "./restaurant.css";
 type RestaurantMediaCarouselProps = {
   itemData: {
