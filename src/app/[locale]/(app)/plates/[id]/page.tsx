@@ -1,4 +1,4 @@
-import ShowMore from "@/components/common/ShowMore";
+import AccordionCarousel from "@/components/common/AccordionCarousel";
 import AddReviewActionButton from "@/components/custom/action-buttons/AddReviewActionButton";
 import PlateCard from "@/components/custom/plate/PlateCard";
 import SubPageLayout from "@/components/layouts/SubPageLayout";
@@ -134,7 +134,7 @@ const PlatePage = () => {
             <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
               Similar dishes
             </Typography>
-            <ShowMore
+            <AccordionCarousel
               slidesToShow={{ xs: 2, sm: 3 }}
               autoPlay={2000}
               infinite
@@ -181,7 +181,7 @@ const PlatePage = () => {
                   />
                 </Box>
               ))}
-            </ShowMore>
+            </AccordionCarousel>
           </Stack>
           {/* Add Review Button */}
         </Stack>

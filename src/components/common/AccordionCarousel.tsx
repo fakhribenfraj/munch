@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import { Children, useRef, useState } from "react";
 import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
-import { CarouselPagination } from "./carousels";
+import { CarouselDefault, CarouselPagination } from "./carousels";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-type ShowMoreProps = {
+type AccordionCarouselProps = {
   children: React.ReactNode;
   slidesToShow?: number | { xs?: number; sm?: number; md?: number };
   autoPlay?: number;
@@ -21,14 +22,14 @@ type ShowMoreProps = {
   title?: string;
 };
 
-const ShowMore = ({
+const AccordionCarousel = ({
   children,
   slidesToShow,
   autoPlay,
   infinite,
   spacing = 0,
   title,
-}: ShowMoreProps) => {
+}: AccordionCarouselProps) => {
   const [showingMore, setShowingMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -40,7 +41,6 @@ const ShowMore = ({
     <IconButton
       sx={{
         display: "block",
-        margin: "auto",
       }}
       onClick={() => {
         if (showingMore) {
@@ -65,20 +65,37 @@ const ShowMore = ({
     </IconButton>
   );
   return (
-    <Stack>
-      {title && (
-        <Typography
-          variant="h6"
-          fontWeight="bold"
-          sx={{ mb: !showingMore && isCarousel ? -4 : 2 }}
-        >
-          {title}
-        </Typography>
-      )}
+    <Stack spacing={2}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        px={spacing}
+      >
+        {title && (
+          <Typography variant="h6" fontWeight="bold">
+            {title}
+          </Typography>
+        )}
+        {isCarousel && (
+          <IconButton
+            onClick={() => setShowingMore(!showingMore)}
+            sx={{
+              p: 0,
+            }}
+          >
+            <ExpandMoreIcon
+              sx={{
+                transform: showingMore ? "rotate(180deg)" : "rotate(0deg)",
+              }}
+            />
+          </IconButton>
+        )}
+      </Stack>
 
       <Box ref={ref}>
         {!showingMore && isCarousel && (
-          <CarouselPagination
+          <CarouselDefault
             slidesToShow={currentSlidesToShow}
             {...(autoPlay !== undefined && {
               autoplay: true,
@@ -88,7 +105,7 @@ const ShowMore = ({
             spacing={spacing}
           >
             {children}
-          </CarouselPagination>
+          </CarouselDefault>
         )}
 
         <Collapse in={showingMore || !isCarousel} timeout="auto">
@@ -100,10 +117,14 @@ const ShowMore = ({
             ))}
           </Grid2>
         </Collapse>
-        {isCarousel && triggerButton}
+        {isCarousel && showingMore && (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {triggerButton}
+          </Box>
+        )}
       </Box>
     </Stack>
   );
 };
 
-export default ShowMore;
+export default AccordionCarousel;

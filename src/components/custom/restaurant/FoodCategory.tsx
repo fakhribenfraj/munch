@@ -1,6 +1,5 @@
-import ShowMore from "@/components/common/ShowMore";
 import PlateCard from "@/components/custom/plate/PlateCard";
-import { Box, Stack, Typography } from "@mui/material";
+import AccordionCarousel from "@/components/common/AccordionCarousel";
 
 interface FoodCategoryProps {
   category: {
@@ -17,7 +16,11 @@ interface FoodCategoryProps {
 
 const FoodCategory = ({ category }: FoodCategoryProps) => {
   return (
-    <ShowMore slidesToShow={{ xs: 2, sm: 3, md: 5 }} spacing={1} title={category.title}>
+    <AccordionCarousel
+      slidesToShow={{ xs: 2, sm: 3, md: 5 }}
+      spacing={1}
+      title={category.title}
+    >
       {category.items.map((item, idx) => (
         <PlateCard
           key={idx}
@@ -28,7 +31,7 @@ const FoodCategory = ({ category }: FoodCategoryProps) => {
           rating={item.rating}
         />
       ))}
-    </ShowMore>
+    </AccordionCarousel>
   );
 };
 

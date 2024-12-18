@@ -1,7 +1,10 @@
 "use client";
 import { Box } from "@mui/material";
 import Image from "next/image";
-import Carousel from "../../../common/carousels/variants/CarouselDefault";
+import {
+  default as Carousel,
+  default as CarouselDefault,
+} from "../../../common/carousels/variants/CarouselDefault";
 import "./restaurant.css";
 type RestaurantMediaCarouselProps = {
   itemData: {
@@ -13,11 +16,9 @@ const RestaurantMediaCarousel = ({
   itemData,
 }: RestaurantMediaCarouselProps) => {
   return (
-    <Carousel
+    <CarouselDefault
       // autoplay
-      dots
       autoplaySpeed={2000}
-   
       infinite
     >
       {itemData.map((item) => (
@@ -39,7 +40,7 @@ const RestaurantMediaCarousel = ({
           />
         </Box>
       ))}
-    </Carousel>
+    </CarouselDefault>
   );
 };
 
