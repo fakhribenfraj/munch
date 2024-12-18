@@ -17,27 +17,18 @@ interface FoodCategoryProps {
 
 const FoodCategory = ({ category }: FoodCategoryProps) => {
   return (
-    <Stack spacing={2}>
-      {/* Category Title */}
-      <Typography variant="h6" fontWeight="bold">
-        {category.title}
-      </Typography>
-
-      {/* Food Items Grid */}
-      <ShowMore slidesToShow={{ xs: 2, sm: 3, md: 5 }}>
-        {category.items.map((item, idx) => (
-          <Box key={idx} p={1}>
-            <PlateCard
-              id={item.id}
-              title={item.name}
-              image={item.image}
-              price={item.price}
-              rating={item.rating}
-            />
-          </Box>
-        ))}
-      </ShowMore>
-    </Stack>
+    <ShowMore slidesToShow={{ xs: 2, sm: 3, md: 5 }} spacing={1} title={category.title}>
+      {category.items.map((item, idx) => (
+        <PlateCard
+          key={idx}
+          id={item.id}
+          title={item.name}
+          image={item.image}
+          price={item.price}
+          rating={item.rating}
+        />
+      ))}
+    </ShowMore>
   );
 };
 

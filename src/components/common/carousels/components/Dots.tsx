@@ -14,11 +14,11 @@ const Dots = ({ children }: { children: React.ReactNode }) => {
           display: "block",
         },
         "& li.slick-active *": {
-          filter: "brightness(1)",
+          opacity: 1,
         },
       }}
     >
-      <Stack direction="row" spacing={1} sx={{ margin: "0px" }}>
+      <Stack component="ul" direction="row" spacing={1} sx={{ margin: "0px" }}>
         {children}
       </Stack>
     </Box>

@@ -1,31 +1,28 @@
 "use client";
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Box, Fab, SxProps, Theme, useTheme } from "@mui/material";
-import React, { ReactNode } from "react";
+import { Box, SxProps, Theme } from "@mui/material";
+import React, { ReactNode, useRef } from "react";
 import Slider, { Settings as SlickSettings } from "react-slick";
-import Arrow from "./Arrow";
-import Dots from "./Dots";
-import Paging from "./Paging";
-type CarouselProps = SlickSettings & {
+import Arrow from "../components/Arrow";
+import Dots from "../components/Dots";
+import Paging from "../components/Paging";
+
+export type CarouselDefaultProps = SlickSettings & {
   children: ReactNode;
   width?: string | number;
   height?: string | number;
-  ref?: React.RefObject<HTMLDivElement>;
+  spacing?: number;
   sx?: SxProps<Theme>;
+  ref?: React.RefObject<Slider>;
 };
-const Carousel = ({
-  ref,
+const CarouselDefault = ({
   children,
   width,
   height,
   sx,
+  spacing = 0,
   ...settings
-}: CarouselProps) => {
-  const theme = useTheme();
-
+}: CarouselDefaultProps) => {
   const defaultSettings: SlickSettings = {
-    dots: true,
     arrows: true,
     speed: 500,
     slidesToShow: 1,
@@ -39,7 +36,6 @@ const Carousel = ({
   const slidesCount = React.Children.count(children);
   return (
     <Box
-      ref={ref}
       sx={{
         width: "100%",
         maxWidth: width,
@@ -47,9 +43,6 @@ const Carousel = ({
         maxHeight: height,
         "& .slick-arrow": {
           display: "none",
-        },
-        "& .slick-dots": {
-          bottom: 0,
         },
         "&:hover .slick-arrow": {
           display: { md: "flex" },
@@ -63,10 +56,12 @@ const Carousel = ({
           slidesCount >= (props?.slidesToShow ?? 1) ? props.infinite : false
         }
       >
-        {children}
+        {React.Children.map(children, (child) => (
+          <Box sx={{ px: spacing }}>{child}</Box>
+        ))}
       </Slider>
     </Box>
   );
 };
 
-export default Carousel;
+export default CarouselDefault;

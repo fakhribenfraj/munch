@@ -16,7 +16,7 @@ export default async function Page({
   return (
     <Stack spacing={1}>
       <RestaurantNavTabs id={id} active="menu" showSearchBar />
-      <Stack spacing={2}>
+      <Stack spacing={4}>
         {menu.map((category, index) => (
           <FoodCategory category={category} key={index} />
         ))}

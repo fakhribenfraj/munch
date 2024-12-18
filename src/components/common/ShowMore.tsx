@@ -1,23 +1,34 @@
 "use client";
-import Carousel from "@/components/common/surfaces/carousel";
 import useResponsive from "@/hooks/useResponsive";
-import { Box, Collapse, Grid2, IconButton } from "@mui/material";
+import {
+  Box,
+  Collapse,
+  Grid2,
+  IconButton,
+  Typography,
+  Stack,
+} from "@mui/material";
 import { Children, useRef, useState } from "react";
 import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
+import { CarouselPagination } from "./carousels";
 
-interface FoodCategoryProps {
+type ShowMoreProps = {
   children: React.ReactNode;
   slidesToShow?: number | { xs?: number; sm?: number; md?: number };
   autoPlay?: number;
   infinite?: boolean;
-}
+  spacing?: number;
+  title?: string;
+};
 
 const ShowMore = ({
   children,
   slidesToShow,
   autoPlay,
   infinite,
-}: FoodCategoryProps) => {
+  spacing = 0,
+  title,
+}: ShowMoreProps) => {
   const [showingMore, setShowingMore] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,33 +64,45 @@ const ShowMore = ({
       </Box>
     </IconButton>
   );
-  console.log(Math.floor(currentSlidesToShow / 2));
   return (
-    <Box ref={ref}>
-      {!showingMore && isCarousel && (
-        <Carousel
-          slidesToShow={currentSlidesToShow}
-          {...(autoPlay !== undefined && {
-            autoplay: true,
-            autoplaySpeed: autoPlay,
-          })}
-          infinite={infinite}
+    <Stack>
+      {title && (
+        <Typography
+          variant="h6"
+          fontWeight="bold"
+          sx={{ mb: !showingMore && isCarousel ? -4 : 2 }}
         >
-          {children}
-        </Carousel>
+          {title}
+        </Typography>
       )}
 
-      <Collapse in={showingMore || !isCarousel} timeout="auto">
-        <Grid2 container ref={ref}>
-          {Children.map(children, (child, idx) => (
-            <Grid2 size={12 / currentSlidesToShow} key={idx}>
-              {child}
-            </Grid2>
-          ))}
-        </Grid2>
-      </Collapse>
-      {isCarousel && triggerButton}
-    </Box>
+      <Box ref={ref}>
+        {!showingMore && isCarousel && (
+          <CarouselPagination
+            slidesToShow={currentSlidesToShow}
+            {...(autoPlay !== undefined && {
+              autoplay: true,
+              autoplaySpeed: autoPlay,
+            })}
+            infinite={infinite}
+            spacing={spacing}
+          >
+            {children}
+          </CarouselPagination>
+        )}
+
+        <Collapse in={showingMore || !isCarousel} timeout="auto">
+          <Grid2 container ref={ref} spacing={spacing}>
+            {Children.map(children, (child, idx) => (
+              <Grid2 size={12 / currentSlidesToShow} key={idx}>
+                {child}
+              </Grid2>
+            ))}
+          </Grid2>
+        </Collapse>
+        {isCarousel && triggerButton}
+      </Box>
+    </Stack>
   );
 };
 
