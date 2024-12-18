@@ -36,6 +36,7 @@ const AccordionCarousel = ({
   let currentSlidesToShow = useResponsive<number>(slidesToShow, 1);
 
   const openedHeight = ref.current?.offsetTop ?? 0;
+  console.log(ref.current);
   const isCarousel = Children.count(children) > currentSlidesToShow;
   const triggerButton = (
     <IconButton
@@ -45,7 +46,7 @@ const AccordionCarousel = ({
       onClick={() => {
         if (showingMore) {
           document?.querySelector("main")?.scroll({
-            top: openedHeight - 215,
+            top: openedHeight - 112,
             behavior: "smooth",
           });
         }
@@ -65,7 +66,7 @@ const AccordionCarousel = ({
     </IconButton>
   );
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} ref={ref}>
       <Stack
         direction="row"
         alignItems="center"
@@ -93,7 +94,11 @@ const AccordionCarousel = ({
         )}
       </Stack>
 
-      <Box ref={ref}>
+      <Collapse
+        in={showingMore || !isCarousel}
+        timeout="auto"
+        collapsedSize={230}
+      >
         {!showingMore && isCarousel && (
           <CarouselDefault
             slidesToShow={currentSlidesToShow}
@@ -107,22 +112,21 @@ const AccordionCarousel = ({
             {children}
           </CarouselDefault>
         )}
-
-        <Collapse in={showingMore || !isCarousel} timeout="auto">
-          <Grid2 container ref={ref} spacing={spacing}>
+        {(showingMore || !isCarousel) && (
+          <Grid2 container ref={ref}>
             {Children.map(children, (child, idx) => (
-              <Grid2 size={12 / currentSlidesToShow} key={idx}>
+              <Grid2 size={12 / currentSlidesToShow} key={idx} p={spacing}>
                 {child}
               </Grid2>
             ))}
           </Grid2>
-        </Collapse>
-        {isCarousel && showingMore && (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            {triggerButton}
-          </Box>
         )}
-      </Box>
+      </Collapse>
+      {isCarousel && showingMore && (
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          {triggerButton}
+        </Box>
+      )}
     </Stack>
   );
 };

@@ -14,7 +14,7 @@ export default async function Page({
 
   const { data: menu } = await getRestaurantMenuById(id);
   return (
-    <Stack spacing={1}>
+    <Stack spacing={2}>
       <RestaurantNavTabs id={id} active="menu" showSearchBar />
       <Stack spacing={4}>
         {menu.map((category, index) => (

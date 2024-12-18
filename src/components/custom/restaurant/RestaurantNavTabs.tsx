@@ -25,8 +25,8 @@ const RestaurantNavTabs = ({
         top: 0,
         zIndex: "subBar",
         bgcolor: "common.white",
-        borderBottom: "1px solid ",
-        borderColor: "divider",
+        // borderBottom: "1px solid ",
+        // borderColor: "divider",
         alignItems: "center",
       }}
     >
