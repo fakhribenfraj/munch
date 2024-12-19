@@ -1,7 +1,6 @@
 import AddReviewActionButton from "@/components/custom/action-buttons/AddReviewActionButton";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
-import ReviewsList from "@/components/custom/restaurant/ReviewsList";
-import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
+
 import {
   Box,
   Divider,
@@ -11,7 +10,13 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
+import dynamic from "next/dynamic";
+const AddReviewForm = dynamic(
+  () => import("@/components/forms/restaurant/reviews/AddReviewForm")
+);
+const ReviewsList = dynamic(
+  () => import("@/components/custom/restaurant/ReviewsList")
+);
 // Mock data
 const restaurantData = {
   id: 1,

@@ -1,10 +1,10 @@
-import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import { getRestaurantMenuById } from "@/actions/restaurants/getRestaurantMenuById";
-import FoodCategory from "@/components/custom/restaurant/FoodCategory";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
-import Searchbar from "@/components/filters/Searchbar";
-import { Stack, Toolbar } from "@mui/material";
-
+import { Stack } from "@mui/material";
+import dynamic from "next/dynamic";
+const FoodCategory = dynamic(
+  () => import("@/components/custom/restaurant/FoodCategory")
+);
 export default async function Page({
   params,
 }: {

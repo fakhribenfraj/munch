@@ -1,7 +1,5 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
 import { getRestaurantAttachementsById } from "@/actions/restaurants/getRestaurantAttachementsById";
-import { CarouselSlideshow } from "@/components/common/carousels";
-import RestaurantMediaCarousel from "@/components/custom/restaurant/RestaurantMediaCarousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import EmailIcon from "@mui/icons-material/Email";
@@ -11,6 +9,11 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import RoomIcon from "@mui/icons-material/Room";
 import TakeoutDiningIcon from "@mui/icons-material/TakeoutDining";
 import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
+
+const CarouselSlideshow = dynamic(() =>
+  import("@/components/common/carousels").then((mod) => mod.CarouselSlideshow)
+);
 export default async function Page({
   params,
 }: {
