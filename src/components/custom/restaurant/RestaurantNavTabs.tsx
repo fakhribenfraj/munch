@@ -25,21 +25,19 @@ const RestaurantNavTabs = ({
         top: 0,
         zIndex: "subBar",
         bgcolor: "common.white",
-        // borderBottom: "1px solid ",
-        // borderColor: "divider",
+
         alignItems: "center",
       }}
     >
-      <Toolbar sx={{ display: "block", width: { md: "25rem" } }}>
-        <NavTabs
-          textColor="primary"
-          links={tabs}
-          active={tabs.findIndex(
-            (tab) => tab.label.toLocaleLowerCase() == active
-          )}
-          variant="fullWidth"
-        />
-      </Toolbar>
+      <NavTabs
+        sx={{ width: { xs: "100%", md: "25rem" } }}
+        textColor="primary"
+        links={tabs}
+        active={tabs.findIndex(
+          (tab) => tab.label.toLocaleLowerCase() == active
+        )}
+        variant="fullWidth"
+      />
       {showSearchBar && (
         <Toolbar sx={{ px: { lg: 8 } }}>
           <Searchbar />

@@ -2,9 +2,9 @@
 import { Box, SxProps, Theme } from "@mui/material";
 import React, { ReactNode, useRef } from "react";
 import Slider, { Settings as SlickSettings } from "react-slick";
-import Arrow from "../components/Arrow";
-import Dots from "../components/Dots";
-import Paging from "../components/Paging";
+import Arrow from "./Arrow";
+import Dots from "./Dots";
+import Paging from "./Paging";
 
 export type CarouselDefaultProps = Omit<SlickSettings, "dots"> & {
   children: ReactNode;

@@ -3,7 +3,8 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { Box, Button, ButtonGroup, Stack } from "@mui/material";
 import React, { ReactNode, useRef } from "react";
 import Slider from "react-slick";
-import CarouselDefault, { CarouselDefaultProps } from "./CarouselDefault";
+import CarouselDefault, { CarouselDefaultProps } from "../default";
+import { getElementName } from "@/utils/react";
 
 export type CarouselPaginationProps = Omit<CarouselDefaultProps, "arrows"> & {
   arrows?: {
@@ -26,13 +27,7 @@ const CarouselPagination = ({
 }: CarouselPaginationProps) => {
   let sliderRef = useRef<Slider | null>(null);
 
-  const getElementName = (child: ReactNode) => {
-    if (React.isValidElement(child) && typeof child.type !== "string") {
-      const componentType = child.type as { displayName?: string };
-      return componentType.displayName;
-    }
-    return null;
-  };
+ 
 
   const carouselHeader = React.Children.toArray(children).find((child, i) => {
     const childName = getElementName(child);
@@ -71,10 +66,10 @@ const CarouselPagination = ({
       </ButtonGroup>
 
       <CarouselDefault
-        {...props}
         arrows={false}
         spacing={spacing}
         ref={sliderRef}
+        {...props}
       >
         {carouselItems}
       </CarouselDefault>

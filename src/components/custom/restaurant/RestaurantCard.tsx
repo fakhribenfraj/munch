@@ -4,7 +4,7 @@ import { Stack } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { default as Carousel, default as CarouselDefault } from "../../common/carousels/variants/CarouselDefault";
+import { default as Carousel, default as CarouselDefault } from "../../common/carousels/default";
 
 type RestaurantCardProps = {
   restaurant: GetRestaurantsResponse;

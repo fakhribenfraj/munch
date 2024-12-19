@@ -1,4 +1,6 @@
 import { getRestaurantById } from "@/actions/restaurants/getRestaurantById";
+import { getRestaurantAttachementsById } from "@/actions/restaurants/getRestaurantAttachementsById";
+import { CarouselSlideshow } from "@/components/common/carousels";
 import RestaurantMediaCarousel from "@/components/custom/restaurant/RestaurantMediaCarousel";
 import RestaurantNavTabs from "@/components/custom/restaurant/RestaurantNavTabs";
 import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
@@ -17,61 +19,26 @@ export default async function Page({
   const { id } = await params;
 
   const { data: restaurant } = await getRestaurantById(id);
-  const itemData = [
-    {
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-      title: "Breakfast",
-      rows: 2,
-      cols: 4,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-      title: "Burger",
-      rows: 2,
-      cols: 4,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-      title: "Honey",
-      rows: 2,
-      cols: 4,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-      title: "Coffee",
-      rows: 2,
-      cols: 4,
-    },
-    {
-      img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-      title: "Hats",
-      rows: 2,
-      cols: 4,
-    },
+  const { data: attachments } = await getRestaurantAttachementsById(id);
 
-    {
-      img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-      title: "Basketball",
-      rows: 2,
-      cols: 4,
-    },
-  ];
-  function srcset(image: string, size: number, rows = 1, cols = 1) {
-    return {
-      src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
   return (
     <Stack spacing={2} sx={{ pb: 4 }}>
       <RestaurantNavTabs id={id} active="overview" />
-      <Grid2 container spacing={4}>
-        <Grid2 size={{ xs: 12, md: 4 }}>
-          <RestaurantMediaCarousel itemData={itemData} />
+      <Grid2 container spacing={{ xs: 4, md: 6 }}>
+        <Grid2 size={{ xs: 12, md: 7 }} p={2}>
+          <CarouselSlideshow spacing={1}>
+            {attachments.map((image) => (
+              <Box key={image.id} sx={{ borderRadius: 1, overflow: "hidden" }}>
+                <img
+                  src={image.url}
+                  alt={image.name}
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </Box>
+            ))}
+          </CarouselSlideshow>
         </Grid2>
-        <Grid2 size={{ xs: 12, md: 8 }}>
+        <Grid2 size={{ xs: 12, md: 5 }}>
           <Stack spacing={2} sx={{ flex: 1 }}>
             <Box
               display="flex"

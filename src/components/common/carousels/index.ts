@@ -1,4 +1,4 @@
-import CarouselDefault from "./variants/CarouselDefault";
+import CarouselDefault from "./default";
 import CarouselPagination from "./variants/CarouselPagination";
-
-export { CarouselDefault, CarouselPagination };
+import CarouselSlideshow from "./variants/CarouselSlideshow";
+export { CarouselDefault, CarouselPagination, CarouselSlideshow };
