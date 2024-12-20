@@ -1,9 +1,13 @@
+"use client";
 import { Box } from "@mui/material";
-import AccordionCarousel from "@/components/common/AccordionCarousel";
 import { Stack, Typography } from "@mui/material";
 import React from "react";
 import PlateCard from "./PlateCard";
-
+import dynamic from "next/dynamic";
+const AccordionCarousel = dynamic(
+  () => import("@/components/common/AccordionCarousel"),
+  { ssr: false }
+);
 const SimilarPlates = () => {
   const img = "/images/plates/plate-1.jpg";
   return (

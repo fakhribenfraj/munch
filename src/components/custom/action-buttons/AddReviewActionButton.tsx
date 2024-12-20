@@ -1,10 +1,14 @@
-import AddReviewForm from "@/components/forms/restaurant/reviews/AddReviewForm";
+"use client";
 import { Box, Typography } from "@mui/material";
 import ButtonModal from "@/components/common/buttons/ButtonModal";
 import { DialogContent } from "@mui/material";
 import MobileActionButton from "@/components/common/buttons/MobileActionButton";
 import React from "react";
-
+import dynamic from "next/dynamic";
+const AddReviewForm = dynamic(
+  () => import("@/components/forms/restaurant/reviews/AddReviewForm"),
+  { ssr: false }
+);
 type AddReviewActionButtonProps = {
   label: string;
 };

@@ -20,12 +20,12 @@ const PlateDetails = dynamic(
 
 const SimilarPlates = dynamic(
   () => import("@/components/custom/plate/SimilarPlates"),
-  { ssr: false } // Load after initial render
+  { ssr: true } // Load after initial render
 );
 
 const AddReviewActionButton = dynamic(
   () => import("@/components/custom/action-buttons/AddReviewActionButton"),
-  { ssr: false }
+  { ssr: true }
 );
 
 const PlatePage = () => {

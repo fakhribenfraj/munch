@@ -5,16 +5,17 @@ import {
   ButtonBaseProps,
   ButtonProps,
   CardProps,
-  Dialog,
-  DialogContent,
-  DialogProps,
   IconButton,
   IconButtonProps,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 import { ReactNode, createContext, useContext, useState } from "react";
-import DialogSlide from "../surfaces/DialogSlide";
 
+const DialogSlide = dynamic(
+  () => import("@/components/common/surfaces/DialogSlide"),
+  { ssr: false }
+);
 type ModalContextType = {
   handleClose: VoidFunction;
 };
@@ -69,9 +70,6 @@ const ButtonModal = ({
     <ModalContext.Provider value={contextValue}>
       {trigger}
 
-      {/* <CardModal {...cardProps} open={isOpen} onClose={() => setIsOpen(false)}>
-        <>{children}</>
-      </CardModal> */}
       <DialogSlide
         {...cardProps}
         open={isOpen}
