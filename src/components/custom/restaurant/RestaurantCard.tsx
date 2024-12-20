@@ -1,10 +1,10 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
+import Carousel from "@/components/common/carousels/swiper/Carousel";
 import { routes } from "@/constants/routes";
 import { Stack } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import { default as Carousel, default as CarouselDefault } from "../../common/carousels/default";
 
 type RestaurantCardProps = {
   restaurant: GetRestaurantsResponse;
@@ -12,23 +12,19 @@ type RestaurantCardProps = {
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   return (
     <Stack sx={{ maxHeight: "100%" }}>
-      <CarouselDefault
-        slidesToShow={1}
-        dots={{ offset: -2.5 }}
-        sx={{ color: "grey.100" }}
-      >
+      <Carousel pagination={true} sx={{ color: "common.white" }}>
         {restaurant.images.map((image) => (
-          <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} key={image}>
+          <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} key={image.id}>
             <CardMedia
               component="img"
               height={190}
-              image={image ?? null}
+              image={image.url ?? null}
               alt={restaurant.name}
               sx={{ objectFit: "cover", borderRadius: 1 }}
             />
           </Link>
         ))}
-      </CarouselDefault>
+      </Carousel>
       <Stack sx={{ padding: 1 }}>
         <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
           <Typography variant="h6">{restaurant.name}</Typography>

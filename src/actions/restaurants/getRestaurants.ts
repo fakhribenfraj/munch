@@ -28,10 +28,13 @@ export type GetRestaurantsResponse = {
   accepted_by: number | null;
   created_at: string;
   updated_at: string;
-  images: string[];
+  images: {
+    id: string;
+    url: string;
+    name: string;
+  }[];
 };
 export const getRestaurants = async () => {
- 
   const res = await fetch(endpoints.RESTAURANTS);
   const resData = await res.json();
   return {
