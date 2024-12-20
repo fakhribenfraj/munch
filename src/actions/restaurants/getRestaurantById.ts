@@ -4,7 +4,7 @@ import { ActionResponse } from "@/types/api";
 import secureFetch from "@/utils/fetch";
 import { getRandomInt } from "@/utils/number";
 import { attachements } from "./mock/attachements";
-type GetRestaurantResponse = {
+export type GetRestaurantResponse = {
   id: string;
   name: string;
   slug: string;

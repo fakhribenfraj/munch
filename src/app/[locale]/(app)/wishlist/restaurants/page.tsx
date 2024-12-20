@@ -1,12 +1,29 @@
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
-import NavTabs from "@/components/common/navigation/NavTabs";
-import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
-import MainLayout from "@/components/layouts/MainLayout";
 import { routes } from "@/constants/routes";
 import { Grid2 } from "@mui/material";
 import { NextPage } from "next";
+import dynamic from "next/dynamic";
+
+const MainLayout = dynamic(() => import("@/components/layouts/MainLayout"), {
+  ssr: true,
+});
+
+const NavTabs = dynamic(
+  () => import("@/components/common/navigation/NavTabs"),
+  { ssr: true }
+);
+
+const RestaurantCard = dynamic(
+  () => import("@/components/custom/restaurant/RestaurantCard"),
+  { 
+    ssr: true,
+    loading: () => <div>Loading...</div>
+  }
+);
+
 const Home: NextPage = async () => {
   const { data: restaurants } = await getRestaurants();
+  
   return (
     <MainLayout activeTab="wishlist">
       <NavTabs
@@ -27,4 +44,5 @@ const Home: NextPage = async () => {
     </MainLayout>
   );
 };
+
 export default Home;
