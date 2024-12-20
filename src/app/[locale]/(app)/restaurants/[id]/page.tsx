@@ -11,8 +11,8 @@ import TakeoutDiningIcon from "@mui/icons-material/TakeoutDining";
 import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
 import dynamic from "next/dynamic";
 
-const CarouselSlideshow = dynamic(() =>
-  import("@/components/common/carousels").then((mod) => mod.CarouselSlideshow)
+const CarouselSlideshow = dynamic(
+  () => import("@/components/common/carousels/swiper/CarouselSlideshow")
 );
 export default async function Page({
   params,
@@ -29,7 +29,7 @@ export default async function Page({
       <RestaurantNavTabs id={id} active="overview" />
       <Grid2 container spacing={{ xs: 4, md: 6 }}>
         <Grid2 size={{ xs: 12, md: 7 }} p={2}>
-          <CarouselSlideshow spacing={1}>
+          <CarouselSlideshow sx={{ color: "common.white" }}>
             {attachments.map((image) => (
               <Box key={image.id} sx={{ borderRadius: 1, overflow: "hidden" }}>
                 <img

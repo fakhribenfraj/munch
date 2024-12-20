@@ -1,5 +1,6 @@
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
+"use client";
+import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 // Import Swiper styles
@@ -10,7 +11,7 @@ import { Children } from "react";
 import { SwiperOptions } from "swiper/types";
 import { Box, SxProps, Theme, useTheme } from "@mui/material";
 
-type CarouselProps = Omit<SwiperOptions, "breakpoints"> & {
+export type CarouselProps = Omit<SwiperProps, "breakpoints"> & {
   children: React.ReactNode;
   sx?: SxProps<Theme>;
   breakpoints?: {
@@ -21,7 +22,13 @@ type CarouselProps = Omit<SwiperOptions, "breakpoints"> & {
     xl?: SwiperOptions;
   };
 };
-const Carousel = ({ children, sx, breakpoints, ...props }: CarouselProps) => {
+const Carousel = ({
+  children,
+  sx,
+  breakpoints,
+  modules,
+  ...props
+}: CarouselProps) => {
   const theme = useTheme();
   const muiBreakpoints = theme.breakpoints.values;
   const newBreakpoints =
@@ -46,8 +53,7 @@ const Carousel = ({ children, sx, breakpoints, ...props }: CarouselProps) => {
       }}
     >
       <Swiper
-        pagination={true}
-        modules={[Pagination]}
+        modules={[Pagination, ...(modules || [])]}
         breakpoints={newBreakpoints}
         spaceBetween={8}
         {...props}
