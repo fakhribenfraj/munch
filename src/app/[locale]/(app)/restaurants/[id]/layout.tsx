@@ -97,7 +97,7 @@ export default async function RootLayout({
           </Stack>
         </Box>
       </Stack>
-      <Stack sx={{ px: { xs: 2, md: 0 } }}>{children}</Stack>
+      <Stack sx={{ px: { xs: 2.5, md: 0 } }}>{children}</Stack>
     </SubPageLayout>
   );
 }

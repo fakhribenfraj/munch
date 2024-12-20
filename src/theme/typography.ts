@@ -40,7 +40,7 @@ declare module "@mui/material/styles" {
 }
 
 export const primaryFont = Manrope({
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   subsets: ["latin"],
   display: "swap",
   fallback: ["Helvetica", "Arial", "sans-serif"],

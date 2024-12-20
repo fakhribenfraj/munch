@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 import React from "react";
 
 interface MobileActionButtonProps {
@@ -7,20 +7,22 @@ interface MobileActionButtonProps {
 
 const MobileActionButton = ({ children }: MobileActionButtonProps) => {
   return (
-    <Box
-      sx={{
-        display: { xs: "block", md: "none" },
-        position: "fixed",
-        bottom: 0,
-        right: 0,
-        left: 0,
-        px: 3,
-        py: 2,
-        zIndex: "appBar",
-        backgroundColor: "common.white",
-      }}
-    >
-      {children}
+    <Box sx={{ display: { xs: "block", md: "none" } }}>
+      <Toolbar
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          right: 0,
+          left: 0,
+          px: 2,
+          py: 1,
+          zIndex: "appBar",
+          backgroundColor: "common.white",
+        }}
+      >
+        {children}
+      </Toolbar>
+      <Toolbar />
     </Box>
   );
 };
