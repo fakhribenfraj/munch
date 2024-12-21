@@ -74,14 +74,13 @@ const Searchbar = () => {
             <DialogActions>
               <Button variant="soft">reset</Button>
               <Button variant="contained" color="primary">
-                Seach
+                Search
               </Button>
             </DialogActions>
           </ButtonModal>
         ),
         sx: {
-          borderRadius: 2,
-          height: "2.5rem",
+          borderRadius: 4,
           backgroundColor: "common.white",
         },
       }}
