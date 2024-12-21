@@ -24,7 +24,7 @@ const HomeScreen = ({
       <MainContainer
         fullHeight
         sx={{
-          pt: { xs: 15, sm: 17 },
+          pt: { xs: 11.5, sm: 17 },
           px: { xs: 0 },
           overflow: "hidden",
         }}

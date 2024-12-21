@@ -103,7 +103,7 @@ const FixedBottomNavigation = ({ activeTab }: FixedBottomNavigationProps) => {
                 position: "absolute",
                 top: 0,
                 left: "50%",
-                transform: "translate(-50%, -50%)",
+                transform: "translate(-50%, -40%)",
                 width: 48,
                 height: 48,
                 backgroundColor: "primary.main",

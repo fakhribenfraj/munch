@@ -19,7 +19,7 @@ const MainContainer = ({
         height: "100%",
         width: "100%",
         overflowY: "auto",
-        pb: { xs: 8, md: 0 },
+        pb: { xs: 9, md: 0 },
         pt: { xs: 3, sm: 4, md: 8 },
         ...sx,
       }}

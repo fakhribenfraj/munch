@@ -1,10 +1,7 @@
 import { getRestaurants } from "@/actions/restaurants/getRestaurants";
-import MainContainer from "@/components/common/surfaces/MainContainer";
 import ResponsiveAppBar from "@/components/custom/ResponsiveAppBar";
 import MapView from "@/components/screens/home/views/MapView";
-import { routes } from "@/constants/routes";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import { Box, Fab, Link, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { getTranslations } from "next-intl/server";
 import ViewChangeButton from "../ViewChangeButton";
 

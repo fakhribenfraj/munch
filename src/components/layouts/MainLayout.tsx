@@ -26,6 +26,7 @@ const MainLayout = ({ children, activeTab }: MainLayoutProps) => {
             right: 0,
             left: 0,
             width: "100%",
+            zIndex: "fab",
           }}
         >
           <FixedBottomNavigation activeTab={activeTab} />
