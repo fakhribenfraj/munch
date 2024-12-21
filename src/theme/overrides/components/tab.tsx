@@ -7,7 +7,7 @@ export function tab(theme: Theme) {
   return {
     MuiTab: {
       defaultProps: {
-        component: Link,
+        LinkComponent: Link,
       },
     },
   };

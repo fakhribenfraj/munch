@@ -51,7 +51,7 @@ export const primary = {
 export const secondary = {
   lighter: "#46bdff",
   light: "#00adff",
-  main: "#22ff56",
+  main: "#4CAF50",
   dark: "#008eff",
   darker: "#0079ff",
   contrastText: "#000000",

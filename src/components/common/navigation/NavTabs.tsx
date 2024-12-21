@@ -11,7 +11,12 @@ export default function NavTabs({ links, active, ...props }: NavTabsProps) {
     <Box sx={{ borderBottom: "1px solid ", borderColor: "divider" }}>
       <Tabs {...props} value={active} role="navigation">
         {links.map((link) => (
-          <Tab key={link.label} label={link.label} href={link.url} />
+          <Tab
+            key={link.label}
+            label={link.label}
+            href={link.url}
+            focusRipple
+          />
         ))}
       </Tabs>
     </Box>

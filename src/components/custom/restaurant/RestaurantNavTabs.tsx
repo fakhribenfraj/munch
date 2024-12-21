@@ -1,7 +1,7 @@
 import NavTabs from "@/components/common/navigation/NavTabs";
 import Searchbar from "@/components/filters/Searchbar";
 import { routes } from "@/constants/routes";
-import { Box, Stack, Toolbar } from "@mui/material";
+import { Box, Toolbar } from "@mui/material";
 
 type RestaurantNavTabsProps = {
   id: string;
