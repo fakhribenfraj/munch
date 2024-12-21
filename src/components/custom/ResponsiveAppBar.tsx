@@ -75,7 +75,7 @@ function ResponsiveAppBar({
       </Toolbar>
 
       {!hideSearchField && (
-        <Toolbar>
+        <Toolbar disableGutters>
           <FilterShortcuts
             filters={[
               "sandwiches",
