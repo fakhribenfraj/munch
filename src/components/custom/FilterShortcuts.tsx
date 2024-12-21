@@ -40,6 +40,9 @@ const FilterShortcuts = ({ filters }: FilterShortcutsProps) => {
               minHeight: HEIGHT,
               border: "1px solid",
               borderColor: "divider",
+              backgroundColor: "transparent",
+              transition: "background-color 0.5s,color 0.5s",
+
               "&.Mui-selected": {
                 backgroundColor: "secondary.main",
                 color: "common.white",
