@@ -12,7 +12,7 @@ const FilterShortcuts = ({ filters }: FilterShortcutsProps) => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-  const HEIGHT = 40;
+  const HEIGHT = { xs: 56, sm: 64 };
   return (
     <Container maxWidth="md" disableGutters>
       <Tabs

@@ -75,19 +75,21 @@ function ResponsiveAppBar({
       </Toolbar>
 
       {!hideSearchField && (
-        <FilterShortcuts
-          filters={[
-            "sandwiches",
-            "pizza",
-            "pasta",
-            "spicy",
-            "drinks",
-            "coffe",
-            "ice cream",
-            "fast food",
-            "cake",
-          ]}
-        />
+        <Toolbar>
+          <FilterShortcuts
+            filters={[
+              "sandwiches",
+              "pizza",
+              "pasta",
+              "spicy",
+              "drinks",
+              "coffe",
+              "ice cream",
+              "fast food",
+              "cake",
+            ]}
+          />
+        </Toolbar>
       )}
     </AppBar>
   );
