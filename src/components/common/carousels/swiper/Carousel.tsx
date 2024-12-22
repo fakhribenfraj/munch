@@ -1,11 +1,12 @@
 // Import Swiper React components
 "use client";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 import { Children } from "react";
 import { SwiperOptions } from "swiper/types";
@@ -53,7 +54,7 @@ const Carousel = ({
       }}
     >
       <Swiper
-        modules={[Pagination, ...(modules || [])]}
+        modules={[Autoplay, Pagination, Navigation, ...(modules || [])]}
         breakpoints={newBreakpoints}
         spaceBetween={8}
         {...props}

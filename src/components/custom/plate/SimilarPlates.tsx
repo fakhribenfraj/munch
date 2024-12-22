@@ -15,11 +15,7 @@ const SimilarPlates = () => {
       <Typography variant="h6" sx={{ fontWeight: "bold", marginTop: 2 }}>
         Similar dishes
       </Typography>
-      <AccordionCarousel
-        slidesToShow={{ xs: 2, sm: 3 }}
-        autoPlay={2000}
-        infinite
-      >
+      <AccordionCarousel slidesPerView={{ xs: 2, sm: 3 }} autoplay>
         {[
           {
             title: "Ramen Noodles",
