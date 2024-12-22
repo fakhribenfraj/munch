@@ -2,8 +2,8 @@
 import useResponsive from "@/hooks/useResponsive";
 import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
-import ArrowsDownIconOutlined from "../icons/outlined/ArrowsDown";
-import Carousel, { CarouselProps } from "./carousels/swiper/Carousel";
+import ArrowsDownIconOutlined from "../../icons/outlined/ArrowsDown";
+import Carousel, { CarouselProps } from "./Carousel";
 
 type AccordionCarouselProps = Omit<CarouselProps, "slidesPerView"> & {
   children: React.ReactNode;

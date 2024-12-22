@@ -4,7 +4,7 @@ import { Box } from "@mui/material";
 import { FC } from "react";
 import dynamic from "next/dynamic";
 const CarouselSlideshow = dynamic(
-  () => import("@/components/common/carousels/swiper/CarouselSlideshow"),
+  () => import("@/components/common/carousels/CarouselSlideshow"),
   { ssr: false } // Client-side only for better performance
 );
 interface RestaurantSlideShowProps {

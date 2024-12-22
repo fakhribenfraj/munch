@@ -1,5 +1,5 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
-import Carousel from "@/components/common/carousels/swiper/Carousel";
+import Carousel from "@/components/common/carousels/Carousel";
 import { routes } from "@/constants/routes";
 import { Stack } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";

@@ -5,7 +5,7 @@ import React from "react";
 import PlateCard from "./PlateCard";
 import dynamic from "next/dynamic";
 const AccordionCarousel = dynamic(
-  () => import("@/components/common/AccordionCarousel"),
+  () => import("@/components/common/carousels/AccordionCarousel"),
   { ssr: false }
 );
 const SimilarPlates = () => {

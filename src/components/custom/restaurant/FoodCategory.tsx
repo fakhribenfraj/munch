@@ -1,5 +1,5 @@
 import PlateCard from "@/components/custom/plate/PlateCard";
-import AccordionCarousel from "@/components/common/AccordionCarousel";
+import AccordionCarousel from "@/components/common/carousels/AccordionCarousel";
 import { Stack, Typography } from "@mui/material";
 
 interface FoodCategoryProps {
