@@ -2,10 +2,10 @@
 import { Slider, SliderProps } from "@mui/material";
 import React from "react";
 
-type RangeProps = SliderProps & {
+export type RangeInputProps = SliderProps & {
   minDistance?: number;
 };
-const RangeInput = ({ minDistance = 1, ...props }: RangeProps) => {
+const RangeInput = ({ minDistance = 1, ...props }: RangeInputProps) => {
   const [value, setValue] = React.useState<number[]>([
     props.min ?? 0,
     props.max ?? minDistance,

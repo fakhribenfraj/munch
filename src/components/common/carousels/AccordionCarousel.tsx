@@ -32,6 +32,7 @@ const AccordionCarousel = ({
           <Carousel
             slidesPerView={currentSlidesToShow + 0.2}
             spaceBetween={spacing * 8}
+            freeMode
             {...props}
           >
             {children}

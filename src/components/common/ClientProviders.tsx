@@ -1,7 +1,7 @@
 "use client";
 import { SnackbarProvider } from "notistack";
 import { ReactNode } from "react";
-import { SessionProvider as nextAuthPrivider } from "next-auth/react";
+import { SessionProvider as nextAuthProvider } from "next-auth/react";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { FilterStoreProvider } from "@/providers/filter-store-provider";
@@ -21,5 +21,5 @@ const ClientProviders = ({ children }: ClientProvidersProps) => {
     </LocalizationProvider>
   );
 };
-export const SessionProvider = nextAuthPrivider;
+export const SessionProvider = nextAuthProvider;
 export default ClientProviders;

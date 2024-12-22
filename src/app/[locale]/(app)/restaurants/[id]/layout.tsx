@@ -6,7 +6,7 @@ import SubPageLayout from "@/components/layouts/SubPageLayout";
 import { routes } from "@/constants/routes";
 import { Avatar, Box, Stack, Typography } from "@mui/material";
 import { getTranslations } from "next-intl/server";
-
+import StoreIcon from "@mui/icons-material/Store";
 export default async function RootLayout({
   children,
   params,
@@ -83,7 +83,9 @@ export default async function RootLayout({
               outline: "4px solid",
               outlineColor: "common.white",
             }}
-          />
+          >
+            <StoreIcon sx={{ width: "75%", height: "75%" }} />
+          </Avatar>
           <Stack
             spacing={1.5}
             marginTop={{ xs: 0, md: 4 }}

@@ -1,24 +1,18 @@
 "use client";
 import {
-  Box,
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-import ButtonModal from "../common/buttons/ButtonModal";
+  getFilters,
+  getFiltersResponse,
+} from "@/actions/restaurants/getFilters";
 import FilterForm from "@/components/forms/filter/FilterForm";
+import useServerAction from "@/hooks/useServerAction";
+import { useFilterStore } from "@/providers/filter-store-provider";
+import { ActionResponse } from "@/types/api";
+import { Box, debounce, InputAdornment, TextField } from "@mui/material";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
+import ButtonModal from "../common/buttons/ButtonModal";
 import FineTuningIconOutlined from "../icons/outlined/FineTuning";
 import SearchIconOutlined from "../icons/outlined/SearchIcon";
-import { useEffect } from "react";
-import { getFilters } from "@/actions/restaurants/getFilters";
-import useServerAction from "@/hooks/useServerAction";
-import { ActionResponse } from "@/types/api";
-import { getFiltersResponse } from "@/actions/restaurants/getFilters";
 
 const Searchbar = () => {
   const t = useTranslations();
@@ -27,6 +21,7 @@ const Searchbar = () => {
     response: filtersBlocks,
     startAction,
   } = useServerAction<ActionResponse<getFiltersResponse[]>>();
+  const { setSearchTerm } = useFilterStore((state) => state);
 
   useEffect(() => {
     startAction(getFilters());
@@ -36,6 +31,11 @@ const Searchbar = () => {
       color="primary"
       placeholder={t("SEARCH_PLACEHOLDER")}
       fullWidth
+      onChange={(event) => {
+        debounce(() => {
+          setSearchTerm(event.target.value);
+        }, 2000)();
+      }}
       slotProps={{
         input: {
           startAdornment: (
@@ -59,25 +59,13 @@ const Searchbar = () => {
                 },
               }}
             >
-              <DialogTitle>
-                <Typography
-                  component="span"
-                  variant="h5"
-                  color="primary"
-                  fontWeight="bold"
-                >
-                  Filters
-                </Typography>
-              </DialogTitle>
-              <DialogContent sx={{ maxHeight: "calc(90vh - 160px)" }}>
+              <Box
+                sx={{
+                  p: 4,
+                }}
+              >
                 <FilterForm filtersBlocks={filtersBlocks?.data ?? []} />
-              </DialogContent>
-              <DialogActions>
-                <Button variant="soft">reset</Button>
-                <Button variant="contained" color="primary">
-                  Search
-                </Button>
-              </DialogActions>
+              </Box>
             </ButtonModal>
           ),
           sx: {

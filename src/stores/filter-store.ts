@@ -1,31 +1,50 @@
 // src/stores/Filter-store.ts
-import { createStore } from 'zustand/vanilla'
+import { createStore } from "zustand/vanilla";
 
 export type FilterState = {
-  count: number
-}
+  filters?: any;
+  searchTerm?: string;
+};
 
 export type FilterActions = {
-  reset: () => void
-  incrementCount: () => void
-}
+  reset: () => void;
+  applyFilters: (filters: any) => void;
+  setSearchTerm: (searchTerm: string) => void;
+};
 
-export type FilterStore = FilterState & FilterActions
+export type FilterStore = FilterState & FilterActions;
+
+const defaultInitState: FilterState = {
+  filters: {},
+  searchTerm: "",
+};
 
 export const initFilterStore = (): FilterState => {
-  return { count: new Date().getFullYear() }
-}
-
-export const defaultInitState: FilterState = {
-  count: 0,
-}
+  return {
+    filters: {},
+    searchTerm: "",
+  };
+};
 
 export const createFilterStore = (
-  initState: FilterState = defaultInitState,
+  initState: FilterState = defaultInitState
 ) => {
   return createStore<FilterStore>()((set) => ({
     ...initState,
-    reset: () => set((state) => ({ count: state.count - 1 })),
-    incrementCount: () => set((state) => ({ count: state.count + 1 })),
-  }))
-}
+    reset: () => set(defaultInitState),
+    applyFilters: (filters) => {
+      console.log(filters);
+      set((state) => ({
+        ...state,
+        filters,
+      }));
+    },
+    setSearchTerm: (searchTerm: string) => {
+      console.log(searchTerm);
+      set((state) => ({
+        ...state,
+        searchTerm,
+      }));
+    },
+  }));
+};
