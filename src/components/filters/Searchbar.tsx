@@ -36,52 +36,55 @@ const Searchbar = () => {
       color="primary"
       placeholder={t("SEARCH_PLACEHOLDER")}
       fullWidth
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIconOutlined sx={{ fontSize: 22 }} />
-          </InputAdornment>
-        ),
-        endAdornment: (
-          <ButtonModal
-            buttonProps={{ "aria-label": "filters" }}
-            icon={<FineTuningIconOutlined />}
-            variant="slide"
-            cardProps={{
-              sx: {
-                alignSelf: { xs: "flex-end", sm: "center" },
-                "& .MuiPaper-root ": {
-                  m: 0,
-                  width: { xs: "100%", sm: "calc(100% - 64px)" },
-                  borderRadius: { xs: "1rem 1rem 0 0", sm: 2 },
+      slotProps={{
+        input: {
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIconOutlined sx={{ fontSize: 22 }} />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <ButtonModal
+              buttonProps={{ "aria-label": "filters" }}
+              icon={<FineTuningIconOutlined />}
+              variant="slide"
+              cardProps={{
+                sx: {
+                  alignSelf: { xs: "flex-end", sm: "center" },
+                  "& .MuiPaper-root ": {
+                    m: 0,
+                    width: { xs: "100%", sm: "calc(100% - 64px)" },
+                    borderRadius: { xs: "1rem 1rem 0 0", sm: 2 },
+                  },
                 },
-              },
-            }}
-          >
-            <DialogTitle>
-              <Typography
-                component="span"
-                variant="h5"
-                color="primary"
-                fontWeight="bold"
-              >
-                Filters
-              </Typography>
-            </DialogTitle>
-            <DialogContent sx={{ maxHeight: "calc(90vh - 160px)" }}>
-              <FilterForm filtersBlocks={filtersBlocks?.data ?? []} />
-            </DialogContent>
-            <DialogActions>
-              <Button variant="soft">reset</Button>
-              <Button variant="contained" color="primary">
-                Search
-              </Button>
-            </DialogActions>
-          </ButtonModal>
-        ),
-        sx: {
-          borderRadius: 4,
-          backgroundColor: "common.white",
+              }}
+            >
+              <DialogTitle>
+                <Typography
+                  component="span"
+                  variant="h5"
+                  color="primary"
+                  fontWeight="bold"
+                >
+                  Filters
+                </Typography>
+              </DialogTitle>
+              <DialogContent sx={{ maxHeight: "calc(90vh - 160px)" }}>
+                <FilterForm filtersBlocks={filtersBlocks?.data ?? []} />
+              </DialogContent>
+              <DialogActions>
+                <Button variant="soft">reset</Button>
+                <Button variant="contained" color="primary">
+                  Search
+                </Button>
+              </DialogActions>
+            </ButtonModal>
+          ),
+          sx: {
+            borderRadius: 4,
+            backgroundColor: "common.white",
+            height: 40,
+          },
         },
       }}
     />

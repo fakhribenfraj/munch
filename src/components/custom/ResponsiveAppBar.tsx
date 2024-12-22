@@ -59,6 +59,7 @@ function ResponsiveAppBar({
               sx={{
                 width: "100%",
                 maxWidth: { xs: "100%", md: "70%", lg: "50%" },
+                mt: { xs: 1, md: 0 },
               }}
             >
               <SearchBar />
@@ -75,21 +76,23 @@ function ResponsiveAppBar({
       </Toolbar>
 
       {!hideSearchField && (
-        <Toolbar disableGutters>
-          <FilterShortcuts
-            filters={[
-              "sandwiches",
-              "pizza",
-              "pasta",
-              "spicy",
-              "drinks",
-              "coffe",
-              "ice cream",
-              "fast food",
-              "cake",
-            ]}
-          />
-        </Toolbar>
+        <Container maxWidth="lg" disableGutters>
+          <Toolbar disableGutters>
+            <FilterShortcuts
+              filters={[
+                "sandwiches",
+                "pizza",
+                "pasta",
+                "spicy",
+                "drinks",
+                "coffe",
+                "ice cream",
+                "fast food",
+                "cake",
+              ]}
+            />
+          </Toolbar>
+        </Container>
       )}
     </AppBar>
   );

@@ -39,7 +39,7 @@ const RestaurantNavTabs = ({
         variant="fullWidth"
       />
       {showSearchBar && (
-        <Toolbar sx={{ px: { lg: 8 } }}>
+        <Toolbar sx={{ px: { lg: 8 }, py: 1 }}>
           <Searchbar />
         </Toolbar>
       )}

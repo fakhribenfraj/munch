@@ -81,7 +81,7 @@ export default async function RootLayout({
               height: logoWidth,
               boxShadow: 2,
               outline: "4px solid",
-              outlineColor: "grey.200",
+              outlineColor: "common.white",
             }}
           />
           <Stack

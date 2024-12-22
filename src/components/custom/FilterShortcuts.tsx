@@ -14,31 +14,29 @@ const FilterShortcuts = ({ filters }: FilterShortcutsProps) => {
   };
   const HEIGHT = { xs: 56, sm: 64 };
   return (
-    <Container maxWidth="md" disableGutters>
-      <Tabs
-        variant="scrollable"
-        scrollButtons="auto"
-        value={value}
-        onChange={handleChange}
-        indicatorColor="secondary"
-        textColor="secondary"
-        sx={{
-          justifyContent: "center",
-          minHeight: HEIGHT,
-        }}
-      >
-        {filters.map((filter) => (
-          <Tab
-            key={filter}
-            label={filter}
-            disableRipple
-            sx={{
-              minHeight: HEIGHT,
-            }}
-          />
-        ))}
-      </Tabs>
-    </Container>
+    <Tabs
+      variant="scrollable"
+      scrollButtons="auto"
+      value={value}
+      onChange={handleChange}
+      indicatorColor="secondary"
+      textColor="secondary"
+      sx={{
+        justifyContent: "center",
+        minHeight: HEIGHT,
+      }}
+    >
+      {filters.map((filter) => (
+        <Tab
+          key={filter}
+          label={filter}
+          disableRipple
+          sx={{
+            minHeight: HEIGHT,
+          }}
+        />
+      ))}
+    </Tabs>
   );
 };
 

@@ -8,7 +8,7 @@ export function tabs(theme: Theme) {
     MuiTabs: {
       styleOverrides: {
         scrollButtons: {
-          width: 48,
+          width: 40,
           borderRadius: "50%",
         },
       },
