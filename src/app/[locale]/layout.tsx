@@ -9,8 +9,7 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
-import "slick-carousel/slick/slick-theme.css";
-import "slick-carousel/slick/slick.css";
+
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";

@@ -25,7 +25,6 @@ const AccordionCarousel = ({
 
   const isCarousel = Children.count(children) > currentSlidesToShow;
 
-  console.log(props.breakpoints);
   return (
     <Box ref={ref}>
       <Collapse in={showingMore} timeout="auto" collapsedSize={210}>
