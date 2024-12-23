@@ -3,10 +3,19 @@ import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
 import { routes } from "@/constants/routes";
+import useResponsive from "@/hooks/useResponsive";
 import useRouterSearchParams from "@/hooks/useRouterSearchParams";
 import CloseIcon from "@mui/icons-material/Close";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import { Box, IconButton, Link, Paper, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Link,
+  Paper,
+  Slide,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -22,6 +31,10 @@ const MapView = ({
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
   const { setParam, getParam } = useRouterSearchParams();
+  const slideDirection = useResponsive<"left" | "right" | "down" | "up">(
+    { md: "right" },
+    "up"
+  );
   useEffect(() => {
     const lng = getParam("lng");
     const lat = getParam("lat");
@@ -91,85 +104,103 @@ const MapView = ({
           ))}
         </Map>
       )}
-
-      {selectedRestaurant && (
+      <Slide
+        in={!!selectedRestaurant}
+        direction={slideDirection}
+        mountOnEnter
+        unmountOnExit
+      >
         <Box
           sx={{
+            width: { xs: "100%", md: "auto" },
+            height: { md: "100%" },
+
             position: "absolute",
             bottom: 0,
-            left: { xs: "50%", md: 0 },
-            transform: { xs: "translateX(-50%)", md: "none" },
-            width: { xs: "100%", sm: "80%", md: 400 },
-            height: { md: "100%" },
+            left: 0,
             zIndex: "appBar",
-            p: 2,
           }}
         >
-          <Paper
+          <Box
             sx={{
-              overflow: "hidden",
-              height: "100%",
-              width: "100%",
+              mx: "auto",
+              mb: { xs: -1, md: 0 },
+              ml: { md: -1 },
+
+              width: { xs: "100%", sm: "80%", md: 400 },
+              height: { md: "100%" },
             }}
           >
-            <Stack
-              direction={{ xs: "row", md: "column-reverse" }}
-              justifyContent="space-between"
+            <Paper
+              sx={{
+                overflow: "hidden",
+                height: "100%",
+                width: "100%",
+                pb: { xs: 1, md: 0 },
+                pl: { md: 1 },
+              }}
             >
-              <Stack direction={{ xs: "row", md: "column" }}>
-                <Box
-                  sx={{
-                    width: { xs: 112, sm: 132, md: "100%" },
-                    aspectRatio: { xs: "1/1", md: "2" },
-                    position: "relative",
-                  }}
-                >
-                  <Image
-                    src={selectedRestaurant.logo}
-                    fill
-                    alt="logo"
-                    style={{ objectFit: "cover" }}
-                  />
-                </Box>
+              {selectedRestaurant && (
                 <Stack
-                  sx={{
-                    p: { xs: 1, sm: 2 },
-                    justifyContent: "space-between",
-                  }}
+                  direction={{ xs: "row", md: "column-reverse" }}
+                  justifyContent="space-between"
                 >
-                  <Link
-                    variant="h6"
-                    href={`${routes.RESTAURANTS}/${selectedRestaurant.id}`}
-                  >
-                    {selectedRestaurant.name}
-                  </Link>
-                  <Stack>
-                    <Typography>{selectedRestaurant.phone}</Typography>
-                    <Link
-                      href={`https://www.${selectedRestaurant.website}`}
-                      target="_blank"
+                  <Stack direction={{ xs: "row", md: "column" }}>
+                    <Box
+                      sx={{
+                        width: { xs: 112, sm: 132, md: "100%" },
+                        aspectRatio: { xs: "1/1", md: "2" },
+                        position: "relative",
+                      }}
                     >
-                      {selectedRestaurant.website}
-                    </Link>
+                      <Image
+                        src={selectedRestaurant.logo}
+                        fill
+                        alt="logo"
+                        style={{ objectFit: "cover" }}
+                      />
+                    </Box>
+                    <Stack
+                      sx={{
+                        p: { xs: 1, sm: 2 },
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Link
+                        variant="h6"
+                        href={`${routes.RESTAURANTS}/${selectedRestaurant.id}`}
+                      >
+                        {selectedRestaurant.name}
+                      </Link>
+                      <Stack>
+                        <Typography>{selectedRestaurant.phone}</Typography>
+                        <Link
+                          href={`https://www.${selectedRestaurant.website}`}
+                          target="_blank"
+                        >
+                          {selectedRestaurant.website}
+                        </Link>
+                      </Stack>
+                    </Stack>
                   </Stack>
+                  <IconButton
+                    size="small"
+                    sx={{
+                      justifySelf: "flex-end",
+                      alignSelf: { xs: "flex-start", md: "flex-end" },
+                    }}
+                    onClick={(e) => {
+                      setSelectedRestaurant(null);
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
                 </Stack>
-              </Stack>
-              <IconButton
-                size="small"
-                sx={{
-                  justifySelf: "flex-end",
-                  alignSelf: { xs: "flex-start", md: "flex-end" },
-                }}
-                onClick={(e) => {
-                  setSelectedRestaurant(null);
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            </Stack>
-          </Paper>
+              )}
+            </Paper>
+          </Box>
         </Box>
-      )}
+      </Slide>
     </Box>
   );
 };
