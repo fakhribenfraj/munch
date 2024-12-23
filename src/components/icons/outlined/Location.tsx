@@ -1,7 +1,7 @@
 import { SvgIconProps } from "@mui/material";
 import SvgIcon from "@mui/material/SvgIcon";
 
-export default function ClockIcon(props: SvgIconProps) {
+export default function LocationIcon(props: SvgIconProps) {
   return (
     <SvgIcon {...props}>
       <svg

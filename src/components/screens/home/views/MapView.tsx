@@ -2,6 +2,7 @@
 import { GetRestaurantsResponse } from "@/actions/restaurants/getRestaurants";
 import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
+import LocationIcon from "@/components/icons/outlined/Location";
 import { routes } from "@/constants/routes";
 import useResponsive from "@/hooks/useResponsive";
 import useRouterSearchParams from "@/hooks/useRouterSearchParams";
@@ -85,15 +86,20 @@ const MapView = ({
                 e.originalEvent.stopPropagation();
                 e.target._map?.flyTo({
                   center: { lat: restaurant.lat, lng: restaurant.lng },
-                  zoom: 14,
+                  zoom: 12,
                 });
                 setParam("lng", restaurant.lng.toString());
                 setParam("lat", restaurant.lat.toString());
                 setSelectedRestaurant(restaurant);
               }}
             >
-              <LocalPizzaIcon
-                sx={{ fontSize: "3rem" }}
+              <LocationIcon
+                sx={{
+                  fontSize:
+                    selectedRestaurant?.id == restaurant.id
+                      ? "2.5rem"
+                      : "2rem",
+                }}
                 color={
                   selectedRestaurant?.id == restaurant.id
                     ? "primary"
