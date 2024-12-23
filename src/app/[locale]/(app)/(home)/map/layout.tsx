@@ -21,7 +21,7 @@ export default async function RootLayout({
         sx={{
           height: "100%",
           width: "100%",
-          pt: { xs: 15, sm: 17 },
+          pt: { xs: 14, sm: 16 },
         }}
       >
         <MapView restaurants={restaurants} />
