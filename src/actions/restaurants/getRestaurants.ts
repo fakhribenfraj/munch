@@ -4,6 +4,7 @@ import { ActionResponse } from "@/types/api";
 import secureFetch from "@/utils/fetch";
 import { getRandomInt } from "@/utils/number";
 import { attachements } from "./mock/attachements";
+import { getGeoDistance } from "@/utils/geolocation";
 export type GetRestaurantsResponse = {
   id: string;
   name: string;
@@ -34,15 +35,36 @@ export type GetRestaurantsResponse = {
     name: string;
   }[];
 };
-export const getRestaurants = async () => {
+export const getRestaurants = async (filters?: {
+  position: { lng: number; lat: number };
+  params: any;
+}) => {
   const res = await fetch(endpoints.RESTAURANTS);
   const resData = await res.json();
-  return {
+  const result = {
     ...resData,
     ok: res.ok,
-    data: resData.data.map((resto: any) => ({
-      ...resto,
-      images: attachements.slice(getRandomInt(5), 5),
-    })),
+    data: resData.data
+      .filter(({ lng, lat }: any) => {
+        let condition = true;
+
+        if (filters) {
+          const distance = getGeoDistance(filters.position, { lng, lat });
+          if (
+            filters.params.distance &&
+            (distance < filters.params.distance[0] * 1000 ||
+              distance > filters.params.distance[1] * 1000)
+          ) {
+            condition = false;
+          }
+        }
+        return condition;
+      })
+      .map((resto: any) => ({
+        ...resto,
+        images: attachements.slice(getRandomInt(5), 5),
+      })),
   } as ActionResponse<GetRestaurantsResponse[]>;
+
+  return result;
 };

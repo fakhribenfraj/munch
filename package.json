@@ -24,6 +24,8 @@
     "@mui/material-nextjs": "^6.1.6",
     "@mui/x-data-grid": "^7.22.2",
     "@mui/x-date-pickers": "^7.22.1",
+    "@tanstack/react-query": "^5.62.8",
+    "@tanstack/react-query-devtools": "^5.62.9",
     "@types/mapbox-gl": "^3.4.0",
     "dotenv": "^16.4.5",
     "getaddress-api": "^1.4.3",

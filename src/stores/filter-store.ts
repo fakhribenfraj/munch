@@ -40,7 +40,6 @@ export const createFilterStore = (
       }));
     },
     setSearchTerm: (searchTerm: string) => {
-      console.log(searchTerm);
       set((state) => ({
         ...state,
         searchTerm,

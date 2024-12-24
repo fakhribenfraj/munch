@@ -1,4 +1,5 @@
 "use client";
+import useMyLocation from "@/hooks/useMyLocation";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import { Stack, Typography } from "@mui/material";
 import Link from "next/link";
@@ -9,18 +10,7 @@ type GoogleDirectionsProps = {
   children?: ReactNode;
 };
 const GoogleDirections = ({ lat, lng, children }: GoogleDirectionsProps) => {
-  const [position, setPosition] = useState<{ lng: number; lat: number } | null>(
-    null
-  );
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setPosition({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      });
-    });
-  }, []);
+  const position = useMyLocation();
   return (
     <Link
       target="_blank"

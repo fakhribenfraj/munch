@@ -10,11 +10,11 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import "../globals.css";
 import NavigationProvider from "@/contexts/navigation-context";
+import { ReactQueryClientProvider } from "@/components/common/ReactQueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,21 +47,23 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   return (
-    <html lang={locale}>
-      <NextIntlClientProvider locale={locale} messages={messages}>
-        <AppRouterCacheProvider>
-          <ThemeProvider>
-            <SessionProvider session={session}>
-              <NavigationProvider>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <AppRouterCacheProvider>
+        <ThemeProvider>
+          <SessionProvider session={session}>
+            <NavigationProvider>
+              <ReactQueryClientProvider>
                 <ClientProviders>
-                  <body className={inter.className}>{children}</body>
+                  <html lang={locale}>
+                    <body className={inter.className}>{children}</body>
+                  </html>
                 </ClientProviders>
-              </NavigationProvider>
-            </SessionProvider>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
-      </NextIntlClientProvider>
-    </html>
+              </ReactQueryClientProvider>
+            </NavigationProvider>
+          </SessionProvider>
+        </ThemeProvider>
+      </AppRouterCacheProvider>
+    </NextIntlClientProvider>
   );
 }
 export function generateStaticParams() {

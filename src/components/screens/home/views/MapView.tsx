@@ -4,10 +4,10 @@ import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
 import LocationIcon from "@/components/icons/outlined/Location";
 import { routes } from "@/constants/routes";
+import useMyLocation from "@/hooks/useMyLocation";
 import useResponsive from "@/hooks/useResponsive";
 import useRouterSearchParams from "@/hooks/useRouterSearchParams";
 import CloseIcon from "@mui/icons-material/Close";
-import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import {
   Box,
   IconButton,
@@ -18,7 +18,6 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GeolocateControl, ViewState } from "react-map-gl";
 
@@ -28,7 +27,7 @@ const MapView = ({
   restaurants: GetRestaurantsResponse[];
 }) => {
   const [viewPort, setViewPort] = useState<Partial<ViewState> | null>(null);
-
+  const myPosition = useMyLocation();
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<GetRestaurantsResponse | null>(null);
   const { setParam, getParam } = useRouterSearchParams();
@@ -46,15 +45,13 @@ const MapView = ({
         longitude: parseFloat(lng),
       });
     } else {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        setViewPort({
-          zoom: 10,
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        });
+      setViewPort({
+        zoom: 10,
+        latitude: myPosition?.lat,
+        longitude: myPosition?.lng,
       });
     }
-  }, []);
+  }, [myPosition, getParam]);
 
   return (
     <Box
@@ -96,9 +93,7 @@ const MapView = ({
               <LocationIcon
                 sx={{
                   fontSize:
-                    selectedRestaurant?.id == restaurant.id
-                      ? "2.5rem"
-                      : "2rem",
+                    selectedRestaurant?.id == restaurant.id ? "2.5rem" : "2rem",
                 }}
                 color={
                   selectedRestaurant?.id == restaurant.id
