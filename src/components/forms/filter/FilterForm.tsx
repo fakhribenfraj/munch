@@ -1,6 +1,4 @@
-import {
-  getFiltersResponse
-} from "@/actions/restaurants/getFilters";
+import { getFiltersResponse } from "@/actions/restaurants/getFilters";
 import ActionForm from "@/components/common/ActionForm";
 import RHFRangeInput from "@/components/hook-form/number/RHFRangeInput";
 import { useFilterStore } from "@/providers/filter-store-provider";
@@ -15,9 +13,9 @@ import {
   Grid2,
   Rating,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 const FilterForm = ({
@@ -25,14 +23,16 @@ const FilterForm = ({
 }: {
   filtersBlocks: getFiltersResponse[];
 }) => {
-
-  const { applyFilters } = useFilterStore((state) => state);
+  const { applyFilters, filters } = useFilterStore();
 
   const methods = useForm();
   const { handleSubmit } = methods;
   const onSubmit = handleSubmit((data) => {
     applyFilters(data);
-  })
+  });
+  useEffect(() => {
+    methods.reset(filters);
+  }, [filters, methods]);
   return (
     <ActionForm methods={methods} onSubmit={onSubmit}>
       <Stack spacing={4}>

@@ -37,7 +37,7 @@ export const getFilters = async () => {
       max: 100,
     },
     {
-      name: "Price",
+      name: "price",
       label: "Price",
       type: "range",
       min: 1,

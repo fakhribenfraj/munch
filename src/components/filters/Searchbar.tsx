@@ -21,7 +21,7 @@ const Searchbar = () => {
     response: filtersBlocks,
     startAction,
   } = useServerAction<ActionResponse<getFiltersResponse[]>>();
-  const { setSearchTerm } = useFilterStore((state) => state);
+  const { setSearchTerm, searchTerm } = useFilterStore();
 
   useEffect(() => {
     startAction(getFilters());
@@ -31,6 +31,7 @@ const Searchbar = () => {
       color="primary"
       placeholder={t("SEARCH_PLACEHOLDER")}
       fullWidth
+      defaultValue={searchTerm}
       onChange={(event) => {
         debounce(() => {
           setSearchTerm(event.target.value);

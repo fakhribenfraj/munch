@@ -33,7 +33,6 @@ export const createFilterStore = (
     ...initState,
     reset: () => set(defaultInitState),
     applyFilters: (filters) => {
-      console.log(filters);
       set((state) => ({
         ...state,
         filters,

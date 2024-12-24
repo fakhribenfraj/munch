@@ -23,14 +23,15 @@ const HomeScreen = ({
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
-  const { filters } = useFilterStore((state) => state);
+  const { filters, searchTerm } = useFilterStore();
   const position = useMyLocation();
   const { data, isPending, isFetching } = useQuery({
-    queryKey: ["restaurants",{ position, params: filters }],
+    queryKey: ["restaurants", { position, params:  { ...filters, searchTerm } }],
     queryFn: () =>
-      getRestaurants(position ? { position, params: filters } : undefined),
+      getRestaurants(
+        position ? { position, params: { ...filters, searchTerm } } : undefined
+      ),
   });
-  console.log({ data, filters });
   return (
     <>
       <ResponsiveAppBar />

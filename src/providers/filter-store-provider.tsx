@@ -33,12 +33,11 @@ export const FilterStoreProvider = ({ children }: FilterStoreProviderProps) => {
   );
 };
 
-export const useFilterStore = <T,>(selector: (store: FilterStore) => T): T => {
+export const useFilterStore = () => {
   const filterStoreContext = useContext(FilterStoreContext);
-
   if (!filterStoreContext) {
     throw new Error(`useFilterStore must be used within FilterStoreProvider`);
   }
 
-  return useStore(filterStoreContext, selector);
+  return useStore(filterStoreContext, (state) => state);
 };

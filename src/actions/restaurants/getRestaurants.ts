@@ -45,7 +45,7 @@ export const getRestaurants = async (filters?: {
     ...resData,
     ok: res.ok,
     data: resData.data
-      .filter(({ lng, lat }: any) => {
+      .filter(({ lng, lat, name }: any) => {
         let condition = true;
 
         if (filters) {
@@ -55,7 +55,15 @@ export const getRestaurants = async (filters?: {
             (distance < filters.params.distance[0] * 1000 ||
               distance > filters.params.distance[1] * 1000)
           ) {
-            condition = false;
+            condition = condition && false;
+          }
+          if (
+            filters.params.searchTerm &&
+            !name
+              .toLowerCase()
+              .includes(filters.params.searchTerm.toLowerCase())
+          ) {
+            condition = condition && false;
           }
         }
         return condition;
