@@ -51,7 +51,7 @@ const MapView = ({
         longitude: myPosition?.lng,
       });
     }
-  }, [myPosition, getParam]);
+  }, [myPosition]);
 
   return (
     <Box

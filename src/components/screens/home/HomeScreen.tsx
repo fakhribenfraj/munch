@@ -12,6 +12,8 @@ import MainContainer from "../../common/surfaces/MainContainer";
 import { useFilterStore } from "@/providers/filter-store-provider";
 import useMyLocation from "@/hooks/useMyLocation";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
+import { useState } from "react";
+import MapView from "./views/MapView";
 
 const ListView = dynamic(() => import("./views/ListView"));
 const ResponsiveAppBar = dynamic(() => import("../../custom/ResponsiveAppBar"));
@@ -23,18 +25,20 @@ const HomeScreen = ({
 }: {
   restaurants: GetRestaurantsResponse[];
 }) => {
+  const [isMapView, setIsMapView] = useState(false);
   const { filters, searchTerm } = useFilterStore();
   const position = useMyLocation();
-  const { data, isPending, isFetching } = useQuery({
-    queryKey: ["restaurants", { position, params:  { ...filters, searchTerm } }],
-    queryFn: () =>
-      getRestaurants(
-        position ? { position, params: { ...filters, searchTerm } } : undefined
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["restaurants", { ...filters, searchTerm, position }],
+    queryFn: async () =>
+      getRestaurants({ ...filters, searchTerm, position }).then(
+        (res) => res.data
       ),
   });
   return (
     <>
-      <ResponsiveAppBar />
+      <ResponsiveAppBar isSearching={isLoading} />
       <MainContainer
         fullHeight
         sx={{
@@ -44,15 +48,23 @@ const HomeScreen = ({
         }}
       >
         {/* <ListView /> */}
-        <Grid2 container spacing={2}>
-          {data?.data.map((restaurant) => (
-            <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={restaurant.id}>
-              <RestaurantCard restaurant={restaurant} />
-            </Grid2>
-          ))}
-        </Grid2>
+        {isMapView ? (
+          <MapView restaurants={data ?? []} />
+        ) : (
+          <Grid2 container spacing={2}>
+            {data?.map((restaurant) => (
+              <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={restaurant.id}>
+                <RestaurantCard restaurant={restaurant} />
+              </Grid2>
+            ))}
+          </Grid2>
+        )}
       </MainContainer>
-      <ViewChangeButton isMapView={false} sx={{ bottom: { xs: 64, md: 0 } }} />
+      <ViewChangeButton
+        isMapView={isMapView}
+        sx={{ bottom: { xs: 64, md: 0 } }}
+        onClick={() => setIsMapView((state) => !state)}
+      />
       <Stack
         sx={{
           position: "fixed",

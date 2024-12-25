@@ -27,7 +27,6 @@ const ViewChangeButton = ({
         ...sx,
       }}
       color="inherit"
-      href={isMapView ? routes.HOME : routes.MAP}
       {...props}
     >
       {!isMapView && (

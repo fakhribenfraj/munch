@@ -35,10 +35,8 @@ export type GetRestaurantsResponse = {
     name: string;
   }[];
 };
-export const getRestaurants = async (filters?: {
-  position: { lng: number; lat: number };
-  params: any;
-}) => {
+export const getRestaurants = async (filters?: any) => {
+
   const res = await fetch(endpoints.RESTAURANTS);
   const resData = await res.json();
   const result = {
@@ -49,22 +47,18 @@ export const getRestaurants = async (filters?: {
         let condition = true;
 
         if (filters) {
-          const distance = getGeoDistance(filters.position, { lng, lat });
-          if (
-            filters.params.distance &&
-            (distance < filters.params.distance[0] * 1000 ||
-              distance > filters.params.distance[1] * 1000)
-          ) {
-            condition = condition && false;
+          let distanceCondition = true;
+          if (filters.position) {
+            const distance = getGeoDistance(filters.position, { lng, lat });
+            distanceCondition = filters.distance
+              ? distance > filters.distance[0] * 1000 &&
+                distance < filters.distance[1] * 1000
+              : true;
           }
-          if (
-            filters.params.searchTerm &&
-            !name
-              .toLowerCase()
-              .includes(filters.params.searchTerm.toLowerCase())
-          ) {
-            condition = condition && false;
-          }
+          const nameCondition = filters.searchTerm
+            ? name.toLowerCase().includes(filters.searchTerm.toLowerCase())
+            : true;
+          condition = distanceCondition && nameCondition;
         }
         return condition;
       })

@@ -12,11 +12,13 @@ const AccountMenu = dynamic(() => import("./user/AccountMenu"));
 type ResponsiveAppBarProps = {
   hideSearchField?: boolean;
   backButton?: ReactNode;
+  isSearching?: boolean;
 };
 
 function ResponsiveAppBar({
   hideSearchField,
   backButton,
+  isSearching,
 }: ResponsiveAppBarProps) {
   return (
     <AppBar
@@ -62,7 +64,7 @@ function ResponsiveAppBar({
                 mt: { xs: 1, md: 0 },
               }}
             >
-              <SearchBar />
+              <SearchBar isSearching={isSearching} />
             </Box>
           )}
           <Stack

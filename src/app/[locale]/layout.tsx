@@ -14,7 +14,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import "../globals.css";
 import NavigationProvider from "@/contexts/navigation-context";
-import { ReactQueryClientProvider } from "@/components/common/ReactQueryClientProvider";
+import ReactQueryClientProvider from "@/components/common/ReactQueryClientProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,15 +52,18 @@ export default async function RootLayout({
       <AppRouterCacheProvider>
         <ThemeProvider>
           <SessionProvider session={session}>
-            <NavigationProvider>
-              <ReactQueryClientProvider>
-                <ClientProviders>
-                  <html lang={locale}>
-                    <body className={inter.className}>{children}</body>
-                  </html>
-                </ClientProviders>
-              </ReactQueryClientProvider>
-            </NavigationProvider>
+            <html lang={locale}>
+              <NavigationProvider>
+                <ReactQueryClientProvider>
+                  <ClientProviders>
+                    <body className={inter.className}>
+                      {children}
+                      <ReactQueryDevtools initialIsOpen={false} />
+                    </body>
+                  </ClientProviders>
+                </ReactQueryClientProvider>
+              </NavigationProvider>
+            </html>
           </SessionProvider>
         </ThemeProvider>
       </AppRouterCacheProvider>
