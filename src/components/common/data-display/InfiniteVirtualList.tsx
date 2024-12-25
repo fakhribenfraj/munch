@@ -1,22 +1,18 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
-import { useVirtualizer } from "@tanstack/react-virtual";
 import {
   Box,
-  Card,
-  CardContent,
-  Typography,
   CircularProgress,
-  CardMedia,
+  Grid2,
   useMediaQuery,
   useTheme,
-  Container,
 } from "@mui/material";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import React, { useMemo, useRef } from "react";
 
-import MainContainer from "../surfaces/MainContainer";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
 import useRestaurants from "@/hooks/custom/useRestaurants";
+import MainContainer from "../surfaces/MainContainer";
 
 export default function RestaurantGrid() {
   const PAGE_SIZE = 20;
@@ -93,9 +89,6 @@ export default function RestaurantGrid() {
               left: 0,
               width: "100%",
               transform: `translateY(${virtualRow.start}px)`,
-              display: "flex",
-              gap: "16px",
-              justifyContent: "space-between",
             };
 
             const rowItems = Array.from({ length: itemsPerRow }).map(
@@ -119,13 +112,19 @@ export default function RestaurantGrid() {
 
                 const restaurant = restaurants[index];
 
-                return <RestaurantCard key={index} restaurant={restaurant} />;
+                return (
+                  <Grid2 key={index} size={{ xs: 12, md: 3 }}>
+                    <RestaurantCard restaurant={restaurant} />
+                  </Grid2>
+                );
               }
             );
 
             return (
               <Box key={virtualRow.key} sx={sx}>
-                {rowItems}
+                <Grid2 container spacing={2}>
+                  {rowItems}
+                </Grid2>
               </Box>
             );
           })}

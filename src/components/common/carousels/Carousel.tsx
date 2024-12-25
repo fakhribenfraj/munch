@@ -57,6 +57,7 @@ const Carousel = ({
         modules={[Autoplay, Pagination, Navigation, ...(modules || [])]}
         breakpoints={newBreakpoints}
         spaceBetween={8}
+        style={{ width: "100%" }}
         {...props}
       >
         {Children.map(children, (child) => (

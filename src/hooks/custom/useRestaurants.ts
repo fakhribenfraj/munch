@@ -7,7 +7,7 @@ const useRestaurants = (pageSize = 20) => {
   const { filters, searchTerm } = useFilterStore();
   const position = useMyLocation();
   const result = useInfiniteQuery({
-    queryKey: ["restaurants"],
+    queryKey: ["restaurants", { ...filters, searchTerm, position }],
     queryFn: ({ pageParam = 1 }) =>
       getRestaurants({ ...filters, searchTerm, position }).then(
         (res) => res.data

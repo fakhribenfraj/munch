@@ -14,6 +14,7 @@ import useMyLocation from "@/hooks/common/useMyLocation";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
 import { useState } from "react";
 import MapView from "./views/MapView";
+import useRestaurants from "@/hooks/custom/useRestaurants";
 
 const ListView = dynamic(() => import("./views/ListView"));
 const ResponsiveAppBar = dynamic(() => import("../../custom/ResponsiveAppBar"));
@@ -26,15 +27,8 @@ const HomeScreen = ({
   restaurants: GetRestaurantsResponse[];
 }) => {
   const [isMapView, setIsMapView] = useState(false);
- 
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["restaurants", { ...filters, searchTerm, position }],
-    queryFn: async () =>
-      getRestaurants({ ...filters, searchTerm, position }).then(
-        (res) => res.data
-      ),
-  });
+  const { data, isLoading } = useRestaurants();
   return (
     <>
       <ResponsiveAppBar isSearching={isLoading} />
@@ -46,23 +40,10 @@ const HomeScreen = ({
             px: { xs: 0 },
           }}
         >
-          <MapView restaurants={data ?? []} />{" "}
+          <MapView restaurants={data?.pages.flatMap((page) => page) ?? []} />{" "}
         </MainContainer>
       ) : (
-        <>
-          <ListView />
-
-          {/* <Grid2 container spacing={2}>
-              {data?.map((restaurant) => (
-                <Grid2
-                  size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-                  key={restaurant.id}
-                >
-                  <RestaurantCard restaurant={restaurant} />
-                </Grid2>
-              ))}
-            </Grid2> */}
-        </>
+        <ListView />
       )}
       <ViewChangeButton
         isMapView={isMapView}
