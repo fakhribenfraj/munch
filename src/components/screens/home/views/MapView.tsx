@@ -4,9 +4,9 @@ import Map from "@/components/common/surfaces/map/Map";
 import Marker from "@/components/common/surfaces/map/Marker";
 import LocationIcon from "@/components/icons/outlined/Location";
 import { routes } from "@/constants/routes";
-import useMyLocation from "@/hooks/useMyLocation";
-import useResponsive from "@/hooks/useResponsive";
-import useRouterSearchParams from "@/hooks/useRouterSearchParams";
+import useMyLocation from "@/hooks/common/useMyLocation";
+import useResponsive from "@/hooks/common/useResponsive";
+import useRouterSearchParams from "@/hooks/common/useRouterSearchParams";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   Box,

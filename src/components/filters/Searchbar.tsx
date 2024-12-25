@@ -4,7 +4,7 @@ import {
   getFiltersResponse,
 } from "@/actions/restaurants/getFilters";
 import FilterForm from "@/components/forms/filter/FilterForm";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import { useFilterStore } from "@/providers/filter-store-provider";
 import { ActionResponse } from "@/types/api";
 import {

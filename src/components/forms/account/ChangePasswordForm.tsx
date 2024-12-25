@@ -7,7 +7,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import FormSection from "../FormSection";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import { useTranslations } from "next-intl";
 
 const FormSchema = z

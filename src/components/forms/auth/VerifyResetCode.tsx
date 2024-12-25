@@ -4,7 +4,7 @@ import { forgotPassword } from "@/actions/authorization/forgotPassword";
 import ActionForm from "@/components/common/ActionForm";
 import DigitInput from "@/components/common/inputs/DigitInput";
 import { routes } from "@/constants/routes";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";

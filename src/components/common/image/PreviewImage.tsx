@@ -1,5 +1,5 @@
 "use client";
-import useSelectFile from "@/hooks/useSelectFile";
+import useSelectFile from "@/hooks/common/useSelectFile";
 import CloseIcon from "@mui/icons-material/Close";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import EditIcon from "@mui/icons-material/Edit";

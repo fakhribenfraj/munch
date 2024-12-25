@@ -1,5 +1,5 @@
 "use client";
-import useResponsive from "@/hooks/useResponsive";
+import useResponsive from "@/hooks/common/useResponsive";
 import { Box, Collapse, Grid2, IconButton } from "@mui/material";
 import { Children, useRef, useState } from "react";
 import ArrowsDownIconOutlined from "../../icons/outlined/ArrowsDown";

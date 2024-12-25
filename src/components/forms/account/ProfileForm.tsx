@@ -2,7 +2,7 @@
 import ActionForm from "@/components/common/ActionForm";
 import RHFTelInput from "@/components/hook-form/text/RHFTelInput";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Stack } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

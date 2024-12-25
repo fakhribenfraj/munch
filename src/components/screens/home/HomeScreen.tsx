@@ -10,7 +10,7 @@ import ViewChangeButton from "@/app/[locale]/(app)/(home)/ViewChangeButton";
 import dynamic from "next/dynamic";
 import MainContainer from "../../common/surfaces/MainContainer";
 import { useFilterStore } from "@/providers/filter-store-provider";
-import useMyLocation from "@/hooks/useMyLocation";
+import useMyLocation from "@/hooks/common/useMyLocation";
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
 import { useState } from "react";
 import MapView from "./views/MapView";
@@ -26,8 +26,7 @@ const HomeScreen = ({
   restaurants: GetRestaurantsResponse[];
 }) => {
   const [isMapView, setIsMapView] = useState(false);
-  const { filters, searchTerm } = useFilterStore();
-  const position = useMyLocation();
+ 
 
   const { data, isLoading } = useQuery({
     queryKey: ["restaurants", { ...filters, searchTerm, position }],
@@ -39,27 +38,32 @@ const HomeScreen = ({
   return (
     <>
       <ResponsiveAppBar isSearching={isLoading} />
-      <MainContainer
-        fullHeight
-        sx={{
-          pt: { xs: 14, sm: 16 },
-          px: { xs: 0 },
-          // overflow: "hidden",
-        }}
-      >
-        {/* <ListView /> */}
-        {isMapView ? (
-          <MapView restaurants={data ?? []} />
-        ) : (
-          <Grid2 container spacing={2}>
-            {data?.map((restaurant) => (
-              <Grid2 size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={restaurant.id}>
-                <RestaurantCard restaurant={restaurant} />
-              </Grid2>
-            ))}
-          </Grid2>
-        )}
-      </MainContainer>
+      {isMapView ? (
+        <MainContainer
+          fullHeight
+          sx={{
+            pt: { xs: 14, sm: 16 },
+            px: { xs: 0 },
+          }}
+        >
+          <MapView restaurants={data ?? []} />{" "}
+        </MainContainer>
+      ) : (
+        <>
+          <ListView />
+
+          {/* <Grid2 container spacing={2}>
+              {data?.map((restaurant) => (
+                <Grid2
+                  size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+                  key={restaurant.id}
+                >
+                  <RestaurantCard restaurant={restaurant} />
+                </Grid2>
+              ))}
+            </Grid2> */}
+        </>
+      )}
       <ViewChangeButton
         isMapView={isMapView}
         sx={{ bottom: { xs: 64, md: 0 } }}

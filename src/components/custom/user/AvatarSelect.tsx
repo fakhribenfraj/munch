@@ -1,5 +1,5 @@
 "use client";
-import useSelectFile from "@/hooks/useSelectFile";
+import useSelectFile from "@/hooks/common/useSelectFile";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import { Avatar, Box, ButtonBase, Chip } from "@mui/material";
 import { useState } from "react";

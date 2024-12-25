@@ -1,5 +1,5 @@
 "use client";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import ConfirmationButton, {
   ConfirmationButtonProps,
 } from "./ConfirmationButton";

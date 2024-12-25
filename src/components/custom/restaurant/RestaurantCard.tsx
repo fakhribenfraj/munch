@@ -12,7 +12,7 @@ type RestaurantCardProps = {
 const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
   return (
     <Stack sx={{ maxHeight: "100%" }}>
-      <Carousel pagination={true} sx={{ color: "common.white" }}>
+      {/* <Carousel pagination={true} sx={{ color: "common.white" }}>
         {restaurant.images.map((image) => (
           <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} key={image.id}>
             <CardMedia
@@ -24,7 +24,7 @@ const RestaurantCard = ({ restaurant }: RestaurantCardProps) => {
             />
           </Link>
         ))}
-      </Carousel>
+      </Carousel> */}
       <Stack sx={{ padding: 1 }}>
         <Link href={`${routes.RESTAURANTS}/${restaurant.id}`} color="inherit">
           <Typography variant="h6">{restaurant.name}</Typography>

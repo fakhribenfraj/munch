@@ -1,5 +1,5 @@
 "use client";
-import useMyLocation from "@/hooks/useMyLocation";
+import useMyLocation from "@/hooks/common/useMyLocation";
 import DirectionsIcon from "@mui/icons-material/Directions";
 import { Stack, Typography } from "@mui/material";
 import Link from "next/link";

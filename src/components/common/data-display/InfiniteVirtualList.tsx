@@ -1,132 +1,136 @@
 "use client";
 
-import { Box } from "@mui/material";
-import React, { useCallback, useRef, useState } from "react";
-import AutoSizer from "react-virtualized-auto-sizer";
-import { VariableSizeGrid as Grid } from "react-window";
-import InfiniteLoader from "react-window-infinite-loader";
+import React, { useRef, useMemo } from "react";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+  CardMedia,
+  useMediaQuery,
+  useTheme,
+  Container,
+} from "@mui/material";
 
-import { ActionResponse } from "@/types/api";
+import MainContainer from "../surfaces/MainContainer";
+import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
+import useRestaurants from "@/hooks/custom/useRestaurants";
 
-type InfiniteVirtualListProps = {
-  itemHeight?: number;
-  itemWidth?: number;
-  spacing?: number;
-  padding?: number;
-  itemsPerRow?: number;
-  loadingComponent: React.ReactNode;
-  itemComponent: (item: any) => React.ReactNode;
-  fetchItems: () => Promise<ActionResponse<unknown[]>>;
-};
-export default function InfiniteVirtualList({
-  fetchItems,
-  loadingComponent,
-  itemComponent,
-  itemHeight = 300,
-  spacing = 16,
-  padding = 0,
-  itemsPerRow = 1,
-}: InfiniteVirtualListProps) {
-  const [items, setItems] = useState<unknown[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const gridRef = useRef<Grid | null>(null);
+export default function RestaurantGrid() {
+  const PAGE_SIZE = 20;
+  const parentRef = useRef(null);
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
 
-  const isItemLoaded = (index: number) => !hasMore || index < items.length;
+  const { data, fetchNextPage, hasNextPage, isFetching } = useRestaurants();
 
-  const loadMoreItems = useCallback(
-    async (startIndex: number) => {
-      try {
-        const res = await fetchItems();
-        setItems((prev) => [...prev, ...res.data]);
-        setHasMore(false);
-      } catch (error) {
-        console.error("Failed to load more items:", error);
-      }
-    },
-    [fetchItems]
-  );
+  const restaurants = useMemo(() => {
+    return data?.pages.flatMap((page) => page) || [];
+  }, [data]);
 
-  const renderCell = useCallback(
-    ({
-      columnIndex,
-      rowIndex,
-      style,
-      isItemLoaded,
-      data,
-    }: {
-      columnIndex: number;
-      rowIndex: number;
-      style: React.CSSProperties;
-      data: unknown[];
-      isItemLoaded: (index: number) => boolean;
-    }) => {
-      const index = rowIndex * itemsPerRow + columnIndex;
-      const globalStyles = {
-        ...style,
-        left: (style.left as number) + padding,
-        paddingLeft: columnIndex === 0 ? 0 : spacing,
-        paddingTop: rowIndex === 0 ? 0 : spacing,
-      };
+  const itemsPerRow = isLargeScreen ? 4 : 1;
+  const virtualizer = useVirtualizer({
+    count: Math.ceil(
+      (hasNextPage ? restaurants.length + PAGE_SIZE : restaurants.length) /
+        itemsPerRow
+    ),
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 350, // Fixed height for all rows
+    overscan: 5,
+  });
 
-      if (!isItemLoaded(index)) {
-        return <Box style={globalStyles}>{loadingComponent}</Box>;
-      }
+  React.useEffect(() => {
+    const [lastItem] = [...virtualizer.getVirtualItems()].slice(-1);
+    if (!lastItem) return;
 
-      const item = data[index];
-      if (!item) return null;
-
-      return <Box style={globalStyles}>{itemComponent(item)}</Box>;
-    },
-    [itemComponent, loadingComponent, itemsPerRow, spacing, padding]
-  );
+    if (
+      lastItem.index * itemsPerRow >= restaurants.length - 1 &&
+      hasNextPage &&
+      !isFetching
+    ) {
+      fetchNextPage();
+    }
+  }, [
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    restaurants,
+    itemsPerRow,
+    virtualizer,
+  ]);
 
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
-      <AutoSizer>
-        {({ height, width }) => {
-          const rowCount = Math.ceil(
-            items.length / itemsPerRow + (hasMore ? 1 : 0)
-          );
-          return (
-            <InfiniteLoader
-              isItemLoaded={isItemLoaded}
-              itemCount={rowCount * itemsPerRow}
-              loadMoreItems={loadMoreItems}
-            >
-              {({ onItemsRendered, ref }) => (
-                <Grid
-                  height={height}
-                  width={width}
-                  columnCount={itemsPerRow}
-                  columnWidth={() => (width - padding * 2) / itemsPerRow} // Use dynamic cell width
-                  rowCount={rowCount}
-                  rowHeight={() => itemHeight}
-                  itemData={items}
-                  onItemsRendered={({
-                    visibleRowStartIndex,
-                    visibleRowStopIndex,
-                  }) => {
-                    onItemsRendered({
-                      overscanStartIndex: visibleRowStartIndex * itemsPerRow,
-                      overscanStopIndex:
-                        (visibleRowStopIndex + 1) * itemsPerRow - 1,
-                      visibleStartIndex: visibleRowStartIndex * itemsPerRow,
-                      visibleStopIndex:
-                        (visibleRowStopIndex + 1) * itemsPerRow - 1,
-                    });
-                  }}
-                  ref={(instance) => {
-                    ref(instance);
-                    gridRef.current = instance;
-                  }}
-                >
-                  {(props) => renderCell({ ...props, isItemLoaded })}
-                </Grid>
-              )}
-            </InfiniteLoader>
-          );
+    <Box
+      ref={parentRef}
+      sx={{
+        height: "100vh",
+        width: "100%",
+        overflow: "auto",
+        position: "relative",
+      }}
+    >
+      <MainContainer
+        fullHeight
+        sx={{
+          pt: { xs: 14, sm: 16 },
+          px: { xs: 0 },
         }}
-      </AutoSizer>
+      >
+        <Box
+          sx={{
+            height: virtualizer.getTotalSize(),
+            width: "100%",
+            position: "relative",
+          }}
+        >
+          {virtualizer.getVirtualItems().map((virtualRow) => {
+            const rowIndex = virtualRow.index;
+            const sx = {
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              transform: `translateY(${virtualRow.start}px)`,
+              display: "flex",
+              gap: "16px",
+              justifyContent: "space-between",
+            };
+
+            const rowItems = Array.from({ length: itemsPerRow }).map(
+              (_, columnIndex) => {
+                const index = rowIndex * itemsPerRow + columnIndex;
+                if (index >= restaurants.length) {
+                  return (
+                    <Box
+                      key={index}
+                      sx={{
+                        flex: 1,
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      {hasNextPage ? <CircularProgress size={24} /> : null}
+                    </Box>
+                  );
+                }
+
+                const restaurant = restaurants[index];
+
+                return <RestaurantCard key={index} restaurant={restaurant} />;
+              }
+            );
+
+            return (
+              <Box key={virtualRow.key} sx={sx}>
+                {rowItems}
+              </Box>
+            );
+          })}
+        </Box>
+      </MainContainer>
     </Box>
   );
 }

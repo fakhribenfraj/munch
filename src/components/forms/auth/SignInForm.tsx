@@ -3,7 +3,7 @@
 import ActionForm from "@/components/common/ActionForm";
 import RHFTextField from "@/components/hook-form/text/RHFTextField";
 import { routes } from "@/constants/routes";
-import useServerAction from "@/hooks/useServerAction";
+import useServerAction from "@/hooks/common/useServerAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Link, Stack, Typography } from "@mui/material";
 import { signIn, SignInResponse } from "next-auth/react";
