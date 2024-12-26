@@ -11,6 +11,7 @@ import {
   Box,
   CircularProgress,
   debounce,
+  IconButton,
   InputAdornment,
   Stack,
   TextField,
@@ -20,6 +21,8 @@ import { useEffect, useState } from "react";
 import ButtonModal from "../common/buttons/ButtonModal";
 import FineTuningIconOutlined from "../icons/outlined/FineTuning";
 import SearchIconOutlined from "../icons/outlined/SearchIcon";
+import CloseIcon from "@mui/icons-material/Close";
+
 type SearchbarProps = {
   isSearching?: boolean;
 };
@@ -36,6 +39,13 @@ const Searchbar = ({ isSearching }: SearchbarProps) => {
   useEffect(() => {
     startAction(getFilters());
   }, [startAction]);
+  useEffect(() => {
+    debounce(() => {
+      if (inputValue.length != 1) {
+        setSearchTerm(inputValue);
+      }
+    }, 1000)();
+  }, [inputValue, setSearchTerm]);
   return (
     <TextField
       color="primary"
@@ -43,13 +53,9 @@ const Searchbar = ({ isSearching }: SearchbarProps) => {
       fullWidth
       value={inputValue}
       onChange={(event) => {
+        //remove multiple spaces
         const value = event.target.value.replace(/\s{2,}/g, " ").trimStart();
         setInputValue(value);
-        debounce(() => {
-          if (value.length != 1) {
-            setSearchTerm(value);
-          }
-        }, 1000)();
       }}
       slotProps={{
         input: {
@@ -59,7 +65,7 @@ const Searchbar = ({ isSearching }: SearchbarProps) => {
             </InputAdornment>
           ),
           endAdornment: (
-            <Stack direction="row" spacing={1}>
+            <Stack direction="row">
               {isSearching && (
                 <CircularProgress
                   size={20}
@@ -69,7 +75,19 @@ const Searchbar = ({ isSearching }: SearchbarProps) => {
                   }}
                 />
               )}
-
+              {!isSearching && inputValue && (
+                <IconButton
+                  aria-label="close"
+                  onClick={() => setInputValue("")}
+                  disableRipple
+                  sx={{
+                    alignSelf: "center",
+                    p: 0,
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              )}
               <ButtonModal
                 buttonProps={{ "aria-label": "filters" }}
                 icon={<FineTuningIconOutlined />}
