@@ -29,12 +29,9 @@ type SearchbarProps = {
 const Searchbar = ({ isSearching }: SearchbarProps) => {
   const [inputValue, setInputValue] = useState("");
   const t = useTranslations();
-  const {
-    isPending,
-    response: filtersBlocks,
-    startAction,
-  } = useServerAction<ActionResponse<getFiltersResponse[]>>();
-  const { setSearchTerm, searchTerm } = useFilterStore();
+  const { response: filtersBlocks, startAction } =
+    useServerAction<ActionResponse<getFiltersResponse[]>>();
+  const { setSearchTerm } = useFilterStore();
 
   useEffect(() => {
     startAction(getFilters());
@@ -66,7 +63,7 @@ const Searchbar = ({ isSearching }: SearchbarProps) => {
           ),
           endAdornment: (
             <Stack direction="row">
-              {isSearching && (
+              {isSearching && inputValue && (
                 <CircularProgress
                   size={20}
                   color="inherit"
