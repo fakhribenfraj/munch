@@ -9,12 +9,10 @@ const useRestaurants = (pageSize = 20) => {
   const result = useInfiniteQuery({
     queryKey: ["restaurants", { ...filters, searchTerm, position }],
     queryFn: ({ pageParam = 1 }) =>
-      getRestaurants({ ...filters, searchTerm, position }).then(
-        (res) => res.data
-      ),
+      getRestaurants({ ...filters, searchTerm, position }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < pageSize) return undefined;
+      if (lastPage.data?.length < pageSize) return undefined;
       return allPages.length;
     },
   });

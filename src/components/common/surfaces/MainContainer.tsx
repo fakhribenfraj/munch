@@ -1,7 +1,7 @@
-import { Box, Container, ContainerOwnProps } from "@mui/material";
+import { Box, Container, ContainerOwnProps, ContainerProps } from "@mui/material";
 import React from "react";
 
-type MainContainerProps = ContainerOwnProps & {
+type MainContainerProps = ContainerProps & {
   disablePadding?: boolean;
   fullHeight?: boolean;
 };

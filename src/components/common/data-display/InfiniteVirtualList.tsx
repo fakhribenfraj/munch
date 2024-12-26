@@ -1,135 +1,128 @@
-"use client";
-
-import {
-  Box,
-  CircularProgress,
-  Grid2,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
-import { useVirtualizer } from "@tanstack/react-virtual";
-import React, { useMemo, useRef } from "react";
+import React from "react";
 
 import RestaurantCard from "@/components/custom/restaurant/RestaurantCard";
+import useResponsive from "@/hooks/common/useResponsive";
 import useRestaurants from "@/hooks/custom/useRestaurants";
+import { Box, Grid2 } from "@mui/material";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import MainContainer from "../surfaces/MainContainer";
 
-export default function RestaurantGrid() {
-  const PAGE_SIZE = 20;
-  const parentRef = useRef(null);
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
+export default function InfiniteVirtualList() {
+  const {
+    status,
+    data,
+    error,
+    isFetching,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+  } = useRestaurants();
+  const allRows = data ? data.pages.flatMap((d) => d.data) : [];
 
-  const { data, fetchNextPage, hasNextPage, isFetching } = useRestaurants();
+  const parentRef = React.useRef<HTMLDivElement>(null);
 
-  const restaurants = useMemo(() => {
-    return data?.pages.flatMap((page) => page) || [];
-  }, [data]);
+  const itemsPerRow = useResponsive({ xs: 1, md: 2, lg: 3, xl: 4 }, 1);
 
-  const itemsPerRow = isLargeScreen ? 4 : 1;
-  const virtualizer = useVirtualizer({
+  const rowVirtualizer = useVirtualizer({
     count: Math.ceil(
-      (hasNextPage ? restaurants.length + PAGE_SIZE : restaurants.length) /
-        itemsPerRow
+      (hasNextPage ? allRows.length + 1 : allRows.length) / itemsPerRow
     ),
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 350, // Fixed height for all rows
+    estimateSize: () => 280, // Fixed height for all rows
     overscan: 5,
   });
 
   React.useEffect(() => {
-    const [lastItem] = [...virtualizer.getVirtualItems()].slice(-1);
-    if (!lastItem) return;
+    const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
 
+    if (!lastItem) return;
     if (
-      lastItem.index * itemsPerRow >= restaurants.length - 1 &&
+      (lastItem.index + 1) * itemsPerRow >= allRows.length &&
       hasNextPage &&
-      !isFetching
+      !isFetchingNextPage
     ) {
       fetchNextPage();
     }
   }, [
-    fetchNextPage,
     hasNextPage,
-    isFetching,
-    restaurants,
+    fetchNextPage,
+    allRows.length,
+    isFetchingNextPage,
+    rowVirtualizer.getVirtualItems(),
     itemsPerRow,
-    virtualizer,
   ]);
 
   return (
-    <Box
-      ref={parentRef}
+    <MainContainer
+      fullHeight
+      disableGutters
+      disablePadding
       sx={{
-        height: "100vh",
-        width: "100%",
-        overflow: "auto",
-        position: "relative",
+        pt: { xs: 14, sm: 16 },
+        px: { xs: 0 },
+        overflow: "hidden",
       }}
     >
-      <MainContainer
-        fullHeight
-        sx={{
-          pt: { xs: 14, sm: 16 },
-          px: { xs: 0 },
-        }}
-      >
+      {status === "pending" ? (
+        <p>Loading...</p>
+      ) : status === "error" ? (
+        <span>Error: {error.message}</span>
+      ) : (
         <Box
+          ref={parentRef}
           sx={{
-            height: virtualizer.getTotalSize(),
+            height: "100%",
             width: "100%",
-            position: "relative",
+            overflow: "auto",
+            px: 2,
           }}
         >
-          {virtualizer.getVirtualItems().map((virtualRow) => {
-            const rowIndex = virtualRow.index;
-            const sx = {
-              position: "absolute",
-              top: 0,
-              left: 0,
+          <Box
+            sx={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
               width: "100%",
-              transform: `translateY(${virtualRow.start}px)`,
-            };
+              position: "relative",
+            }}
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const rowIndex = virtualRow.index;
+              const sx = {
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                transform: `translateY(${virtualRow.start}px)`,
+              };
 
-            const rowItems = Array.from({ length: itemsPerRow }).map(
-              (_, columnIndex) => {
-                const index = rowIndex * itemsPerRow + columnIndex;
-                if (index >= restaurants.length) {
+              const rowItems = Array.from({ length: itemsPerRow }).map(
+                (_, columnIndex) => {
+                  const index = rowIndex * itemsPerRow + columnIndex;
+                  if (index >= allRows.length) {
+                    return null;
+                  }
+                  const restaurant = allRows[index];
                   return (
-                    <Box
-                      key={index}
-                      sx={{
-                        flex: 1,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {hasNextPage ? <CircularProgress size={24} /> : null}
-                    </Box>
+                    <Grid2 size={12/itemsPerRow} key={index}>
+                      <RestaurantCard restaurant={restaurant} />
+                    </Grid2>
                   );
                 }
+              );
 
-                const restaurant = restaurants[index];
-
-                return (
-                  <Grid2 key={index} size={{ xs: 12, md: 3 }}>
-                    <RestaurantCard restaurant={restaurant} />
+              return (
+                <Box key={virtualRow.key} sx={sx}>
+                  <Grid2 container spacing={2}>
+                    {rowItems}
                   </Grid2>
-                );
-              }
-            );
-
-            return (
-              <Box key={virtualRow.key} sx={sx}>
-                <Grid2 container spacing={2}>
-                  {rowItems}
-                </Grid2>
-              </Box>
-            );
-          })}
+                </Box>
+              );
+            })}
+          </Box>
         </Box>
-      </MainContainer>
-    </Box>
+      )}
+      <Box>
+        {isFetching && !isFetchingNextPage ? "Background Updating..." : null}
+      </Box>
+    </MainContainer>
   );
 }

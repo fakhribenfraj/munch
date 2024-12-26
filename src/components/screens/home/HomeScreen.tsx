@@ -40,7 +40,9 @@ const HomeScreen = ({
             px: { xs: 0 },
           }}
         >
-          <MapView restaurants={data?.pages.flatMap((page) => page) ?? []} />{" "}
+          <MapView
+            restaurants={data?.pages.flatMap((page) => page.data) ?? []}
+          />
         </MainContainer>
       ) : (
         <ListView />
